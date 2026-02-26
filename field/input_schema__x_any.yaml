@@ -1,0 +1,9 @@
+type: union/path_exists_any
+description: >-
+  Schema the input data validates against. Workspace-relative path to a
+  .schema.json or .schema.yaml file. When provided, the resolver uses this for
+  input validation enforcement before the agent processes data — a security
+  property that catches malformed input early. Optional: include when the
+  agent's input has a defined schema and you want pre-validation. Omit when
+  input is unstructured text or when input validation is handled upstream.
+  Schema file must exist at resolution time.

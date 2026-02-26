@@ -1,0 +1,5 @@
+type: element/path_exists_absolute
+description: >-
+  An @path reference to a .md file that expands to one or many example
+  entries. The resolver reads the file, splits at H2 boundaries, and derives
+  example_heading from each H2.

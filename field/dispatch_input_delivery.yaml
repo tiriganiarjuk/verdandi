@@ -1,0 +1,12 @@
+type: enum/dispatch_input_delivery
+description: >-
+  How input data reaches the agent. 'file' means the agent reads from a pre-
+  determined file path declared in the definition — also requires
+  security_io_input_file in [security.security_io]. 'directory' means the
+  agent reads from a pre-determined directory path — also requires
+  security_io_input_directory in [security.security_io]. 'tempfile' means the
+  dispatcher writes input to a scoped temp directory and passes the path as
+  parameter — preserves context window for large inputs; also requires
+  security_io_input_tempdir in [security.security_io]. 'inline' means embedded
+  directly in the agent prompt (small inputs only, no file paths or
+  security_io fields needed).

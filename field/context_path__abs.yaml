@@ -1,0 +1,6 @@
+type: atom/path_absolute
+description: >-
+  Workspace-relative path to a context resource. The transformer uses this to
+  both generate prompt sections (telling the agent about the resource) AND add
+  the path to read hooks (granting access). This dual-purpose mechanism
+  ensures prompt awareness and permission always stay in sync.

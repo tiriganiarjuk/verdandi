@@ -1,0 +1,11 @@
+type: union/path_any
+description: >-
+  Path prefixes granting write-level access via platform tools (generic write,
+  edit, append). Each entry grants recursive access to all files and
+  directories under the prefix. Entries can be workspace-relative or absolute.
+  Write-level paths make all capabilities possible (write, edit, append, read,
+  search, inspect) — actual capabilities granted depend on intersection with
+  security_capabilities_requested. IMPORTANT: Do not include the agent's
+  output path (security_io_output_file or security_io_output_directory) here —
+  doing so bypasses the enforcement output tool's schema validation and format
+  checking.

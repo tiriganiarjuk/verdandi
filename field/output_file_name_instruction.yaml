@@ -1,0 +1,9 @@
+type: atom/string_plain
+description: >-
+  Instruction indicating what the LLM should use as the filename basis during
+  processing. The LLM derives the identifier from the data being processed.
+  The tool writes to output_directory/{identifier}.{extension}, where the
+  extension is enforced by processing_output_file_format. The LLM controls the
+  filename but not the directory or file type. Example: "{record-identifier}"
+  — the LLM provides a record identifier, the tool writes to the output
+  directory with the correct extension.

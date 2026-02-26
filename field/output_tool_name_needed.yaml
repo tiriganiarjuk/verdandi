@@ -1,0 +1,6 @@
+type: atom/boolean
+description: >-
+  Whether the LLM must provide a filename when invoking the output tool. Only
+  present when the output filename is not fully known at definition time. When
+  true, the LLM provides a name or identifier that the tool uses to construct
+  the output path within the output directory.

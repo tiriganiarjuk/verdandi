@@ -1,0 +1,8 @@
+type: enum/instruction_mode
+description: >-
+  Processing mode boundary. DETERMINISTIC steps are mechanical operations
+  (reading input, writing output, validating schema) where the LLM must follow
+  exact procedures with no creativity. PROBABILISTIC steps require LLM
+  intelligence (rewriting text, making quality judgments, creative decisions).
+  The transformer uses mode declarations to compile different prompt patterns
+  for each step type.

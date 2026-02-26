@@ -1,0 +1,9 @@
+type: atom/string_plain
+description: >-
+  Skill and knowledge areas the agent claims. Each entry is a concise phrase
+  describing a competency relevant to the agent's task. These calibrate the
+  LLM's self-model — declare expertise areas that directly support
+  role_responsibility. Typical agents declare 2-5 entries. Be specific: "JSON
+  Schema validation" not "validation", "Gothic linguistic terminology" not
+  "languages". If provided, must contain at least one entry (omit the field
+  entirely rather than providing an empty array). Entries must be unique.

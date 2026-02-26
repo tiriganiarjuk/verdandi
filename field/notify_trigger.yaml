@@ -1,0 +1,6 @@
+type: atom/string_plain
+description: >-
+  When to trigger an agent-initiated notification. A human-readable condition
+  the agent evaluates during processing. "every 100 records processed", "on
+  first schema validation failure", "when processing completes". The
+  transformer compiles this into echo instructions in the processing section.

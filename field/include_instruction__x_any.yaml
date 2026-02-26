@@ -1,0 +1,5 @@
+type: union/path_exists_any
+description: >-
+  An @path reference to a .md file that expands to one or many instruction
+  steps. The resolver reads the file, splits at H2 boundaries, and derives
+  instruction_mode from each H2 heading.

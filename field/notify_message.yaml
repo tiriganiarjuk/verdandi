@@ -1,0 +1,6 @@
+type: atom/string_plain
+description: >-
+  Message template for agent-initiated notifications. Can contain
+  {placeholders} the agent fills in at runtime. "{n} of {total} processed,
+  {remaining} remaining". The agent echoes this with a ::notify:: prefix; the
+  hook intercepts and routes to the delivery mechanism.

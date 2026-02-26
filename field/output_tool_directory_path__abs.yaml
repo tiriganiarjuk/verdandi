@@ -1,0 +1,6 @@
+type: atom/path_absolute
+description: >-
+  Resolved absolute path to the output directory. Present when the output
+  filename is not fully known at definition time. The enforcement tool writes
+  files within this directory, with filenames constrained by
+  enforcement_output_tool_name_pattern when available.

@@ -1,0 +1,5 @@
+type: element/path_exists_absolute
+description: >-
+  Paths granted inspect capability from author-defined permissions (System 1).
+  Displayed in Security Boundary section. Maps to platform-specific read-only
+  command execution tools scoped to these paths.

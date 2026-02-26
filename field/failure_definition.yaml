@@ -1,0 +1,25 @@
+type: atom/string_plain
+description: >-
+  One-sentence statement of what failure means for this agent. Failure refers
+  to the PROCESS, not the DATA. An agent that correctly identifies all inputs
+  as invalid has SUCCEEDED — the assessment process worked. FAILURE means the
+  process itself broke: couldn't read input, couldn't write output,
+  unrecoverable error.
+semantic:
+  intent: >-
+    Defines process failure — not data outcomes. The agent uses this to
+    determine when to report FAILURE vs SUCCESS with bad-data findings.
+  checks:
+    - >-
+      Describes PROCESS failure, not data quality problems
+    - >-
+      Specific failure conditions, not 'something went wrong'
+    - >-
+      Distinguishable from success_definition — no overlap
+  anti_patterns:
+    - >-
+      Treating bad data as failure ('found invalid entries' is SUCCESS if the
+      process worked)
+    - >-
+      Restating success_definition in negative form
+  severity: error

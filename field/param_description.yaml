@@ -1,0 +1,5 @@
+type: atom/string_plain
+description: >-
+  Human-readable description of what a dispatcher parameter represents and how
+  the agent should interpret it. Optional — parameter name and type may be
+  sufficient for self-documenting parameters.

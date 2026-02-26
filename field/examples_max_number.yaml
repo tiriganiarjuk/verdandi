@@ -1,0 +1,7 @@
+type: atom/integer
+description: >-
+  Maximum number of examples to include from this group after include
+  resolution and H2 splitting. Applied AFTER the transformer resolves @include
+  references and splits on H2 boundaries — the count is about resolved
+  individual examples, not raw array entries. Omit to include all examples in
+  the group.

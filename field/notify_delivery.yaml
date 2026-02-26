@@ -1,0 +1,6 @@
+type: enum/notify_delivery
+description: >-
+  How to deliver agent-initiated notifications. 'say' uses macOS text-to-
+  speech (good for background monitoring). 'notification' uses macOS
+  Notification Center via osascript (urgent alerts). 'terminal' rings the bell
+  and prints the message. 'log' writes silently to a log file.

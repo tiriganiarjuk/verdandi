@@ -1,0 +1,6 @@
+type: union/path_any
+description: >-
+  Workspace-relative path to the input file. Automatically grants read tool
+  and read permission to this file — no need to also list it in
+  security_paths_allowed_read. Validated against the path blocklist. Example:
+  "interview/data/input.jsonl"

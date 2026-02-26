@@ -1,0 +1,23 @@
+type: atom/string_plain
+description: >-
+  Short noun phrase naming what this agent is. Not a sentence, not a role
+  description — that belongs in role and capabilities. Examples: "semantic
+  quality assessor", "interview summarizer", "embedding normalizer". This
+  becomes the "You are a {identity}" opening in the generated prompt.
+semantic:
+  intent: >-
+    Establishes the agent's behavioral frame. The generated prompt opens "You
+    are a {role_identity}" — vague identities produce vague behavior.
+  checks:
+    - >-
+      Specific enough to distinguish this agent from others in the system
+    - >-
+      Noun phrase, not a sentence or role description
+    - >-
+      Names a recognizable specialist, not a generic label
+  anti_patterns:
+    - >-
+      Generic labels: 'assistant', 'helper', 'processor', 'agent'
+    - >-
+      Sentences or descriptions instead of noun phrases
+  severity: error

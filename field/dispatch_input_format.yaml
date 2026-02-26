@@ -1,0 +1,6 @@
+type: enum/input_format
+description: >-
+  Format of the input data the agent receives. 'jsonl' for newline-delimited
+  JSON records (one per line). 'json' for a single JSON document. 'text' for
+  unstructured text content. This determines how the agent should parse the
+  input file delivered via the delivery mechanism.

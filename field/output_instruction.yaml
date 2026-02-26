@@ -1,0 +1,6 @@
+type: atom/string_plain
+description: >-
+  Prompt instruction telling the agent how to deliver its output data in its
+  return. Composed into the agent prompt when return mode includes output.
+  Example: "Return your output directly as your final message to the
+  dispatcher."

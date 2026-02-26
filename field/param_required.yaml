@@ -1,0 +1,5 @@
+type: atom/boolean
+description: >-
+  Whether this parameter must be provided by the dispatcher. Required
+  parameters cause dispatcher failure if missing. Optional parameters have
+  sensible defaults or conditional behavior.

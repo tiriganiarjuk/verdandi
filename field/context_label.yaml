@@ -1,0 +1,21 @@
+type: atom/string_plain
+description: >-
+  Display label for a context resource. Used in the generated prompt to create
+  readable section headers. "Output Schema", "Canonical Glossary", "Operations
+  Guide". Keep concise — this appears in the agent's prompt.
+semantic:
+  intent: >-
+    Human-readable label that identifies a context resource in the agent
+    prompt. Must be meaningful enough to distinguish resources from each
+    other.
+  checks:
+    - >-
+      Descriptive enough to identify the resource without seeing its content
+    - >-
+      Concise — a label, not a sentence
+  anti_patterns:
+    - >-
+      Generic: 'Context' or 'Data'
+    - >-
+      Filename repeated as label: 'schema.json'
+  severity: warning

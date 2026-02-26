@@ -1,0 +1,9 @@
+type: union/path_any
+description: >-
+  Workspace-relative path to a context resource file. The transformer embeds
+  this file's content into the agent prompt as a labeled section (using
+  context_label as the heading) AND adds the path to read hooks (granting file
+  access). This dual-purpose mechanism ensures prompt awareness and permission
+  always stay in sync. Because content is embedded, consider file size — large
+  files consume context window. For context_required, the file must exist at
+  resolution time. For context_available, missing files are silently skipped.

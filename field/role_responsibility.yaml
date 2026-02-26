@@ -1,0 +1,27 @@
+type: atom/string_plain
+description: >-
+  One-sentence mandate defining the agent's core obligation. This is the
+  single most important thing the agent must accomplish. Everything else is
+  secondary. Write as a direct imperative: "Assess each truth entry against
+  quality dimensions and produce a structured QC report."
+semantic:
+  intent: >-
+    Defines the agent's primary obligation. Everything else the agent does is
+    secondary to this. A weak responsibility produces unfocused execution.
+  checks:
+    - >-
+      Single clear mandate, not a list of duties
+    - >-
+      Written as direct imperative
+    - >-
+      Specific enough that completion is verifiable
+    - >-
+      Describes an outcome, not an activity
+  anti_patterns:
+    - >-
+      Multiple obligations joined by 'and'
+    - >-
+      Passive voice or vague directives: 'handle', 'manage', 'process'
+    - >-
+      Describing what the agent IS instead of what it MUST DO
+  severity: error

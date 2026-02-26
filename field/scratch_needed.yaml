@@ -1,0 +1,8 @@
+type: atom/boolean
+description: >-
+  Whether this agent needs a scratch directory for intermediate files. When
+  true, security_io_scratch_tempdir must be provided and the agent auto-
+  derives write access to a scoped temp path. Off by default — most agents
+  keep intermediate state in context. Enable when an agent processes
+  sequential data that loses coherence without file-based checkpointing, or
+  when LLM behavior requires scratch space for processing optimization.

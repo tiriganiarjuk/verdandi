@@ -1,0 +1,6 @@
+type: atom/boolean
+description: >-
+  Toggle per-group display of individual example headings. When false,
+  examples render as items under the group H3. When true, each example gets
+  its own H4 heading derived from the H2 in the resolved content. Controls
+  detail level without changing content.

@@ -1,0 +1,5 @@
+type: enum/output_format_kind
+description: >-
+  The output format the agent produces. Determines file extension enforcement
+  and format validation hooks. JSONL enables record-level write frequency
+  control via processing_output_write_frequency.

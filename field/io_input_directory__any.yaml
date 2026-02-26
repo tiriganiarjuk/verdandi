@@ -1,0 +1,6 @@
+type: union/path_any
+description: >-
+  Workspace-relative path to the input directory. Automatically grants read
+  tool and read permission to all files within this directory — no need to
+  also list it in security_paths_allowed_read. Validated against the path
+  blocklist. Example: "interview/data/"

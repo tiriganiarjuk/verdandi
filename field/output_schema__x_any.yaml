@@ -1,0 +1,19 @@
+type: union/path_exists_any
+description: >-
+  Schema the output data must validate against. Workspace-relative path to a
+  .schema.json or .schema.yaml file. Required when the agent produces
+  structured output (JSON or JSONL) — the enforcement output tool uses this
+  schema to validate records before writing. Optional for unstructured output
+  (markdown, text) where schema validation is not applicable. Lives in the
+  security section because the resolver needs it for engineering control
+  derivation — schema validation is a security enforcement property. Schema
+  file must exist at resolution time.
+constraint:
+  - rule: required_when
+    field: task.processing.processing_output_file_format
+    in: [jsonl, json]
+    severity: error
+    reason: >-
+      Structured output (JSON or JSONL) requires a schema for validation
+      enforcement. Without a schema, the enforcement output tool cannot
+      validate records before writing.

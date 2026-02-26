@@ -1,0 +1,6 @@
+type: enum/dispatch_mode
+description: >-
+  How the dispatcher feeds work to the agent. 'batch' means the dispatcher
+  splits input into chunks and invokes the agent once per chunk — requires
+  dispatch_batch_size. 'full' means the dispatcher passes all input at once in
+  a single agent invocation.

@@ -1,0 +1,4 @@
+type: atom/path_absolute
+description: >-
+  Path to the input file. Automatically grants read tool and read permission
+  to this file. Validated against the path blocklist.

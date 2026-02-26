@@ -1,0 +1,24 @@
+type: atom/path_absolute
+description: >-
+  Workspace-relative path to the agent's output directory. The security
+  resolver uses this to create a constrained write tool that enforces schema
+  validation, format checking, and batch size limits on every write within
+  this directory. This path must NOT appear in security_paths_allowed_write —
+  if it did, the agent would have unconstrained write access bypassing all
+  enforcement. Validated against the path blocklist. Example:
+  "interview/output/"
+constraint:
+  - rule: not_subpath_of
+    field: security_paths_allowed_write
+    severity: error
+    reason: >-
+      Output path in the write fence defeats bound tool constraints. The agent
+      would have generic write access via platform tools, bypassing schema
+      validation, format enforcement, and batch limits.
+  - rule: not_equal
+    field: security_paths_allowed_write
+    severity: error
+    reason: >-
+      Output path identical to a write fence path defeats bound tool
+      constraints. The agent would have generic write access to the same
+      location, bypassing schema validation and format enforcement.

@@ -1,0 +1,7 @@
+type: enum/return_mode
+description: >-
+  How the agent returns results to the dispatcher. status: return only SUCCESS
+  or FAILURE. status-metrics: return status plus summary metrics. metrics-
+  output: return metrics plus actual output data. output: return output
+  directly, no status word needed. Determines which return instructions the
+  format transformer composes into the prompt.

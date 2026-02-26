@@ -1,0 +1,4 @@
+type: atom/string_plain
+description: >-
+  Inline example text for this entry. Used for short examples that don't
+  warrant a separate .md file. Mutually exclusive with include.

@@ -1,0 +1,27 @@
+type: atom/string_plain
+description: >-
+  Opaque directory name (a short slug, not a path) for this agent type's
+  scratch/intermediate file area. The agent auto-derives write access to
+  /tmp/{workspace}/{value}/ for intermediate processing files. Provide only
+  the name segment — e.g., "cedar-scratch", not "/tmp/myworkspace/cedar-
+  scratch". The format transformer may hash both workspace and value for
+  obfuscation on disk. Same opaque naming rules as security_io_input_tempdir —
+  must not be derived from the agent name or reveal agent structure. Examples:
+  "cedar-scratch", "work-bravo" (good); "my-agent-work" (bad — reveals agent
+  identity).
+constraint:
+  - rule: not_equal
+    field: security_io_input_tempdir
+    severity: error
+    reason: >-
+      Input tempdir (read access) and scratch tempdir (write access) must not
+      resolve to the same path. Same value would give the agent write access
+      to its input staging area, defeating isolation between dispatcher-
+      written input and agent-written scratch files.
+  - rule: not_subpath_of
+    field: security_io_output_directory
+    severity: error
+    reason: >-
+      Scratch tempdir must not overlap with the output directory. Same path
+      would allow unconstrained scratch writes to masquerade as validated
+      output.

@@ -1,0 +1,6 @@
+type: atom/snake_string
+description: >-
+  Name of a parameter the dispatcher passes to the agent. This becomes the
+  placeholder name in the agent prompt template. Common names: 'tempfile'
+  (path to input data), 'uid' (record identifier), 'iteration' (processing
+  round number).

@@ -1,0 +1,5 @@
+type: union/path_exists_any
+description: >-
+  An @path reference to a .md file containing success criteria. The resolver
+  reads the file and extracts individual success criterion items from its
+  structure.

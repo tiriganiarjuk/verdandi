@@ -1,0 +1,5 @@
+type: atom/path_absolute
+description: >-
+  Absolute path to the directory where the agent writes output files. Used in
+  the render schema to specify the resolved output location when the agent
+  produces multiple files or when file names are partially or fully unknown.

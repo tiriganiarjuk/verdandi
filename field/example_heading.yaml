@@ -1,0 +1,6 @@
+type: atom/string_plain
+description: >-
+  Heading for an individual example entry. When example_display_headings is
+  true, this becomes the H4 heading for the example in the generated prompt.
+  When derived from @include, the resolver extracts this from the H2 heading
+  in the source .md file.

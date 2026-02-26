@@ -1,0 +1,6 @@
+type: atom/integer
+description: >-
+  Maximum number of concurrent agent instances the dispatcher may spawn.
+  Controls parallelism for batch processing. The dispatcher launches up to
+  this many agents simultaneously, each processing a different chunk. Defaults
+  to 6 if not specified.

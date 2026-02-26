@@ -1,0 +1,5 @@
+type: atom/string_plain
+description: >-
+  Fixed prompt instruction for the output portion of the agent return.
+  Composed into the prompt when return_mode includes output (metrics-output or
+  output). Const value — not author-editable.

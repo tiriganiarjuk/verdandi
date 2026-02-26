@@ -1,0 +1,10 @@
+type: union/path_any
+description: >-
+  Path prefixes granting read-level access. Each entry grants recursive access
+  to all files and directories under the prefix. Entries can be workspace-
+  relative (resolved against security_paths_workspace) or absolute. Use
+  relative paths for workspace content (e.g., "schemas/",
+  "definitions/schemas/") and absolute paths for system locations (e.g.,
+  "/tmp/"). Read-level paths make read, search, and inspect capabilities
+  possible — actual capabilities granted depend on intersection with
+  security_capabilities_requested.

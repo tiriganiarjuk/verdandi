@@ -1,0 +1,15 @@
+type: element/path_exists_absolute
+description: >-
+  Schema the output data must validate against. Workspace-relative path to a
+  .schema.json file. Lives in the security section because the resolver needs
+  it for engineering control derivation — schema validation is a security
+  enforcement property.
+constraint:
+  - rule: required_when
+    field: task.processing.processing_output_file_format
+    in: [jsonl, json]
+    severity: error
+    reason: >-
+      Structured output (JSON or JSONL) requires a schema for validation
+      enforcement. Without a schema, the enforcement output tool cannot
+      validate records before writing.

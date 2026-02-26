@@ -1,0 +1,10 @@
+type: enum/output_name_known
+description: >-
+  How well the output filename is known at definition time. known: exact
+  output file path is declared — also requires security_io_output_file in
+  [security.security_io]. partially: a naming template or instruction
+  constrains the filename but the LLM provides variable parts — also requires
+  security_io_output_directory in [security.security_io], plus
+  processing_output_file_name_template. unknown: completely dynamic, no naming
+  constraint — also requires security_io_output_directory in
+  [security.security_io], plus processing_output_file_name_instruction.

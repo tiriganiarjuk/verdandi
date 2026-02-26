@@ -1,0 +1,5 @@
+type: atom/string_plain
+description: >-
+  Fixed prompt instruction for the metrics portion of the agent return.
+  Composed into the prompt when return_mode includes metrics (status-metrics
+  or metrics-output). Const value — not author-editable.

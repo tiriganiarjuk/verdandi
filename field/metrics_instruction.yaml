@@ -1,0 +1,6 @@
+type: atom/string_plain
+description: >-
+  Prompt instruction telling the agent how to report summary metrics in its
+  return. Composed into the agent prompt when return mode includes metrics.
+  Example: "Include summary metrics with your return: records processed,
+  records passed, records failed."

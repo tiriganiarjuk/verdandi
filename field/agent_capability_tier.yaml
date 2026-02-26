@@ -1,0 +1,9 @@
+type: enum/processing_capability
+description: >-
+  Platform-agnostic capability tier for this agent. Format transformers map
+  descriptors to vendor-specific models. fast-cheap: speed/cost over quality
+  (bulk transforms, simple extraction). standard: general-purpose balance.
+  analytical: careful judgment (QC, assessment, structured analysis). complex-
+  reasoning: deep multi-step reasoning (text rewriting, nuanced decisions).
+  max-capability: highest available, no compromises. inherit: match the
+  dispatcher's model (task scales with calling context).

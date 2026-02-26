@@ -1,0 +1,7 @@
+type: atom/path_absolute
+description: >-
+  Path prefixes granting read-level access. Each entry is a
+  path_allowed_absolute validated against the blocklist. Read-level paths make
+  read, search, and inspect capabilities possible within these paths. Which
+  capabilities are actually granted depends on capabilities_requested
+  intersection.

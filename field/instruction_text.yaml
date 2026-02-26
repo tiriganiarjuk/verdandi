@@ -1,0 +1,16 @@
+type: atom/string_plain
+description: >-
+  Inline instruction text for this step. Used for short instructions that
+  don't warrant a separate .md file. Mutually exclusive with include.
+semantic:
+  intent: >-
+    Directs agent behavior for one processing step. Each instruction must
+    produce consistent behavior across different LLM instances.
+  checks:
+    - >-
+      Specific enough that two different LLMs would produce similar outputs
+    - >-
+      Describes concrete actions, not aspirational goals
+    - >-
+      Scoped to a single processing step, not the entire task
+  severity: error

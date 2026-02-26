@@ -1,0 +1,5 @@
+type: atom/path_absolute
+description: >-
+  Resolved absolute path to the output file. Present when the output filename
+  is fully known at definition time. The enforcement tool writes exclusively
+  to this path.

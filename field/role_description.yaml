@@ -1,0 +1,28 @@
+type: atom/string_plain
+description: >-
+  Expanded role context that builds on role_identity and role_responsibility.
+  Where identity says WHAT you are and responsibility says WHAT you must do,
+  description provides the WHY and HOW — domain context, judgement guidance,
+  and framing that shapes how the agent approaches its work. Optional for
+  simple agents; increasingly valuable as task complexity and required
+  judgement increase.
+semantic:
+  intent: >-
+    Builds the agent's understanding of its role beyond the identity and
+    responsibility. Provides context, nuance, and framing that helps the agent
+    exercise good judgement in ambiguous situations.
+  checks:
+    - >-
+      Adds context beyond what identity and responsibility already state
+    - >-
+      Helps the agent understand WHY it does what it does
+    - >-
+      Appropriate depth for task complexity — simple agents may omit entirely
+  anti_patterns:
+    - >-
+      Repeating the agent_description verbatim
+    - >-
+      Restating role_identity or role_responsibility in different words
+    - >-
+      Generic filler: 'You are a helpful assistant that...'
+  severity: warning

@@ -1,0 +1,9 @@
+type: enum/output_format_kind
+description: >-
+  Output format the agent produces. Choose based on output structure: 'jsonl'
+  for record-oriented output where each line is an independent JSON object
+  (supports per-record and batch write frequency control). 'json' for a single
+  structured JSON document. 'markdown' for prose or structured text with
+  headings. 'text' for unstructured plain text. Format transformers use this
+  to add enforcement (e.g., hooks that verify valid JSONL before allowing
+  writes).

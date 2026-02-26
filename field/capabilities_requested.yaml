@@ -1,0 +1,7 @@
+type: enum/capabilities
+description: >-
+  Platform-agnostic capabilities the agent requests. Each entry is a
+  capability descriptor, not a vendor tool name. A requested capability is
+  only granted if a matching path grant exists and the capability is not
+  prohibited. Format transformers map capability names to vendor- specific
+  tools.

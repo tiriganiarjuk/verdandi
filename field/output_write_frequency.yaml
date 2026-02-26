@@ -1,0 +1,6 @@
+type: enum/write_frequency
+description: >-
+  How often the agent flushes records to disk. record: one record per write
+  invocation, minimal blast radius. batch: bounded set of records per
+  invocation, size controlled by processing_output_batch_size. Only relevant
+  for JSONL — other formats write the entire file per invocation by default.

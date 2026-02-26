@@ -1,0 +1,8 @@
+type: atom/string_plain
+description: >-
+  Filename template with {placeholder} syntax for dispatch-time parameters.
+  The tool constructs the output filename by substituting placeholder values
+  provided by the LLM (received as dispatch parameters). The tool controls
+  directory, naming pattern, and extension. The LLM controls only the variable
+  parts. Example: "{interview-id}.summaries.jsonl" — the LLM provides
+  interview-id, the tool constructs the full path.

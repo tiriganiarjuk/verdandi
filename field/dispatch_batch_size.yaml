@@ -1,0 +1,14 @@
+type: tuple/dispatch_batch_size
+description: >-
+  Tuple of [min, max] records per batch chunk. The dispatcher splits input
+  into chunks of size between min and max. Min must be strictly less than max.
+  Required when dispatch_mode is 'batch'. Example: [50, 100] means each agent
+  invocation gets between 50 and 100 records.
+constraint:
+  - rule: tuple_ordered
+    order: ascending_strict
+    severity: error
+    reason: >-
+      First element (minimum batch size) must be strictly less than second
+      element (maximum batch size). A minimum that equals or exceeds the
+      maximum makes the batch size range degenerate.

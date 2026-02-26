@@ -1,0 +1,6 @@
+type: atom/string_plain
+description: >-
+  Naming pattern constraint for LLM-provided filenames. Only present when the
+  output filename is partially known — the definition provides a template or
+  instruction and the LLM fills in the variable parts. The tool enforces this
+  pattern when constructing the output path.

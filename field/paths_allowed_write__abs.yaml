@@ -1,0 +1,7 @@
+type: atom/path_absolute
+description: >-
+  Path prefixes granting write-level access. Each entry is a
+  path_allowed_absolute validated against the blocklist. Write-level paths
+  make all capabilities possible (write, edit, append, read, search, inspect)
+  within these paths. Which capabilities are actually granted depends on
+  capabilities_requested intersection.

@@ -1,0 +1,9 @@
+type: enum/dispatch_background_mode
+description: >-
+  Background execution policy for this agent. Determines how the dispatcher
+  handles this agent's execution lifecycle. 'allowed' means the dispatcher
+  chooses foreground or background based on workload — most common choice.
+  'required' means the dispatcher must launch this agent as a background
+  process — use for long-running agents that should not block the dispatcher.
+  'forbidden' means the agent must run in the foreground and the dispatcher
+  waits for completion — use for interactive agents requiring user input.

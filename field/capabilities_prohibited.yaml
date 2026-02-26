@@ -1,0 +1,6 @@
+type: enum/capabilities
+description: >-
+  Platform-agnostic capabilities to deny even if path grants exist. Each entry
+  is a capability descriptor, not a vendor tool name. Takes precedence over
+  both explicit path grants and auto-derived permissions. Format transformers
+  map capability names to vendor-specific tools.

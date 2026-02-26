@@ -1,0 +1,5 @@
+type: atom/integer
+description: >-
+  Number of records per write tool call when write frequency is batch. The
+  agent accumulates this many records before invoking the write tool. Balances
+  write frequency against data loss risk from interruption.

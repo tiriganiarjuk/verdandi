@@ -1,0 +1,5 @@
+type: union/path_exists_any
+description: >-
+  An @path reference to a .md file that expands to a complete example group.
+  The resolver reads the file and derives group name, entries, and headings
+  from its structure.

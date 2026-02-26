@@ -1,0 +1,6 @@
+type: element/path_exists_absolute
+description: >-
+  Path to the JSON Schema file that validates enforcement tool output.
+  Required for all enforcement output tools — structured output (JSON, JSONL)
+  always requires schema validation. The tool validates each write against
+  this schema before committing to disk.

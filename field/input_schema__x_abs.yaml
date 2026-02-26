@@ -1,0 +1,5 @@
+type: element/path_exists_absolute
+description: >-
+  Schema the input data validates against. Workspace-relative path to a
+  .schema.json or .schema.yaml file. The resolver uses this for input
+  validation enforcement — a security property.
