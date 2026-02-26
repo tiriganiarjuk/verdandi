@@ -1,0 +1,18 @@
+version: 3
+description: >
+  After permission resolution — enforcement section computed from security
+  declarations. Paths and includes already resolved.
+required:
+  - indirect
+  - task
+  - security
+  - execution
+  - criteria
+  - enforcement
+sections:
+  indirect: section/indirect
+  task: section/task
+  security: section/security_resolved
+  execution: section/execution_resolved
+  criteria: section/criteria_resolved
+  enforcement: section/enforcement

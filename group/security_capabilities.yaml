@@ -1,0 +1,6 @@
+description: Platform-agnostic capability declarations
+containers:
+  required:
+    security_capabilities_requested: simplearray/security_capabilities_requested
+  optional:
+    security_capabilities_prohibited: simplearray/security_capabilities_prohibited

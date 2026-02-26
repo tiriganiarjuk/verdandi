@@ -1,0 +1,4 @@
+description: >
+  @path reference to a .md file containing success criteria
+required:
+  include: union/path_exists_any

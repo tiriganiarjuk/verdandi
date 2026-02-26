@@ -1,0 +1,7 @@
+description: Access control after path resolution — all paths absolutized
+components:
+  security_io: group/security_io_resolved
+  security_schema: group/security_schema_resolved
+  security_paths: group/security_paths_resolved
+  security_capabilities: group/security_capabilities
+  context: group/context_resolved

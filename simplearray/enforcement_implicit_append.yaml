@@ -1,0 +1,5 @@
+items: element/path_exists_absolute
+description: >
+  Paths granted append capability from system-derived permissions (System 2).
+  NOT displayed to agent. Hooks enforce silently. Covers auto-derived access
+  to log files or accumulation files in temp directories.

@@ -1,0 +1,4 @@
+regex: "\\.\\."
+description: >
+  Parent directory traversal — any path containing ".." is a violation
+  regardless of whether it resolves to a safe location.

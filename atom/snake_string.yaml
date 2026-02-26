@@ -1,0 +1,5 @@
+type: string
+pattern: pattern/snake
+description: >
+  Lowercase snake_case string — words separated by underscores. Used
+  for parameter names and template placeholders.

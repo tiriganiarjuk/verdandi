@@ -1,0 +1,18 @@
+version: 3
+description: >
+  After success/failure reduction — all criteria includes inlined.
+  This is the final pipeline stage before universal-format.
+required:
+  - indirect
+  - task
+  - security
+  - execution
+  - criteria
+  - enforcement
+sections:
+  indirect: section/indirect
+  task: section/task
+  security: section/security_resolved
+  execution: section/execution_reduced
+  criteria: section/criteria_reduced
+  enforcement: section/enforcement

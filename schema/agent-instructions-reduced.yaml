@@ -1,0 +1,18 @@
+version: 3
+description: >
+  After instruction reduction — all instruction includes inlined.
+  Examples still as references.
+required:
+  - indirect
+  - task
+  - security
+  - execution
+  - criteria
+  - enforcement
+sections:
+  indirect: section/indirect
+  task: section/task
+  security: section/security_resolved
+  execution: section/examples_resolved_instructions_reduced
+  criteria: section/criteria_resolved
+  enforcement: section/enforcement

@@ -1,0 +1,15 @@
+description: >
+  What the agent produces: format, file location, naming rules, and
+  optional schema for validation. Aggregates fields from task.processing,
+  security.security_schema, and security.security_io.
+required:
+  description: atom/string_plain
+  format: enum/output_format_kind
+  name_known: enum/output_name_known
+optional:
+  schema_path: element/path_exists_absolute
+  schema_embed: atom/boolean
+  output_file: atom/path_absolute
+  output_directory: atom/path_absolute
+  name_template: atom/string_plain
+  name_instruction: atom/string_plain

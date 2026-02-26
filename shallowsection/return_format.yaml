@@ -1,0 +1,15 @@
+description: >
+  How the agent reports results: return mode, optional instructions for
+  status/metrics/output, schema for structured returns, and success/failure
+  criteria. Aggregates from task.return and criteria sections.
+required:
+  mode: enum/return_mode
+optional:
+  status_instruction: atom/string_plain
+  metrics_instruction: atom/string_plain
+  output_instruction: atom/string_plain
+  return_schema: union/path_exists_any
+containers:
+  optional:
+    success_criteria: array/success_criteria_reduced
+    failure_criteria: array/failure_criteria_reduced

@@ -1,0 +1,6 @@
+values: [allowed, required, forbidden]
+description: >
+  Background execution policy. 'allowed' means the dispatcher chooses
+  foreground or background based on workload. 'required' means the agent
+  must run as a background process. 'forbidden' means the agent must run
+  in the foreground and the dispatcher waits for completion.

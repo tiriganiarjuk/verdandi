@@ -1,0 +1,46 @@
+description: >
+  Minimal output tool specification assembled by the security resolver.
+  Present only when the agent produces structured output (JSON or JSONL).
+  Fields drawn from task.processing and security declarations.
+fields:
+  conditional:
+    enforcement_output_tool_format:
+      ref: enum/enforcement_tool_format
+      only_when:
+        field: task.processing.processing_output_file_format
+        in: [jsonl, json]
+    enforcement_output_tool_write_frequency:
+      ref: enum/write_frequency
+      only_when:
+        field: enforcement_output_tool_format
+        equals: jsonl
+    enforcement_output_tool_batch_size:
+      ref: atom/integer
+      only_when:
+        field: enforcement_output_tool_write_frequency
+        equals: batch
+    enforcement_output_tool_name_needed:
+      ref: atom/boolean
+      only_when:
+        field: task.processing.processing_output_file_name_known
+        in: [unknown, partially]
+    enforcement_output_tool_name_pattern:
+      ref: atom/string_plain
+      only_when:
+        field: task.processing.processing_output_file_name_known
+        equals: partially
+    enforcement_output_tool_schema_path:
+      ref: element/path_exists_schema
+      always_when:
+        field: enforcement_output_tool_format
+        in: [jsonl, json]
+    enforcement_output_tool_file_path:
+      ref: atom/path_absolute
+      only_when:
+        field: task.processing.processing_output_file_name_known
+        equals: known
+    enforcement_output_tool_directory_path:
+      ref: atom/path_absolute
+      only_when:
+        field: task.processing.processing_output_file_name_known
+        in: [partially, unknown]

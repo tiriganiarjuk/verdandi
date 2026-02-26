@@ -1,0 +1,6 @@
+values: [read, search, write, edit, append, inspect]
+description: >
+  Platform-agnostic capability descriptor. Format transformers map these
+  to vendor-specific tools. read: file read. search: find files by name or
+  content. write: create or overwrite files. edit: targeted modification.
+  append: add content to end of files. inspect: read-only command execution.

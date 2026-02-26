@@ -1,0 +1,7 @@
+values: [tempfile, inline, file, directory]
+description: >
+  How input data reaches the agent. 'tempfile' means the dispatcher writes
+  to a scoped temp directory and passes the path as parameter. 'inline'
+  means embedded directly in the agent prompt. 'file' means the agent reads
+  from a pre-determined file path. 'directory' means the agent reads from a
+  pre-determined directory path.

@@ -1,0 +1,14 @@
+description: >
+  What the agent receives: data format, delivery mechanism, schema for
+  validation, parameters, and context resources. Context items use
+  resolved variants (absolute paths).
+required:
+  description: atom/string_plain
+  format: enum/input_format
+  delivery: enum/dispatch_input_delivery
+optional:
+  input_schema: element/path_exists_absolute
+containers:
+  optional:
+    parameters: array/dispatch_parameters
+    context: group/context_resources

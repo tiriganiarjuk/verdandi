@@ -1,0 +1,4 @@
+items: enum/capabilities
+description: >
+  Capabilities to deny even if path grants exist. Takes precedence over
+  both explicit path grants and auto-derived permissions.

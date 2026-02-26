@@ -1,0 +1,4 @@
+description: How the agent processes work — include paths absolutized
+components:
+  execution_instructions: array/execution_instructions_resolved
+  execution_examples: superarray/execution_examples_resolved

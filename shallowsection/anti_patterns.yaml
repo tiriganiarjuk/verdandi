@@ -1,0 +1,6 @@
+description: >
+  Known failure patterns the agent must avoid. Null when no
+  anti-patterns defined.
+containers:
+  required:
+    patterns: simplearray/guardrails_anti_patterns_raw

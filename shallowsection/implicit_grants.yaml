@@ -1,0 +1,7 @@
+description: >
+  Resolver-derived capability grants for hook enforcement only. Not
+  displayed to the agent. Same shape as security_boundary capabilities
+  but from implicit sources (context paths, schema paths, etc.).
+containers:
+  required:
+    capabilities: group/enforcement_implicit_grants

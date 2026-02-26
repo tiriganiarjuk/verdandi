@@ -1,0 +1,2 @@
+union: [element/path_exists_relative, element/path_exists_absolute]
+description: Filesystem path that must exist — either relative or absolute

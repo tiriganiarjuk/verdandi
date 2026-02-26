@@ -1,0 +1,7 @@
+description: >
+  Raw output tool specification from enforcement. Unresolved — no tool_name
+  yet. These fields are the input to custom tool discovery at the
+  platform-specific render stage. Null when agent has no custom output tool.
+containers:
+  required:
+    writing_output: group/enforcement_output_tool

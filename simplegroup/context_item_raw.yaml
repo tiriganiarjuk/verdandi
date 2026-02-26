@@ -1,0 +1,4 @@
+description: A label+path pair for a context resource — auto-derives read permission
+required:
+  context_label: atom/string_plain
+  context_path: union/path_any

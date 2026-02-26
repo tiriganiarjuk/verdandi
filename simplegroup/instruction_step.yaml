@@ -1,0 +1,4 @@
+description: Inline instruction step with processing mode boundary
+required:
+  instruction_mode: enum/instruction_mode
+  instruction_text: atom/string_plain

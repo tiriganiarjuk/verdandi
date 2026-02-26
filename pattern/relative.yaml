@@ -1,0 +1,2 @@
+regex: "^\\."
+description: Starts with dot — relative path prefix (e.g., ./src/file.py)

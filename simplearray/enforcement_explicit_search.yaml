@@ -1,0 +1,5 @@
+items: element/path_exists_absolute
+description: >
+  Paths granted search capability from author-defined permissions (System 1).
+  Displayed in Security Boundary section. Maps to platform-specific file
+  search and content search tools scoped to these paths.

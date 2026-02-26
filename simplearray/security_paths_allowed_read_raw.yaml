@@ -1,0 +1,4 @@
+items: union/path_any
+description: >
+  Path prefixes granting read-level access. Entries can be workspace-relative
+  or absolute. Read-level makes read, search, and inspect possible.

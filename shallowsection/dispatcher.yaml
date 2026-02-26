@@ -1,0 +1,25 @@
+description: >
+  Everything the dispatcher skill needs to launch and feed the agent:
+  identity, mode, batching, input/output format, parameters.
+required:
+  agent_name: element/agent_name
+  agent_description: element/agent_description
+  dispatch_mode: enum/dispatch_mode
+  background_mode: enum/dispatch_background_mode
+  input_format: enum/input_format
+  input_delivery: enum/dispatch_input_delivery
+  input_description: atom/string_plain
+  output_format: enum/output_format_kind
+  output_name_known: enum/output_name_known
+  return_mode: enum/return_mode
+optional:
+  max_agents: atom/integer
+conditional:
+  batch_size:
+    ref: tuple/dispatch_batch_size
+    only_when:
+      field: dispatch_mode
+      equals: batch
+containers:
+  optional:
+    parameters: array/dispatch_parameters

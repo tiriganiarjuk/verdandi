@@ -1,0 +1,4 @@
+values: [path, string, integer, boolean]
+description: >
+  Type of a dispatch parameter value. Used for documentation and dispatcher
+  validation.

@@ -1,0 +1,5 @@
+values: [say, notification, log, terminal]
+description: >
+  How to deliver agent-initiated notifications. 'say' uses macOS
+  text-to-speech. 'notification' uses macOS Notification Center.
+  'terminal' rings the bell and prints. 'log' writes silently to a log file.

@@ -1,0 +1,12 @@
+description: >
+  Author-defined capability-keyed path grants (System 1). Displayed in
+  Security Boundary section as tool/path pairs. Each key maps one capability
+  to its granted paths. Empty buckets omitted.
+containers:
+  optional:
+    read: simplearray/enforcement_explicit_read
+    search: simplearray/enforcement_explicit_search
+    inspect: simplearray/enforcement_explicit_inspect
+    write: simplearray/enforcement_explicit_write
+    edit: simplearray/enforcement_explicit_edit
+    append: simplearray/enforcement_explicit_append

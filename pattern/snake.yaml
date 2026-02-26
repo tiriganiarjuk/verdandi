@@ -1,0 +1,2 @@
+regex: "^[a-z][a-z0-9_]*$"
+description: Lowercase snake_case — words separated by underscores (e.g., tempfile, batch_id)

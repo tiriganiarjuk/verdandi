@@ -1,0 +1,7 @@
+description: >
+  Data schema declarations after resolution — schema paths absolutized.
+fields:
+  optional:
+    security_input_schema: element/path_exists_absolute
+    security_output_schema: element/path_exists_absolute
+    security_output_schema_embed: atom/boolean

@@ -1,0 +1,6 @@
+values: [status, status-metrics, metrics-output, output]
+description: >
+  How the agent returns results. 'status' returns only SUCCESS or FAILURE.
+  'status-metrics' returns status plus summary metrics. 'metrics-output'
+  returns metrics plus actual output data. 'output' returns output directly
+  with no status word.

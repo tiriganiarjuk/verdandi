@@ -1,0 +1,4 @@
+items: enum/capabilities
+description: >
+  Platform-agnostic capabilities the agent requests. A requested capability
+  is only granted if a matching path grant exists and it is not prohibited.

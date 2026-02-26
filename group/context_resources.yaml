@@ -1,0 +1,7 @@
+description: >
+  Context resources available to the agent — required items that must
+  be provided and optional items available on request.
+containers:
+  optional:
+    context_required: array/context_required_resolved
+    context_available: array/context_available_resolved

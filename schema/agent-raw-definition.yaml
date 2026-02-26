@@ -1,0 +1,16 @@
+version: 3
+description: >
+  Schema for agent definitions before resolution. Validates what the
+  author writes directly. All sections required.
+required:
+  - indirect
+  - task
+  - security
+  - execution
+  - criteria
+sections:
+  indirect: section/indirect
+  task: section/task
+  security: section/security_raw
+  execution: section/execution_raw
+  criteria: section/criteria_raw

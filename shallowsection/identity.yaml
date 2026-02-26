@@ -1,0 +1,16 @@
+description: >
+  Agent identity: who it is, what it does, what tier it runs at.
+  Title is derived from agent_name (split hyphens, capitalize).
+  Capability tier is unresolved — vendor model resolution happens
+  at the platform-specific render stage.
+required:
+  title: atom/agent_title
+  description: element/agent_description
+  role_identity: atom/string_plain
+  role_responsibility: atom/string_plain
+  capability_tier: enum/processing_capability
+optional:
+  role_description: atom/string_plain
+containers:
+  optional:
+    role_expertise: simplearray/role_expertise

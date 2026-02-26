@@ -1,0 +1,16 @@
+version: 3
+description: >
+  After path resolution — all filesystem paths absolutized relative to
+  workspace root. Includes still present as references.
+required:
+  - indirect
+  - task
+  - security
+  - execution
+  - criteria
+sections:
+  indirect: section/indirect
+  task: section/task
+  security: section/security_resolved
+  execution: section/execution_resolved
+  criteria: section/criteria_resolved

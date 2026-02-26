@@ -1,0 +1,4 @@
+values: [jsonl, json, text]
+description: >
+  Format of input file content. 'jsonl' for newline-delimited JSON records,
+  'json' for a single JSON document, 'text' for unstructured text.

@@ -1,0 +1,10 @@
+description: A named group of calibration examples — includes inlined, direct entries only
+fields:
+  required:
+    example_group_name: atom/string_plain
+  optional:
+    example_display_headings: atom/boolean
+    examples_max_number: atom/integer
+containers:
+  required:
+    example_entries: array/example_entries_reduced

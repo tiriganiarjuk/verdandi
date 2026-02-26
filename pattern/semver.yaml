@@ -1,0 +1,2 @@
+regex: "^\\d+\\.\\d+\\.\\d+$"
+description: Semantic version MAJOR.MINOR.PATCH (e.g., 1.0.0, 3.2.1)

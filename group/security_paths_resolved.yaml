@@ -1,0 +1,9 @@
+description: >
+  Filesystem path grants after resolution — all paths absolutized.
+fields:
+  required:
+    security_paths_workspace: element/path_exists_absolute
+containers:
+  optional:
+    security_paths_allowed_read: simplearray/security_paths_allowed_read_resolved
+    security_paths_allowed_write: simplearray/security_paths_allowed_write_resolved

@@ -1,0 +1,9 @@
+description: >
+  Computed permission grants and optional enforcement output tool. Added
+  by the security resolver alongside the original sections. Explicit grants
+  are author-defined (System 1, displayed to agent). Implicit grants are
+  system-derived (System 2, hooks only).
+components:
+  enforcement_explicit_grants: group/enforcement_explicit_grants
+  enforcement_implicit_grants: group/enforcement_implicit_grants
+  enforcement_output_tool: group/enforcement_output_tool

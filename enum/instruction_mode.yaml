@@ -1,0 +1,5 @@
+values: [deterministic, probabilistic]
+description: >
+  Processing mode boundary. 'deterministic' steps are mechanical operations
+  where the LLM must follow exact procedures. 'probabilistic' steps require
+  LLM intelligence for creative or evaluative work.

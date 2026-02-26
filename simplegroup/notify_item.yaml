@@ -1,0 +1,5 @@
+description: A notification rule — when to trigger, what to say, how to deliver
+required:
+  notify_trigger: atom/string_plain
+  notify_message: atom/string_plain
+  notify_delivery: enum/notify_delivery

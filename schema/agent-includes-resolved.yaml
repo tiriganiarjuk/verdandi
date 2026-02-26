@@ -1,0 +1,16 @@
+version: 3
+description: >
+  After include resolution — @path references resolved to absolute paths.
+  Structure identical to raw definition but include paths absolutized.
+required:
+  - indirect
+  - task
+  - security
+  - execution
+  - criteria
+sections:
+  indirect: section/indirect
+  task: section/task
+  security: section/security_raw
+  execution: section/execution_resolved
+  criteria: section/criteria_resolved

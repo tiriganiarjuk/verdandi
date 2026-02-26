@@ -1,0 +1,5 @@
+items: element/path_exists_absolute
+description: >
+  Paths granted edit capability from system-derived permissions (System 2).
+  NOT displayed to agent. Hooks enforce silently. Covers auto-derived access
+  to scratch or temp files that require in-place modification.

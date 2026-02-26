@@ -1,0 +1,7 @@
+values: [fast-cheap, standard, analytical, complex-reasoning, max-capability, inherit]
+description: >
+  Platform-agnostic capability tier. Format transformers map to vendor
+  models. 'fast-cheap' for bulk transforms. 'standard' for general purpose.
+  'analytical' for careful judgment. 'complex-reasoning' for deep multi-step
+  reasoning. 'max-capability' for highest available. 'inherit' to match
+  the dispatcher's model.

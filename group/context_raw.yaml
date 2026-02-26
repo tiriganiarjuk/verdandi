@@ -1,0 +1,5 @@
+description: Resources the agent needs access to — auto-derives read permissions
+containers:
+  optional:
+    context_required: array/context_required_raw
+    context_available: array/context_available_raw

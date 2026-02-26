@@ -1,0 +1,5 @@
+values: [jsonl, json, markdown, text]
+description: >
+  Output format the agent produces. 'jsonl' for record-oriented output,
+  'json' for a single structured document, 'markdown' for prose or
+  structured text with headings, 'text' for unstructured plain text.

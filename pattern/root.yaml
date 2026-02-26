@@ -1,0 +1,4 @@
+regex: "^/$"
+description: >
+  Filesystem root in isolation — granting / gives access to the entire
+  filesystem. Always a security violation.

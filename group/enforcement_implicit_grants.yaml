@@ -1,0 +1,12 @@
+description: >
+  System-derived capability-keyed path grants (System 2). NOT displayed
+  to agent. Hooks enforce silently. Covers auto-derived access from context
+  paths, schema files, input files, temp directories.
+containers:
+  optional:
+    read: simplearray/enforcement_implicit_read
+    search: simplearray/enforcement_implicit_search
+    inspect: simplearray/enforcement_implicit_inspect
+    write: simplearray/enforcement_implicit_write
+    edit: simplearray/enforcement_implicit_edit
+    append: simplearray/enforcement_implicit_append

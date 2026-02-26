@@ -1,0 +1,4 @@
+type: string
+description: >
+  Human-readable agent title derived mechanically from agent_name.
+  Split on hyphens, capitalize each word.

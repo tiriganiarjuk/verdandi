@@ -1,0 +1,4 @@
+description: Agent-initiated notifications during processing
+containers:
+  optional:
+    notify: array/notify

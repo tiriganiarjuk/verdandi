@@ -1,0 +1,4 @@
+description: Inline example with heading and text content
+required:
+  example_heading: atom/string_plain
+  example_text: atom/string_plain

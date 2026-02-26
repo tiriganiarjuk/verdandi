@@ -1,0 +1,4 @@
+items: atom/string_plain
+description: >
+  Common mistakes to avoid. Each entry describes a specific wrong behavior
+  the agent might exhibit and why it's wrong.

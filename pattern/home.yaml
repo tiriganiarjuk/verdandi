@@ -1,0 +1,4 @@
+regex: "^(~/|/Users/johnny/)$"
+description: >
+  Home directory in isolation — granting ~/ or its expanded form gives
+  access to the entire home tree. Always a security violation.

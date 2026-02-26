@@ -1,0 +1,21 @@
+description: >
+  Dispatcher configuration — batching, concurrency, execution mode,
+  and data flow.
+fields:
+  required:
+    dispatch_mode: enum/dispatch_mode
+    dispatch_background_mode: enum/dispatch_background_mode
+    dispatch_input_format: enum/input_format
+    dispatch_input_delivery: enum/dispatch_input_delivery
+    dispatch_input_description: atom/string_plain
+  optional:
+    dispatch_max_agents: atom/integer
+  conditional:
+    dispatch_batch_size:
+      ref: tuple/dispatch_batch_size
+      only_when:
+        field: dispatch_mode
+        equals: batch
+containers:
+  optional:
+    dispatch_parameters: array/dispatch_parameters

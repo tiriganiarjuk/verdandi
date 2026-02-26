@@ -1,0 +1,18 @@
+version: 3
+description: >
+  After guardrails reduction — guardrail includes inlined.
+  Success/failure criteria still as references.
+required:
+  - indirect
+  - task
+  - security
+  - execution
+  - criteria
+  - enforcement
+sections:
+  indirect: section/indirect
+  task: section/task
+  security: section/security_resolved
+  execution: section/execution_reduced
+  criteria: section/success_failure_resolved_guardrails_reduced
+  enforcement: section/enforcement

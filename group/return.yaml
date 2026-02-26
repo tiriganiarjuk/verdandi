@@ -1,0 +1,16 @@
+description: >
+  How the agent returns results. return_mode drives which instruction
+  fields the format transformer composes into the prompt.
+fields:
+  required:
+    return_mode: enum/return_mode
+  optional:
+    return_status: atom/string_plain
+    return_metrics: atom/string_plain
+    return_output: atom/string_plain
+  conditional:
+    return_schema:
+      ref: union/path_exists_any
+      only_when:
+        field: return_mode
+        in: [status-metrics, metrics-output]

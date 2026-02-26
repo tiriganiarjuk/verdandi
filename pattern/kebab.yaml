@@ -1,0 +1,2 @@
+regex: "^[a-z0-9]+(-[a-z0-9]+)*$"
+description: Lowercase kebab-case — words separated by hyphens (e.g., truth-system-quality-control)

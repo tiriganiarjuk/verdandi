@@ -1,0 +1,5 @@
+items: union/path_any
+description: >
+  Path prefixes granting write-level access. Write-level makes all
+  capabilities possible. Output paths must NOT appear here — that would
+  bypass the enforcement output tool.

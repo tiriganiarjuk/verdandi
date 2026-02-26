@@ -1,0 +1,5 @@
+description: >
+  @path reference to a .md file that expands to an example group.
+  Path absolutized after resolution.
+required:
+  include: element/path_exists_absolute

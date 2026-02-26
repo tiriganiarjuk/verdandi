@@ -1,0 +1,6 @@
+description: Agent-facing identity and interaction model
+components:
+  role: group/role
+  communication: group/communication
+  return: group/return
+  processing: group/processing

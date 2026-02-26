@@ -1,0 +1,5 @@
+type: string
+pattern: pattern/timestamp_zulu
+description: >
+  ISO 8601 timestamp in UTC with Zulu suffix. Format: YYYY-MM-DDTHH:MM:SSZ.
+  No timezone offset, no fractional seconds — always UTC.

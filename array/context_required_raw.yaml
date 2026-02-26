@@ -1,0 +1,2 @@
+items: simplegroup/context_item_raw
+description: Context resources the agent requires — resolution fails if missing

@@ -1,0 +1,5 @@
+items: [atom/integer, atom/integer]
+constraint: ascending_strict
+description: >
+  [min, max] records per batch chunk. Min must be strictly less than max.
+  The dispatcher splits input into chunks of size between min and max.

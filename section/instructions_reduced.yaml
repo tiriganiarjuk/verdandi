@@ -1,0 +1,3 @@
+description: Ordered processing steps — includes inlined, for render consumption
+components:
+  steps: array/execution_instructions_reduced

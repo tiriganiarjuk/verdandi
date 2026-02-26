@@ -1,0 +1,6 @@
+description: >
+  Behavioral constraint rules the agent must follow. Null when no
+  constraints defined.
+containers:
+  required:
+    rules: simplearray/guardrails_constraints_raw

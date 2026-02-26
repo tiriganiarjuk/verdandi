@@ -1,0 +1,10 @@
+description: Agent persona — identity and responsibility are required
+fields:
+  required:
+    role_identity: atom/string_plain
+    role_responsibility: atom/string_plain
+  optional:
+    role_description: atom/string_plain
+containers:
+  optional:
+    role_expertise: simplearray/role_expertise

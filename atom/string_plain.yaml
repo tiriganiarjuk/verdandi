@@ -1,0 +1,5 @@
+type: string
+excludes: [pattern/relative, pattern/absolute]
+description: >
+  Plain string that is not a path. Excludes relative and absolute path
+  prefixes — mutually exclusive with path atoms.

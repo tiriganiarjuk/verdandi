@@ -1,0 +1,3 @@
+items:
+  oneOf: [group/example_group_resolved, simplegroup/include_example_group_resolved]
+description: Example groups — include paths absolutized

@@ -1,0 +1,35 @@
+description: >
+  Concrete I/O targets. Input side auto-grants read permission. Output
+  side produces the enforcement output tool — not a generic write permission.
+fields:
+  conditional:
+    security_io_input_file:
+      ref: union/path_any
+      only_when:
+        field: indirect.dispatch.dispatch_input_delivery
+        equals: file
+    security_io_input_directory:
+      ref: union/path_any
+      only_when:
+        field: indirect.dispatch.dispatch_input_delivery
+        equals: directory
+    security_io_input_tempdir:
+      ref: atom/string_plain
+      only_when:
+        field: indirect.dispatch.dispatch_input_delivery
+        equals: tempfile
+    security_io_scratch_tempdir:
+      ref: atom/string_plain
+      only_when:
+        field: task.processing.processing_scratch_needed
+        equals: true
+    security_io_output_file:
+      ref: union/path_any
+      only_when:
+        field: task.processing.processing_output_file_name_known
+        equals: known
+    security_io_output_directory:
+      ref: union/path_any
+      only_when:
+        field: task.processing.processing_output_file_name_known
+        in: [partially, unknown]

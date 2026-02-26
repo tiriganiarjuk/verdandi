@@ -1,0 +1,11 @@
+description: >
+  Filesystem path grants at two permission levels. At least one path
+  grant must be present. Read-level enables read, search, inspect.
+  Write-level enables all capabilities.
+fields:
+  required:
+    security_paths_workspace: element/path_exists_absolute
+containers:
+  optional:
+    security_paths_allowed_read: simplearray/security_paths_allowed_read_raw
+    security_paths_allowed_write: simplearray/security_paths_allowed_write_raw

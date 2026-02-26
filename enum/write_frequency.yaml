@@ -1,0 +1,5 @@
+values: [record, batch]
+description: >
+  How often records are flushed to disk. 'record' means one record per
+  write invocation with minimal blast radius. 'batch' means a bounded set
+  of records per invocation with size controlled by batch_size.

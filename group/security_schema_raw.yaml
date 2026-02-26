@@ -1,0 +1,8 @@
+description: >
+  Data schema declarations for input and output. Schema validation
+  enforcement is a security property.
+fields:
+  optional:
+    security_input_schema: union/path_exists_any
+    security_output_schema: union/path_exists_any
+    security_output_schema_embed: atom/boolean
