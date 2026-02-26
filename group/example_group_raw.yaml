@@ -1,10 +1,10 @@
 description: A named group of calibration examples with optional heading display and count limits
 fields:
   required:
-    example_group_name: atom/string_plain
+    example_group_name: field/example_group_name
   optional:
-    example_display_headings: atom/boolean
-    examples_max_number: atom/integer
+    example_display_headings: field/example_display_headings
+    examples_max_number: field/examples_max_number
 containers:
   required:
     example_entries: array/example_entries_raw

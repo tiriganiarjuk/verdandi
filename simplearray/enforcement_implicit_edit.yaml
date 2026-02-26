@@ -1,4 +1,4 @@
-items: element/path_exists_absolute
+items: field/enforcement_implicit_edit__x_abs
 description: >
   Paths granted edit capability from system-derived permissions (System 2).
   NOT displayed to agent. Hooks enforce silently. Covers auto-derived access

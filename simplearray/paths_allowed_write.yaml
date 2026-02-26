@@ -1,2 +1,2 @@
-items: atom/path_absolute
+items: field/paths_allowed_write__abs
 description: Write-level path grants after resolution — all absolutized

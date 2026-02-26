@@ -1,4 +1,4 @@
-items: enum/capabilities
+items: field/capabilities_requested
 description: >
   Platform-agnostic capabilities the agent requests. A requested capability
   is only granted if a matching path grant exists and it is not prohibited.

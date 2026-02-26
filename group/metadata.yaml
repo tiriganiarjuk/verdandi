@@ -3,6 +3,6 @@ description: >
   agent_description is the one-line purpose statement.
 fields:
   required:
-    agent_name: atom/kebab_string
-    agent_description: atom/string_plain
-    semantic_version: atom/semver_string
+    agent_name: field/agent_name
+    agent_description: field/agent_description
+    semantic_version: field/semantic_version

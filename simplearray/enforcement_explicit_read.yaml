@@ -1,4 +1,4 @@
-items: element/path_exists_absolute
+items: field/enforcement_explicit_read__x_abs
 description: >
   Paths granted read capability from author-defined permissions (System 1).
   Displayed in Security Boundary section. Maps to platform-specific file

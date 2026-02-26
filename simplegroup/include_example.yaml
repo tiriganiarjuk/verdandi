@@ -2,4 +2,4 @@ description: >
   @path reference to a .md file that expands to example entries.
   Path absolutized after resolution.
 required:
-  include: element/path_exists_absolute
+  include: field/include_example__x_abs

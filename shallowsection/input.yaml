@@ -3,11 +3,11 @@ description: >
   validation, parameters, and context resources. Context items use
   resolved variants (absolute paths).
 required:
-  description: atom/string_plain
-  format: enum/input_format
-  delivery: enum/dispatch_input_delivery
+  description: field/input_description
+  format: field/dispatch_input_format
+  delivery: field/dispatch_input_delivery
 optional:
-  input_schema: element/path_exists_absolute
+  input_schema: field/input_schema__x_abs
 containers:
   optional:
     parameters: array/dispatch_parameters

@@ -1,2 +1,2 @@
-items: union/path_any
+items: field/io_output_file__any
 description: Output file paths before resolution — relative or absolute

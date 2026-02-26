@@ -1,2 +1,2 @@
-items: union/path_any
+items: field/io_input_directory__any
 description: Input directory paths before resolution — relative or absolute

@@ -1,4 +1,4 @@
 description: A label+path pair for a context resource — paths absolutized after resolution
 required:
-  context_label: atom/string_plain
-  context_path: atom/path_absolute
+  context_label: field/context_label
+  context_path: field/context_path__abs

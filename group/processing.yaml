@@ -3,18 +3,18 @@ description: >
   model capability tier, and scratch space needs.
 fields:
   required:
-    processing_capability_model: enum/processing_capability
-    processing_output_file_format: enum/output_format_kind
-    processing_output_file_name_known: enum/output_name_known
-    processing_output_description: atom/string_plain
+    processing_capability_model: field/agent_capability_model
+    processing_output_file_format: field/output_file_format
+    processing_output_file_name_known: field/output_file_name_known
+    processing_output_description: field/output_description
   optional:
-    processing_scratch_needed: atom/boolean
-    processing_output_file_name_template: atom/string_plain
-    processing_output_file_name_instruction: atom/string_plain
-    processing_output_batch_size: atom/integer
+    processing_scratch_needed: field/scratch_needed
+    processing_output_file_name_template: field/output_file_name_template
+    processing_output_file_name_instruction: field/output_file_name_instruction
+    processing_output_batch_size: field/output_batch_size
   conditional:
     processing_output_write_frequency:
-      ref: enum/write_frequency
+      ref: field/output_write_frequency
       only_when:
         field: processing_output_file_format
         equals: jsonl

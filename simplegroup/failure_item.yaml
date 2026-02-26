@@ -1,4 +1,4 @@
 description: A single failure criterion — FAILURE means process broke, not data quality
 required:
-  failure_definition: atom/string_plain
+  failure_definition: field/failure_definition
   failure_evidence: simplearray/failure_evidence

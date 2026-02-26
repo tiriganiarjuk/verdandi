@@ -5,42 +5,42 @@ description: >
 fields:
   conditional:
     enforcement_output_tool_format:
-      ref: enum/enforcement_tool_format
+      ref: field/output_tool_format
       only_when:
         field: task.processing.processing_output_file_format
         in: [jsonl, json]
     enforcement_output_tool_write_frequency:
-      ref: enum/write_frequency
+      ref: field/output_tool_write_frequency
       only_when:
         field: enforcement_output_tool_format
         equals: jsonl
     enforcement_output_tool_batch_size:
-      ref: atom/integer
+      ref: field/output_tool_batch_size
       only_when:
         field: enforcement_output_tool_write_frequency
         equals: batch
     enforcement_output_tool_name_needed:
-      ref: atom/boolean
+      ref: field/output_tool_name_needed
       only_when:
         field: task.processing.processing_output_file_name_known
         in: [unknown, partially]
     enforcement_output_tool_name_pattern:
-      ref: atom/string_plain
+      ref: field/output_tool_name_pattern
       only_when:
         field: task.processing.processing_output_file_name_known
         equals: partially
     enforcement_output_tool_schema_path:
-      ref: element/path_exists_schema
+      ref: field/output_tool_schema__x_abs
       always_when:
         field: enforcement_output_tool_format
         in: [jsonl, json]
     enforcement_output_tool_file_path:
-      ref: atom/path_absolute
+      ref: field/output_tool_file_path__abs
       only_when:
         field: task.processing.processing_output_file_name_known
         equals: known
     enforcement_output_tool_directory_path:
-      ref: atom/path_absolute
+      ref: field/output_tool_directory_path__abs
       only_when:
         field: task.processing.processing_output_file_name_known
         in: [partially, unknown]

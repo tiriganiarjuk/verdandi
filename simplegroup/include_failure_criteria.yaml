@@ -1,4 +1,4 @@
 description: >
   @path reference to a .md file containing failure criteria
 required:
-  include: union/path_exists_any
+  include: field/include_failure_criteria__x_any

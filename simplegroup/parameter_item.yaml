@@ -1,7 +1,7 @@
 description: A parameter the dispatcher passes to the agent at invocation
 required:
-  param_name: atom/snake_string
-  param_type: enum/param_type
-  param_required: atom/boolean
+  param_name: field/param_name
+  param_type: field/param_type
+  param_required: field/param_required
 optional:
-  param_description: atom/string_plain
+  param_description: field/param_description

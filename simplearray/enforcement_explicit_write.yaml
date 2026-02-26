@@ -1,4 +1,4 @@
-items: element/path_exists_absolute
+items: field/enforcement_explicit_write__x_abs
 description: >
   Paths granted write capability from author-defined permissions (System 1).
   Displayed in Security Boundary section. Populated by Write fork when no

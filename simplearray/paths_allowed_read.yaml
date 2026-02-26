@@ -1,2 +1,2 @@
-items: atom/path_absolute
+items: field/paths_allowed_read__abs
 description: Read-level path grants after resolution — all absolutized

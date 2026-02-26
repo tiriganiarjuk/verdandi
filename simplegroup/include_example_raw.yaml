@@ -2,4 +2,4 @@ description: >
   @path reference to a .md file that expands to example entries.
   Resolver splits at H2 boundaries and derives example_heading from headings.
 required:
-  include: union/path_exists_any
+  include: field/include_example__x_any

@@ -1,2 +1,2 @@
-items: atom/path_absolute
+items: field/io_input_directory__abs
 description: Input directory paths after resolution — all absolutized

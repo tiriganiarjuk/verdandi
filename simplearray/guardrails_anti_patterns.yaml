@@ -1,4 +1,4 @@
-items: atom/string_plain
+items: field/guardrails_anti_patterns
 description: >
   Common mistakes to avoid. Each entry describes a specific wrong behavior
   the agent might exhibit and why it's wrong.

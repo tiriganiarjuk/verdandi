@@ -1,4 +1,4 @@
 description: A single success criterion with definition and observable evidence
 required:
-  success_definition: atom/string_plain
+  success_definition: field/success_definition
   success_evidence: simplearray/success_evidence

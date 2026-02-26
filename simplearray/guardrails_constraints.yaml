@@ -1,4 +1,4 @@
-items: atom/string_plain
+items: field/guardrails_constraints
 description: >
   MUST and NEVER rules the agent must follow. Each entry is a single
   imperative constraint. Keep constraints specific and verifiable.

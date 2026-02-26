@@ -1,2 +1,2 @@
-items: atom/path_absolute
+items: field/context_path__abs
 description: Context resource paths after resolution — all absolutized
