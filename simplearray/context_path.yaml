@@ -1,2 +1,2 @@
-items: union/path_any
-description: Context resource paths before resolution — relative or absolute
+items: atom/path_absolute
+description: Context resource paths after resolution — all absolutized

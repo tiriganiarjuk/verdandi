@@ -1,5 +1,5 @@
 description: >
-  @path reference to a .md file that expands to a complete example group.
-  Resolver derives group name, entries, and headings from file structure.
+  @path reference to a .md file that expands to an example group.
+  Path absolutized after resolution.
 required:
-  include: union/path_exists_any
+  include: element/path_exists_absolute
