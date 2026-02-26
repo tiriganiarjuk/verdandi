@@ -3,4 +3,4 @@ description: >
   constraints defined.
 containers:
   required:
-    rules: simplearray/guardrails_constraints_raw
+    rules: simplearray/guardrails_constraints

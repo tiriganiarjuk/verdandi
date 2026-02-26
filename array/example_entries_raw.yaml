@@ -1,3 +1,3 @@
 items:
-  oneOf: [simplegroup/example_entry, simplegroup/include_example]
+  oneOf: [simplegroup/example_entry, simplegroup/include_example_raw]
 description: Example entries — inline or included from .md files

@@ -5,5 +5,5 @@ fields:
     security_paths_workspace: element/path_exists_absolute
 containers:
   optional:
-    security_paths_allowed_read: simplearray/security_paths_allowed_read_resolved
-    security_paths_allowed_write: simplearray/security_paths_allowed_write_resolved
+    security_paths_allowed_read: simplearray/paths_allowed_read
+    security_paths_allowed_write: simplearray/paths_allowed_write

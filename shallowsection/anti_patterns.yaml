@@ -3,4 +3,4 @@ description: >
   anti-patterns defined.
 containers:
   required:
-    patterns: simplearray/guardrails_anti_patterns_raw
+    patterns: simplearray/guardrails_anti_patterns

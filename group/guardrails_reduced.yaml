@@ -2,5 +2,5 @@ description: >
   Behavioral constraints and failure patterns — includes inlined, direct content only
 containers:
   optional:
-    guardrails_constraints: simplearray/guardrails_constraints_raw
-    guardrails_anti_patterns: simplearray/guardrails_anti_patterns_raw
+    guardrails_constraints: simplearray/guardrails_constraints
+    guardrails_anti_patterns: simplearray/guardrails_anti_patterns
