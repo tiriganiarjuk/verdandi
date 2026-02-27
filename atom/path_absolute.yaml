@@ -1,3 +1,4 @@
+title: PathAbsolute
 type: string
 pattern: pattern/absolute
 excludes: [pattern/traversal, pattern/env, pattern/home, pattern/root, pattern/claude]

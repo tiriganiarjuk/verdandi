@@ -1,3 +1,4 @@
+title: ExampleGroupName
 type: atom/string_plain
 description: >-
   Name of the example group, used as the H3 heading when compiling examples

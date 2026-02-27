@@ -1,3 +1,4 @@
+title: InstructionMode
 values: [deterministic, probabilistic]
 description: >
   Processing mode boundary. 'deterministic' steps are mechanical operations

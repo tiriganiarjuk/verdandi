@@ -1,3 +1,4 @@
+title: DispatchBatchSize
 items: [atom/integer, atom/integer]
 constraint: ascending_strict
 description: >

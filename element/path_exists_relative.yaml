@@ -1,3 +1,4 @@
+title: PathExistsRelative
 inherits: atom/path_relative
 format: exists
 description: Relative path that must exist on the filesystem at resolution time

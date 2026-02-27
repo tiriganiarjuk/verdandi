@@ -1,3 +1,4 @@
+title: SuccessEvidence
 type: atom/string_plain
 description: >-
   Observable conditions that prove success. Each entry is a concrete,

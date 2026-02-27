@@ -1,3 +1,4 @@
+title: EnforcementExplicitAppend
 items: field/enforcement_explicit_append__x_abs
 description: >
   Paths granted append capability from author-defined permissions (System 1).

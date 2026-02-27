@@ -1,3 +1,4 @@
+title: OutputSchemaXAbs
 type: element/path_exists_absolute
 description: >-
   Schema the output data must validate against. Workspace-relative path to a

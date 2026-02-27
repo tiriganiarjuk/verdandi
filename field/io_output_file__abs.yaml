@@ -1,3 +1,4 @@
+title: IoOutputFileAbs
 type: atom/path_absolute
 description: >-
   Workspace-relative path to the agent's output file. The security resolver

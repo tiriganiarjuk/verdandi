@@ -1,3 +1,4 @@
+title: NameKnown
 type: enum/output_name_known
 description: >-
   How well the output filename is known at definition time. known: exact

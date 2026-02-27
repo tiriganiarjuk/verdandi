@@ -1,3 +1,4 @@
+title: Claude
 regex: "(^|/)\\.claude($|/)"
 description: >
   .claude directories at any depth. Agents must not read or modify

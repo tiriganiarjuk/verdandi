@@ -1,3 +1,4 @@
+title: Dispatch
 description: >
   Dispatcher configuration — batching, concurrency, execution mode,
   and data flow.

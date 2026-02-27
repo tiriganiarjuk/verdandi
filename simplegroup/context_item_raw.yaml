@@ -1,3 +1,4 @@
+title: ContextItem
 description: A label+path pair for a context resource — auto-derives read permission
 required:
   context_label: field/context_label

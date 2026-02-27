@@ -1,3 +1,4 @@
+title: Return
 description: >
   How the agent returns results. return_mode drives which instruction
   fields the format transformer composes into the prompt.

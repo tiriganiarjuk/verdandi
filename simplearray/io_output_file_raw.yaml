@@ -1,2 +1,3 @@
+title: IoOutputFile
 items: field/io_output_file__any
 description: Output file paths before resolution — relative or absolute

@@ -1,3 +1,4 @@
+title: IoInputFileAny
 type: union/path_any
 description: >-
   Workspace-relative path to the input file. Automatically grants read tool

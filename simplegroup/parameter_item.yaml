@@ -1,3 +1,4 @@
+title: ParameterItem
 description: A parameter the dispatcher passes to the agent at invocation
 required:
   param_name: field/param_name

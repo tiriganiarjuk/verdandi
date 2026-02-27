@@ -1,3 +1,4 @@
+title: OutputFileFormat
 type: enum/output_format_kind
 description: >-
   The output format the agent produces. Determines file extension enforcement

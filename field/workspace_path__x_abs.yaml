@@ -1,3 +1,4 @@
+title: WorkspacePathXAbs
 type: element/path_exists_absolute
 description: >-
   Absolute filesystem path to the workspace root directory. All workspace-

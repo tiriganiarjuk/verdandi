@@ -1,3 +1,4 @@
+title: SemverString
 type: string
 pattern: pattern/semver
 description: >

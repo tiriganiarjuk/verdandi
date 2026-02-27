@@ -1,3 +1,4 @@
+title: PathExistsAbsolute
 inherits: atom/path_absolute
 format: exists
 description: Absolute path that must exist on the filesystem

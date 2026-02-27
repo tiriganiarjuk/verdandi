@@ -1,3 +1,4 @@
+title: OutputFileNameInstruction
 type: atom/string_plain
 description: >-
   Instruction indicating what the LLM should use as the filename basis during

@@ -1,3 +1,4 @@
+title: OutputDescription
 type: atom/string_plain
 description: >-
   Human-readable description of the output data the agent produces. Describes

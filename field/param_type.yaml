@@ -1,3 +1,4 @@
+title: ParamType
 type: enum/param_type
 description: >-
   Type of the parameter value. Used for documentation and dispatcher

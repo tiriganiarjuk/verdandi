@@ -1,2 +1,3 @@
+title: Absolute
 regex: "^/"
 description: Starts with forward slash — absolute path prefix

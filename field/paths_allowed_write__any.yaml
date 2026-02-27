@@ -1,3 +1,4 @@
+title: PathsAllowedWriteAny
 type: union/path_any
 description: >-
   Path prefixes granting write-level access via platform tools (generic write,

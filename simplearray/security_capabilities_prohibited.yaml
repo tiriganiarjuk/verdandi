@@ -1,3 +1,4 @@
+title: SecurityCapabilitiesProhibited
 items: field/capabilities_prohibited
 description: >
   Capabilities to deny even if path grants exist. Takes precedence over

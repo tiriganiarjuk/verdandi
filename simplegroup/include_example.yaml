@@ -1,3 +1,4 @@
+title: IncludeExample
 description: >
   @path reference to a .md file that expands to example entries.
   Path absolutized after resolution.

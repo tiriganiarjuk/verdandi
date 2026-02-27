@@ -1,3 +1,4 @@
+title: IncludeExampleXAny
 type: union/path_exists_any
 description: >-
   An @path reference to a .md file that expands to one or many example

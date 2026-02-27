@@ -1,3 +1,4 @@
+title: PathsAllowedReadAny
 type: union/path_any
 description: >-
   Path prefixes granting read-level access. Each entry grants recursive access

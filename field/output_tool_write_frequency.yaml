@@ -1,3 +1,4 @@
+title: OutputToolWriteFrequency
 type: enum/write_frequency
 description: >-
   How often the enforcement tool flushes records to disk. record: one record

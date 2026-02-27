@@ -1,3 +1,4 @@
+title: ExamplesResolvedInstructions
 description: >
   Cross-stage execution: examples at resolved stage (paths absolutized),
   instructions at reduced stage (includes inlined).

@@ -1,3 +1,4 @@
+title: StringPlain
 type: string
 excludes: [pattern/relative, pattern/absolute]
 description: >

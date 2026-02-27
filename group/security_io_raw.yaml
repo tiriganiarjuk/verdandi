@@ -1,3 +1,4 @@
+title: SecurityIo
 description: >
   Concrete I/O targets. Input side auto-grants read permission. Output
   side produces the enforcement output tool — not a generic write permission.

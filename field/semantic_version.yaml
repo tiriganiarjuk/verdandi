@@ -1,3 +1,4 @@
+title: SemanticVersion
 type: atom/semver_string
 description: >-
   Semantic version string in MAJOR.MINOR.PATCH format. Increment major for

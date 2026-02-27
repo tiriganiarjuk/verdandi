@@ -1,3 +1,4 @@
+title: IoOutputFileAny
 type: union/path_any
 description: >-
   Workspace-relative path to the agent's output file. The security resolver

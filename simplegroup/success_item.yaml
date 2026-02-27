@@ -1,3 +1,4 @@
+title: SuccessItem
 description: A single success criterion with definition and observable evidence
 required:
   success_definition: field/success_definition

@@ -1,3 +1,4 @@
+title: ExampleHeading
 type: atom/string_plain
 description: >-
   Heading for an individual example entry. When example_display_headings is

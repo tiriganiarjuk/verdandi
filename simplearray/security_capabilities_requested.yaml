@@ -1,3 +1,4 @@
+title: SecurityCapabilitiesRequested
 items: field/capabilities_requested
 description: >
   Platform-agnostic capabilities the agent requests. A requested capability

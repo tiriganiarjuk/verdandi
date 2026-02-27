@@ -1,3 +1,4 @@
+title: OutputToolNameNeeded
 type: atom/boolean
 description: >-
   Whether the LLM must provide a filename when invoking the output tool. Only

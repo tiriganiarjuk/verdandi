@@ -1,3 +1,4 @@
+title: EnforcementImplicitInspectXAbs
 type: element/path_exists_absolute
 description: >-
   Paths granted inspect capability from system-derived permissions (System 2).

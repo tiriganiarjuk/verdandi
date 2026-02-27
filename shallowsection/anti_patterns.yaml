@@ -1,3 +1,4 @@
+title: AntiPatterns
 description: >
   Known failure patterns the agent must avoid. Null when no
   anti-patterns defined.

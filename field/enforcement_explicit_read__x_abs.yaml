@@ -1,3 +1,4 @@
+title: EnforcementExplicitReadXAbs
 type: element/path_exists_absolute
 description: >-
   Paths granted read capability from author-defined permissions (System 1).

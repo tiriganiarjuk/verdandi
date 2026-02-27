@@ -1,3 +1,4 @@
+title: GuardrailsConstraints
 type: atom/string_plain
 description: >-
   MUST and NEVER rules the agent must follow. Each entry is a single

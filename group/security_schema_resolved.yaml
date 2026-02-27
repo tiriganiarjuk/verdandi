@@ -1,3 +1,4 @@
+title: SecuritySchema
 description: >
   Data schema declarations after resolution — schema paths absolutized.
 fields:

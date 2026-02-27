@@ -1,3 +1,4 @@
+title: DispatchInputFormat
 type: enum/input_format
 description: >-
   Format of the input data the agent receives. 'jsonl' for newline-delimited

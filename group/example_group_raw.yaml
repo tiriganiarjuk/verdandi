@@ -1,3 +1,4 @@
+title: ExampleGroup
 description: A named group of calibration examples with optional heading display and count limits
 fields:
   required:

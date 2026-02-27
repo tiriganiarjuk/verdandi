@@ -1,3 +1,4 @@
+title: IncludeInstruction
 description: >
   @path reference to a .md file that expands to instruction steps.
   Resolver splits at H2 boundaries and derives instruction_mode from headings.

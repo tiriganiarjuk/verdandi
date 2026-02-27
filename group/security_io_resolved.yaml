@@ -1,3 +1,4 @@
+title: SecurityIo
 description: >
   Concrete I/O targets after path resolution — all paths absolutized.
 fields:

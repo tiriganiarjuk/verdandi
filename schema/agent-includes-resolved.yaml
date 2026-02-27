@@ -1,3 +1,4 @@
+title: Agent Includes Resolved
 version: 3
 description: >
   After include resolution — @path references resolved to absolute paths.

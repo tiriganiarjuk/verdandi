@@ -1,3 +1,4 @@
+title: OutputSchemaXAny
 type: union/path_exists_any
 description: >-
   Schema the output data must validate against. Workspace-relative path to a

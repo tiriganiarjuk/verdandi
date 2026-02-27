@@ -1,3 +1,4 @@
+title: OutputFormatKind
 type: enum/output_format_kind
 description: >-
   Output format the agent produces. Choose based on output structure: 'jsonl'

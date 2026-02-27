@@ -1,3 +1,4 @@
+title: EnforcementImplicitGrants
 description: >
   System-derived capability-keyed path grants (System 2). NOT displayed
   to agent. Hooks enforce silently. Covers auto-derived access from context

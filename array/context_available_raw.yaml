@@ -1,2 +1,3 @@
+title: ContextAvailable
 items: simplegroup/context_item_raw
 description: Context resources available to the agent — silently skipped if missing

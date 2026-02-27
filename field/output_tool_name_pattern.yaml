@@ -1,3 +1,4 @@
+title: OutputToolNamePattern
 type: atom/string_plain
 description: >-
   Naming pattern constraint for LLM-provided filenames. Only present when the

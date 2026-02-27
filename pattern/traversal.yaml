@@ -1,3 +1,4 @@
+title: Traversal
 regex: "\\.\\."
 description: >
   Parent directory traversal — any path containing ".." is a violation

@@ -1,3 +1,4 @@
+title: DispatchInputDelivery
 values: [tempfile, inline, file, directory]
 description: >
   How input data reaches the agent. 'tempfile' means the dispatcher writes

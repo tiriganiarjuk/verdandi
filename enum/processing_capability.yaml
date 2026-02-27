@@ -1,3 +1,4 @@
+title: ProcessingCapability
 values: [fast-cheap, standard, analytical, complex-reasoning, max-capability, inherit]
 description: >
   Platform-agnostic capability tier. Format transformers map to vendor

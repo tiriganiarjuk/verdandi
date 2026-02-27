@@ -1,3 +1,4 @@
+title: Capabilities
 values: [read, search, write, edit, append, inspect]
 description: >
   Platform-agnostic capability descriptor. Format transformers map these

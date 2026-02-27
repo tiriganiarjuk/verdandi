@@ -1,3 +1,4 @@
+title: DispatchInputDelivery
 type: enum/dispatch_input_delivery
 description: >-
   How input data reaches the agent. 'file' means the agent reads from a pre-

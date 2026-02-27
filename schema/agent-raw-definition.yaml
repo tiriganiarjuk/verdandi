@@ -1,3 +1,4 @@
+title: Agent Raw Definition
 version: 3
 description: >
   Schema for agent definitions before resolution. Validates what the

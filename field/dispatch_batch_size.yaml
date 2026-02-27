@@ -1,3 +1,4 @@
+title: DispatchBatchSize
 type: tuple/dispatch_batch_size
 description: >-
   Tuple of [min, max] records per batch chunk. The dispatcher splits input

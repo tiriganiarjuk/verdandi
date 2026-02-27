@@ -1,3 +1,4 @@
+title: CapabilitiesRequested
 type: enum/capabilities
 description: >-
   Platform-agnostic capabilities the agent requests. Each entry is a

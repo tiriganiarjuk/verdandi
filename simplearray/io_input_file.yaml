@@ -1,2 +1,3 @@
+title: IoInputFile
 items: field/io_input_file__abs
 description: Input file paths after resolution — all absolutized

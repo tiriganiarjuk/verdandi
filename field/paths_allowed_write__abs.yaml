@@ -1,3 +1,4 @@
+title: PathsAllowedWriteAbs
 type: atom/path_absolute
 description: >-
   Path prefixes granting write-level access. Each entry is a

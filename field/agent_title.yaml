@@ -1,3 +1,4 @@
+title: AgentTitle
 type: atom/agent_title
 description: >-
   Human-readable agent title derived mechanically from agent_name. Split on

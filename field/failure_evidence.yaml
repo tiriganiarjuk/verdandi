@@ -1,3 +1,4 @@
+title: FailureEvidence
 type: atom/string_plain
 description: >-
   Observable conditions that prove failure. Each entry is a concrete condition

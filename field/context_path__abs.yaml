@@ -1,3 +1,4 @@
+title: ContextPathAbs
 type: atom/path_absolute
 description: >-
   Workspace-relative path to a context resource. The transformer uses this to

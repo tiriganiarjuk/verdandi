@@ -1,3 +1,4 @@
+title: PathRelative
 type: string
 pattern: pattern/relative
 excludes: [pattern/traversal, pattern/env, pattern/home, pattern/root, pattern/claude]

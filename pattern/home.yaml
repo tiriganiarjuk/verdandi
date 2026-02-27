@@ -1,3 +1,4 @@
+title: Home
 regex: "^(~/|/Users/johnny/)$"
 description: >
   Home directory in isolation — granting ~/ or its expanded form gives

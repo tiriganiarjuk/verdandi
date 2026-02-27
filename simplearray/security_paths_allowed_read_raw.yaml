@@ -1,3 +1,4 @@
+title: SecurityPathsAllowedRead
 items: field/paths_allowed_read__any
 description: >
   Path prefixes granting read-level access. Entries can be workspace-relative

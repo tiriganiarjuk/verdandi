@@ -1,3 +1,4 @@
+title: AgentDescription
 type: atom/string_plain
 description: >-
   One-line purpose statement for the agent. Becomes the frontmatter

@@ -1,3 +1,4 @@
+title: OutputToolBatchSize
 type: atom/integer
 description: >-
   Number of records per write tool call when write frequency is batch. The

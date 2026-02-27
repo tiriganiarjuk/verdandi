@@ -1,3 +1,4 @@
+title: InputDescription
 type: atom/string_plain
 description: >-
   Human-readable description of the input data the agent receives. Describes

@@ -1,3 +1,4 @@
+title: ExampleEntries
 items:
   oneOf: [simplegroup/example_entry, simplegroup/include_example]
 description: Example entries — include paths absolutized

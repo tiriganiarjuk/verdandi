@@ -1,3 +1,4 @@
+title: ParamRequired
 type: atom/boolean
 description: >-
   Whether this parameter must be provided by the dispatcher. Required

@@ -1,3 +1,4 @@
+title: InputSchemaXAny
 type: union/path_exists_any
 description: >-
   Schema the input data validates against. Workspace-relative path to a

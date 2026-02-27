@@ -1,3 +1,4 @@
+title: Input
 description: >
   What the agent receives: data format, delivery mechanism, schema for
   validation, parameters, and context resources. Context items use

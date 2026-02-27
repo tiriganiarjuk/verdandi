@@ -1,3 +1,4 @@
+title: IoInputTempdir
 type: atom/string_plain
 description: >-
   Opaque directory name (a short slug, not a path) for this agent type's temp

@@ -1,3 +1,4 @@
+title: OutputFormatKind
 values: [jsonl, json, markdown, text]
 description: >
   Output format the agent produces. 'jsonl' for record-oriented output,

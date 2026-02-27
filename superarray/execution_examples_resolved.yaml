@@ -1,3 +1,4 @@
+title: ExecutionExamples
 items:
   oneOf: [group/example_group_resolved, simplegroup/include_example_group]
 description: Example groups — include paths absolutized

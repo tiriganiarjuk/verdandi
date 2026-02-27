@@ -1,3 +1,4 @@
+title: EnforcementOutputTool
 description: >
   Minimal output tool specification assembled by the security resolver.
   Present only when the agent produces structured output (JSON or JSONL).

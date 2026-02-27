@@ -1,3 +1,4 @@
+title: ContextLabel
 type: atom/string_plain
 description: >-
   Display label for a context resource. Used in the generated prompt to create

@@ -1,3 +1,4 @@
+title: Security
 description: Access control after path resolution — all paths absolutized
 components:
   security_io: group/security_io_resolved

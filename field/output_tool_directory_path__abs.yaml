@@ -1,3 +1,4 @@
+title: OutputToolDirectoryPathAbs
 type: atom/path_absolute
 description: >-
   Resolved absolute path to the output directory. Present when the output

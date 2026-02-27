@@ -1,3 +1,4 @@
+title: ReturnMode
 values: [status, status-metrics, metrics-output, output]
 description: >
   How the agent returns results. 'status' returns only SUCCESS or FAILURE.

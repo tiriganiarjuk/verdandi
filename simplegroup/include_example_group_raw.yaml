@@ -1,3 +1,4 @@
+title: IncludeExampleGroup
 description: >
   @path reference to a .md file that expands to a complete example group.
   Resolver derives group name, entries, and headings from file structure.

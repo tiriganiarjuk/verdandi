@@ -1,3 +1,4 @@
+title: FailureItem
 description: A single failure criterion — FAILURE means process broke, not data quality
 required:
   failure_definition: field/failure_definition

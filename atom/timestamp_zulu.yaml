@@ -1,3 +1,4 @@
+title: TimestampZulu
 type: string
 pattern: pattern/timestamp_zulu
 description: >

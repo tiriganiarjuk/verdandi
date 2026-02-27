@@ -1,3 +1,4 @@
+title: Root
 regex: "^/$"
 description: >
   Filesystem root in isolation — granting / gives access to the entire

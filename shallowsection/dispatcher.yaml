@@ -1,3 +1,4 @@
+title: Dispatcher
 description: >
   Everything the dispatcher skill needs to launch and feed the agent:
   identity, mode, batching, input/output format, parameters.

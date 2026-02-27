@@ -1,3 +1,4 @@
+title: ReturnFormat
 description: >
   How the agent reports results: return mode, optional instructions for
   status/metrics/output, schema for structured returns, and success/failure

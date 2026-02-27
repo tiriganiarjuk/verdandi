@@ -1,3 +1,4 @@
+title: MetricsInstruction
 type: atom/string_plain
 description: >-
   Prompt instruction telling the agent how to report summary metrics in its

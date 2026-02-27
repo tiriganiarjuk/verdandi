@@ -1,3 +1,4 @@
+title: SchemaPathXAbs
 type: element/path_exists_absolute
 description: >-
   Path to the JSON Schema file that validates enforcement tool output.

@@ -1,3 +1,4 @@
+title: SuccessFailureReducedGuardrails
 description: >
   Cross-stage criteria: success/failure at reduced stage (includes inlined),
   guardrails at resolved stage (paths absolutized).

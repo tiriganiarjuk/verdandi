@@ -1,3 +1,4 @@
+title: AgentName
 type: atom/kebab_string
 description: >-
   Kebab-case identifier for the agent. Becomes the frontmatter `name` field in

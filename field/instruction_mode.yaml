@@ -1,3 +1,4 @@
+title: InstructionMode
 type: enum/instruction_mode
 description: >-
   Processing mode boundary. DETERMINISTIC steps are mechanical operations

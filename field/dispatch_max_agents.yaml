@@ -1,3 +1,4 @@
+title: DispatchMaxAgents
 type: atom/integer
 description: >-
   Maximum number of concurrent agent instances the dispatcher may spawn.

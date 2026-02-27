@@ -1,3 +1,4 @@
+title: NotifyDelivery
 type: enum/notify_delivery
 description: >-
   How to deliver agent-initiated notifications. 'say' uses macOS text-to-

@@ -1,3 +1,4 @@
+title: ImplicitGrants
 description: >
   Resolver-derived capability grants for hook enforcement only. Not
   displayed to the agent. Same shape as security_boundary capabilities

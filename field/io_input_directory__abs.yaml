@@ -1,3 +1,4 @@
+title: IoInputDirectoryAbs
 type: atom/path_absolute
 description: >-
   Path to the input directory. Automatically grants read tool and read

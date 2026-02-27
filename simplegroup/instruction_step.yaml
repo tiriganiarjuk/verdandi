@@ -1,3 +1,4 @@
+title: InstructionStep
 description: Inline instruction step with processing mode boundary
 required:
   instruction_mode: field/instruction_mode

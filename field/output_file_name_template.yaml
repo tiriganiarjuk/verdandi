@@ -1,3 +1,4 @@
+title: OutputFileNameTemplate
 type: atom/string_plain
 description: >-
   Filename template with {placeholder} syntax for dispatch-time parameters.

@@ -1,3 +1,4 @@
+title: ContextPathAny
 type: union/path_any
 description: >-
   Workspace-relative path to a context resource file. The transformer embeds

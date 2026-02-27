@@ -1,3 +1,4 @@
+title: ParamDescription
 type: atom/string_plain
 description: >-
   Human-readable description of what a dispatcher parameter represents and how

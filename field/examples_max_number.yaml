@@ -1,3 +1,4 @@
+title: ExamplesMaxNumber
 type: atom/integer
 description: >-
   Maximum number of examples to include from this group after include

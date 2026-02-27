@@ -1,3 +1,4 @@
+title: EnforcementExplicitGrants
 description: >
   Author-defined capability-keyed path grants (System 1). Displayed in
   Security Boundary section as tool/path pairs. Each key maps one capability

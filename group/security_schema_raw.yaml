@@ -1,3 +1,4 @@
+title: SecuritySchema
 description: >
   Data schema declarations for input and output. Schema validation
   enforcement is a security property.

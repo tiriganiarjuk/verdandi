@@ -1,3 +1,4 @@
+title: NotifyItem
 description: A notification rule — when to trigger, what to say, how to deliver
 required:
   notify_trigger: field/notify_trigger

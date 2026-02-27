@@ -1,3 +1,4 @@
+title: ExampleEntry
 description: Inline example with heading and text content
 required:
   example_heading: field/example_heading

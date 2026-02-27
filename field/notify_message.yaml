@@ -1,3 +1,4 @@
+title: NotifyMessage
 type: atom/string_plain
 description: >-
   Message template for agent-initiated notifications. Can contain

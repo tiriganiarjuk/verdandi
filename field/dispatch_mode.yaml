@@ -1,3 +1,4 @@
+title: DispatchMode
 type: enum/dispatch_mode
 description: >-
   How the dispatcher feeds work to the agent. 'batch' means the dispatcher

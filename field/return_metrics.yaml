@@ -1,3 +1,4 @@
+title: ReturnMetrics
 type: atom/string_plain
 description: >-
   Fixed prompt instruction for the metrics portion of the agent return.

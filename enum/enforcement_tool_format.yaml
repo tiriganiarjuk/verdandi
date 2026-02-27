@@ -1,3 +1,4 @@
+title: EnforcementToolFormat
 values: [jsonl, json]
 description: >
   Output format for the enforcement tool. Only present when the agent

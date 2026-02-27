@@ -1,3 +1,4 @@
+title: IncludeFailureCriteriaXAny
 type: union/path_exists_any
 description: >-
   An @path reference to a .md file containing failure criteria. The resolver

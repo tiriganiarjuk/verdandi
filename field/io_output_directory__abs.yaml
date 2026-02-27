@@ -1,3 +1,4 @@
+title: IoOutputDirectoryAbs
 type: atom/path_absolute
 description: >-
   Workspace-relative path to the agent's output directory. The security

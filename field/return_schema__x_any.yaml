@@ -1,3 +1,4 @@
+title: ReturnSchemaXAny
 type: union/path_exists_any
 description: >-
   Workspace-relative path to a JSON Schema file (must end with .schema.json or

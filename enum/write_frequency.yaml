@@ -1,3 +1,4 @@
+title: WriteFrequency
 values: [record, batch]
 description: >
   How often records are flushed to disk. 'record' means one record per

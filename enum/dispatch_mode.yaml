@@ -1,3 +1,4 @@
+title: DispatchMode
 values: [batch, full]
 description: >
   How the dispatcher feeds work to the agent. 'batch' splits input into

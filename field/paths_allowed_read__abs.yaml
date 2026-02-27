@@ -1,3 +1,4 @@
+title: PathsAllowedReadAbs
 type: atom/path_absolute
 description: >-
   Path prefixes granting read-level access. Each entry is a

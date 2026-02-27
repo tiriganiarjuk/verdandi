@@ -1,3 +1,4 @@
+title: InstructionText
 type: atom/string_plain
 description: >-
   Inline instruction text for this step. Used for short instructions that

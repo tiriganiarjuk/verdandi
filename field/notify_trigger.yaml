@@ -1,3 +1,4 @@
+title: NotifyTrigger
 type: atom/string_plain
 description: >-
   When to trigger an agent-initiated notification. A human-readable condition

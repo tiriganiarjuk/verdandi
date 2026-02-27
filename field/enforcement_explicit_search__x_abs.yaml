@@ -1,3 +1,4 @@
+title: EnforcementExplicitSearchXAbs
 type: element/path_exists_absolute
 description: >-
   Paths granted search capability from author-defined permissions (System 1).

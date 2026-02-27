@@ -1,3 +1,4 @@
+title: ReturnMode
 type: enum/return_mode
 description: >-
   How the agent returns results to the dispatcher. status: return only SUCCESS

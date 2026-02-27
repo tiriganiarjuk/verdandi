@@ -1,3 +1,4 @@
+title: SecurityPathsAllowedWrite
 items: field/paths_allowed_write__any
 description: >
   Path prefixes granting write-level access. Write-level makes all

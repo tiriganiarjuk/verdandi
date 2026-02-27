@@ -1,3 +1,4 @@
+title: RoleDescription
 type: atom/string_plain
 description: >-
   Expanded role context that builds on role_identity and role_responsibility.

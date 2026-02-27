@@ -1,3 +1,4 @@
+title: OutputNameKnown
 values: [known, partially, unknown]
 description: >
   How well the output filename is known at definition time. 'known' means

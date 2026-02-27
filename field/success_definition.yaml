@@ -1,3 +1,4 @@
+title: SuccessDefinition
 type: atom/string_plain
 description: >-
   One-sentence statement of what success means for this agent. LLMs are goal-

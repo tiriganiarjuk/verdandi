@@ -1,3 +1,4 @@
+title: DispatchBackgroundMode
 values: [allowed, required, forbidden]
 description: >
   Background execution policy. 'allowed' means the dispatcher chooses

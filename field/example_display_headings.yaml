@@ -1,3 +1,4 @@
+title: ExampleDisplayHeadings
 type: atom/boolean
 description: >-
   Toggle per-group display of individual example headings. When false,

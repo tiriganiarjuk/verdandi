@@ -1,3 +1,4 @@
+title: InputFormat
 values: [jsonl, json, text]
 description: >
   Format of input file content. 'jsonl' for newline-delimited JSON records,

@@ -1,2 +1,3 @@
+title: PathAny
 union: [atom/path_relative, atom/path_absolute]
 description: Filesystem path — either relative (./) or absolute (/)

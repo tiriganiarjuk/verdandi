@@ -1,3 +1,4 @@
+title: ParamName
 type: atom/snake_string
 description: >-
   Name of a parameter the dispatcher passes to the agent. This becomes the

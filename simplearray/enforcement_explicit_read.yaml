@@ -1,3 +1,4 @@
+title: EnforcementExplicitRead
 items: field/enforcement_explicit_read__x_abs
 description: >
   Paths granted read capability from author-defined permissions (System 1).

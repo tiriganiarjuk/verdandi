@@ -1,3 +1,4 @@
+title: SuccessCriteria
 items:
   oneOf: [simplegroup/success_item, simplegroup/include_success_criteria]
 description: Success criteria — include paths absolutized

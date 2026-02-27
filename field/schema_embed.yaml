@@ -1,3 +1,4 @@
+title: SchemaEmbed
 type: atom/boolean
 description: >-
   Whether to embed the output schema directly into the agent prompt. When

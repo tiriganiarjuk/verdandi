@@ -1,3 +1,4 @@
+title: Output
 description: >
   What the agent produces: format, file location, naming rules, and
   optional schema for validation. Aggregates fields from task.processing,

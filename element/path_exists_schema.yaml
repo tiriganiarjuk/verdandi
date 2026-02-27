@@ -1,3 +1,4 @@
+title: PathExistsSchema
 inherits: atom/path_absolute
 format: exists_schema
 description: Absolute path to a JSON Schema file that must exist on the filesystem

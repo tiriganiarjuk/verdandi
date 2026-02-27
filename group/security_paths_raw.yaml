@@ -1,3 +1,4 @@
+title: SecurityPaths
 description: >
   Filesystem path grants at two permission levels. At least one path
   grant must be present. Read-level enables read, search, inspect.

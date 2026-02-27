@@ -1,2 +1,3 @@
+title: DispatchParameters
 items: simplegroup/parameter_item
 description: Named parameters the dispatcher passes to the agent at invocation

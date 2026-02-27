@@ -1,3 +1,4 @@
+title: ContextItem
 description: A label+path pair for a context resource — paths absolutized after resolution
 required:
   context_label: field/context_label

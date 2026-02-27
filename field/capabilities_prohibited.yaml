@@ -1,3 +1,4 @@
+title: CapabilitiesProhibited
 type: enum/capabilities
 description: >-
   Platform-agnostic capabilities to deny even if path grants exist. Each entry

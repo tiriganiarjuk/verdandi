@@ -1,3 +1,4 @@
+title: FailureDefinition
 type: atom/string_plain
 description: >-
   One-sentence statement of what failure means for this agent. Failure refers

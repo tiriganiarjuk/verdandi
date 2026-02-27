@@ -1,3 +1,4 @@
+title: EnforcementExplicitWriteXAbs
 type: element/path_exists_absolute
 description: >-
   Paths granted write capability from author-defined permissions (System 1).

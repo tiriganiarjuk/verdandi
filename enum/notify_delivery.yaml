@@ -1,3 +1,4 @@
+title: NotifyDelivery
 values: [say, notification, log, terminal]
 description: >
   How to deliver agent-initiated notifications. 'say' uses macOS

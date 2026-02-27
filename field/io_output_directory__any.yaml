@@ -1,3 +1,4 @@
+title: IoOutputDirectoryAny
 type: union/path_any
 description: >-
   Workspace-relative path to the agent's output directory. The security

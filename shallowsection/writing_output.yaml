@@ -1,3 +1,4 @@
+title: WritingOutput
 description: >
   Raw output tool specification from enforcement. Unresolved — no tool_name
   yet. These fields are the input to custom tool discovery at the

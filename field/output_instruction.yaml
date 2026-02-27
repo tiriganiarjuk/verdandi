@@ -1,3 +1,4 @@
+title: OutputInstruction
 type: atom/string_plain
 description: >-
   Prompt instruction telling the agent how to deliver its output data in its

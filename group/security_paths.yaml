@@ -1,3 +1,4 @@
+title: SecurityPaths
 description: >
   Filesystem path grants after resolution — all paths absolutized.
 fields:
