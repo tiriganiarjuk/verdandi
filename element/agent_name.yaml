@@ -1,3 +1,0 @@
-inherits: atom/kebab_string
-required: mandatory
-description: Unique kebab-case identifier for the agent definition

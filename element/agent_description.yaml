@@ -1,3 +1,0 @@
-inherits: atom/string_plain
-required: mandatory
-description: Human-readable summary of what the agent does and its primary purpose
