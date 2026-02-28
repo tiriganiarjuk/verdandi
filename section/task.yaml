@@ -1,7 +1,8 @@
 title: Task
-description: Agent-facing identity and interaction model
-components:
-  role: group/role
-  communication: group/communication
-  return: group/return
-  processing: group/processing
+description: Agent-facing identity and interaction model — paths absolutized
+containers:
+  required:
+    role: group/role
+    communication: group/communication
+    return: group/return
+    processing: group/processing

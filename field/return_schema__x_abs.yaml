@@ -1,0 +1,9 @@
+title: ReturnSchemaXAbs
+type: element/path_exists_absolute
+description: >-
+  Absolute path to a JSON Schema file (must end with .schema.json or
+  .schema.yaml) defining the metric fields the agent returns. Always embedded
+  directly into the prompt — there is no enforcement mechanism for return
+  communication (agent-to-dispatcher LLM text). Embedding ensures the agent
+  sees field names, types, and definitions. Schema file must exist at
+  resolution time. Example: "definitions/schemas/my-agent-return.schema.json"

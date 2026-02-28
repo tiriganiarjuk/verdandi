@@ -1,5 +1,5 @@
 title: StatusInstruction
-type: atom/string_plain
+type: atom/string_prose
 description: >-
   Prompt instruction telling the agent how to report its completion status in
   its return. Composed into the agent prompt when return mode includes status.

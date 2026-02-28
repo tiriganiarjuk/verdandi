@@ -1,0 +1,8 @@
+title: AnthropicModel
+type: enum/anthropic_model
+description: >-
+  Resolved Anthropic model name for this agent. Produced by mapping the
+  platform-agnostic capability_tier to a concrete model at the anthropic
+  render stage. haiku for fast-cheap, sonnet for standard and analytical,
+  opus for complex-reasoning and max-capability, inherit to match the
+  dispatcher.

@@ -1,6 +1,0 @@
-title: Context
-description: Resources the agent needs access to — paths absolutized after resolution
-containers:
-  optional:
-    context_required: array/context_required_resolved
-    context_available: array/context_available_resolved

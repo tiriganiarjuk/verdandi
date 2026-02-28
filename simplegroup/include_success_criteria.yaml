@@ -1,5 +1,6 @@
 title: IncludeSuccessCriteria
 description: >
-  @path reference to a .md file containing success criteria
+  @path reference to a .md file containing success criteria.
+  Path absolutized after resolution.
 required:
-  include: field/include_success_criteria__x_any
+  include: field/include_success_criteria__x_abs

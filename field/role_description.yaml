@@ -1,5 +1,5 @@
 title: RoleDescription
-type: atom/string_plain
+type: atom/string_prose
 description: >-
   Expanded role context that builds on role_identity and role_responsibility.
   Where identity says WHAT you are and responsibility says WHAT you must do,

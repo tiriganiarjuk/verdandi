@@ -1,0 +1,6 @@
+title: Execution
+description: How the agent processes work — include paths absolutized
+containers:
+  required:
+    execution_instructions: array/execution_instructions
+    execution_examples: superarray/execution_examples

@@ -1,5 +1,6 @@
 title: IncludeFailureCriteria
 description: >
-  @path reference to a .md file containing failure criteria
+  @path reference to a .md file containing failure criteria.
+  Path absolutized after resolution.
 required:
-  include: field/include_failure_criteria__x_any
+  include: field/include_failure_criteria__x_abs

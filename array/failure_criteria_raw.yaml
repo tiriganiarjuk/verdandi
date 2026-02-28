@@ -1,4 +1,4 @@
 title: FailureCriteria
 items:
-  oneOf: [simplegroup/failure_item, simplegroup/include_failure_criteria]
+  oneOf: [simplegroup/failure_item, simplegroup/include_failure_criteria_raw]
 description: Failure criteria — inline definitions or included from .md files

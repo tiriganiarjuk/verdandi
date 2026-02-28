@@ -1,0 +1,11 @@
+title: HookAction
+description: >
+  A single Claude Code hook rule. Binds a tool matcher to a validation
+  binary with allowed path arguments. Each tool gets its own rule with
+  dedicated allowed paths. The binary name and arguments are composed
+  into a shell command at render time.
+required:
+  matcher: field/hook_matcher
+  type: field/hook_type
+  binary: field/hook_command
+  arguments: simplearray/hook_arguments

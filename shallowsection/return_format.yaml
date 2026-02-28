@@ -9,7 +9,7 @@ optional:
   status_instruction: field/status_instruction
   metrics_instruction: field/metrics_instruction
   output_instruction: field/output_instruction
-  return_schema: field/return_schema__x_any
+  return_schema: field/return_schema__x_abs
 containers:
   optional:
     success_criteria: array/success_criteria_reduced

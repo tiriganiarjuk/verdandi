@@ -1,0 +1,5 @@
+title: IncludeGuardrailsConstraintsXAbs
+type: element/path_exists_absolute
+description: >-
+  An @path reference to a .md file containing constraints. The resolver reads
+  the file and extracts individual constraint items from its structure.

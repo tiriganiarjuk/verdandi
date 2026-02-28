@@ -1,5 +1,5 @@
 title: InputDescription
-type: atom/string_plain
+type: atom/string_text
 description: >-
   Human-readable description of the input data the agent receives. Describes
   what the records represent and what the agent does with them. The mechanical

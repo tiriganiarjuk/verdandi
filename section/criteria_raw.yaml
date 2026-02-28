@@ -2,7 +2,8 @@ title: Criteria
 description: >
   Quality criteria — guardrails, success conditions, failure conditions.
   At least one must be present.
-components:
-  guardrails: group/guardrails_raw
-  success_criteria: array/success_criteria_raw
-  failure_criteria: array/failure_criteria_raw
+containers:
+  required:
+    guardrails: group/guardrails_raw
+    success_criteria: array/success_criteria_raw
+    failure_criteria: array/failure_criteria_raw

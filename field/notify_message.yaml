@@ -1,5 +1,5 @@
 title: NotifyMessage
-type: atom/string_plain
+type: atom/string_text
 description: >-
   Message template for agent-initiated notifications. Can contain
   {placeholders} the agent fills in at runtime. "{n} of {total} processed,

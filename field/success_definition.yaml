@@ -1,5 +1,5 @@
 title: SuccessDefinition
-type: atom/string_plain
+type: atom/string_prose
 description: >-
   One-sentence statement of what success means for this agent. LLMs are goal-
   driven — explicit success definitions pull harder than constraints. Write as

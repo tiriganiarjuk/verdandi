@@ -1,19 +1,18 @@
 title: Agent Guardrails Reduced
 version: 3
 description: >
-  After guardrails reduction — guardrail includes inlined.
-  Success/failure criteria still as references.
+  Level 3 content branch — guardrail includes inlined into criteria
+  constraints and anti-patterns. Parallel reducer: only touches
+  guardrails. Other sections unchanged from paths-verified input.
 required:
   - indirect
   - task
   - security
   - execution
   - criteria
-  - enforcement
 sections:
   indirect: section/indirect
   task: section/task
-  security: section/security_resolved
-  execution: section/execution_reduced
-  criteria: section/success_failure_resolved_guardrails_reduced
-  enforcement: section/enforcement
+  security: section/security
+  execution: section/execution
+  criteria: section/criteria_guardrails_reduced

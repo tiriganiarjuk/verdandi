@@ -1,9 +1,10 @@
 title: Agent Universal Render
 version: 1
 description: >
-  Consumption-oriented regrouping of universal-format for rendering.
-  Shallow sections for mostly-flat render targets. All paths resolved,
-  all includes reduced.
+  Level 7 — domain sections regrouped into consumption-oriented shallow
+  sections for rendering. Fields redistributed from 6 domain sections
+  into 12 self-contained render sections. Platform-agnostic render
+  format consumed by vendor-specific resolvers.
 required:
   - identity
   - input
@@ -29,6 +30,5 @@ shallowsections:
   anti_patterns: shallowsection/anti_patterns
   return_format: shallowsection/return_format
   dispatcher: shallowsection/dispatcher
-sections:
-  instructions: section/instructions_reduced
-  examples: section/examples_reduced
+  instructions: shallowsection/instructions_reduced
+  examples: shallowsection/examples_reduced

@@ -1,5 +1,5 @@
 title: RoleResponsibility
-type: atom/string_plain
+type: atom/string_prose
 description: >-
   One-sentence mandate defining the agent's core obligation. This is the
   single most important thing the agent must accomplish. Everything else is

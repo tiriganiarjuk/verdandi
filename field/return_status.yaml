@@ -1,5 +1,5 @@
 title: ReturnStatus
-type: atom/string_plain
+type: atom/string_prose
 description: >-
   Fixed prompt instruction for the status portion of the agent return.
   Composed into the prompt when return_mode includes status (status or status-

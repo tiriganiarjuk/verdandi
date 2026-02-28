@@ -2,6 +2,7 @@ title: Indirect
 description: >
   System-facing metadata and dispatcher configuration. Nothing here
   appears in the agent prompt.
-components:
-  metadata: group/metadata
-  dispatch: group/dispatch
+containers:
+  required:
+    metadata: group/metadata
+    dispatch: group/dispatch

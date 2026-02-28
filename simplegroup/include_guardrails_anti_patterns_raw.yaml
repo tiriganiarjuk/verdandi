@@ -1,0 +1,5 @@
+title: IncludeGuardrailsAntiPatterns
+description: >
+  @path reference to a .md file containing anti-patterns
+required:
+  include: field/include_guardrails_anti_patterns__x_any

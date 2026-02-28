@@ -1,5 +1,5 @@
 title: FailureDefinition
-type: atom/string_plain
+type: atom/string_prose
 description: >-
   One-sentence statement of what failure means for this agent. Failure refers
   to the PROCESS, not the DATA. An agent that correctly identifies all inputs

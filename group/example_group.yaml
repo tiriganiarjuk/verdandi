@@ -1,0 +1,11 @@
+title: ExampleGroup
+description: A named group of calibration examples — include paths absolutized
+fields:
+  required:
+    example_group_name: field/example_group_name
+  optional:
+    example_display_headings: field/example_display_headings
+    examples_max_number: field/examples_max_number
+containers:
+  required:
+    example_entries: array/example_entries

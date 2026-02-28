@@ -1,8 +1,9 @@
 title: Agent Raw Definition
 version: 3
 description: >
-  Schema for agent definitions before resolution. Validates what the
-  author writes directly. All sections required.
+  Authored agent definition as written by humans. Entry point to the
+  pipeline DAG. Paths are workspace-relative, includes are file
+  references, no computed sections.
 required:
   - indirect
   - task
@@ -11,7 +12,7 @@ required:
   - criteria
 sections:
   indirect: section/indirect
-  task: section/task
+  task: section/task_raw
   security: section/security_raw
   execution: section/execution_raw
   criteria: section/criteria_raw

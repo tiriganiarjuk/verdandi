@@ -1,0 +1,8 @@
+title: FilenameTemplate
+regex: "^\\{[a-z][a-z0-9-]*\\}(\\.\\.?\\w+)+$"
+description: >
+  Filename template — a {variable} placeholder followed by one or more
+  dot-separated segments forming a file extension. Used in agent
+  definitions to specify output naming patterns that the build system
+  decomposes into CLI arguments and write paths
+  (e.g., {interview-id}.summaries.jsonl, {entry-id}.json).

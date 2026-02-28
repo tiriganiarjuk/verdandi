@@ -1,4 +1,4 @@
 title: SuccessCriteria
 items:
-  oneOf: [simplegroup/success_item, simplegroup/include_success_criteria]
+  oneOf: [simplegroup/success_item, simplegroup/include_success_criteria_raw]
 description: Success criteria — inline definitions or included from .md files

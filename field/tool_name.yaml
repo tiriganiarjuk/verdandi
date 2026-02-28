@@ -1,0 +1,6 @@
+title: ToolName
+type: atom/snake_string
+description: >-
+  Resolved name of the custom output tool. Produced by matching the
+  enforcement output tool specification against the custom tool lookup
+  table during anthropic render. Example: "append_validated_jsonl_batch.py".

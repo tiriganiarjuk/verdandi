@@ -1,5 +1,5 @@
 title: SuccessEvidence
-type: atom/string_plain
+type: atom/string_prose
 description: >-
   Observable conditions that prove success. Each entry is a concrete,
   verifiable statement the agent can check. "Output record count equals input

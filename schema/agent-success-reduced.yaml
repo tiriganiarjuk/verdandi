@@ -1,19 +1,19 @@
 title: Agent Success Reduced
 version: 3
 description: >
-  After success/failure reduction — all criteria includes inlined.
-  This is the final pipeline stage before universal-format.
+  Level 3 content branch — success and failure criteria includes inlined
+  into definition+evidence entries. Parallel reducer: only touches
+  success_criteria and failure_criteria. Other sections unchanged from
+  paths-verified input.
 required:
   - indirect
   - task
   - security
   - execution
   - criteria
-  - enforcement
 sections:
   indirect: section/indirect
   task: section/task
-  security: section/security_resolved
-  execution: section/execution_reduced
-  criteria: section/criteria_reduced
-  enforcement: section/enforcement
+  security: section/security
+  execution: section/execution
+  criteria: section/criteria_success_reduced

@@ -1,0 +1,6 @@
+title: FrontmatterTool
+type: atom/pascal_string
+description: >-
+  A single Claude Code tool name granted to this agent. PascalCase
+  identifier matching the Claude Code tool naming convention. Examples:
+  Bash, Edit, Glob, Grep, Read, Write.

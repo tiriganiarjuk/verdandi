@@ -1,5 +1,5 @@
 title: IoScratchTempdir
-type: atom/string_plain
+type: atom/kebab_string
 description: >-
   Opaque directory name (a short slug, not a path) for this agent type's
   scratch/intermediate file area. The agent auto-derives write access to

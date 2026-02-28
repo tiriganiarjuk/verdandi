@@ -1,4 +1,4 @@
 title: ExecutionInstructions
 items:
-  oneOf: [simplegroup/instruction_step, simplegroup/include_instruction]
+  oneOf: [simplegroup/instruction_step, simplegroup/include_instruction_raw]
 description: Ordered processing steps — inline or included from .md files

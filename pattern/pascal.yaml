@@ -1,0 +1,5 @@
+title: Pascal
+regex: "^[A-Z][a-zA-Z0-9]*$"
+description: >
+  PascalCase — starts uppercase, no separators, uses uppercase for word
+  boundaries (e.g., Bash, PreToolUse, ReadFile, AgentName).

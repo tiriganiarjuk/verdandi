@@ -1,0 +1,5 @@
+title: IncludeFailureCriteria
+description: >
+  @path reference to a .md file containing failure criteria
+required:
+  include: field/include_failure_criteria__x_any

@@ -1,0 +1,5 @@
+title: HookArguments
+items: field/hook_argument
+description: >-
+  Absolute path arguments for a hook validation binary. Each path is
+  an allowed location that the hook enforces for the matched tool.

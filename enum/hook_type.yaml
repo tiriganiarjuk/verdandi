@@ -1,0 +1,6 @@
+title: HookType
+values: [command]
+description: >
+  Claude Code hook action types. command: executes a shell command
+  that receives tool input via environment variables and can block
+  the tool call by returning non-zero exit status.

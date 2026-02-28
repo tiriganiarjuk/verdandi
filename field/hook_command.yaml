@@ -1,0 +1,5 @@
+title: HookBinary
+type: atom/snake_string
+description: >-
+  Name of the hook validation binary. Nornir-built binaries deployed
+  to PATH. Examples: hook_validate_tools, hook_validate_bash.

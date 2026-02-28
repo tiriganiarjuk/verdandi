@@ -1,0 +1,17 @@
+title: StringToken
+type: string
+pattern: pattern/no_whitespace
+excludes:
+  - pattern/absolute
+  - pattern/relative
+  - pattern/path_extension
+  - pattern/path_multi_segment
+  - pattern/snake
+  - pattern/kebab
+  - pattern/camel
+  - pattern/pascal
+description: >
+  Unclassified single-token identifier — no whitespace, not a path,
+  and does not match any named casing convention (snake, kebab, camel,
+  pascal). Escape hatch for identifiers with unusual formatting. If a
+  more specific casing type fits, use that instead.

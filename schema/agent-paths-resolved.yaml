@@ -1,8 +1,9 @@
 title: Agent Paths Resolved
 version: 3
 description: >
-  After path resolution — all filesystem paths absolutized relative to
-  workspace root. Includes still present as references.
+  Level 1 — workspace-relative paths absolutized against workspace root.
+  Include references remain as file paths. Same five sections as raw
+  definition with resolved path types.
 required:
   - indirect
   - task
@@ -12,6 +13,6 @@ required:
 sections:
   indirect: section/indirect
   task: section/task
-  security: section/security_resolved
-  execution: section/execution_resolved
-  criteria: section/criteria_resolved
+  security: section/security
+  execution: section/execution
+  criteria: section/criteria

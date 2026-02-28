@@ -1,4 +1,0 @@
-title: ExecutionInstructions
-items:
-  oneOf: [simplegroup/instruction_step, simplegroup/include_instruction_resolved]
-description: Ordered processing steps — include paths absolutized

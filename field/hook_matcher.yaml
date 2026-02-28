@@ -1,0 +1,6 @@
+title: HookMatcher
+type: atom/pascal_string
+description: >-
+  Claude Code tool name that this hook rule matches against. Each tool
+  gets its own hook rule with a dedicated set of allowed paths. Examples:
+  Read, Grep, Glob, Write, Edit, Bash.

@@ -1,0 +1,7 @@
+title: Prose
+regex: "^[A-Z](?:.*?\\s){3,}.*[.!?;:]$"
+description: >
+  Sentence-level prose text. Starts with a capital letter, contains at
+  least three whitespace characters, and ends with sentence punctuation.
+  Structural requirement is strict enough that path exclusions are
+  unnecessary.

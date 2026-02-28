@@ -1,5 +1,6 @@
 title: Execution
 description: How the agent processes work — includes inlined, direct content only
-components:
-  execution_instructions: array/execution_instructions_reduced
-  execution_examples: superarray/execution_examples_reduced
+containers:
+  required:
+    execution_instructions: array/execution_instructions_reduced
+    execution_examples: superarray/execution_examples_reduced

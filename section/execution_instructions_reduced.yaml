@@ -1,0 +1,8 @@
+title: Execution
+description: >
+  Cross-stage execution: examples at resolved stage (paths absolutized),
+  instructions at reduced stage (includes inlined).
+containers:
+  required:
+    execution_instructions: array/execution_instructions_reduced
+    execution_examples: superarray/execution_examples

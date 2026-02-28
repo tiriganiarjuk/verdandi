@@ -1,0 +1,6 @@
+title: TitleCase
+regex: "^([A-Z][a-zA-Z0-9]*)(\\s[A-Z][a-zA-Z0-9]*)*$"
+description: >
+  Title Case — one or more words each starting with an uppercase letter,
+  separated by spaces. Used for display titles, headings, and labels
+  (e.g., Agent Rebuilder, Decomposition Examples, QC Report).

@@ -1,0 +1,17 @@
+title: WritingOutputAnthropic
+description: >
+  Anthropic-resolved output tool specification. The raw enforcement
+  fields have been matched against the custom tool lookup table to
+  produce a resolved tool name and invocation pattern. Null when no
+  custom tool exists for this agent.
+required:
+  tool_name: field/tool_name
+  invocation_variant: field/invocation_variant
+  invocation_display: field/invocation_display
+  name_needed: field/output_tool_name_needed
+optional:
+  name_pattern: field/output_tool_name_pattern
+  batch_size: field/output_tool_batch_size
+  schema_path: field/output_tool_schema__x_abs
+  file_path: field/output_tool_file_path__abs
+  directory_path: field/output_tool_directory_path__abs

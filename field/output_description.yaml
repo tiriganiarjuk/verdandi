@@ -1,5 +1,5 @@
 title: OutputDescription
-type: atom/string_plain
+type: atom/string_text
 description: >-
   Human-readable description of the output data the agent produces. Describes
   what the output contains and its downstream purpose. The mechanical format

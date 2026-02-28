@@ -1,0 +1,12 @@
+title: StringIdentifier
+union:
+  - atom/snake_string
+  - atom/kebab_string
+  - atom/camel_string
+  - atom/pascal_string
+  - atom/string_token
+description: >
+  Any single-token identifier — OneOf snake_case, kebab-case, camelCase,
+  PascalCase, or unclassified token. Use the specific atom when the
+  casing convention is known. Use this union when any identifier format
+  is acceptable.

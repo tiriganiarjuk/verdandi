@@ -1,34 +1,37 @@
 title: Agent Anthropic Render
 version: 1
 description: >
-  Anthropic platform render format. Structural copy of universal-render
-  as a base for platform-specific adaptation. All paths resolved,
-  all includes reduced.
+  Level 8 vendor branch — Anthropic platform render format. Resolved
+  from universal-render: capability_tier mapped to model name, capabilities
+  exploded to tool-path pairs, custom output tool discovered, hooks
+  built, frontmatter composed. 13 sections: 8 pass-through, 3 modified,
+  2 created. implicit_grants consumed during hook building.
 required:
   - identity
+  - security_boundary
   - input
   - instructions
   - output
   - return_format
   - dispatcher
+  - critical_rules
+  - frontmatter
 nullable:
-  - security_boundary
-  - implicit_grants
   - examples
   - writing_output
   - constraints
   - anti_patterns
 shallowsections:
-  identity: shallowsection/identity
-  security_boundary: shallowsection/security_boundary
-  implicit_grants: shallowsection/implicit_grants
+  identity: shallowsection/identity_anthropic
+  security_boundary: shallowsection/security_boundary_anthropic
   input: shallowsection/input
   output: shallowsection/output
-  writing_output: shallowsection/writing_output
+  writing_output: shallowsection/writing_output_anthropic
   constraints: shallowsection/constraints
   anti_patterns: shallowsection/anti_patterns
   return_format: shallowsection/return_format
   dispatcher: shallowsection/dispatcher
-sections:
-  instructions: section/instructions_reduced
-  examples: section/examples_reduced
+  instructions: shallowsection/instructions_reduced
+  examples: shallowsection/examples_reduced
+  critical_rules: shallowsection/critical_rules
+  frontmatter: shallowsection/frontmatter

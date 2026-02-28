@@ -1,8 +1,10 @@
 title: Agent Permissions Resolved
 version: 3
 description: >
-  After permission resolution — enforcement section computed from security
-  declarations. Paths and includes already resolved.
+  Level 3 permissions branch — enforcement section computed from security
+  declarations via 6-phase resolution algorithm. Adds enforcement
+  (explicit grants, implicit grants, output tool). Content sections
+  unchanged from paths-verified input.
 required:
   - indirect
   - task
@@ -13,7 +15,7 @@ required:
 sections:
   indirect: section/indirect
   task: section/task
-  security: section/security_resolved
-  execution: section/execution_resolved
-  criteria: section/criteria_resolved
+  security: section/security
+  execution: section/execution
+  criteria: section/criteria
   enforcement: section/enforcement

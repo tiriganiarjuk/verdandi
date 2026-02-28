@@ -1,0 +1,18 @@
+title: Agent Includes Merged
+version: 3
+description: >
+  Level 5 content branch — merges execution-merged and criteria-merged.
+  All include references now inline content. Final content-branch
+  checkpoint before convergence with permissions branch at level 6.
+required:
+  - indirect
+  - task
+  - security
+  - execution
+  - criteria
+sections:
+  indirect: section/indirect
+  task: section/task
+  security: section/security
+  execution: section/execution_reduced
+  criteria: section/criteria_reduced

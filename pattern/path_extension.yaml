@@ -1,0 +1,6 @@
+title: PathExtension
+regex: "\\/[^\\/]+\\.\\w{1,4}$"
+description: >
+  Path ending with a file extension — slash followed by a filename with
+  a 1-4 character extension at end of string. Catches bare relative paths
+  like src/file.py that lack conventional ./ or / prefixes.

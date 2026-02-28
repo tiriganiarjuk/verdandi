@@ -1,5 +1,5 @@
 title: IoInputTempdir
-type: atom/string_plain
+type: atom/kebab_string
 description: >-
   Opaque directory name (a short slug, not a path) for this agent type's temp
   staging area. The dispatcher writes input data to /tmp/{workspace}/{value}/

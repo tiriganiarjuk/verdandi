@@ -1,5 +1,5 @@
 title: GuardrailsConstraints
-type: atom/string_plain
+type: atom/string_prose
 description: >-
   MUST and NEVER rules the agent must follow. Each entry is a single
   imperative constraint. "MUST validate every record against schema before

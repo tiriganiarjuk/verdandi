@@ -1,5 +1,5 @@
 title: OutputToolNamePattern
-type: atom/string_plain
+type: atom/filename_template
 description: >-
   Naming pattern constraint for LLM-provided filenames. Only present when the
   output filename is partially known — the definition provides a template or

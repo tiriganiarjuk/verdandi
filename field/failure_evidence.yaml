@@ -1,5 +1,5 @@
 title: FailureEvidence
-type: atom/string_plain
+type: atom/string_prose
 description: >-
   Observable conditions that prove failure. Each entry is a concrete condition
   indicating the process broke. "Any record skipped without explanation",

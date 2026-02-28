@@ -1,0 +1,8 @@
+title: AnthropicModel
+values: [haiku, sonnet, opus, inherit]
+description: >
+  Resolved Anthropic model names. The anthropic render stage maps the
+  platform-agnostic capability_tier to a concrete Anthropic model.
+  haiku: fast/cheap tasks. sonnet: standard and analytical tasks.
+  opus: complex reasoning and max capability. inherit: match the
+  dispatcher's model.

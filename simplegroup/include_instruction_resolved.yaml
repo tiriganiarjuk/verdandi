@@ -1,6 +1,0 @@
-title: IncludeInstruction
-description: >
-  @path reference to a .md file that expands to instruction steps.
-  Path absolutized after resolution.
-required:
-  include: field/include_instruction__x_abs

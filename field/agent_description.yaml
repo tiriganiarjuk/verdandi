@@ -1,5 +1,5 @@
 title: AgentDescription
-type: atom/string_plain
+type: atom/string_prose
 description: >-
   One-line purpose statement for the agent. Becomes the frontmatter
   `description` field in the generated agent prompt. Should complete the

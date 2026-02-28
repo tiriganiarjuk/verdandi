@@ -1,0 +1,5 @@
+title: HasWhitespace
+regex: "\\s"
+description: >
+  Contains at least one whitespace character — natural language prose,
+  not an identifier. Mutually exclusive with no_whitespace pattern.

@@ -1,5 +1,5 @@
 title: InstructionText
-type: atom/string_plain
+type: atom/string_markdown
 description: >-
   Inline instruction text for this step. Used for short instructions that
   don't warrant a separate .md file. Mutually exclusive with include.

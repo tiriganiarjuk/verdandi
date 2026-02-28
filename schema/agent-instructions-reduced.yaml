@@ -1,19 +1,18 @@
 title: Agent Instructions Reduced
 version: 3
 description: >
-  After instruction reduction — all instruction includes inlined.
-  Examples still as references.
+  Level 3 content branch — instruction includes inlined into execution
+  steps. Parallel reducer: only touches execution_instructions. Other
+  sections unchanged from paths-verified input.
 required:
   - indirect
   - task
   - security
   - execution
   - criteria
-  - enforcement
 sections:
   indirect: section/indirect
   task: section/task
-  security: section/security_resolved
-  execution: section/examples_resolved_instructions_reduced
-  criteria: section/criteria_resolved
-  enforcement: section/enforcement
+  security: section/security
+  execution: section/execution_instructions_reduced
+  criteria: section/criteria

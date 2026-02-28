@@ -1,0 +1,7 @@
+title: HasOutputTool
+type: atom/boolean
+description: >-
+  Whether this agent has a custom output tool for writing structured
+  output. When true, the agent must use the resolved tool for all
+  output writes. When false, the agent uses standard Write or Edit
+  tools directly.

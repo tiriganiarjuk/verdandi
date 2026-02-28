@@ -1,0 +1,7 @@
+title: PermissionMode
+values: [bypassPermissions]
+description: >
+  Claude Code permission modes for agent execution. bypassPermissions:
+  agent runs with hooks-based enforcement instead of interactive
+  permission prompts. All tool access is controlled by PreToolUse
+  hooks that validate paths and commands.

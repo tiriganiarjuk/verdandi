@@ -1,5 +1,5 @@
 title: NameTemplate
-type: atom/string_plain
+type: atom/filename_template
 description: >-
   Filename template with {placeholder} syntax for dispatch-time parameters.
   The tool constructs the output filename by substituting placeholder values

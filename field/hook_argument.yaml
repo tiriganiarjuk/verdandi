@@ -1,0 +1,6 @@
+title: HookArgument
+type: atom/path_absolute
+description: >-
+  A single absolute path argument passed to the hook validation binary.
+  Each argument is an allowed path that the hook enforces for the
+  matched tool.

@@ -1,0 +1,7 @@
+title: InvocationVariant
+values: [no-name, with-name]
+description: >
+  Custom tool invocation variants. Determines whether the agent must
+  generate a filename before invoking the output tool. no-name: output
+  path is fully known, tool takes data only. with-name: agent generates
+  a filename from a pattern or instruction before invocation.

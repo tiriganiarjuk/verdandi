@@ -1,0 +1,6 @@
+title: PathMultiSegment
+regex: "\\w+\\/\\w+\\/\\w+"
+description: >
+  Multi-segment path — three or more path components separated by forward
+  slashes. Catches bare relative paths like src/components/Button that
+  lack conventional ./ or / prefixes.

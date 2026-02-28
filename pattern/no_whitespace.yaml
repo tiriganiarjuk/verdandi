@@ -1,0 +1,5 @@
+title: NoWhitespace
+regex: "^\\S+$"
+description: >
+  Single token with no whitespace — the entire string consists of
+  non-whitespace characters. Identifiers, not prose.

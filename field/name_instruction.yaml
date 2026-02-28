@@ -1,5 +1,5 @@
 title: NameInstruction
-type: atom/string_plain
+type: atom/string_prose
 description: >-
   Instruction indicating what the LLM should use as the filename basis during
   processing. The LLM derives the identifier from the data being processed.

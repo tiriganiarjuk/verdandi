@@ -1,0 +1,5 @@
+title: IncludeSuccessCriteria
+description: >
+  @path reference to a .md file containing success criteria
+required:
+  include: field/include_success_criteria__x_any

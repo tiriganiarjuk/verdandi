@@ -1,7 +1,0 @@
-title: ExamplesReducedInstructions
-description: >
-  Cross-stage execution: examples at reduced stage (includes inlined),
-  instructions at resolved stage (paths absolutized).
-components:
-  execution_instructions: array/execution_instructions_resolved
-  execution_examples: superarray/execution_examples_reduced

@@ -1,0 +1,6 @@
+title: HasGrants
+type: atom/boolean
+description: >-
+  Whether this agent has explicit capability grants in its security
+  boundary. When false, the security boundary display is empty and the
+  agent operates with no tool-path restrictions beyond hooks.

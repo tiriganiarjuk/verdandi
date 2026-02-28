@@ -1,0 +1,6 @@
+title: IncludeFailureCriteriaXAbs
+type: element/path_exists_absolute
+description: >-
+  An @path reference to a .md file containing failure criteria. The resolver
+  reads the file and extracts individual failure criterion items from its
+  structure.

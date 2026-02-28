@@ -1,0 +1,6 @@
+title: IncludeGuardrailsAntiPatternsXAbs
+type: element/path_exists_absolute
+description: >-
+  An @path reference to a .md file containing anti-patterns. The resolver
+  reads the file and extracts individual anti-pattern items from its
+  structure.

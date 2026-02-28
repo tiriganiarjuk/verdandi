@@ -1,0 +1,7 @@
+title: Criteria
+description: Quality criteria — include paths absolutized
+containers:
+  required:
+    guardrails: group/guardrails
+    success_criteria: array/success_criteria
+    failure_criteria: array/failure_criteria

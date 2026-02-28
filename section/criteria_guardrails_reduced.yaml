@@ -1,0 +1,9 @@
+title: Criteria
+description: >
+  Cross-stage criteria: success/failure at resolved stage (paths absolutized),
+  guardrails at reduced stage (includes inlined).
+containers:
+  required:
+    guardrails: group/guardrails_reduced
+    success_criteria: array/success_criteria
+    failure_criteria: array/failure_criteria

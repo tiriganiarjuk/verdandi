@@ -1,0 +1,17 @@
+title: Return
+description: >
+  How the agent returns results. return_mode drives which instruction
+  fields the format transformer composes into the prompt.
+fields:
+  required:
+    return_mode: field/return_mode
+  optional:
+    return_status: field/return_status
+    return_metrics: field/return_metrics
+    return_output: field/return_output
+  conditional:
+    return_schema:
+      ref: field/return_schema__x_any
+      only_when:
+        field: return_mode
+        in: [status-metrics, metrics-output]

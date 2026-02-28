@@ -1,0 +1,5 @@
+title: Camel
+regex: "^[a-z][a-zA-Z0-9]*$"
+description: >
+  camelCase — starts lowercase, no separators, uses uppercase for word
+  boundaries (e.g., bypassPermissions, tempFile, outputFormat).

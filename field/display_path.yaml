@@ -1,0 +1,7 @@
+title: DisplayPath
+type: atom/path_relative
+description: >-
+  Workspace-relative path in a security boundary display entry. Produced
+  by stripping the workspace root prefix from the absolute grant paths.
+  Each display entry groups all tools and commands that share the same
+  relative path. Example: "truth/", "schemas/".

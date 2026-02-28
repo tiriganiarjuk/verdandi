@@ -1,5 +1,5 @@
 title: RoleIdentity
-type: atom/string_plain
+type: atom/string_text
 description: >-
   Short noun phrase naming what this agent is. Not a sentence, not a role
   description — that belongs in role and capabilities. Examples: "semantic

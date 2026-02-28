@@ -1,6 +1,0 @@
-title: Criteria
-description: Quality criteria — include paths absolutized
-components:
-  guardrails: group/guardrails_resolved
-  success_criteria: array/success_criteria_resolved
-  failure_criteria: array/failure_criteria_resolved

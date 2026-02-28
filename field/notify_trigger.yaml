@@ -1,5 +1,5 @@
 title: NotifyTrigger
-type: atom/string_plain
+type: atom/string_text
 description: >-
   When to trigger an agent-initiated notification. A human-readable condition
   the agent evaluates during processing. "every 100 records processed", "on

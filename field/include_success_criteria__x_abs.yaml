@@ -1,0 +1,6 @@
+title: IncludeSuccessCriteriaXAbs
+type: element/path_exists_absolute
+description: >-
+  An @path reference to a .md file containing success criteria. The resolver
+  reads the file and extracts individual success criterion items from its
+  structure.

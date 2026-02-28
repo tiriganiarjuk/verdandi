@@ -1,5 +1,5 @@
 title: GuardrailsAntiPatterns
-type: atom/string_plain
+type: atom/string_prose
 description: >-
   Common mistakes to avoid. Each entry describes a specific wrong behavior the
   agent might exhibit and why it's wrong. "Do not batch-summarize from memory

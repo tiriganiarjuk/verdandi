@@ -1,5 +1,6 @@
 title: Execution
 description: How the agent processes work — instructions and examples
-components:
-  execution_instructions: array/execution_instructions_raw
-  execution_examples: superarray/execution_examples_raw
+containers:
+  required:
+    execution_instructions: array/execution_instructions_raw
+    execution_examples: superarray/execution_examples_raw

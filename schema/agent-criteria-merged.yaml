@@ -1,19 +1,19 @@
 title: Agent Criteria Merged
 version: 3
 description: >
-  After criteria merge — guardrail includes inlined, success/failure
-  includes still as references.
+  Level 4 content branch — merges guardrails-reduced and success-reduced.
+  Criteria section carries both inline guardrails and inline
+  success/failure criteria. Shared sections verified identical between
+  inputs.
 required:
   - indirect
   - task
   - security
   - execution
   - criteria
-  - enforcement
 sections:
   indirect: section/indirect
   task: section/task
-  security: section/security_resolved
-  execution: section/execution_reduced
-  criteria: section/success_failure_resolved_guardrails_reduced
-  enforcement: section/enforcement
+  security: section/security
+  execution: section/execution
+  criteria: section/criteria_reduced

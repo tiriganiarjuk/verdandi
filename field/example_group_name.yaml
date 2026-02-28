@@ -1,5 +1,5 @@
 title: ExampleGroupName
-type: atom/string_plain
+type: atom/title_string
 description: >-
   Name of the example group, used as the H3 heading when compiling examples
   into the agent prompt. Groups organize examples by what they demonstrate —

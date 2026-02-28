@@ -4,5 +4,5 @@ description: >
   be provided and optional items available on request.
 containers:
   optional:
-    context_required: array/context_required_resolved
-    context_available: array/context_available_resolved
+    context_required: array/context_required
+    context_available: array/context_available

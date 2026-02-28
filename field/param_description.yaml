@@ -1,5 +1,5 @@
 title: ParamDescription
-type: atom/string_plain
+type: atom/string_text
 description: >-
   Human-readable description of what a dispatcher parameter represents and how
   the agent should interpret it. Optional — parameter name and type may be

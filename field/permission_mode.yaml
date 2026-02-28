@@ -1,0 +1,6 @@
+title: PermissionMode
+type: enum/permission_mode
+description: >-
+  Claude Code permission mode for agent execution. bypassPermissions
+  means the agent runs without interactive permission prompts, relying
+  entirely on PreToolUse hooks for path and command enforcement.

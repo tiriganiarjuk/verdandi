@@ -1,5 +1,5 @@
 title: ContextLabel
-type: atom/string_plain
+type: atom/title_string
 description: >-
   Display label for a context resource. Used in the generated prompt to create
   readable section headers. "Output Schema", "Canonical Glossary", "Operations

@@ -1,0 +1,7 @@
+title: InvocationVariant
+type: enum/invocation_variant
+description: >-
+  How the custom tool is invoked. no-name: output path is fully known,
+  the tool takes data on stdin and writes to a fixed path. with-name:
+  the agent generates a filename from a pattern or instruction before
+  each invocation.

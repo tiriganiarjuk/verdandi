@@ -1,5 +1,6 @@
 title: IncludeGuardrailsConstraints
 description: >
-  @path reference to a .md file containing constraints
+  @path reference to a .md file containing constraints.
+  Path absolutized after resolution.
 required:
-  include: field/include_guardrails_constraints__x_any
+  include: field/include_guardrails_constraints__x_abs

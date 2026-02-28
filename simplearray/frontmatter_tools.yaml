@@ -1,0 +1,6 @@
+title: FrontmatterTools
+items: field/frontmatter_tools
+description: >-
+  All Claude Code tool names granted to this agent. Each item is a
+  PascalCase tool name. Composed at render time into the comma-separated
+  frontmatter tools field.

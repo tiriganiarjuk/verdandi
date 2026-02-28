@@ -2,9 +2,10 @@ title: Security
 description: >
   Access control — tools, paths, capabilities, context resources. Everything
   needed for computing minimum privileges.
-components:
-  security_io: group/security_io_raw
-  security_schema: group/security_schema_raw
-  security_paths: group/security_paths_raw
-  security_capabilities: group/security_capabilities
-  context: group/context_raw
+containers:
+  required:
+    security_io: group/security_io_raw
+    security_schema: group/security_schema_raw
+    security_paths: group/security_paths_raw
+    security_capabilities: group/security_capabilities
+    context: group/context_raw

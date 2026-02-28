@@ -1,0 +1,7 @@
+title: Markdown
+regex: "^[^/.](?:[\\s\\S]*?\\s){3,}"
+description: >
+  Markdown-formatted text. Starts with a non-path character (not / or .),
+  contains at least three whitespace characters. Structural constraints
+  prevent path abuse without needing path exclusions. Allows markdown
+  formatting characters at start: **, #, >, -, `, [, etc.
