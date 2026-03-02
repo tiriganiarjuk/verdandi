@@ -25,7 +25,7 @@ Verdandi is static data. You edit YAML files, then run Draupnir to compile them 
 
 ### Input
 
-~344 YAML files in `tools/verdandi/` organized into 15 subdirectories (one per composition level). Each file defines a single reusable type.
+~348 YAML files in `tools/verdandi/` organized into 15 subdirectories (one per composition level). Each file defines a single reusable type.
 
 ### Output
 
@@ -42,7 +42,7 @@ The full cascade is:
 
 ## How It Works
 
-Verdandi contains ~344 YAML files organized into 15 subdirectories (one per composition level). Each file defines a single reusable type. Higher-level types reference lower-level types by file path (e.g., `field/dispatch_mode` means `field/dispatch_mode.yaml`).
+Verdandi contains ~348 YAML files organized into 15 subdirectories (one per composition level). Each file defines a single reusable type. Higher-level types reference lower-level types by file path (e.g., `field/dispatch_mode` means `field/dispatch_mode.yaml`).
 
 **Draupnir** (`tools/draupnir/`) is the compiler. It reads all Verdandi YAML files in dependency order, validates them into frozen Pydantic models, and generates JSON Schema files to `schemas/`.
 
@@ -77,8 +77,8 @@ The generated JSON Schemas are then consumed by:
 
 | Level | What It Holds | Example |
 |-------|---------------|---------|
-| **simplearray** | Variable-length array of one field type | `items: field/role_expertise` |
-| **simplegroup** | Flat object with required/optional/conditional zones | `required: {name: field/param_name}` |
+| **simplearray** | Variable-length array of one field type | `items: field/role_expertise_item` |
+| **simplegroup** | Flat object with required/optional/conditional zones (fields + tuples + simplearrays) | `required: {name: field/param_name}` |
 | **array** | Variable-length array of simplegroups | `items: simplegroup/parameter_item` |
 | **group** | Object with fields section + containers section | `fields: {required: ...}, containers: {optional: ...}` |
 | **superarray** | Variable-length array of groups | `items: group/example_group_raw` |
@@ -89,7 +89,7 @@ The generated JSON Schemas are then consumed by:
 |-------|---------------|---------|
 | **section** | Named complex containers | `containers: {required: {metadata: group/metadata}}` |
 | **shallowsection** | Fields + limited containers (max 2) | `required: {title: field/agent_title}, containers: {...}` |
-| **schema** | Root -- named sections/shallowsections | `sections: {indirect: section/indirect, ...}` |
+| **schema** | Root — uses `sections:` key (deep) or `shallowsections:` key (wide), never both | `sections: {indirect: section/indirect, ...}` |
 
 ## Raw / Resolved / Reduced Stages
 
@@ -163,7 +163,7 @@ This is a typed, known shape -- not arbitrary data.
 
 3. **Do not use name-based references.** Every reference is `level/filename` (without `.yaml`). The file path IS the identity.
 
-4. **Do not add fields to a type that violate its tier.** A simplegroup holds fields only (plus tuple and simplearray). If you need nested containers, use group.
+4. **Do not add fields to a type that violate its tier.** A simplegroup holds fields, tuples, and simplearrays — anything below it in the hierarchy. If you need nested containers (arrays, groups), use group.
 
 5. **Do not create a shallowsection with more than 2 containers.** Use section + group for deeper nesting.
 

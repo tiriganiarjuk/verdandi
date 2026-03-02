@@ -63,7 +63,7 @@ simplegroups. Groups reference simple containers AND arrays.
 ```
 section          composes complex containers only (no direct fields)
 shallowsection   composes fields + containers (simplearray/array/group)
-schema           root — references sections and shallowsections
+schema           root — `sections:` key (deep) or `shallowsections:` key (wide)
 ```
 
 ---
@@ -73,7 +73,7 @@ schema           root — references sections and shallowsections
 Each level references only levels below it in the load order:
 
 ```
-simple containers  accept: fields (simplegroup also accepts tuple/simplearray)
+simple containers  accept: fields (simplegroup also accepts tuple + simplearray)
 array              accepts: simplegroups
 group              accepts: fields + simple containers + arrays
 superarray         accepts: groups + simplegroups
@@ -100,6 +100,7 @@ description: Starts with dot (relative path prefix)
 
 | Field | Required | Description |
 |-------|----------|-------------|
+| title | yes | PascalCase name (used for Python class generation) |
 | regex | yes | Regular expression pattern |
 | description | yes | Human-readable explanation (used in scaffolding templates) |
 
@@ -127,9 +128,11 @@ description: Whole number value
 
 | Field | Required | Description |
 |-------|----------|-------------|
+| title | yes | PascalCase name (used for Python class generation) |
 | type | yes | `string`, `integer`, or `boolean` |
 | pattern | no | Reference to `pattern/` file (strings only) |
 | excludes | no | List of `pattern/` references to reject (strings only) |
+| min_length | no | Minimum string length (emitted as JSON Schema `minLength`) |
 | description | yes | Human-readable explanation (used in scaffolding templates) |
 
 Referenced by: enums, elements, unions, simple containers
@@ -148,6 +151,7 @@ description: How the dispatcher feeds input — all at once or in chunks
 
 | Field | Required | Description |
 |-------|----------|-------------|
+| title | yes | PascalCase name (used for Python class generation) |
 | values | yes | List of allowed values |
 | description | yes | Human-readable explanation (used in scaffolding templates) |
 
@@ -168,6 +172,7 @@ description: Relative path that must exist on the filesystem
 
 | Field | Required | Description |
 |-------|----------|-------------|
+| title | yes | PascalCase name (used for Python class generation) |
 | inherits | yes | Reference to `atom/` or `enum/` |
 | format | yes | Runtime validation keyword (e.g., `exists`) |
 | description | yes | Human-readable explanation (used in scaffolding templates) |
@@ -204,6 +209,7 @@ union: [enum/output_format_text, enum/output_format_structured]
 
 | Field | Required | Description |
 |-------|----------|-------------|
+| title | yes | PascalCase name (used for Python class generation) |
 | union | yes | List of `atom/`, `enum/`, or `element/` references |
 | description | yes | Human-readable explanation (used in scaffolding templates) |
 
@@ -226,6 +232,7 @@ constraint: ascending_strict
 
 | Field | Required | Description |
 |-------|----------|-------------|
+| title | yes | PascalCase name (used for Python class generation) |
 | items | yes | Ordered list of field references (atom/enum/element/union) |
 | constraint | no | Validation rule (e.g., `ascending_strict`) |
 | description | yes | Human-readable explanation (used in scaffolding templates) |
@@ -235,18 +242,83 @@ different field types.
 
 ---
 
+### field/
+
+The membrane between types and containers. Each field file binds a
+type reference to a per-field description and optional x-extensions.
+This is where semantic meaning attaches to structural types.
+
+```yaml
+# field/agent_description.yaml
+title: AgentDescription
+type: atom/string_prose
+min_length: 40
+description: >-
+  One-sentence purpose statement. Appears in scaffolding, inspection
+  reports, and agent identity sections.
+semantic: >-
+  Must describe WHAT the agent does, not HOW. Avoid implementation
+  details. Focus on the user-facing capability.
+```
+
+| Field | Required | Description |
+|-------|----------|-------------|
+| title | yes | PascalCase name (used for Python class generation) |
+| type | yes | Reference to type tier: atom/, enum/, element/, union/, or tuple/ |
+| description | yes | Per-field semantic meaning (what this field represents in context) |
+| min_length | no | Minimum string length (emitted as JSON Schema `minLength`) |
+| semantic | no | Quality/intent checks (emitted as `x-semantic` in JSON Schema) |
+| constraint | no | Cross-field/domain rules (emitted as `x-constraint` in JSON Schema) |
+| validation | no | Runtime validation hints (emitted as `x-validation` in JSON Schema) |
+
+Referenced by: simplearray (via `items:`), simplegroup/group/shallowsection
+(via required/optional/conditional zones)
+
+#### Double-Underscore Type Narrowing
+
+When the same logical field needs different type constraints at
+different pipeline stages, the field name carries a double-underscore
+suffix indicating the type variant:
+
+| Suffix | Meaning | Type Reference | Stage |
+|--------|---------|----------------|-------|
+| `__any` | Accepts relative or absolute paths | `union/path_any` | Raw (pre-resolution) |
+| `__abs` | Absolute paths only | `atom/path_absolute` | Resolved (post-resolution) |
+| `__x_any` | Path must exist, relative or absolute | `union/path_exists_any` | Raw (pre-resolution) |
+| `__x_abs` | Path must exist, absolute only | `element/path_exists_absolute` | Resolved (post-resolution) |
+
+The `x` prefix means "exists" — the field references an `element/`
+type with `format: exists`, adding a runtime filesystem existence
+contract on top of the path pattern.
+
+Examples:
+```
+field/context_path__any.yaml     type: union/path_any          (raw stage)
+field/context_path__abs.yaml     type: atom/path_absolute      (resolved stage)
+field/include_instruction__x_any type: union/path_exists_any   (raw, must exist)
+field/include_instruction__x_abs type: element/path_exists_absolute (resolved, must exist)
+```
+
+The base name (`context_path`, `include_instruction`) identifies the
+logical field. The suffix identifies the type narrowing applied at
+that pipeline stage. This lets different schemas reference the same
+logical field with stage-appropriate type constraints.
+
+---
+
 ### simplearray/
 
 Variable-length array of one field type.
 
 ```yaml
 # simplearray/role_expertise.yaml
-items: atom/string_plain
+items: field/role_expertise_item
 ```
 
 | Field | Required | Description |
 |-------|----------|-------------|
-| items | yes | Single field reference (atom/enum/element/union) |
+| title | yes | PascalCase name (used for Python class generation) |
+| items | yes | Single field reference (`field/` level — the field membrane) |
 | description | yes | Human-readable explanation (used in scaffolding templates) |
 
 ---
@@ -281,6 +353,7 @@ conditional:
 
 | Section | Required | Description |
 |---------|----------|-------------|
+| title | yes | PascalCase name (used for Python class generation) |
 | description | yes | Human-readable explanation (used in scaffolding templates) |
 | required | no | Fields that must be present |
 | optional | no | Fields that may be absent |
@@ -288,8 +361,8 @@ conditional:
 
 At least one of `required`, `optional`, or `conditional` must exist.
 
-Field values reference: atom/, enum/, element/, union/, tuple/,
-simplearray/ (any field or simple container type).
+Field values reference: field/, tuple/, simplearray/ (any field-level
+or simple container type below simplegroup in the hierarchy).
 
 #### Conditional keywords
 
@@ -350,6 +423,7 @@ containers:
 
 | Section | Required | Description |
 |---------|----------|-------------|
+| title | yes | PascalCase name (used for Python class generation) |
 | description | yes | Human-readable explanation (used in scaffolding templates) |
 | fields | no | `required`/`optional`/`conditional` — references field types (+ tuple in conditionals) |
 | containers | no | `required`/`optional`/`conditional` — references simple containers + arrays |
@@ -380,6 +454,7 @@ description: Ordered processing steps — inline or included from file
 
 | Field | Required | Description |
 |-------|----------|-------------|
+| title | yes | PascalCase name (used for Python class generation) |
 | items | yes | Reference to simplegroup/ — or oneOf list for polymorphic arrays |
 | description | yes | Human-readable explanation (used in scaffolding templates) |
 
@@ -397,6 +472,7 @@ description: Example groups with entries demonstrating expected behavior
 
 | Field | Required | Description |
 |-------|----------|-------------|
+| title | yes | PascalCase name (used for Python class generation) |
 | items | yes | Reference to group/ — or oneOf list for polymorphic arrays |
 | description | yes | Human-readable explanation (used in scaffolding templates) |
 
@@ -416,6 +492,7 @@ description: How the agent processes work — steps and examples
 
 | Field | Required | Description |
 |-------|----------|-------------|
+| title | yes | PascalCase name (used for Python class generation) |
 | components | yes | Named references to group/, array/, superarray/ |
 | description | yes | Human-readable explanation (used in scaffolding templates) |
 
@@ -444,6 +521,7 @@ containers:
 
 | Section | Required | Description |
 |---------|----------|-------------|
+| title | yes | PascalCase name (used for Python class generation) |
 | description | yes | Human-readable explanation (used in scaffolding templates) |
 | required | no | Field references (atom/enum/element/union) |
 | optional | no | Field references |
@@ -462,8 +540,35 @@ If you need more than 2 containers, use section/ with groups.
 
 ### schema/
 
-Root file. References sections OR shallowsections — not both.
-A schema must choose deep (sections) or wide (shallowsections).
+Root file. Uses exactly one of two composition keys:
+
+- **`sections:`** — references `section/` types (deep composition)
+- **`shallowsections:`** — references `shallowsection/` types (wide composition)
+
+A schema must choose one key. Never both. Draupnir enforces mutual
+exclusion at compile time.
+
+**Deep schema** (pipeline stages — domain-organized):
+
+```yaml
+# schema/agent-raw-definition.yaml
+version: 3
+description: Authored agent definition as written by humans
+required:
+  - indirect
+  - task
+  - security
+  - execution
+  - criteria
+sections:
+  indirect: section/indirect
+  task: section/task_raw
+  security: section/security_raw
+  execution: section/execution_raw
+  criteria: section/criteria_raw
+```
+
+**Wide schema** (render stages — consumption-organized):
 
 ```yaml
 # schema/agent-universal-render.yaml
@@ -483,28 +588,34 @@ nullable:
   - writing_output
   - constraints
   - anti_patterns
-sections:
+shallowsections:
   identity: shallowsection/identity
   security_boundary: shallowsection/security_boundary
   implicit_grants: shallowsection/implicit_grants
   input: shallowsection/input
-  instructions: section/instructions
-  examples: section/examples
   output: shallowsection/output
-  writing_output: section/writing_output
+  writing_output: shallowsection/writing_output
   constraints: shallowsection/constraints
   anti_patterns: shallowsection/anti_patterns
   return_format: shallowsection/return_format
   dispatcher: shallowsection/dispatcher
+  instructions: shallowsection/instructions_reduced
+  examples: shallowsection/examples_reduced
 ```
 
 | Field | Required | Description |
 |-------|----------|-------------|
+| title | yes | PascalCase name (used for Python class generation) |
 | version | yes | Schema version |
 | description | yes | Human-readable explanation (used in scaffolding templates) |
 | required | yes | List of section names that must be present |
 | nullable | no | List of section names that may be null/absent |
-| sections | yes | Named references to section/ OR shallowsection/ (no mixing) |
+| sections | mutual | Named references to `section/` types — deep composition |
+| shallowsections | mutual | Named references to `shallowsection/` types — wide composition |
+
+**`sections` and `shallowsections` are mutually exclusive.** Exactly one
+must be present. The key name signals the composition style and constrains
+what types may be referenced.
 
 ---
 

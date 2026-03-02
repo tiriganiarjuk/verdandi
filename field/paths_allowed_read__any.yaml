@@ -1,11 +1,14 @@
 title: PathsAllowedReadAny
 type: union/path_any
 description: >-
-  Path prefixes granting read-level access. Each entry grants recursive access
-  to all files and directories under the prefix. Entries can be workspace-
-  relative (resolved against security_paths_workspace) or absolute. Use
-  relative paths for workspace content (e.g., "schemas/",
-  "definitions/schemas/") and absolute paths for system locations (e.g.,
-  "/tmp/"). Read-level paths make read, search, and inspect capabilities
-  possible — actual capabilities granted depend on intersection with
-  security_capabilities_requested.
+  WARNING — MOST AGENTS DO NOT NEED THIS. Read permissions for input files,
+  context resources, schemas, and temp directories are ALL AUTO-DERIVED from
+  their respective declarations. Adding them here is REDUNDANT and indicates
+  a misunderstanding of the security model. THIS IS ONLY FOR additional
+  workspace paths the agent reads that are NOT declared anywhere else — e.g.,
+  reference data directories, shared configuration files, library sources.
+  If every path you want to add here is already declared in security_io,
+  security_schema, or context, LEAVE THIS EMPTY. Each entry grants recursive
+  read-level access to all files under the prefix. Entries can be workspace-
+  relative or absolute. Actual capabilities granted depend on intersection
+  with security_capabilities_requested.

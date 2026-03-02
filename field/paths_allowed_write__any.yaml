@@ -1,12 +1,14 @@
 title: PathsAllowedWriteAny
 type: union/path_any
 description: >-
-  Path prefixes granting write-level access via platform tools (generic write,
-  edit, append). Each entry grants recursive access to all files and
-  directories under the prefix. Entries can be workspace-relative or absolute.
-  Write-level paths make all capabilities possible (write, edit, append, read,
-  search, inspect) — actual capabilities granted depend on intersection with
-  security_capabilities_requested. IMPORTANT: Do not include the agent's
-  output path (security_io_output_file or security_io_output_directory) here —
-  doing so bypasses the enforcement output tool's schema validation and format
-  checking.
+  WARNING — MOST AGENTS DO NOT NEED THIS. Write permissions for output files,
+  output directories, temp dirs, and scratch dirs are ALL AUTO-DERIVED from
+  security_io declarations. NEVER put output paths here — doing so BYPASSES
+  schema validation, format enforcement, and batch size limits that the
+  enforcement output tool enforces. THIS IS ONLY FOR workspace paths where
+  the agent needs UNCONSTRAINED write access to locations NOT declared in
+  security_io — e.g., updating shared state files, writing logs to a common
+  directory. If every path you want to add here is already declared in
+  security_io, LEAVE THIS EMPTY. Each entry grants recursive write-level
+  access (write, edit, append, plus read, search, inspect) to all files under
+  the prefix. Entries can be workspace-relative or absolute.

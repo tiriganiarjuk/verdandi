@@ -1,8 +1,15 @@
 title: CapabilitiesRequested
 type: enum/capabilities
 description: >-
-  Platform-agnostic capabilities the agent requests. Each entry is a
-  capability descriptor, not a vendor tool name. A requested capability is
-  only granted if a matching path grant exists and the capability is not
-  prohibited. Format transformers map capability names to vendor- specific
+  WARNING — MOST AGENTS SHOULD LEAVE THIS EMPTY. Capabilities for input
+  files, output files, context resources, schemas, temp dirs, and scratch
+  dirs are ALL AUTO-DERIVED by the security resolver. You do NOT need to
+  request read for input files or write for output files — that happens
+  automatically from security_io declarations. THIS IS ONLY FOR capabilities
+  the agent needs on EXPLICIT path grants (security_paths_allowed_read and
+  security_paths_allowed_write). If the agent has no explicit path grants,
+  this array MUST be empty. Each entry is a platform-agnostic capability
+  descriptor, not a vendor tool name. A requested capability is only granted
+  if a matching explicit path grant exists and the capability is not
+  prohibited. Format transformers map capability names to vendor-specific
   tools.

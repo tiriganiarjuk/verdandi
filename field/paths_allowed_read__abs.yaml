@@ -1,8 +1,10 @@
 title: PathsAllowedReadAbs
 type: atom/path_absolute
 description: >-
-  Path prefixes granting read-level access. Each entry is a
-  path_allowed_absolute validated against the blocklist. Read-level paths make
-  read, search, and inspect capabilities possible within these paths. Which
-  capabilities are actually granted depends on capabilities_requested
-  intersection.
+  Path prefixes granting read-level access for general workspace work (post-
+  resolution absolute paths). Each entry validated against the blocklist.
+  Read-level paths make read, search, and inspect capabilities possible within
+  these paths. Which capabilities are actually granted depends on
+  capabilities_requested intersection. Does not include auto-derived read
+  paths from context resources, IO declarations, or schema paths — those are
+  computed separately by the security resolver.
