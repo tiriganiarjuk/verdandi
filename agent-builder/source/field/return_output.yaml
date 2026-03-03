@@ -1,5 +1,6 @@
 title: ReturnOutput
 type: atom/string_prose
+const: "Return your output directly as your final message to the dispatcher."
 description: >-
   Fixed prompt instruction for the output portion of the agent return.
   Composed into the prompt when return_mode includes output (metrics-output or

@@ -326,59 +326,33 @@
             "return_status": {
               "$ref": "#/$defs/atom__string_prose",
               "title": "ReturnStatus",
-              "description": "Fixed prompt instruction for the status portion of the agent return. Composed into the prompt when return_mode includes status (status or status- metrics). Const value — not author-editable.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
+              "description": "Fixed prompt instruction for the status portion of the agent return. Composed into the prompt when return_mode includes status (status or status- metrics). Const value — not author-editable.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths.",
+              "const": "Return only SUCCESS or FAILURE. SUCCESS means the process completed correctly regardless of data outcomes. FAILURE means the process itself broke."
             },
             "return_metrics": {
               "$ref": "#/$defs/atom__string_prose",
               "title": "ReturnMetrics",
-              "description": "Fixed prompt instruction for the metrics portion of the agent return. Composed into the prompt when return_mode includes metrics (status-metrics or metrics-output). Const value — not author-editable.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
+              "description": "Fixed prompt instruction for the metrics portion of the agent return. Composed into the prompt when return_mode includes metrics (status-metrics or metrics-output). Const value — not author-editable.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths.",
+              "const": "Include summary metrics with your return: records processed, records passed, records failed."
             },
             "return_output": {
               "$ref": "#/$defs/atom__string_prose",
               "title": "ReturnOutput",
-              "description": "Fixed prompt instruction for the output portion of the agent return. Composed into the prompt when return_mode includes output (metrics-output or output). Const value — not author-editable.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
-            },
-            "return_schema": {
-              "$ref": "#/$defs/element__path_exists_absolute",
-              "title": "ReturnSchemaXAbs",
-              "description": "Absolute path to a JSON Schema file (must end with .schema.json or .schema.yaml) defining the metric fields the agent returns. Always embedded directly into the prompt — there is no enforcement mechanism for return communication (agent-to-dispatcher LLM text). Embedding ensures the agent sees field names, types, and definitions. Schema file must exist at resolution time. Example: \"definitions/schemas/my-agent-return.schema.json\"\nAbsolute path that must exist on the filesystem"
+              "description": "Fixed prompt instruction for the output portion of the agent return. Composed into the prompt when return_mode includes output (metrics-output or output). Const value — not author-editable.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths.",
+              "const": "Return your output directly as your final message to the dispatcher."
             }
           },
           "required": [
             "return_mode"
           ],
-          "additionalProperties": false,
-          "allOf": [
-            {
-              "if": {
-                "properties": {
-                  "return_mode": {
-                    "enum": [
-                      "status-metrics",
-                      "metrics-output"
-                    ]
-                  }
-                }
-              },
-              "then": {
-                "required": [
-                  "return_schema"
-                ]
-              },
-              "else": {
-                "properties": {
-                  "return_schema": false
-                }
-              }
-            }
-          ]
+          "additionalProperties": false
         },
         "processing": {
           "title": "Processing",
           "type": "object",
           "description": "Output processing configuration — file format, naming, write frequency, model capability tier, and scratch space needs.\n",
           "properties": {
-            "processing_capability_model": {
+            "capability_model": {
               "title": "AgentCapabilityModel",
               "type": "string",
               "description": "Platform-agnostic capability tier for this agent. Format transformers map descriptors to vendor-specific models. fast-cheap: speed/cost over quality (bulk transforms, simple extraction). standard: general-purpose balance. analytical: careful judgment (QC, assessment, structured analysis). complex- reasoning: deep multi-step reasoning (text rewriting, nuanced decisions). max-capability: highest available, no compromises. inherit: match the dispatcher's model (task scales with calling context).\nPlatform-agnostic capability tier. Format transformers map to vendor models. 'fast-cheap' for bulk transforms. 'standard' for general purpose. 'analytical' for careful judgment. 'complex-reasoning' for deep multi-step reasoning. 'max-capability' for highest available. 'inherit' to match the dispatcher's model.",
@@ -391,7 +365,7 @@
                 "inherit"
               ]
             },
-            "processing_output_file_format": {
+            "output_file_format": {
               "title": "OutputFileFormat",
               "type": "string",
               "description": "The output format the agent produces. Determines file extension enforcement and format validation hooks. JSONL enables record-level write frequency control via processing_output_write_frequency.\nOutput format the agent produces. 'jsonl' for record-oriented output, 'json' for a single structured document, 'markdown' for prose or structured text with headings, 'text' for unstructured plain text.",
@@ -402,7 +376,7 @@
                 "text"
               ]
             },
-            "processing_output_file_name_known": {
+            "output_file_name_known": {
               "title": "OutputFileNameKnown",
               "type": "string",
               "description": "How well the output filename is known at definition time. known: exact output file path is declared — also requires security_io_output_file in [security.security_io]. partially: a naming template or instruction constrains the filename but the LLM provides variable parts — also requires security_io_output_directory in [security.security_io], plus processing_output_file_name_template. unknown: completely dynamic, no naming constraint — also requires security_io_output_directory in [security.security_io], plus processing_output_file_name_instruction.\nHow well the output filename is known at definition time. 'known' means exact path is declared. 'partially' means a naming template constrains the filename. 'unknown' means completely dynamic naming.",
@@ -412,35 +386,35 @@
                 "unknown"
               ]
             },
-            "processing_output_description": {
+            "output_description": {
               "$ref": "#/$defs/atom__string_text",
               "title": "OutputDescription",
               "description": "Human-readable description of the output data the agent produces. Describes what the output contains and its downstream purpose. The mechanical format is captured by processing_output_file_format — this field captures domain meaning, but repeating format for human readability is acceptable. Example: \"One assessment record per input entry with quality scores and failure annotations\"\nNatural language prose — must contain at least one whitespace character. Mutually exclusive with all identifier types. Used for descriptions, instructions, error messages, and display labels. Not a path.",
               "minLength": 20
             },
-            "processing_scratch_needed": {
+            "scratch_needed": {
               "$ref": "#/$defs/atom__boolean",
               "title": "ScratchNeeded",
               "description": "Whether this agent needs a scratch directory for intermediate files. When true, security_io_scratch_tempdir must be provided and the agent auto- derives write access to a scoped temp path. Off by default — most agents keep intermediate state in context. Enable when an agent processes sequential data that loses coherence without file-based checkpointing, or when LLM behavior requires scratch space for processing optimization.\nTrue or false value"
             },
-            "processing_output_file_name_template": {
+            "output_file_name_template": {
               "title": "OutputFileNameTemplate",
               "type": "string",
               "description": "Filename template with {placeholder} syntax for dispatch-time parameters. The tool constructs the output filename by substituting placeholder values provided by the LLM (received as dispatch parameters). The tool controls directory, naming pattern, and extension. The LLM controls only the variable parts. Example: \"{interview-id}.summaries.jsonl\" — the LLM provides interview-id, the tool constructs the full path.\nFilename template with a {variable} placeholder and file extension. The variable becomes the --name CLI argument for the output tool. The extension segments determine the output file suffix. LLM authors write the complete template; the build system decomposes it into tool arguments and write paths.",
               "pattern": "^\\{[a-z][a-z0-9-]*\\}(\\.\\.?\\w+)+$",
               "minLength": 5
             },
-            "processing_output_file_name_instruction": {
+            "output_file_name_instruction": {
               "$ref": "#/$defs/atom__string_prose",
               "title": "OutputFileNameInstruction",
               "description": "Instruction indicating what the LLM should use as the filename basis during processing. The LLM derives the identifier from the data being processed. The tool writes to output_directory/{identifier}.{extension}, where the extension is enforced by processing_output_file_format. The LLM controls the filename but not the directory or file type. Example: \"{record-identifier}\" — the LLM provides a record identifier, the tool writes to the output directory with the correct extension.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
             },
-            "processing_output_batch_size": {
+            "output_batch_size": {
               "$ref": "#/$defs/atom__integer",
               "title": "OutputBatchSize",
               "description": "Number of records per write tool call when write frequency is batch. The agent accumulates this many records before invoking the write tool. Balances write frequency against data loss risk from interruption.\nWhole number value"
             },
-            "processing_output_write_frequency": {
+            "output_write_frequency": {
               "title": "OutputWriteFrequency",
               "type": "string",
               "description": "How often the agent flushes records to disk. record: one record per write invocation, minimal blast radius. batch: bounded set of records per invocation, size controlled by processing_output_batch_size. Only relevant for JSONL — other formats write the entire file per invocation by default.\nHow often records are flushed to disk. 'record' means one record per write invocation with minimal blast radius. 'batch' means a bounded set of records per invocation with size controlled by batch_size.",
@@ -451,30 +425,30 @@
             }
           },
           "required": [
-            "processing_capability_model",
-            "processing_output_file_format",
-            "processing_output_file_name_known",
-            "processing_output_description",
-            "processing_scratch_needed"
+            "capability_model",
+            "output_file_format",
+            "output_file_name_known",
+            "output_description",
+            "scratch_needed"
           ],
           "additionalProperties": false,
           "allOf": [
             {
               "if": {
                 "properties": {
-                  "processing_output_file_format": {
+                  "output_file_format": {
                     "const": "jsonl"
                   }
                 }
               },
               "then": {
                 "required": [
-                  "processing_output_write_frequency"
+                  "output_write_frequency"
                 ]
               },
               "else": {
                 "properties": {
-                  "processing_output_write_frequency": false
+                  "output_write_frequency": false
                 }
               }
             }
@@ -546,17 +520,17 @@
           "type": "object",
           "description": "Concrete I/O targets after path resolution — all paths absolutized.\n",
           "properties": {
-            "security_io_input_file": {
+            "io_input_file": {
               "$ref": "#/$defs/atom__path_absolute",
               "title": "IoInputFileAbs",
               "description": "Path to the input file. Automatically grants read tool and read permission to this file. Validated against the path blocklist.\nAbsolute filesystem path starting with / — excludes traversal and sensitive path patterns. The resolved form after absolutization."
             },
-            "security_io_input_directory": {
+            "io_input_directory": {
               "$ref": "#/$defs/atom__path_absolute",
               "title": "IoInputDirectoryAbs",
               "description": "Path to the input directory. Automatically grants read tool and read permission to this directory. Validated against the path blocklist.\nAbsolute filesystem path starting with / — excludes traversal and sensitive path patterns. The resolved form after absolutization."
             },
-            "security_io_input_tempdir": {
+            "io_input_tempdir": {
               "$ref": "#/$defs/atom__kebab_string",
               "title": "IoInputTempdir",
               "description": "Opaque directory name (a short slug, not a path) for this agent type's temp staging area. The dispatcher writes input data to /tmp/{workspace}/{value}/ and the agent auto-derives read access to that scoped path. Provide only the name segment — e.g., \"cobalt-stage\", not \"/tmp/myworkspace/cobalt-stage\". The format transformer may hash both workspace and value for obfuscation on disk. Must not be derived from the agent name or reveal agent structure — if names follow a predictable pattern, an adversarial LLM can enumerate temp directories for other agent types. Choose an arbitrary, non-descriptive name per agent type. Examples: \"cobalt-stage\", \"theta-7\" (good); \"embedding- normalizer-input\", \"input\" (bad — reveals agent identity or is too predictable).\nLowercase kebab-case string — words separated by hyphens. Used for identifiers that must be URL-safe and filesystem-safe.",
@@ -572,7 +546,7 @@
                 ]
               }
             },
-            "security_io_scratch_tempdir": {
+            "io_scratch_tempdir": {
               "$ref": "#/$defs/atom__kebab_string",
               "title": "IoScratchTempdir",
               "description": "Opaque directory name (a short slug, not a path) for this agent type's scratch/intermediate file area. The agent auto-derives write access to /tmp/{workspace}/{value}/ for intermediate processing files. Provide only the name segment — e.g., \"cedar-scratch\", not \"/tmp/myworkspace/cedar- scratch\". The format transformer may hash both workspace and value for obfuscation on disk. Same opaque naming rules as security_io_input_tempdir — must not be derived from the agent name or reveal agent structure. Examples: \"cedar-scratch\", \"work-bravo\" (good); \"my-agent-work\" (bad — reveals agent identity).\nLowercase kebab-case string — words separated by hyphens. Used for identifiers that must be URL-safe and filesystem-safe.",
@@ -594,7 +568,7 @@
                 ]
               }
             },
-            "security_io_output_file": {
+            "io_output_file": {
               "$ref": "#/$defs/atom__path_absolute",
               "title": "IoOutputFileAbs",
               "description": "Workspace-relative path to the agent's output file. The security resolver uses this path to create a constrained write tool that enforces schema validation, format checking, and batch size limits on every write. This path must NOT appear in security_paths_allowed_write — if it did, the agent would have a second, unconstrained write path bypassing all enforcement. Validated against the path blocklist. Example: \"interview/output/results.jsonl\"\nAbsolute filesystem path starting with / — excludes traversal and sensitive path patterns. The resolved form after absolutization.",
@@ -615,7 +589,7 @@
                 ]
               }
             },
-            "security_io_output_directory": {
+            "io_output_directory": {
               "$ref": "#/$defs/atom__path_absolute",
               "title": "IoOutputDirectoryAbs",
               "description": "Workspace-relative path to the agent's output directory. The security resolver uses this to create a constrained write tool that enforces schema validation, format checking, and batch size limits on every write within this directory. This path must NOT appear in security_paths_allowed_write — if it did, the agent would have unconstrained write access bypassing all enforcement. Validated against the path blocklist. Example: \"interview/output/\"\nAbsolute filesystem path starting with / — excludes traversal and sensitive path patterns. The resolved form after absolutization.",
@@ -644,12 +618,12 @@
           "type": "object",
           "description": "Data schema declarations after resolution — schema paths absolutized.\n",
           "properties": {
-            "security_input_schema": {
+            "input_schema": {
               "$ref": "#/$defs/element__path_exists_absolute",
               "title": "InputSchemaXAbs",
               "description": "Schema the input data validates against. Workspace-relative path to a .schema.json or .schema.yaml file. The resolver uses this for input validation enforcement — a security property.\nAbsolute path that must exist on the filesystem"
             },
-            "security_output_schema": {
+            "output_schema": {
               "$ref": "#/$defs/element__path_exists_absolute",
               "title": "OutputSchemaXAbs",
               "description": "Schema the output data must validate against. Workspace-relative path to a .schema.json file. Lives in the security section because the resolver needs it for engineering control derivation — schema validation is a security enforcement property.\nAbsolute path that must exist on the filesystem",
@@ -668,10 +642,15 @@
                 ]
               }
             },
-            "security_output_schema_embed": {
+            "output_schema_embed": {
               "$ref": "#/$defs/atom__boolean",
               "title": "OutputSchemaEmbed",
               "description": "Whether to embed the output schema directly into the agent prompt. When true, the format transformer reads the schema file and inlines its content — uses context window but ensures the agent sees the schema without a tool call. When false (or omitted), the schema path is granted read access and the agent reads it via Read tool — saves context but adds a tool-call round trip. Prefer true for small schemas (under ~100 lines) or when schema adherence is critical. Prefer false for large schemas where context window conservation matters. Either way the agent knows the desired shape.\nTrue or false value"
+            },
+            "return_schema": {
+              "$ref": "#/$defs/element__path_exists_absolute",
+              "title": "ReturnSchemaXAbs",
+              "description": "Absolute path to a JSON Schema file (must end with .schema.json or .schema.yaml) defining the metric fields the agent returns. Always embedded directly into the prompt — there is no enforcement mechanism for return communication (agent-to-dispatcher LLM text). Embedding ensures the agent sees field names, types, and definitions. Schema file must exist at resolution time. Example: \"definitions/schemas/my-agent-return.schema.json\"\nAbsolute path that must exist on the filesystem"
             }
           },
           "additionalProperties": false
@@ -681,12 +660,12 @@
           "type": "object",
           "description": "Filesystem path grants after resolution — all paths absolutized.\n",
           "properties": {
-            "security_paths_workspace": {
+            "paths_workspace": {
               "$ref": "#/$defs/element__path_exists_absolute",
               "title": "WorkspacePathXAbs",
               "description": "Absolute filesystem path to the workspace root directory. All workspace- relative paths in the definition (context paths, schema paths, allowed_read/write paths) are resolved relative to this directory. Must be an absolute path (starting with /). Validated against the blocklist during resolution. Any path that resolves outside this workspace or into a blocked zone triggers a SecurityIncident. Example: \"/Users/username/.ai/spaces/myproject\"\nAbsolute path that must exist on the filesystem"
             },
-            "security_paths_allowed_read": {
+            "paths_allowed_read": {
               "title": "PathsAllowedRead",
               "type": "array",
               "description": "Read-level path grants after resolution — all absolutized",
@@ -697,7 +676,7 @@
               },
               "minItems": 1
             },
-            "security_paths_allowed_write": {
+            "paths_allowed_write": {
               "title": "PathsAllowedWrite",
               "type": "array",
               "description": "Write-level path grants after resolution — all absolutized",
@@ -710,7 +689,7 @@
             }
           },
           "required": [
-            "security_paths_workspace"
+            "paths_workspace"
           ],
           "additionalProperties": false
         },
@@ -745,8 +724,8 @@
           "type": "object",
           "description": "Platform-agnostic capability declarations",
           "properties": {
-            "security_capabilities_requested": {
-              "title": "SecurityCapabilitiesRequested",
+            "capabilities_requested": {
+              "title": "CapabilitiesRequested",
               "type": "array",
               "description": "Platform-agnostic capabilities the agent requests. A requested capability is only granted if a matching path grant exists and it is not prohibited.\n",
               "items": {
@@ -756,8 +735,8 @@
               },
               "minItems": 1
             },
-            "security_capabilities_prohibited": {
-              "title": "SecurityCapabilitiesProhibited",
+            "capabilities_prohibited": {
+              "title": "CapabilitiesProhibited",
               "type": "array",
               "description": "Capabilities to deny even if path grants exist. Takes precedence over both explicit path grants and auto-derived permissions.\n",
               "items": {
@@ -769,7 +748,7 @@
             }
           },
           "required": [
-            "security_capabilities_requested"
+            "capabilities_requested"
           ],
           "additionalProperties": false
         }
@@ -1188,12 +1167,12 @@
       "type": "boolean",
       "description": "True or false value"
     },
-    "element__path_exists_absolute": {
-      "title": "PathExistsAbsolute",
+    "atom__path_absolute": {
+      "title": "PathAbsolute",
       "type": "string",
-      "description": "Absolute path that must exist on the filesystem",
-      "format": "exists",
+      "description": "Absolute filesystem path starting with / — excludes traversal and sensitive path patterns. The resolved form after absolutization.\n",
       "pattern": "^/",
+      "minLength": 2,
       "not": {
         "anyOf": [
           {
@@ -1214,12 +1193,12 @@
         ]
       }
     },
-    "atom__path_absolute": {
-      "title": "PathAbsolute",
+    "element__path_exists_absolute": {
+      "title": "PathExistsAbsolute",
       "type": "string",
-      "description": "Absolute filesystem path starting with / — excludes traversal and sensitive path patterns. The resolved form after absolutization.\n",
+      "description": "Absolute path that must exist on the filesystem",
+      "format": "exists",
       "pattern": "^/",
-      "minLength": 2,
       "not": {
         "anyOf": [
           {
@@ -1325,7 +1304,7 @@
             "properties": {
               "security_io": {
                 "required": [
-                  "security_io_input_file"
+                  "io_input_file"
                 ]
               }
             }
@@ -1338,7 +1317,7 @@
             "properties": {
               "security_io": {
                 "properties": {
-                  "security_io_input_file": false
+                  "io_input_file": false
                 }
               }
             }
@@ -1368,7 +1347,7 @@
             "properties": {
               "security_io": {
                 "required": [
-                  "security_io_input_directory"
+                  "io_input_directory"
                 ]
               }
             }
@@ -1381,7 +1360,7 @@
             "properties": {
               "security_io": {
                 "properties": {
-                  "security_io_input_directory": false
+                  "io_input_directory": false
                 }
               }
             }
@@ -1411,7 +1390,7 @@
             "properties": {
               "security_io": {
                 "required": [
-                  "security_io_input_tempdir"
+                  "io_input_tempdir"
                 ]
               }
             }
@@ -1424,7 +1403,7 @@
             "properties": {
               "security_io": {
                 "properties": {
-                  "security_io_input_tempdir": false
+                  "io_input_tempdir": false
                 }
               }
             }
@@ -1439,7 +1418,7 @@
             "properties": {
               "processing": {
                 "properties": {
-                  "processing_scratch_needed": {
+                  "scratch_needed": {
                     "const": true
                   }
                 }
@@ -1454,7 +1433,7 @@
             "properties": {
               "security_io": {
                 "required": [
-                  "security_io_scratch_tempdir"
+                  "io_scratch_tempdir"
                 ]
               }
             }
@@ -1467,7 +1446,7 @@
             "properties": {
               "security_io": {
                 "properties": {
-                  "security_io_scratch_tempdir": false
+                  "io_scratch_tempdir": false
                 }
               }
             }
@@ -1482,7 +1461,7 @@
             "properties": {
               "processing": {
                 "properties": {
-                  "processing_output_file_name_known": {
+                  "output_file_name_known": {
                     "const": "known"
                   }
                 }
@@ -1497,7 +1476,7 @@
             "properties": {
               "security_io": {
                 "required": [
-                  "security_io_output_file"
+                  "io_output_file"
                 ]
               }
             }
@@ -1510,7 +1489,7 @@
             "properties": {
               "security_io": {
                 "properties": {
-                  "security_io_output_file": false
+                  "io_output_file": false
                 }
               }
             }
@@ -1525,7 +1504,7 @@
             "properties": {
               "processing": {
                 "properties": {
-                  "processing_output_file_name_known": {
+                  "output_file_name_known": {
                     "enum": [
                       "partially",
                       "unknown"
@@ -1543,7 +1522,7 @@
             "properties": {
               "security_io": {
                 "required": [
-                  "security_io_output_directory"
+                  "io_output_directory"
                 ]
               }
             }
@@ -1556,7 +1535,53 @@
             "properties": {
               "security_io": {
                 "properties": {
-                  "security_io_output_directory": false
+                  "io_output_directory": false
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "task": {
+            "properties": {
+              "return": {
+                "properties": {
+                  "return_mode": {
+                    "enum": [
+                      "status-metrics",
+                      "metrics-output"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "security": {
+            "properties": {
+              "security_schema": {
+                "required": [
+                  "return_schema"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "security": {
+            "properties": {
+              "security_schema": {
+                "properties": {
+                  "return_schema": false
                 }
               }
             }
