@@ -1,5 +1,6 @@
 title: ScratchNeeded
 type: atom/boolean
+default: false
 description: >-
   Whether this agent needs a scratch directory for intermediate files. When
   true, security_io_scratch_tempdir must be provided and the agent auto-

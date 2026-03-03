@@ -1,5 +1,6 @@
 title: ExampleDisplayHeadings
 type: atom/boolean
+default: false
 description: >-
   Toggle per-group display of individual example headings. When false,
   examples render as items under the group H3. When true, each example gets

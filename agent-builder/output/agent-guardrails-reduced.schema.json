@@ -116,7 +116,8 @@
             "dispatch_max_agents": {
               "$ref": "#/$defs/atom__integer",
               "title": "DispatchMaxAgents",
-              "description": "Maximum number of concurrent agent instances the dispatcher may spawn. Controls parallelism for batch processing. The dispatcher launches up to this many agents simultaneously, each processing a different chunk. Defaults to 6 if not specified.\nWhole number value"
+              "description": "Maximum number of concurrent agent instances the dispatcher may spawn. Controls parallelism for batch processing. The dispatcher launches up to this many agents simultaneously, each processing a different chunk. Defaults to 6 if not specified.\nWhole number value",
+              "default": 6
             },
             "dispatch_batch_size": {
               "title": "DispatchBatchSize",
@@ -363,7 +364,8 @@
                 "complex-reasoning",
                 "max-capability",
                 "inherit"
-              ]
+              ],
+              "default": "standard"
             },
             "output_file_format": {
               "title": "OutputFileFormat",
@@ -395,7 +397,8 @@
             "scratch_needed": {
               "$ref": "#/$defs/atom__boolean",
               "title": "ScratchNeeded",
-              "description": "Whether this agent needs a scratch directory for intermediate files. When true, security_io_scratch_tempdir must be provided and the agent auto- derives write access to a scoped temp path. Off by default — most agents keep intermediate state in context. Enable when an agent processes sequential data that loses coherence without file-based checkpointing, or when LLM behavior requires scratch space for processing optimization.\nTrue or false value"
+              "description": "Whether this agent needs a scratch directory for intermediate files. When true, security_io_scratch_tempdir must be provided and the agent auto- derives write access to a scoped temp path. Off by default — most agents keep intermediate state in context. Enable when an agent processes sequential data that loses coherence without file-based checkpointing, or when LLM behavior requires scratch space for processing optimization.\nTrue or false value",
+              "default": false
             },
             "output_file_name_template": {
               "title": "OutputFileNameTemplate",
@@ -412,7 +415,8 @@
             "output_batch_size": {
               "$ref": "#/$defs/atom__integer",
               "title": "OutputBatchSize",
-              "description": "Number of records per write tool call when write frequency is batch. The agent accumulates this many records before invoking the write tool. Balances write frequency against data loss risk from interruption.\nWhole number value"
+              "description": "Number of records per write tool call when write frequency is batch. The agent accumulates this many records before invoking the write tool. Balances write frequency against data loss risk from interruption.\nWhole number value",
+              "default": 20
             },
             "output_write_frequency": {
               "title": "OutputWriteFrequency",
@@ -847,7 +851,8 @@
                   "example_display_headings": {
                     "$ref": "#/$defs/atom__boolean",
                     "title": "ExampleDisplayHeadings",
-                    "description": "Toggle per-group display of individual example headings. When false, examples render as items under the group H3. When true, each example gets its own H4 heading derived from the H2 in the resolved content. Controls detail level without changing content.\nTrue or false value"
+                    "description": "Toggle per-group display of individual example headings. When false, examples render as items under the group H3. When true, each example gets its own H4 heading derived from the H2 in the resolved content. Controls detail level without changing content.\nTrue or false value",
+                    "default": false
                   },
                   "examples_max_number": {
                     "$ref": "#/$defs/atom__integer",

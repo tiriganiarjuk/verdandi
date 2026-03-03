@@ -690,7 +690,8 @@
         "max_agents": {
           "$ref": "#/$defs/atom__integer",
           "title": "DispatchMaxAgents",
-          "description": "Maximum number of concurrent agent instances the dispatcher may spawn. Controls parallelism for batch processing. The dispatcher launches up to this many agents simultaneously, each processing a different chunk. Defaults to 6 if not specified.\nWhole number value"
+          "description": "Maximum number of concurrent agent instances the dispatcher may spawn. Controls parallelism for batch processing. The dispatcher launches up to this many agents simultaneously, each processing a different chunk. Defaults to 6 if not specified.\nWhole number value",
+          "default": 6
         },
         "batch_size": {
           "title": "DispatchBatchSize",
@@ -824,7 +825,8 @@
                   "example_display_headings": {
                     "$ref": "#/$defs/atom__boolean",
                     "title": "ExampleDisplayHeadings",
-                    "description": "Toggle per-group display of individual example headings. When false, examples render as items under the group H3. When true, each example gets its own H4 heading derived from the H2 in the resolved content. Controls detail level without changing content.\nTrue or false value"
+                    "description": "Toggle per-group display of individual example headings. When false, examples render as items under the group H3. When true, each example gets its own H4 heading derived from the H2 in the resolved content. Controls detail level without changing content.\nTrue or false value",
+                    "default": false
                   },
                   "examples_max_number": {
                     "$ref": "#/$defs/atom__integer",
@@ -1337,7 +1339,8 @@
     "field__output_tool_batch_size": {
       "$ref": "#/$defs/atom__integer",
       "title": "OutputToolBatchSize",
-      "description": "Number of records per write tool call when write frequency is batch. The agent accumulates this many records before invoking the write tool. Balances write frequency against data loss risk from interruption.\nWhole number value"
+      "description": "Number of records per write tool call when write frequency is batch. The agent accumulates this many records before invoking the write tool. Balances write frequency against data loss risk from interruption.\nWhole number value",
+      "default": 20
     },
     "field__return_mode": {
       "title": "ReturnMode",

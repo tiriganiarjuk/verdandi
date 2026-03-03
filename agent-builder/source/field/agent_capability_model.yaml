@@ -1,5 +1,6 @@
 title: AgentCapabilityModel
 type: enum/processing_capability
+default: "standard"
 description: >-
   Platform-agnostic capability tier for this agent. Format transformers map
   descriptors to vendor-specific models. fast-cheap: speed/cost over quality

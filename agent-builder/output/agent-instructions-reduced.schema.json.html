@@ -307,7 +307,7 @@
 <div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^\./</span></div>
 <div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/\/[^\/]+\.\w{1,4}$/</span></div>
 <div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/\w+\/\w+\/\w+/</span></div></div>
-<div class="line"><span class="indent">    </span><span class="field-name">scratch_needed</span>: <span class="field-type">boolean</span> — <span class="req-required">REQUIRED</span></div>
+<div class="line"><span class="indent">    </span><span class="field-name">scratch_needed</span>: <span class="field-type">boolean (default: False)</span> — <span class="req-required">REQUIRED</span></div>
 <div class="line field-desc"><span class="indent">      </span><span class="desc-text">Whether this agent needs a scratch directory for intermediate files.</span></div>
 <div class="line"><span class="indent">    </span><span class="field-name">output_file_name_template</span>: <span class="field-type">string /^\{[a-z][a-z0-9-]*\}(\.\.?\w+)+$/</span> — <span class="req-optional">OPTIONAL</span></div>
 <div class="line field-desc"><span class="indent">      </span><span class="desc-text">Filename template with {placeholder} syntax for dispatch-time parameters.</span></div>
@@ -460,7 +460,7 @@
 <div class="line"><span class="indent">    </span><span class="alt-label">| ALT1 (example_group_name, example_entries)</span></div>
 <div class="line"><span class="indent">      </span><span class="field-name">example_group_name</span>: <span class="field-type">string /^([A-Z][a-zA-Z0-9]*)(\s[A-Z][a-zA-Z0-9]*)*$/</span> — <span class="req-required">REQUIRED</span></div>
 <div class="line field-desc"><span class="indent">        </span><span class="desc-text">Name of the example group, used as the H3 heading when compiling examples into the agent prompt.</span></div>
-<div class="line"><span class="indent">      </span><span class="field-name">example_display_headings</span>: <span class="field-type">boolean</span> — <span class="req-optional">OPTIONAL</span></div>
+<div class="line"><span class="indent">      </span><span class="field-name">example_display_headings</span>: <span class="field-type">boolean (default: False)</span> — <span class="req-optional">OPTIONAL</span></div>
 <div class="line field-desc"><span class="indent">        </span><span class="desc-text">Toggle per-group display of individual example headings.</span></div>
 <div class="line"><span class="indent">      </span><span class="field-name">examples_max_number</span>: <span class="field-type">integer</span> — <span class="req-optional">OPTIONAL</span></div>
 <div class="line field-desc"><span class="indent">        </span><span class="desc-text">Maximum number of examples to include from this group after include resolution and H2 splitting.</span></div>

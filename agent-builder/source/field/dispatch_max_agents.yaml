@@ -1,5 +1,6 @@
 title: DispatchMaxAgents
 type: atom/integer
+default: 6
 description: >-
   Maximum number of concurrent agent instances the dispatcher may spawn.
   Controls parallelism for batch processing. The dispatcher launches up to
