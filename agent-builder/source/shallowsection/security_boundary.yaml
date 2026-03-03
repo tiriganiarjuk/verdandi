@@ -1,0 +1,10 @@
+title: SecurityBoundary
+description: >
+  Workspace root path and explicit capability grants. Capabilities are
+  the author-defined grants displayed to the agent. Each capability key
+  maps to an array of absolute paths.
+required:
+  workspace_path: field/workspace_path__x_abs
+containers:
+  optional:
+    capabilities: group/enforcement_explicit_grants

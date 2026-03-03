@@ -1,0 +1,7 @@
+title: ExampleGroupName
+type: atom/title_string
+min_length: 5
+description: >-
+  Name of the example group, used as the H3 heading when compiling examples
+  into the agent prompt. Groups organize examples by what they demonstrate —
+  "correct rewrite", "incorrect compression", "edge cases".

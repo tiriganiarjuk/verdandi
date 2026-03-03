@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "include-guardrails-anti-patterns.schema.json",
+  "title": "GuardrailsAntiPatterns",
+  "type": "object",
+  "description": "Common mistakes to avoid. Each entry describes a specific wrong behavior the agent might exhibit and why it's wrong.\n",
+  "properties": {
+    "items": {
+      "title": "GuardrailsAntiPatterns",
+      "type": "array",
+      "description": "Common mistakes to avoid. Each entry describes a specific wrong behavior the agent might exhibit and why it's wrong.\n",
+      "items": {
+        "title": "GuardrailsAntiPatterns",
+        "type": "string",
+        "description": "Common mistakes to avoid. Each entry describes a specific wrong behavior the agent might exhibit and why it's wrong. \"Do not batch-summarize from memory \u2014 process each record individually from the source file\", \"Do not infer missing fields \u2014 mark them as absent\". Anti-patterns are learned from observed agent failures.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths.",
+        "pattern": "^[A-Z](?:.*?\\s){3,}.*[.!?;:]$",
+        "x-semantic": {
+          "intent": "Calibrates the LLM against its own failure modes. Each item must describe a specific, recognizable mistake \u2014 not a generic warning.",
+          "severity": "warning",
+          "checks": [
+            "Each item describes a specific mistake, not a category of mistakes",
+            "Each item is recognizable \u2014 agent can detect when it is about to do this",
+            "Items are grounded in observed LLM failure modes, not hypothetical risks"
+          ]
+        }
+      }
+    }
+  },
+  "required": [
+    "items"
+  ],
+  "additionalProperties": false
+}

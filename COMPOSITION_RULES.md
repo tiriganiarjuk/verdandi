@@ -29,7 +29,7 @@ the name is derived from the filename. No `name:` field needed.
 
 ## Composition Categories
 
-### Fields (single items)
+### Types (structural constraint — what values are valid)
 
 ```
 pattern          raw regex patterns — the lowest building block
@@ -37,12 +37,12 @@ atom             constrained base types (string/integer/boolean + pattern + excl
 enum             enumerated allowed values
 element          atom + runtime format contract
 union            oneOf composition of atoms, enums, or elements
+tuple            fixed-length typed sequence (type composition, not a container)
 ```
 
 ### Simple Containers (fields only — no containers inside)
 
 ```
-tuple            fixed-length typed sequence of fields
 simplearray      variable-length array of one field type
 simplegroup      flat object — fields organized into required/optional/conditional
 ```
@@ -73,7 +73,7 @@ schema           root — `sections:` key (deep) or `shallowsections:` key (wide
 Each level references only levels below it in the load order:
 
 ```
-simple containers  accept: fields (simplegroup also accepts tuple + simplearray)
+simple containers  accept: fields + tuples (simplegroup also accepts simplearray)
 array              accepts: simplegroups
 group              accepts: fields + simple containers + arrays
 superarray         accepts: groups + simplegroups
@@ -216,7 +216,7 @@ union: [enum/output_format_text, enum/output_format_structured]
 Pure composition — no constraints added. Members must all be
 field-level types (atom, enum, or element).
 
-Referenced by: simple containers
+Referenced by: field/, tuple/
 
 ---
 

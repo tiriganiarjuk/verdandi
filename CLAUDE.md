@@ -12,12 +12,12 @@ After compaction, you have a summary — not understanding. The summary preserve
 - Used old directory names from stale documentation (`primitives/`, `composed/`, `groups/`)
 - Created types that reference peers at the same level (violating the strictly-lower-level rule)
 - Edited generated JSON Schema files directly instead of modifying the Verdandi YAML source
-- Assumed the hierarchy has 8 or 12 levels based on stale docs (it has 14)
+- Assumed the hierarchy has 8 or 12 or 14 levels based on stale docs (it has 15, including the field membrane)
 - Conflated `group` and `supergroup` terminology (current names: `group`, `superarray`)
 
 None of them felt uncertain while doing it.
 
-**The test:** Can you name all 14 levels in load order and state which tier each belongs to? Can you state what a `simplegroup` can contain that a `group` cannot, and vice versa? If not, you don't have enough context. Read the CONTEXT_MAP below before proceeding.
+**The test:** Can you name all 15 levels in load order and state which tier each belongs to? Can you state what a `simplegroup` can contain that a `group` cannot, and vice versa? If not, you don't have enough context. Read the CONTEXT_MAP below before proceeding.
 
 ---
 <!-- EVERYTHING ABOVE THIS LINE IS STANDARDIZED (except the failure examples) -->
@@ -38,7 +38,7 @@ None of them felt uncertain while doing it.
 
 ### Using Old Level Names from Stale Documentation
 **Detection:** If you find yourself looking for `primitives/`, `composed/`, `groups/`, `supergroups/`...
-**Why it's wrong:** These are pre-rebuild directory names from historical design documents. The current 14 levels are: pattern, enum, atom, element, union, tuple, simplearray, simplegroup, array, group, superarray, section, shallowsection, schema. Multiple documentation files still reference the old names — the CONTEXT_MAP flags which docs are stale.
+**Why it's wrong:** These are pre-rebuild directory names from historical design documents. The current 15 levels are: pattern, atom, enum, element, union, tuple, field, simplearray, simplegroup, array, group, superarray, section, shallowsection, schema. Multiple documentation files still reference the old names — the CONTEXT_MAP flags which docs are stale.
 **Recovery:** Check the CONTEXT_MAP's Documentation References section for freshness flags before trusting any doc.
 
 ### Adding Wrong Fields to a Level

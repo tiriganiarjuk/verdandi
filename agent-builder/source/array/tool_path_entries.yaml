@@ -1,0 +1,4 @@
+title: ToolPathEntries
+items: simplegroup/tool_path_entry
+description: >-
+  Claude Code tools with their granted path prefixes. One entry per tool.

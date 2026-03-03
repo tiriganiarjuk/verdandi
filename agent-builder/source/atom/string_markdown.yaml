@@ -1,0 +1,10 @@
+title: StringMarkdown
+type: string
+pattern: pattern/markdown
+min_length: 20
+description: >
+  Markdown-formatted text content. Starts with a non-path character,
+  contains at least three whitespace characters. No path exclusions
+  needed — the structural constraints prevent abuse while allowing
+  markdown formatting and embedded path references. Used for example
+  content, instructional text, and rich-text fields.

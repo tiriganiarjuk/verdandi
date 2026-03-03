@@ -1,0 +1,20 @@
+title: FailureEvidenceItem
+type: atom/string_prose
+description: >-
+  Observable conditions that prove failure. Each entry is a concrete condition
+  indicating the process broke. "Any record skipped without explanation",
+  "Schema validation failure not resolved after retry", "Output file not
+  created". These are process failures, not data quality findings.
+semantic:
+  intent: >-
+    Process failure detection. The agent checks these conditions to determine
+    whether to report FAILURE instead of SUCCESS.
+  checks:
+    - >-
+      Each item describes a PROCESS failure condition, not a data quality
+      finding
+    - >-
+      Each item is observable from the execution environment
+    - >-
+      Conditions are distinct from success_evidence — no overlap
+  severity: warning

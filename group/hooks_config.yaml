@@ -1,8 +1,0 @@
-title: HooksConfig
-description: >
-  Claude Code hook configuration. Maps hook events to ordered lists
-  of rules. Currently supports PreToolUse only — each rule matches
-  a tool name and validates paths via a shell command.
-containers:
-  required:
-    PreToolUse: array/hook_actions

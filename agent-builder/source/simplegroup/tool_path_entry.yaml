@@ -1,0 +1,8 @@
+title: ToolPathEntry
+description: >
+  A Claude Code tool with its granted path prefixes. Each entry binds
+  one Anthropic tool to the absolute paths it may access. At render time,
+  entries are composed into hook enforcement CLI arguments.
+required:
+  tool: field/tool_name_anthropic
+  paths: simplearray/path_prefixes

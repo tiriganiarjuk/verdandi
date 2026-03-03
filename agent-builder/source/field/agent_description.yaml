@@ -1,0 +1,26 @@
+title: AgentDescription
+type: atom/string_prose
+min_length: 40
+description: >-
+  One-line purpose statement for the agent. Becomes the frontmatter
+  `description` field in the generated agent prompt. Should complete the
+  sentence "This agent..." without starting with "This agent". Be specific
+  about what the agent does, not what it is. "Assesses truth entries against
+  quality dimensions" not "A quality control agent".
+semantic:
+  intent: >-
+    Communicates the agent's purpose to humans and systems that select agents
+    for tasks. Vague descriptions make agents undiscoverable.
+  checks:
+    - >-
+      Completes the sentence 'This agent...' naturally
+    - >-
+      Describes what the agent does, not what it is
+    - >-
+      Specific enough to distinguish from other agents
+  anti_patterns:
+    - >-
+      Starting with 'This agent' or 'An agent that'
+    - >-
+      Describing identity instead of action: 'A quality control agent'
+  severity: warning

@@ -1,0 +1,6 @@
+title: UnixCommand
+values: [find, ls, du, wc, stat, diff, tree]
+description: >
+  Unix commands granted to agents for filesystem inspection. find: locate
+  files by name. ls: list directory contents. du: disk usage. wc: word/line
+  count. stat: file metadata. diff: file comparison. tree: directory tree.

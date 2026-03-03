@@ -86,6 +86,7 @@ Complete listing of verdandi's subdirectories with current file counts and conte
 | `enum/` | 19 | Enumerated allowed values. anthropic_model, anthropic_tools, capabilities, dispatch_background_mode, dispatch_input_delivery, dispatch_mode, enforcement_tool_format, input_format, instruction_mode, invocation_variant, notify_delivery, output_format_kind, output_name_known, param_type, permission_mode, processing_capability, return_mode, unix_command, write_frequency |
 | `element/` | 3 | Atom/enum + runtime format contract. path_exists_absolute, path_exists_relative, path_exists_schema |
 | `union/` | 4 | OneOf composition of atoms/enums/elements. path_any, path_exists_any, string_identifier, tool_or_command |
+| `tuple/` | 1 | Fixed-length typed sequences (type composition, not a container). dispatch_batch_size |
 
 ### Field Membrane
 
@@ -97,7 +98,6 @@ Complete listing of verdandi's subdirectories with current file counts and conte
 
 | Directory | Files | Description |
 |-----------|-------|-------------|
-| `tuple/` | 1 | Fixed-length typed sequences. dispatch_batch_size |
 | `simplearray/` | 26 | Variable-length arrays of one field type. Enforcement grants (explicit/implicit x read/write/edit/append/search/inspect), guardrails, security paths/capabilities, display, frontmatter, success/failure evidence, role expertise. |
 | `simplegroup/` | 24 | Flat objects with required/optional/conditional zones. context_item (raw/resolved), example_entry, failure_item, instruction_step, notify_item, parameter_item, success_item, tool_path_entry, command_path_entry, and various include_* types for @include references. |
 
@@ -163,6 +163,6 @@ For an LLM mid-session that needs to refresh understanding:
 
 These are pre-rebuild artifacts. Rather than rewriting historical documents (which would destroy their value as design records), the reconciliation preserved them as-is with staleness notes where appropriate.
 
-**Draupnir enforcement pending:** The `sections:` / `shallowsections:` mutual exclusion on schema files is a convention enforced by documentation. Compile-time enforcement in Draupnir has not yet been added.
+**Draupnir enforces sections:/shallowsections: mutual exclusion** at compile time via the `exactly_one_section_type` model validator on the Schema class. A schema file must have exactly one of these keys — neither or both is a validation error.
 
 **pattern/home portability:** The `pattern/home` regex is hardcoded to `/Users/johnny/`. This is a known limitation if definitions are ever used on another machine.

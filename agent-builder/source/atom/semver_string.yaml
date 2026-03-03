@@ -1,0 +1,7 @@
+title: SemverString
+type: string
+pattern: pattern/semver
+min_length: 5
+description: >
+  Semantic version in MAJOR.MINOR.PATCH format. Increment major for
+  breaking changes, minor for new capabilities, patch for fixes.

@@ -1,6 +1,0 @@
-title: HookType
-type: enum/hook_type
-description: >-
-  Type of hook action. command: executes a shell command that receives
-  tool input via environment variables. The command can block the tool
-  call by returning non-zero exit status.

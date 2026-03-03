@@ -1,9 +1,0 @@
-title: InputDescription
-type: atom/string_text
-description: >-
-  Human-readable description of the input data the agent receives. Describes
-  what the records represent and what the agent does with them. The mechanical
-  format is captured by dispatch_input_format and delivery by
-  dispatch_input_delivery — this field captures domain meaning, but repeating
-  format for human readability is acceptable. Example: "Embedding target
-  records to rewrite and compress to 80-150 characters"

@@ -1,6 +1,0 @@
-title: SemverString
-type: string
-pattern: pattern/semver
-description: >
-  Semantic version in MAJOR.MINOR.PATCH format. Increment major for
-  breaking changes, minor for new capabilities, patch for fixes.

@@ -1,0 +1,5 @@
+title: ToolNameAnthropic
+type: enum/anthropic_tools
+description: >-
+  Claude Code tool name for the Anthropic platform. One of: Read, Grep,
+  Glob, Write, Edit, Bash.

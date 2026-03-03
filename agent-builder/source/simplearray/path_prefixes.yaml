@@ -1,0 +1,5 @@
+title: PathPrefixes
+items: field/path_prefix
+description: >-
+  Absolute path prefixes granted for access scoping. Each prefix
+  authorizes access to any path that starts with it.

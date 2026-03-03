@@ -1,6 +1,0 @@
-title: KebabString
-type: string
-pattern: pattern/kebab
-description: >
-  Lowercase kebab-case string — words separated by hyphens. Used for
-  identifiers that must be URL-safe and filesystem-safe.

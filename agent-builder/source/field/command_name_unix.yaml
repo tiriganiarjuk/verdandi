@@ -1,0 +1,4 @@
+title: CommandNameUnix
+type: enum/unix_command
+description: >-
+  Unix shell command name. One of: find, ls, du, wc, stat, diff, tree.

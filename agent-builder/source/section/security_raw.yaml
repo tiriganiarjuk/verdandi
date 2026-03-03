@@ -1,0 +1,12 @@
+title: Security
+description: >
+  Access control — tools, paths, capabilities, context resources. Everything
+  needed for computing minimum privileges.
+containers:
+  required:
+    security_io: group/security_io_raw
+    security_schema: group/security_schema_raw
+    security_paths: group/security_paths_raw
+    context: group/context_raw
+  optional:
+    security_capabilities: group/security_capabilities

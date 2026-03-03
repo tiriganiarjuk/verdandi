@@ -1,7 +1,0 @@
-title: PascalString
-type: string
-pattern: pattern/pascal
-description: >
-  PascalCase string — starts uppercase, word boundaries marked by
-  uppercase letters. Used for tool names and type identifiers that
-  follow PascalCase convention (e.g., Bash, Read, PreToolUse).

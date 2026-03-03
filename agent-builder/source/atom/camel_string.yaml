@@ -1,0 +1,8 @@
+title: CamelString
+type: string
+pattern: pattern/camel
+min_length: 3
+description: >
+  camelCase string — starts lowercase, word boundaries marked by
+  uppercase letters. Used for platform-specific identifiers that
+  follow camelCase convention (e.g., bypassPermissions).

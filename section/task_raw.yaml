@@ -1,8 +1,0 @@
-title: Task
-description: Agent-facing identity and interaction model
-containers:
-  required:
-    role: group/role
-    communication: group/communication
-    return: group/return_raw
-    processing: group/processing

@@ -1,0 +1,13 @@
+title: HooksConfig
+description: >
+  Hook enforcement data for the agent. Stores what tools, commands,
+  and output tools are granted — pure data with no rendering concerns.
+  Galdr composes this into Claude Code PreToolUse hook CLI commands
+  at render time.
+fields:
+  optional:
+    output_tool: field/output_tool_name
+containers:
+  optional:
+    tool_entries: array/tool_path_entries
+    command_entries: array/command_path_entries

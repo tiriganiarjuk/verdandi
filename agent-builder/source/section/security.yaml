@@ -1,0 +1,10 @@
+title: Security
+description: Access control after path resolution — all paths absolutized
+containers:
+  required:
+    security_io: group/security_io
+    security_schema: group/security_schema
+    security_paths: group/security_paths
+    context: group/context
+  optional:
+    security_capabilities: group/security_capabilities

@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "include-execution-instructions.schema.json",
+  "title": "ExecutionInstructions",
+  "type": "object",
+  "description": "Ordered processing steps \u2014 includes inlined, direct steps only",
+  "properties": {
+    "items": {
+      "title": "ExecutionInstructions",
+      "type": "array",
+      "description": "Ordered processing steps \u2014 includes inlined, direct steps only",
+      "items": {
+        "title": "InstructionStep",
+        "type": "object",
+        "description": "Inline instruction step with processing mode boundary",
+        "properties": {
+          "instruction_mode": {
+            "title": "InstructionMode",
+            "type": "string",
+            "description": "Processing mode boundary. DETERMINISTIC steps are mechanical operations (reading input, writing output, validating schema) where the LLM must follow exact procedures with no creativity. PROBABILISTIC steps require LLM intelligence (rewriting text, making quality judgments, creative decisions). The transformer uses mode declarations to compile different prompt patterns for each step type.\nProcessing mode boundary. 'deterministic' steps are mechanical operations where the LLM must follow exact procedures. 'probabilistic' steps require LLM intelligence for creative or evaluative work.",
+            "enum": [
+              "deterministic",
+              "probabilistic"
+            ]
+          },
+          "instruction_text": {
+            "title": "InstructionText",
+            "type": "string",
+            "description": "Inline instruction text for this step. Used for short instructions that don't warrant a separate .md file. Mutually exclusive with include.\nMarkdown-formatted text content. Starts with a non-path character, contains at least three whitespace characters. No path exclusions needed \u2014 the structural constraints prevent abuse while allowing markdown formatting and embedded path references. Used for example content, instructional text, and rich-text fields.",
+            "pattern": "^[^/.](?:[\\s\\S]*?\\s){3,}",
+            "x-semantic": {
+              "intent": "Directs agent behavior for one processing step. Each instruction must produce consistent behavior across different LLM instances.",
+              "severity": "error",
+              "checks": [
+                "Specific enough that two different LLMs would produce similar outputs",
+                "Describes concrete actions, not aspirational goals",
+                "Scoped to a single processing step, not the entire task"
+              ]
+            }
+          }
+        },
+        "required": [
+          "instruction_mode",
+          "instruction_text"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "items"
+  ],
+  "additionalProperties": false
+}

@@ -1,7 +1,0 @@
-title: AgentName
-type: atom/kebab_string
-description: >-
-  Kebab-case identifier for the agent. Becomes the frontmatter `name` field in
-  the generated agent prompt. Must be unique across all agent definitions. Use
-  descriptive names that communicate domain and function: truth-system-
-  quality-control, not qc-agent.

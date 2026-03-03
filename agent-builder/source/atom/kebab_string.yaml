@@ -1,0 +1,7 @@
+title: KebabString
+type: string
+pattern: pattern/kebab
+min_length: 3
+description: >
+  Lowercase kebab-case string — words separated by hyphens. Used for
+  identifiers that must be URL-safe and filesystem-safe.

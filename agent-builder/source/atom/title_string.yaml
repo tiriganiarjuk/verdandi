@@ -1,0 +1,8 @@
+title: TitleString
+type: string
+pattern: pattern/title_case
+min_length: 3
+description: >
+  Title Case string — each word starts uppercase, separated by spaces.
+  Used for display titles, section headings, and short labels. Not
+  prose (no sentences), not an identifier (has spaces).

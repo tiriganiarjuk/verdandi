@@ -1,0 +1,4 @@
+title: CommandPathEntries
+items: simplegroup/command_path_entry
+description: >-
+  Unix commands with their granted path prefixes. One entry per command.

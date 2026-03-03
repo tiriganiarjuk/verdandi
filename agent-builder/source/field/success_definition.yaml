@@ -1,0 +1,27 @@
+title: SuccessDefinition
+type: atom/string_prose
+min_length: 30
+description: >-
+  One-sentence statement of what success means for this agent. LLMs are goal-
+  driven — explicit success definitions pull harder than constraints. Write as
+  a positive outcome: "Every input record has been assessed and a valid QC
+  report written to disk."
+semantic:
+  intent: >-
+    The agent's goal state. LLMs are goal-driven — explicit success
+    definitions pull behavior more effectively than constraints push it.
+  checks:
+    - >-
+      Describes a concrete end state, not an ongoing activity
+    - >-
+      Refers to the PROCESS succeeding, not data quality outcomes
+    - >-
+      Observable — you can tell from examining outputs whether this was
+      achieved
+  anti_patterns:
+    - >-
+      Confusing process success with data quality ('all entries are high
+      quality' is data, not process)
+    - >-
+      Vague outcomes: 'task completed successfully', 'all items processed'
+  severity: error

@@ -1,0 +1,14 @@
+title: StringText
+type: string
+pattern: pattern/has_whitespace
+min_length: 10
+excludes:
+  - pattern/absolute
+  - pattern/relative
+  - pattern/path_extension
+  - pattern/path_multi_segment
+description: >
+  Natural language prose — must contain at least one whitespace
+  character. Mutually exclusive with all identifier types. Used for
+  descriptions, instructions, error messages, and display labels.
+  Not a path.

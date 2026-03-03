@@ -1,9 +1,0 @@
-title: FilenameTemplate
-type: string
-pattern: pattern/filename_template
-description: >
-  Filename template with a {variable} placeholder and file extension.
-  The variable becomes the --name CLI argument for the output tool.
-  The extension segments determine the output file suffix. LLM authors
-  write the complete template; the build system decomposes it into
-  tool arguments and write paths.

@@ -1,0 +1,10 @@
+title: OutputDescription
+type: atom/string_text
+min_length: 20
+description: >-
+  Human-readable description of the output data the agent produces. Describes
+  what the output contains and its downstream purpose. The mechanical format
+  is captured by processing_output_file_format — this field captures domain
+  meaning, but repeating format for human readability is acceptable. Example:
+  "One assessment record per input entry with quality scores and failure
+  annotations"

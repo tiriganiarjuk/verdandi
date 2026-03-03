@@ -1,0 +1,7 @@
+title: ToolOrCommand
+union:
+  - atom/pascal_string
+  - atom/snake_string
+description: >
+  Either a Claude Code tool name (PascalCase: Read, Grep, Bash) or a
+  shell command name (snake_case: find, ls, du, wc, stat, diff, tree).

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FailureCriteria</title>
+<style>
+  :root {
+    --bg:           #1a1b26;
+    --bg-surface:   #1f2031;
+    --bg-controls:  #24283b;
+    --text:         #a9b1d6;
+    --text-muted:   #565f89;
+    --text-bright:  #c0caf5;
+    --blue:         #7aa2f7;
+    --cyan:         #7dcfff;
+    --green:        #9ece6a;
+    --amber:        #e0af68;
+    --red:          #f7768e;
+    --purple:       #bb9af7;
+    --teal:         #73daca;
+    --border:       #292e42;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'SF Mono', 'Cascadia Code', 'JetBrains Mono', 'Fira Code',
+                 'Consolas', 'Monaco', monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    background: var(--bg);
+    color: var(--text);
+  }
+
+  .controls {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--bg-controls);
+    border-bottom: 1px solid var(--border);
+    padding: 8px 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .controls label {
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--text-muted);
+    font-size: 12px;
+  }
+
+  .controls label:hover { color: var(--text); }
+  .controls input[type="checkbox"] { cursor: pointer; accent-color: var(--blue); }
+  .controls .spacer { flex: 1; }
+
+  .header {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header h1 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-bright);
+  }
+
+  .header .subtitle {
+    color: var(--text-muted);
+    font-size: 12px;
+    margin-top: 2px;
+  }
+
+  .stats {
+    margin-top: 8px;
+    display: flex;
+    gap: 16px;
+    font-size: 12px;
+  }
+
+  .stats .stat { color: var(--text-muted); }
+  .stats .stat b { color: var(--text); font-weight: 600; }
+
+  .schema { padding: 8px 0; }
+
+  .section-block {
+    border-bottom: 1px solid var(--border);
+    padding: 4px 0;
+  }
+
+  .section-header {
+    padding: 8px 20px;
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  .section-name { color: var(--blue); }
+  .section-req { color: var(--green); font-weight: 400; font-size: 12px; }
+  .section-opt { color: var(--amber); font-weight: 400; font-size: 12px; }
+  .section-nullable { color: var(--purple); font-weight: 400; font-size: 12px; }
+
+  .section-body { padding: 0 20px 8px; }
+
+  .line {
+    white-space: pre;
+    padding: 1px 0;
+  }
+
+  .indent { color: transparent; }
+  .field-name { color: var(--text-bright); }
+  .group-name { color: var(--blue); font-weight: 600; }
+  .field-type { color: var(--cyan); }
+  .alt-label { color: var(--purple); }
+  .note { color: var(--text-muted); font-size: 12px; }
+
+  .req-required { color: var(--green); }
+  .req-optional { color: var(--text-muted); }
+  .req-oneof { color: var(--purple); }
+  .req-conditional { color: var(--amber); }
+
+  .ext {
+    font-size: 12px;
+    margin-left: 4px;
+  }
+
+  .ext { color: var(--amber); }
+  .ext-format { color: var(--purple); }
+  .sev-error { color: var(--red); }
+  .sev-warning { color: var(--amber); }
+  .ext-constraint { color: var(--teal); }
+
+  /* Extension detail panels */
+  .ext-panel {
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .ext-panel-semantic { border-left: 2px solid var(--border); margin-left: 20px; padding-left: 8px; }
+  .ext-panel-semantic.sev-error { border-left-color: var(--red); }
+  .ext-panel-semantic.sev-warning { border-left-color: var(--amber); }
+
+  .ext-panel-constraint { border-left: 2px solid var(--teal); margin-left: 20px; padding-left: 8px; }
+  .ext-panel-excludes { border-left: 2px solid var(--red); margin-left: 20px; padding-left: 8px; }
+
+  .panel-indent { color: transparent; }
+  .panel-label { color: var(--text-muted); font-weight: 600; }
+  .panel-severity { color: var(--text-muted); }
+  .panel-key { color: var(--text-muted); font-weight: 600; }
+  .panel-row { white-space: pre; }
+  .panel-check { color: var(--green); }
+  .panel-anti { color: var(--red); }
+  .panel-rule { font-weight: 600; }
+  .panel-exclude { color: var(--red); font-weight: bold; }
+  .ext-excludes { color: var(--red); }
+
+  .field-desc { opacity: 0.7; padding: 0; margin: 0; }
+  .desc-text { color: var(--text-muted); font-style: italic; }
+
+  body.hide-semantic .toggle-semantic { display: none; }
+  body.hide-constraint .toggle-constraint { display: none; }
+  body.hide-excludes .toggle-excludes { display: none; }
+  body.hide-desc .field-desc { display: none; }
+
+  .footer {
+    padding: 12px 20px;
+    color: var(--text-muted);
+    font-size: 11px;
+    border-top: 1px solid var(--border);
+  }
+</style>
+</head>
+<body class="hide-semantic hide-constraint hide-excludes hide-desc">
+
+<div class="controls">
+  <label>
+    <input type="checkbox" onchange="toggle('semantic', this.checked)">
+    x-semantic
+  </label>
+  <label>
+    <input type="checkbox" onchange="toggle('constraint', this.checked)">
+    x-constraint
+  </label>
+  <label>
+    <input type="checkbox" onchange="toggle('excludes', this.checked)">
+    excludes
+  </label>
+  <label>
+    <input type="checkbox" onchange="toggle('desc', this.checked)">
+    descriptions
+  </label>
+</div>
+
+<div class="header">
+  <h1>FailureCriteria <span class="subtitle">(include-failure-criteria.schema.json)</span></h1>
+  <div class="subtitle">Failure criteria — includes inlined, direct items only</div>
+  <div class="stats">
+    <span class="stat">Sections: <b>1</b> total, <b>1</b> required</span>
+    <span class="stat">Semantic: <b>1</b> of <b>2</b> fields</span>
+  </div>
+</div>
+
+<div class="schema">
+<div class="section-block"><div class="section-header"><span class="section-name">items</span> <span class="section-req">(REQUIRED)</span></div><div class="section-body"></div></div>
+</div>
+
+<div class="footer">
+  Source: /Users/johnny/.ai/spaces/bragi/schemas/include-failure-criteria.schema.json
+</div>
+
+<script>
+function toggle(name, checked) {
+  document.body.classList.toggle('hide-' + name, !checked);
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,5 @@
+title: PathPrefix
+type: atom/path_absolute
+description: >-
+  Absolute filesystem path prefix used for access scoping. Tools and
+  commands granted this prefix can access any path that starts with it.

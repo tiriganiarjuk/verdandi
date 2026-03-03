@@ -1,0 +1,7 @@
+title: OutputToolName
+type: atom/snake_string
+min_length: 8
+description: >-
+  Name of the resolved output tool binary. Produced by matching the
+  enforcement output tool specification against the tool registry
+  during anthropic render. Example: write_truth_entry.

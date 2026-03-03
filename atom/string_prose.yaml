@@ -1,9 +1,0 @@
-title: StringProse
-type: string
-pattern: pattern/prose
-description: >
-  Substantive prose text that forms complete sentences. Starts with a
-  capital letter, contains at least three whitespace characters, ends
-  with sentence punctuation. Structural constraints prevent non-prose
-  abuse, so path exclusions are not needed. Used for descriptions,
-  instructions, and multi-sentence text that may reference file paths.

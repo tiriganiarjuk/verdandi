@@ -1,0 +1,8 @@
+title: AnthropicTools
+values: [Read, Grep, Glob, Write, Edit, Bash]
+description: >
+  Claude Code tool names for the Anthropic platform. Each value is a
+  tool that Claude Code exposes and that hook enforcement validates
+  against. Read: file read. Grep/Glob: content/file search. Write:
+  file create/overwrite. Edit: targeted file modification. Bash: shell
+  command execution.

@@ -1,0 +1,8 @@
+title: InvocationDisplay
+type: atom/string_text
+min_length: 30
+description: >-
+  Ready-to-use bash heredoc showing the exact invocation pattern for the
+  custom output tool. Composed during anthropic render from the resolved
+  tool name, schema path, and output path. Displayed in the writing_output
+  section of the generated prompt.

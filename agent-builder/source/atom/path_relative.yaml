@@ -1,0 +1,9 @@
+title: PathRelative
+type: string
+pattern: pattern/relative
+min_length: 3
+excludes: [pattern/traversal, pattern/env, pattern/home, pattern/root, pattern/claude]
+description: >
+  Relative filesystem path starting with ./ — excludes traversal and
+  sensitive path patterns. Workspace-relative, gets absolutized during
+  resolution.

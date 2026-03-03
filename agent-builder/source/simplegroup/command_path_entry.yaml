@@ -1,0 +1,8 @@
+title: CommandPathEntry
+description: >
+  A Unix command with its granted path prefixes. Each entry binds one
+  shell command to the absolute paths it may inspect. At render time,
+  entries are composed into hook enforcement CLI arguments.
+required:
+  command: field/command_name_unix
+  paths: simplearray/path_prefixes

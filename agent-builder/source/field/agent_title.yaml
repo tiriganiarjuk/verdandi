@@ -1,0 +1,6 @@
+title: AgentTitle
+type: atom/title_string
+description: >-
+  Human-readable agent title derived mechanically from agent_name. Split on
+  hyphens, capitalize each word. Becomes the frontmatter title field in the
+  generated agent prompt.

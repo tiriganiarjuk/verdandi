@@ -1,7 +1,0 @@
-title: PathAbsolute
-type: string
-pattern: pattern/absolute
-excludes: [pattern/traversal, pattern/env, pattern/home, pattern/root, pattern/claude]
-description: >
-  Absolute filesystem path starting with / — excludes traversal and
-  sensitive path patterns. The resolved form after absolutization.

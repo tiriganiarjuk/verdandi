@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agent Paths Resolved</title>
+<style>
+  :root {
+    --bg:           #1a1b26;
+    --bg-surface:   #1f2031;
+    --bg-controls:  #24283b;
+    --text:         #a9b1d6;
+    --text-muted:   #565f89;
+    --text-bright:  #c0caf5;
+    --blue:         #7aa2f7;
+    --cyan:         #7dcfff;
+    --green:        #9ece6a;
+    --amber:        #e0af68;
+    --red:          #f7768e;
+    --purple:       #bb9af7;
+    --teal:         #73daca;
+    --border:       #292e42;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'SF Mono', 'Cascadia Code', 'JetBrains Mono', 'Fira Code',
+                 'Consolas', 'Monaco', monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    background: var(--bg);
+    color: var(--text);
+  }
+
+  .controls {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--bg-controls);
+    border-bottom: 1px solid var(--border);
+    padding: 8px 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .controls label {
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--text-muted);
+    font-size: 12px;
+  }
+
+  .controls label:hover { color: var(--text); }
+  .controls input[type="checkbox"] { cursor: pointer; accent-color: var(--blue); }
+  .controls .spacer { flex: 1; }
+
+  .header {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header h1 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-bright);
+  }
+
+  .header .subtitle {
+    color: var(--text-muted);
+    font-size: 12px;
+    margin-top: 2px;
+  }
+
+  .stats {
+    margin-top: 8px;
+    display: flex;
+    gap: 16px;
+    font-size: 12px;
+  }
+
+  .stats .stat { color: var(--text-muted); }
+  .stats .stat b { color: var(--text); font-weight: 600; }
+
+  .schema { padding: 8px 0; }
+
+  .section-block {
+    border-bottom: 1px solid var(--border);
+    padding: 4px 0;
+  }
+
+  .section-header {
+    padding: 8px 20px;
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  .section-name { color: var(--blue); }
+  .section-req { color: var(--green); font-weight: 400; font-size: 12px; }
+  .section-opt { color: var(--amber); font-weight: 400; font-size: 12px; }
+  .section-nullable { color: var(--purple); font-weight: 400; font-size: 12px; }
+
+  .section-body { padding: 0 20px 8px; }
+
+  .line {
+    white-space: pre;
+    padding: 1px 0;
+  }
+
+  .indent { color: transparent; }
+  .field-name { color: var(--text-bright); }
+  .group-name { color: var(--blue); font-weight: 600; }
+  .field-type { color: var(--cyan); }
+  .alt-label { color: var(--purple); }
+  .note { color: var(--text-muted); font-size: 12px; }
+
+  .req-required { color: var(--green); }
+  .req-optional { color: var(--text-muted); }
+  .req-oneof { color: var(--purple); }
+  .req-conditional { color: var(--amber); }
+
+  .ext {
+    font-size: 12px;
+    margin-left: 4px;
+  }
+
+  .ext { color: var(--amber); }
+  .ext-format { color: var(--purple); }
+  .sev-error { color: var(--red); }
+  .sev-warning { color: var(--amber); }
+  .ext-constraint { color: var(--teal); }
+
+  /* Extension detail panels */
+  .ext-panel {
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .ext-panel-semantic { border-left: 2px solid var(--border); margin-left: 20px; padding-left: 8px; }
+  .ext-panel-semantic.sev-error { border-left-color: var(--red); }
+  .ext-panel-semantic.sev-warning { border-left-color: var(--amber); }
+
+  .ext-panel-constraint { border-left: 2px solid var(--teal); margin-left: 20px; padding-left: 8px; }
+  .ext-panel-excludes { border-left: 2px solid var(--red); margin-left: 20px; padding-left: 8px; }
+
+  .panel-indent { color: transparent; }
+  .panel-label { color: var(--text-muted); font-weight: 600; }
+  .panel-severity { color: var(--text-muted); }
+  .panel-key { color: var(--text-muted); font-weight: 600; }
+  .panel-row { white-space: pre; }
+  .panel-check { color: var(--green); }
+  .panel-anti { color: var(--red); }
+  .panel-rule { font-weight: 600; }
+  .panel-exclude { color: var(--red); font-weight: bold; }
+  .ext-excludes { color: var(--red); }
+
+  .field-desc { opacity: 0.7; padding: 0; margin: 0; }
+  .desc-text { color: var(--text-muted); font-style: italic; }
+
+  body.hide-semantic .toggle-semantic { display: none; }
+  body.hide-constraint .toggle-constraint { display: none; }
+  body.hide-excludes .toggle-excludes { display: none; }
+  body.hide-desc .field-desc { display: none; }
+
+  .footer {
+    padding: 12px 20px;
+    color: var(--text-muted);
+    font-size: 11px;
+    border-top: 1px solid var(--border);
+  }
+</style>
+</head>
+<body class="hide-semantic hide-constraint hide-excludes hide-desc">
+
+<div class="controls">
+  <label>
+    <input type="checkbox" onchange="toggle('semantic', this.checked)">
+    x-semantic
+  </label>
+  <label>
+    <input type="checkbox" onchange="toggle('constraint', this.checked)">
+    x-constraint
+  </label>
+  <label>
+    <input type="checkbox" onchange="toggle('excludes', this.checked)">
+    excludes
+  </label>
+  <label>
+    <input type="checkbox" onchange="toggle('desc', this.checked)">
+    descriptions
+  </label>
+</div>
+
+<div class="header">
+  <h1>Agent Paths Resolved <span class="subtitle">(agent-paths-resolved.schema.json)</span></h1>
+  <div class="subtitle">Level 1 — workspace-relative paths absolutized against workspace root. Include references remain as file paths. Same five sections as raw definition with resolved path types.</div>
+  <div class="stats">
+    <span class="stat">Sections: <b>5</b> total, <b>5</b> required</span>
+    <span class="stat">Semantic: <b>9</b> of <b>73</b> fields</span>
+  </div>
+</div>
+
+<div class="schema">
+<div class="section-block"><div class="section-header"><span class="section-name">indirect</span> <span class="section-req">(REQUIRED)</span></div><div class="section-body"><div class="line"><span class="indent">  </span><span class="group-name">metadata</span> (<span class="req-required">REQUIRED</span>)</div>
+<div class="line"><span class="indent">    </span><span class="field-name">agent_name</span>: <span class="field-type">string /^[a-z0-9]+(-[a-z0-9]+)*$/</span> — <span class="req-required">REQUIRED</span></div>
+<div class="line field-desc"><span class="indent">      </span><span class="desc-text">Kebab-case identifier for the agent.</span></div>
+<div class="line"><span class="indent">    </span><span class="field-name">agent_description</span>: <span class="field-type">string /^[A-Z](?:.*?\s){3,}.*[.!?;:]$/</span> — <span class="req-required">REQUIRED</span> <span class="ext ext-semantic sev-warning">[semantic: warning]</span></div>
+<div class="line field-desc"><span class="indent">      </span><span class="desc-text">One-line purpose statement for the agent.</span></div>
+<div class="ext-panel ext-panel-semantic toggle-semantic sev-warning"><div class="panel-row"><span class="panel-indent">      </span><span class="panel-key">intent</span> Communicates the agent&#x27;s purpose to humans and systems that select agents for tasks. Vague descriptions make agents undiscoverable.</div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-check">&#x2713;</span> Completes the sentence &#x27;This agent...&#x27; naturally</div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-check">&#x2713;</span> Describes what the agent does, not what it is</div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-check">&#x2713;</span> Specific enough to distinguish from other agents</div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-anti">&#x2717;</span> Starting with &#x27;This agent&#x27; or &#x27;An agent that&#x27;</div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-anti">&#x2717;</span> Describing identity instead of action: &#x27;A quality control agent&#x27;</div></div>
+<div class="line"><span class="indent">    </span><span class="field-name">semantic_version</span>: <span class="field-type">string /^\d+\.\d+\.\d+$/</span> — <span class="req-required">REQUIRED</span></div>
+<div class="line field-desc"><span class="indent">      </span><span class="desc-text">Semantic version string in MAJOR.MINOR.PATCH format.</span></div>
+<div class="line"><span class="indent">  </span><span class="group-name">dispatch</span> (<span class="req-required">REQUIRED</span>)</div>
+<div class="line"><span class="indent">    </span><span class="field-name">dispatch_mode</span>: <span class="field-type">enum [batch, full]</span> — <span class="req-required">REQUIRED</span></div>
+<div class="line field-desc"><span class="indent">      </span><span class="desc-text">How the dispatcher feeds work to the agent.</span></div>
+<div class="line"><span class="indent">    </span><span class="field-name">dispatch_background_mode</span>: <span class="field-type">enum [allowed, required, forbidden]</span> — <span class="req-required">REQUIRED</span></div>
+<div class="line field-desc"><span class="indent">      </span><span class="desc-text">Background execution policy for this agent.</span></div>
+<div class="line"><span class="indent">    </span><span class="field-name">dispatch_input_format</span>: <span class="field-type">enum [jsonl, json, text]</span> — <span class="req-required">REQUIRED</span></div>
+<div class="line field-desc"><span class="indent">      </span><span class="desc-text">Format of the input data the agent receives.</span></div>
+<div class="line"><span class="indent">    </span><span class="field-name">dispatch_input_delivery</span>: <span class="field-type">enum [tempfile, inline, file, directory]</span> — <span class="req-required">REQUIRED</span></div>
+<div class="line field-desc"><span class="indent">      </span><span class="desc-text">How input data reaches the agent.</span></div>
+<div class="line"><span class="indent">    </span><span class="field-name">dispatch_input_description</span>: <span class="field-type">string /\s/</span> — <span class="req-required">REQUIRED</span> <span class="ext ext-excludes">[excludes: 4]</span></div>
+<div class="line field-desc"><span class="indent">      </span><span class="desc-text">Human-readable description of the input data the agent receives.</span></div>
+<div class="ext-panel ext-panel-excludes toggle-excludes"><div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^//</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^\./</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/\/[^\/]+\.\w{1,4}$/</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/\w+\/\w+\/\w+/</span></div></div>
+<div class="line"><span class="indent">    </span><span class="field-name">dispatch_max_agents</span>: <span class="field-type">integer</span> — <span class="req-optional">OPTIONAL</span></div>
+<div class="line field-desc"><span class="indent">      </span><span class="desc-text">Maximum number of concurrent agent instances the dispatcher may spawn.</span></div>
+<div class="line"><span class="indent">    </span><span class="field-name">dispatch_batch_size</span>: <span class="field-type">tuple [integer, integer]</span> — <span class="req-conditional">ONLY WHEN dispatch_mode=batch</span></div>
+<div class="line"><span class="indent">    </span><span class="field-name">dispatch_parameters</span>: <span class="field-type">array</span> — <span class="req-optional">OPTIONAL</span></div>
+<div class="line"><span class="indent">      </span>[<span class="field-name">param_name</span>: <span class="field-type">string /^[a-z][a-z0-9_]*$/</span> — <span class="req-required">REQUIRED</span>]</div>
+<div class="line"><span class="indent">      </span>[<span class="field-name">param_type</span>: <span class="field-type">enum [path, string, integer, boolean]</span> — <span class="req-required">REQUIRED</span>]</div>
+<div class="line"><span class="indent">      </span>[<span class="field-name">param_required</span>: <span class="field-type">boolean</span> — <span class="req-required">REQUIRED</span>]</div>
+<div class="line"><span class="indent">      </span>[<span class="field-name">param_description</span>: <span class="field-type">string /\s/</span> — <span class="req-optional">OPTIONAL</span> <span class="ext ext-excludes">[excludes: 4]</span>]</div>
+<div class="ext-panel ext-panel-excludes toggle-excludes"><div class="panel-row"><span class="panel-indent">        </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^//</span></div>
+<div class="panel-row"><span class="panel-indent">        </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^\./</span></div>
+<div class="panel-row"><span class="panel-indent">        </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/\/[^\/]+\.\w{1,4}$/</span></div>
+<div class="panel-row"><span class="panel-indent">        </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/\w+\/\w+\/\w+/</span></div></div></div></div>
+<div class="section-block"><div class="section-header"><span class="section-name">task</span> <span class="section-req">(REQUIRED)</span></div><div class="section-body"><div class="line"><span class="indent">  </span><span class="group-name">role</span> (<span class="req-required">REQUIRED</span>)</div>
+<div class="line"><span class="indent">    </span><span class="field-name">role_identity</span>: <span class="field-type">string /\s/</span> — <span class="req-required">REQUIRED</span> <span class="ext ext-excludes">[excludes: 4]</span> <span class="ext ext-semantic sev-error">[semantic: error]</span></div>
+<div class="line field-desc"><span class="indent">      </span><span class="desc-text">Short noun phrase naming what this agent is.</span></div>
+<div class="ext-panel ext-panel-semantic toggle-semantic sev-error"><div class="panel-row"><span class="panel-indent">      </span><span class="panel-key">intent</span> Establishes the agent&#x27;s behavioral frame. The generated prompt opens &quot;You are a {role_identity}&quot; — vague identities produce vague behavior.</div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-check">&#x2713;</span> Specific enough to distinguish this agent from others in the system</div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-check">&#x2713;</span> Noun phrase, not a sentence or role description</div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-check">&#x2713;</span> Names a recognizable specialist, not a generic label</div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-anti">&#x2717;</span> Generic labels: &#x27;assistant&#x27;, &#x27;helper&#x27;, &#x27;processor&#x27;, &#x27;agent&#x27;</div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-anti">&#x2717;</span> Sentences or descriptions instead of noun phrases</div></div>
+<div class="ext-panel ext-panel-excludes toggle-excludes"><div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^//</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^\./</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/\/[^\/]+\.\w{1,4}$/</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/\w+\/\w+\/\w+/</span></div></div>
+<div class="line"><span class="indent">    </span><span class="field-name">role_responsibility</span>: <span class="field-type">string /^[A-Z](?:.*?\s){3,}.*[.!?;:]$/</span> — <span class="req-required">REQUIRED</span> <span class="ext ext-semantic sev-error">[semantic: error]</span></div>
+<div class="line field-desc"><span class="indent">      </span><span class="desc-text">One-sentence mandate defining the agent&#x27;s core obligation.</span></div>
+<div class="ext-panel ext-panel-semantic toggle-semantic sev-error"><div class="panel-row"><span class="panel-indent">      </span><span class="panel-key">intent</span> Defines the agent&#x27;s primary obligation. Everything else the agent does is secondary to this. A weak responsibility produces unfocused execution.</div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-check">&#x2713;</span> Single clear mandate, not a list of duties</div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-check">&#x2713;</span> Written as direct imperative</div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-check">&#x2713;</span> Specific enough that completion is verifiable</div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-check">&#x2713;</span> Describes an outcome, not an activity</div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-anti">&#x2717;</span> Multiple obligations joined by &#x27;and&#x27;</div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-anti">&#x2717;</span> Passive voice or vague directives: &#x27;handle&#x27;, &#x27;manage&#x27;, &#x27;process&#x27;</div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-anti">&#x2717;</span> Describing what the agent IS instead of what it MUST DO</div></div>
+<div class="line"><span class="indent">    </span><span class="field-name">role_description</span>: <span class="field-type">string /^[A-Z](?:.*?\s){3,}.*[.!?;:]$/</span> — <span class="req-optional">OPTIONAL</span> <span class="ext ext-semantic sev-warning">[semantic: warning]</span></div>
+<div class="line field-desc"><span class="indent">      </span><span class="desc-text">Expanded role context that builds on role_identity and role_responsibility.</span></div>
+<div class="ext-panel ext-panel-semantic toggle-semantic sev-warning"><div class="panel-row"><span class="panel-indent">      </span><span class="panel-key">intent</span> Builds the agent&#x27;s understanding of its role beyond the identity and responsibility. Provides context, nuance, and framing that helps the agent exercise good judgement in ambiguous situations.</div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-check">&#x2713;</span> Adds context beyond what identity and responsibility already state</div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-check">&#x2713;</span> Helps the agent understand WHY it does what it does</div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-check">&#x2713;</span> Appropriate depth for task complexity — simple agents may omit entirely</div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-anti">&#x2717;</span> Repeating the agent_description verbatim</div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-anti">&#x2717;</span> Restating role_identity or role_responsibility in different words</div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-anti">&#x2717;</span> Generic filler: &#x27;You are a helpful assistant that...&#x27;</div></div>
+<div class="line"><span class="indent">    </span><span class="field-name">role_expertise</span>: <span class="field-type">array [string /\s/]</span> — <span class="req-optional">OPTIONAL</span> <span class="ext ext-excludes">[excludes: 4]</span></div>
+<div class="line field-desc"><span class="indent">      </span><span class="desc-text">Agent areas of expertise</span></div>
+<div class="ext-panel ext-panel-excludes toggle-excludes"><div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^//</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^\./</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/\/[^\/]+\.\w{1,4}$/</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/\w+\/\w+\/\w+/</span></div></div>
+<div class="line"><span class="indent">  </span><span class="group-name">return</span> (<span class="req-required">REQUIRED</span>)</div>
+<div class="line"><span class="indent">    </span><span class="field-name">return_mode</span>: <span class="field-type">enum [status, status-metrics, metrics-output, output]</span> — <span class="req-required">REQUIRED</span></div>
+<div class="line field-desc"><span class="indent">      </span><span class="desc-text">How the agent returns results to the dispatcher.</span></div>
+<div class="line"><span class="indent">    </span><span class="field-name">return_status</span>: <span class="field-type">string /^[A-Z](?:.*?\s){3,}.*[.!?;:]$/</span> — <span class="req-optional">OPTIONAL</span></div>
+<div class="line field-desc"><span class="indent">      </span><span class="desc-text">Fixed prompt instruction for the status portion of the agent return.</span></div>
+<div class="line"><span class="indent">    </span><span class="field-name">return_metrics</span>: <span class="field-type">string /^[A-Z](?:.*?\s){3,}.*[.!?;:]$/</span> — <span class="req-optional">OPTIONAL</span></div>
+<div class="line field-desc"><span class="indent">      </span><span class="desc-text">Fixed prompt instruction for the metrics portion of the agent return.</span></div>
+<div class="line"><span class="indent">    </span><span class="field-name">return_output</span>: <span class="field-type">string /^[A-Z](?:.*?\s){3,}.*[.!?;:]$/</span> — <span class="req-optional">OPTIONAL</span></div>
+<div class="line field-desc"><span class="indent">      </span><span class="desc-text">Fixed prompt instruction for the output portion of the agent return.</span></div>
+<div class="line"><span class="indent">    </span><span class="field-name">return_schema</span>: <span class="field-type">string /^// [exists]</span> — <span class="req-conditional">ONLY WHEN return_mode in [status-metrics|metrics-output]</span> <span class="ext ext-format">[format: exists]</span> <span class="ext ext-excludes">[excludes: 5]</span></div>
+<div class="line field-desc"><span class="indent">      </span><span class="desc-text">Absolute path to a JSON Schema file (must end with .schema.json or .schema.yaml) defining the metric fields the agent...</span></div>
+<div class="ext-panel ext-panel-excludes toggle-excludes"><div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/\.\./</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/(^|/)\.env($|/)/</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^(~/|/Users/johnny/)$/</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^/$/</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/(^|/)\.claude($|/)/</span></div></div>
+<div class="line"><span class="indent">  </span><span class="group-name">processing</span> (<span class="req-required">REQUIRED</span>)</div>
+<div class="line"><span class="indent">    </span><span class="field-name">processing_capability_model</span>: <span class="field-type">enum [fast-cheap, standard, analytical, complex-reasoning, max-capability, inherit]</span> — <span class="req-required">REQUIRED</span></div>
+<div class="line field-desc"><span class="indent">      </span><span class="desc-text">Platform-agnostic capability tier for this agent.</span></div>
+<div class="line"><span class="indent">    </span><span class="field-name">processing_output_file_format</span>: <span class="field-type">enum [jsonl, json, markdown, text]</span> — <span class="req-required">REQUIRED</span></div>
+<div class="line field-desc"><span class="indent">      </span><span class="desc-text">The output format the agent produces.</span></div>
+<div class="line"><span class="indent">    </span><span class="field-name">processing_output_file_name_known</span>: <span class="field-type">enum [known, partially, unknown]</span> — <span class="req-required">REQUIRED</span></div>
+<div class="line field-desc"><span class="indent">      </span><span class="desc-text">How well the output filename is known at definition time.</span></div>
+<div class="line"><span class="indent">    </span><span class="field-name">processing_output_description</span>: <span class="field-type">string /\s/</span> — <span class="req-required">REQUIRED</span> <span class="ext ext-excludes">[excludes: 4]</span></div>
+<div class="line field-desc"><span class="indent">      </span><span class="desc-text">Human-readable description of the output data the agent produces.</span></div>
+<div class="ext-panel ext-panel-excludes toggle-excludes"><div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^//</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^\./</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/\/[^\/]+\.\w{1,4}$/</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/\w+\/\w+\/\w+/</span></div></div>
+<div class="line"><span class="indent">    </span><span class="field-name">processing_scratch_needed</span>: <span class="field-type">boolean</span> — <span class="req-required">REQUIRED</span></div>
+<div class="line field-desc"><span class="indent">      </span><span class="desc-text">Whether this agent needs a scratch directory for intermediate files.</span></div>
+<div class="line"><span class="indent">    </span><span class="field-name">processing_output_file_name_template</span>: <span class="field-type">string /^\{[a-z][a-z0-9-]*\}(\.\.?\w+)+$/</span> — <span class="req-optional">OPTIONAL</span></div>
+<div class="line field-desc"><span class="indent">      </span><span class="desc-text">Filename template with {placeholder} syntax for dispatch-time parameters.</span></div>
+<div class="line"><span class="indent">    </span><span class="field-name">processing_output_file_name_instruction</span>: <span class="field-type">string /^[A-Z](?:.*?\s){3,}.*[.!?;:]$/</span> — <span class="req-optional">OPTIONAL</span></div>
+<div class="line field-desc"><span class="indent">      </span><span class="desc-text">Instruction indicating what the LLM should use as the filename basis during processing.</span></div>
+<div class="line"><span class="indent">    </span><span class="field-name">processing_output_batch_size</span>: <span class="field-type">integer</span> — <span class="req-optional">OPTIONAL</span></div>
+<div class="line field-desc"><span class="indent">      </span><span class="desc-text">Number of records per write tool call when write frequency is batch.</span></div>
+<div class="line"><span class="indent">    </span><span class="field-name">processing_output_write_frequency</span>: <span class="field-type">enum [record, batch]</span> — <span class="req-conditional">ONLY WHEN processing_output_file_format=jsonl</span></div>
+<div class="line field-desc"><span class="indent">      </span><span class="desc-text">How often the agent flushes records to disk.</span></div>
+<div class="line"><span class="indent">  </span><span class="group-name">communication</span> (<span class="req-optional">OPTIONAL</span>)</div>
+<div class="line"><span class="indent">    </span><span class="field-name">notify</span>: <span class="field-type">array</span> — <span class="req-optional">OPTIONAL</span></div>
+<div class="line"><span class="indent">      </span>[<span class="field-name">notify_trigger</span>: <span class="field-type">string /\s/</span> — <span class="req-required">REQUIRED</span> <span class="ext ext-excludes">[excludes: 4]</span>]</div>
+<div class="ext-panel ext-panel-excludes toggle-excludes"><div class="panel-row"><span class="panel-indent">        </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^//</span></div>
+<div class="panel-row"><span class="panel-indent">        </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^\./</span></div>
+<div class="panel-row"><span class="panel-indent">        </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/\/[^\/]+\.\w{1,4}$/</span></div>
+<div class="panel-row"><span class="panel-indent">        </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/\w+\/\w+\/\w+/</span></div></div>
+<div class="line"><span class="indent">      </span>[<span class="field-name">notify_message</span>: <span class="field-type">string /\s/</span> — <span class="req-required">REQUIRED</span> <span class="ext ext-excludes">[excludes: 4]</span>]</div>
+<div class="ext-panel ext-panel-excludes toggle-excludes"><div class="panel-row"><span class="panel-indent">        </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^//</span></div>
+<div class="panel-row"><span class="panel-indent">        </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^\./</span></div>
+<div class="panel-row"><span class="panel-indent">        </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/\/[^\/]+\.\w{1,4}$/</span></div>
+<div class="panel-row"><span class="panel-indent">        </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/\w+\/\w+\/\w+/</span></div></div>
+<div class="line"><span class="indent">      </span>[<span class="field-name">notify_delivery</span>: <span class="field-type">enum [say, notification, log, terminal]</span> — <span class="req-required">REQUIRED</span>]</div></div></div>
+<div class="section-block"><div class="section-header"><span class="section-name">security</span> <span class="section-req">(REQUIRED)</span></div><div class="section-body"><div class="line"><span class="indent">  </span><span class="group-name">security_io</span> (<span class="req-required">REQUIRED</span>)</div>
+<div class="line"><span class="indent">    </span><span class="field-name">security_io_input_file</span>: <span class="field-type">string /^//</span> — <span class="req-conditional">ONLY WHEN indirect.dispatch.dispatch_input_delivery=file</span> <span class="ext ext-excludes">[excludes: 5]</span></div>
+<div class="line field-desc"><span class="indent">      </span><span class="desc-text">Path to the input file.</span></div>
+<div class="ext-panel ext-panel-excludes toggle-excludes"><div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/\.\./</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/(^|/)\.env($|/)/</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^(~/|/Users/johnny/)$/</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^/$/</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/(^|/)\.claude($|/)/</span></div></div>
+<div class="line"><span class="indent">    </span><span class="field-name">security_io_input_directory</span>: <span class="field-type">string /^//</span> — <span class="req-conditional">ONLY WHEN indirect.dispatch.dispatch_input_delivery=directory</span> <span class="ext ext-excludes">[excludes: 5]</span></div>
+<div class="line field-desc"><span class="indent">      </span><span class="desc-text">Path to the input directory.</span></div>
+<div class="ext-panel ext-panel-excludes toggle-excludes"><div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/\.\./</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/(^|/)\.env($|/)/</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^(~/|/Users/johnny/)$/</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^/$/</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/(^|/)\.claude($|/)/</span></div></div>
+<div class="line"><span class="indent">    </span><span class="field-name">security_io_input_tempdir</span>: <span class="field-type">string /^[a-z0-9]+(-[a-z0-9]+)*$/</span> — <span class="req-conditional">ONLY WHEN indirect.dispatch.dispatch_input_delivery=tempfile</span> <span class="ext ext-constraint">[constraint: 1]</span></div>
+<div class="line field-desc"><span class="indent">      </span><span class="desc-text">Opaque directory name (a short slug, not a path) for this agent type&#x27;s temp staging area.</span></div>
+<div class="ext-panel ext-panel-constraint toggle-constraint"><div class="panel-row"><span class="panel-indent">      </span><span class="panel-rule sev-error">not_equal</span> <span class="panel-key">→ security_io_scratch_tempdir</span> — Input tempdir (read access) and scratch tempdir (write access) must not resolve to the same path. Same value would give the agent write access to its input staging area.</div></div>
+<div class="line"><span class="indent">    </span><span class="field-name">security_io_scratch_tempdir</span>: <span class="field-type">string /^[a-z0-9]+(-[a-z0-9]+)*$/</span> — <span class="req-conditional">ONLY WHEN task.processing.processing_scratch_needed=True</span> <span class="ext ext-constraint">[constraint: 2]</span></div>
+<div class="line field-desc"><span class="indent">      </span><span class="desc-text">Opaque directory name (a short slug, not a path) for this agent type&#x27;s scratch/intermediate file area.</span></div>
+<div class="ext-panel ext-panel-constraint toggle-constraint"><div class="panel-row"><span class="panel-indent">      </span><span class="panel-rule sev-error">not_equal</span> <span class="panel-key">→ security_io_input_tempdir</span> — Input tempdir (read access) and scratch tempdir (write access) must not resolve to the same path. Same value would give the agent write access to its input staging area, defeating isolation between dispatcher- written input and agent-written scratch files.</div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-rule sev-error">not_subpath_of</span> <span class="panel-key">→ security_io_output_directory</span> — Scratch tempdir must not overlap with the output directory. Same path would allow unconstrained scratch writes to masquerade as validated output.</div></div>
+<div class="line"><span class="indent">    </span><span class="field-name">security_io_output_file</span>: <span class="field-type">string /^//</span> — <span class="req-conditional">ONLY WHEN task.processing.processing_output_file_name_known=known</span> <span class="ext ext-excludes">[excludes: 5]</span> <span class="ext ext-constraint">[constraint: 2]</span></div>
+<div class="line field-desc"><span class="indent">      </span><span class="desc-text">Workspace-relative path to the agent&#x27;s output file.</span></div>
+<div class="ext-panel ext-panel-constraint toggle-constraint"><div class="panel-row"><span class="panel-indent">      </span><span class="panel-rule sev-error">not_subpath_of</span> <span class="panel-key">→ security_paths_allowed_write</span> — Output path in the write fence defeats bound tool constraints. The agent would have generic write access via platform tools, bypassing schema validation, format enforcement, and batch limits.</div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-rule sev-error">not_equal</span> <span class="panel-key">→ security_paths_allowed_write</span> — Output path identical to a write fence path defeats bound tool constraints. The agent would have generic write access to the same location, bypassing schema validation and format enforcement.</div></div>
+<div class="ext-panel ext-panel-excludes toggle-excludes"><div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/\.\./</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/(^|/)\.env($|/)/</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^(~/|/Users/johnny/)$/</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^/$/</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/(^|/)\.claude($|/)/</span></div></div>
+<div class="line"><span class="indent">    </span><span class="field-name">security_io_output_directory</span>: <span class="field-type">string /^//</span> — <span class="req-conditional">ONLY WHEN task.processing.processing_output_file_name_known in [partially|unknown]</span> <span class="ext ext-excludes">[excludes: 5]</span> <span class="ext ext-constraint">[constraint: 2]</span></div>
+<div class="line field-desc"><span class="indent">      </span><span class="desc-text">Workspace-relative path to the agent&#x27;s output directory.</span></div>
+<div class="ext-panel ext-panel-constraint toggle-constraint"><div class="panel-row"><span class="panel-indent">      </span><span class="panel-rule sev-error">not_subpath_of</span> <span class="panel-key">→ security_paths_allowed_write</span> — Output path in the write fence defeats bound tool constraints. The agent would have generic write access via platform tools, bypassing schema validation, format enforcement, and batch limits.</div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-rule sev-error">not_equal</span> <span class="panel-key">→ security_paths_allowed_write</span> — Output path identical to a write fence path defeats bound tool constraints. The agent would have generic write access to the same location, bypassing schema validation and format enforcement.</div></div>
+<div class="ext-panel ext-panel-excludes toggle-excludes"><div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/\.\./</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/(^|/)\.env($|/)/</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^(~/|/Users/johnny/)$/</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^/$/</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/(^|/)\.claude($|/)/</span></div></div>
+<div class="line"><span class="indent">  </span><span class="group-name">security_schema</span> (<span class="req-required">REQUIRED</span>)</div>
+<div class="line"><span class="indent">    </span><span class="field-name">security_input_schema</span>: <span class="field-type">string /^// [exists]</span> — <span class="req-optional">OPTIONAL</span> <span class="ext ext-format">[format: exists]</span> <span class="ext ext-excludes">[excludes: 5]</span></div>
+<div class="line field-desc"><span class="indent">      </span><span class="desc-text">Schema the input data validates against.</span></div>
+<div class="ext-panel ext-panel-excludes toggle-excludes"><div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/\.\./</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/(^|/)\.env($|/)/</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^(~/|/Users/johnny/)$/</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^/$/</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/(^|/)\.claude($|/)/</span></div></div>
+<div class="line"><span class="indent">    </span><span class="field-name">security_output_schema</span>: <span class="field-type">string /^// [exists]</span> — <span class="req-optional">OPTIONAL</span> <span class="ext ext-format">[format: exists]</span> <span class="ext ext-excludes">[excludes: 5]</span> <span class="ext ext-constraint">[constraint: 1]</span></div>
+<div class="line field-desc"><span class="indent">      </span><span class="desc-text">Schema the output data must validate against.</span></div>
+<div class="ext-panel ext-panel-constraint toggle-constraint"><div class="panel-row"><span class="panel-indent">      </span><span class="panel-rule sev-error">required_when</span> <span class="panel-key">→ task.processing.processing_output_file_format</span> — Structured output (JSON or JSONL) requires a schema for validation enforcement. Without a schema, the enforcement output tool cannot validate records before writing.</div></div>
+<div class="ext-panel ext-panel-excludes toggle-excludes"><div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/\.\./</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/(^|/)\.env($|/)/</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^(~/|/Users/johnny/)$/</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^/$/</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/(^|/)\.claude($|/)/</span></div></div>
+<div class="line"><span class="indent">    </span><span class="field-name">security_output_schema_embed</span>: <span class="field-type">boolean</span> — <span class="req-optional">OPTIONAL</span></div>
+<div class="line field-desc"><span class="indent">      </span><span class="desc-text">Whether to embed the output schema directly into the agent prompt.</span></div>
+<div class="line"><span class="indent">  </span><span class="group-name">security_paths</span> (<span class="req-required">REQUIRED</span>)</div>
+<div class="line"><span class="indent">    </span><span class="field-name">security_paths_workspace</span>: <span class="field-type">string /^// [exists]</span> — <span class="req-required">REQUIRED</span> <span class="ext ext-format">[format: exists]</span> <span class="ext ext-excludes">[excludes: 5]</span></div>
+<div class="line field-desc"><span class="indent">      </span><span class="desc-text">Absolute filesystem path to the workspace root directory.</span></div>
+<div class="ext-panel ext-panel-excludes toggle-excludes"><div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/\.\./</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/(^|/)\.env($|/)/</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^(~/|/Users/johnny/)$/</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^/$/</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/(^|/)\.claude($|/)/</span></div></div>
+<div class="line"><span class="indent">    </span><span class="field-name">security_paths_allowed_read</span>: <span class="field-type">array [string /^//]</span> — <span class="req-optional">OPTIONAL</span> <span class="ext ext-excludes">[excludes: 5]</span></div>
+<div class="line field-desc"><span class="indent">      </span><span class="desc-text">Read-level path grants after resolution — all absolutized</span></div>
+<div class="ext-panel ext-panel-excludes toggle-excludes"><div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/\.\./</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/(^|/)\.env($|/)/</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^(~/|/Users/johnny/)$/</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^/$/</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/(^|/)\.claude($|/)/</span></div></div>
+<div class="line"><span class="indent">    </span><span class="field-name">security_paths_allowed_write</span>: <span class="field-type">array [string /^//]</span> — <span class="req-optional">OPTIONAL</span> <span class="ext ext-excludes">[excludes: 5]</span></div>
+<div class="line field-desc"><span class="indent">      </span><span class="desc-text">Write-level path grants after resolution — all absolutized</span></div>
+<div class="ext-panel ext-panel-excludes toggle-excludes"><div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/\.\./</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/(^|/)\.env($|/)/</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^(~/|/Users/johnny/)$/</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^/$/</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/(^|/)\.claude($|/)/</span></div></div>
+<div class="line"><span class="indent">  </span><span class="group-name">context</span> (<span class="req-required">REQUIRED</span>)</div>
+<div class="line"><span class="indent">    </span><span class="field-name">context_required</span>: <span class="field-type">array</span> — <span class="req-optional">OPTIONAL</span></div>
+<div class="line"><span class="indent">      </span>[<span class="field-name">context_label</span>: <span class="field-type">string /^([A-Z][a-zA-Z0-9]*)(\s[A-Z][a-zA-Z0-9]*)*$/</span> — <span class="req-required">REQUIRED</span> <span class="ext ext-semantic sev-warning">[semantic: warning]</span>]</div>
+<div class="ext-panel ext-panel-semantic toggle-semantic sev-warning"><div class="panel-row"><span class="panel-indent">        </span><span class="panel-key">intent</span> Human-readable label that identifies a context resource in the agent prompt. Must be meaningful enough to distinguish resources from each other.</div>
+<div class="panel-row"><span class="panel-indent">        </span><span class="panel-check">&#x2713;</span> Descriptive enough to identify the resource without seeing its content</div>
+<div class="panel-row"><span class="panel-indent">        </span><span class="panel-check">&#x2713;</span> Concise — a label, not a sentence</div>
+<div class="panel-row"><span class="panel-indent">        </span><span class="panel-anti">&#x2717;</span> Generic: &#x27;Context&#x27; or &#x27;Data&#x27;</div>
+<div class="panel-row"><span class="panel-indent">        </span><span class="panel-anti">&#x2717;</span> Filename repeated as label: &#x27;schema.json&#x27;</div></div>
+<div class="line"><span class="indent">      </span>[<span class="field-name">context_path</span>: <span class="field-type">string /^//</span> — <span class="req-required">REQUIRED</span> <span class="ext ext-excludes">[excludes: 5]</span>]</div>
+<div class="ext-panel ext-panel-excludes toggle-excludes"><div class="panel-row"><span class="panel-indent">        </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/\.\./</span></div>
+<div class="panel-row"><span class="panel-indent">        </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/(^|/)\.env($|/)/</span></div>
+<div class="panel-row"><span class="panel-indent">        </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^(~/|/Users/johnny/)$/</span></div>
+<div class="panel-row"><span class="panel-indent">        </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^/$/</span></div>
+<div class="panel-row"><span class="panel-indent">        </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/(^|/)\.claude($|/)/</span></div></div>
+<div class="line"><span class="indent">    </span><span class="field-name">context_available</span>: <span class="field-type">array</span> — <span class="req-optional">OPTIONAL</span></div>
+<div class="line"><span class="indent">      </span>[<span class="field-name">context_label</span>: <span class="field-type">string /^([A-Z][a-zA-Z0-9]*)(\s[A-Z][a-zA-Z0-9]*)*$/</span> — <span class="req-required">REQUIRED</span> <span class="ext ext-semantic sev-warning">[semantic: warning]</span>]</div>
+<div class="ext-panel ext-panel-semantic toggle-semantic sev-warning"><div class="panel-row"><span class="panel-indent">        </span><span class="panel-key">intent</span> Human-readable label that identifies a context resource in the agent prompt. Must be meaningful enough to distinguish resources from each other.</div>
+<div class="panel-row"><span class="panel-indent">        </span><span class="panel-check">&#x2713;</span> Descriptive enough to identify the resource without seeing its content</div>
+<div class="panel-row"><span class="panel-indent">        </span><span class="panel-check">&#x2713;</span> Concise — a label, not a sentence</div>
+<div class="panel-row"><span class="panel-indent">        </span><span class="panel-anti">&#x2717;</span> Generic: &#x27;Context&#x27; or &#x27;Data&#x27;</div>
+<div class="panel-row"><span class="panel-indent">        </span><span class="panel-anti">&#x2717;</span> Filename repeated as label: &#x27;schema.json&#x27;</div></div>
+<div class="line"><span class="indent">      </span>[<span class="field-name">context_path</span>: <span class="field-type">string /^//</span> — <span class="req-required">REQUIRED</span> <span class="ext ext-excludes">[excludes: 5]</span>]</div>
+<div class="ext-panel ext-panel-excludes toggle-excludes"><div class="panel-row"><span class="panel-indent">        </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/\.\./</span></div>
+<div class="panel-row"><span class="panel-indent">        </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/(^|/)\.env($|/)/</span></div>
+<div class="panel-row"><span class="panel-indent">        </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^(~/|/Users/johnny/)$/</span></div>
+<div class="panel-row"><span class="panel-indent">        </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^/$/</span></div>
+<div class="panel-row"><span class="panel-indent">        </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/(^|/)\.claude($|/)/</span></div></div>
+<div class="line"><span class="indent">  </span><span class="group-name">security_capabilities</span> (<span class="req-optional">OPTIONAL</span>)</div>
+<div class="line"><span class="indent">    </span><span class="field-name">security_capabilities_requested</span>: <span class="field-type">array [enum: read, search, write, edit, append, inspect]</span> — <span class="req-required">REQUIRED</span></div>
+<div class="line field-desc"><span class="indent">      </span><span class="desc-text">Platform-agnostic capabilities the agent requests.</span></div>
+<div class="line"><span class="indent">    </span><span class="field-name">security_capabilities_prohibited</span>: <span class="field-type">array [enum: read, search, write, edit, append, inspect]</span> — <span class="req-optional">OPTIONAL</span></div>
+<div class="line field-desc"><span class="indent">      </span><span class="desc-text">Capabilities to deny even if path grants exist.</span></div></div></div>
+<div class="section-block"><div class="section-header"><span class="section-name">execution</span> <span class="section-req">(REQUIRED)</span></div><div class="section-body"><div class="line"><span class="indent">  </span><span class="field-name">execution_instructions</span>: <span class="field-type">array</span> — <span class="req-required">REQUIRED</span></div>
+<div class="line"><span class="indent">    </span><span class="alt-label">| ALT1 (instruction_mode, instruction_text)</span>: <span class="field-name">instruction_mode</span>: <span class="field-type">enum [deterministic, probabilistic]</span> [<span class="req-required">REQ</span>], <span class="field-name">instruction_text</span>: <span class="field-type">string /^[^/.](?:[\s\S]*?\s){3,}/</span> [<span class="req-required">REQ</span>] <span class="ext ext-semantic sev-error">[semantic: error]</span></div>
+<div class="ext-panel ext-panel-semantic toggle-semantic sev-error"><div class="panel-row"><span class="panel-indent">      </span><span class="panel-key">intent</span> Directs agent behavior for one processing step. Each instruction must produce consistent behavior across different LLM instances.</div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-check">&#x2713;</span> Specific enough that two different LLMs would produce similar outputs</div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-check">&#x2713;</span> Describes concrete actions, not aspirational goals</div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-check">&#x2713;</span> Scoped to a single processing step, not the entire task</div></div>
+<div class="line"><span class="indent">    </span><span class="alt-label">| INCLUDE</span>: <span class="field-name">include</span>: <span class="field-type">string /^// [exists]</span> [<span class="req-required">REQ</span>] <span class="ext ext-format">[format: exists]</span> <span class="ext ext-excludes">[excludes: 5]</span></div>
+<div class="ext-panel ext-panel-excludes toggle-excludes"><div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/\.\./</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/(^|/)\.env($|/)/</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^(~/|/Users/johnny/)$/</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^/$/</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/(^|/)\.claude($|/)/</span></div></div>
+<div class="line"><span class="indent">  </span><span class="field-name">execution_examples</span>: <span class="field-type">array</span> — <span class="req-required">REQUIRED</span></div>
+<div class="line"><span class="indent">    </span><span class="alt-label">| ALT1 (example_group_name, example_entries)</span></div>
+<div class="line"><span class="indent">      </span><span class="field-name">example_group_name</span>: <span class="field-type">string /^([A-Z][a-zA-Z0-9]*)(\s[A-Z][a-zA-Z0-9]*)*$/</span> — <span class="req-required">REQUIRED</span></div>
+<div class="line field-desc"><span class="indent">        </span><span class="desc-text">Name of the example group, used as the H3 heading when compiling examples into the agent prompt.</span></div>
+<div class="line"><span class="indent">      </span><span class="field-name">example_display_headings</span>: <span class="field-type">boolean</span> — <span class="req-optional">OPTIONAL</span></div>
+<div class="line field-desc"><span class="indent">        </span><span class="desc-text">Toggle per-group display of individual example headings.</span></div>
+<div class="line"><span class="indent">      </span><span class="field-name">examples_max_number</span>: <span class="field-type">integer</span> — <span class="req-optional">OPTIONAL</span></div>
+<div class="line field-desc"><span class="indent">        </span><span class="desc-text">Maximum number of examples to include from this group after include resolution and H2 splitting.</span></div>
+<div class="line"><span class="indent">      </span><span class="field-name">example_entries</span>: <span class="field-type">array</span> — <span class="req-required">REQUIRED</span></div>
+<div class="line"><span class="indent">        </span><span class="alt-label">| ALT1 (example_heading, example_text)</span>: <span class="field-name">example_heading</span>: <span class="field-type">string /\s/</span> [<span class="req-required">REQ</span>] <span class="ext ext-excludes">[excludes: 4]</span>, <span class="field-name">example_text</span>: <span class="field-type">string /^[^/.](?:[\s\S]*?\s){3,}/</span> [<span class="req-required">REQ</span>]</div>
+<div class="ext-panel ext-panel-excludes toggle-excludes"><div class="panel-row"><span class="panel-indent">          </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^//</span></div>
+<div class="panel-row"><span class="panel-indent">          </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^\./</span></div>
+<div class="panel-row"><span class="panel-indent">          </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/\/[^\/]+\.\w{1,4}$/</span></div>
+<div class="panel-row"><span class="panel-indent">          </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/\w+\/\w+\/\w+/</span></div></div>
+<div class="line"><span class="indent">        </span><span class="alt-label">| INCLUDE</span>: <span class="field-name">include</span>: <span class="field-type">string /^// [exists]</span> [<span class="req-required">REQ</span>] <span class="ext ext-format">[format: exists]</span> <span class="ext ext-excludes">[excludes: 5]</span></div>
+<div class="ext-panel ext-panel-excludes toggle-excludes"><div class="panel-row"><span class="panel-indent">          </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/\.\./</span></div>
+<div class="panel-row"><span class="panel-indent">          </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/(^|/)\.env($|/)/</span></div>
+<div class="panel-row"><span class="panel-indent">          </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^(~/|/Users/johnny/)$/</span></div>
+<div class="panel-row"><span class="panel-indent">          </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^/$/</span></div>
+<div class="panel-row"><span class="panel-indent">          </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/(^|/)\.claude($|/)/</span></div></div>
+<div class="line"><span class="indent">    </span><span class="alt-label">| INCLUDE</span>: <span class="field-name">include</span>: <span class="field-type">string /^// [exists]</span> [<span class="req-required">REQ</span>] <span class="ext ext-format">[format: exists]</span> <span class="ext ext-excludes">[excludes: 5]</span></div>
+<div class="ext-panel ext-panel-excludes toggle-excludes"><div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/\.\./</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/(^|/)\.env($|/)/</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^(~/|/Users/johnny/)$/</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^/$/</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/(^|/)\.claude($|/)/</span></div></div></div></div>
+<div class="section-block"><div class="section-header"><span class="section-name">criteria</span> <span class="section-req">(REQUIRED)</span></div><div class="section-body"><div class="line"><span class="indent">  </span><span class="group-name">guardrails</span> (<span class="req-required">REQUIRED</span>)</div>
+<div class="line"><span class="indent">    </span><span class="field-name">guardrails_constraints</span>: <span class="field-type">array [string /^[A-Z](?:.*?\s){3,}.*[.!?;:]$/]</span> — <span class="req-optional">OPTIONAL</span> <span class="ext ext-semantic sev-warning">[semantic: warning]</span></div>
+<div class="line field-desc"><span class="indent">      </span><span class="desc-text">MUST and NEVER rules the agent must follow.</span></div>
+<div class="ext-panel ext-panel-semantic toggle-semantic sev-warning"><div class="panel-row"><span class="panel-indent">      </span><span class="panel-key">intent</span> Hard behavioral boundaries in the agent prompt. Violations are agent failures. Each item must be clear enough that both the agent AND a reviewer can determine whether a specific output violates it.</div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-check">&#x2713;</span> Each item is actionable — agent can determine compliance from the constraint alone</div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-check">&#x2713;</span> Each item is verifiable — a reviewer can check violation without ambiguity</div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-check">&#x2713;</span> Items are specific to this agent&#x27;s failure modes, not generic good practice</div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-anti">&#x2717;</span> Vague directives: &#x27;be careful&#x27;, &#x27;ensure quality&#x27;, &#x27;be thorough&#x27;</div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-anti">&#x2717;</span> Constraints the agent cannot actually verify or enforce</div></div>
+<div class="line"><span class="indent">    </span><span class="field-name">guardrails_anti_patterns</span>: <span class="field-type">array [string /^[A-Z](?:.*?\s){3,}.*[.!?;:]$/]</span> — <span class="req-optional">OPTIONAL</span> <span class="ext ext-semantic sev-warning">[semantic: warning]</span></div>
+<div class="line field-desc"><span class="indent">      </span><span class="desc-text">Common mistakes to avoid.</span></div>
+<div class="ext-panel ext-panel-semantic toggle-semantic sev-warning"><div class="panel-row"><span class="panel-indent">      </span><span class="panel-key">intent</span> Calibrates the LLM against its own failure modes. Each item must describe a specific, recognizable mistake — not a generic warning.</div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-check">&#x2713;</span> Each item describes a specific mistake, not a category of mistakes</div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-check">&#x2713;</span> Each item is recognizable — agent can detect when it is about to do this</div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-check">&#x2713;</span> Items are grounded in observed LLM failure modes, not hypothetical risks</div></div>
+<div class="line"><span class="indent">    </span><span class="group-name">include_guardrails_constraints</span> (<span class="req-optional">OPTIONAL</span>)</div>
+<div class="line"><span class="indent">      </span><span class="field-name">include</span>: <span class="field-type">string /^// [exists]</span> — <span class="req-required">REQUIRED</span> <span class="ext ext-format">[format: exists]</span> <span class="ext ext-excludes">[excludes: 5]</span></div>
+<div class="line field-desc"><span class="indent">        </span><span class="desc-text">An @path reference to a .md file containing constraints.</span></div>
+<div class="ext-panel ext-panel-excludes toggle-excludes"><div class="panel-row"><span class="panel-indent">        </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/\.\./</span></div>
+<div class="panel-row"><span class="panel-indent">        </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/(^|/)\.env($|/)/</span></div>
+<div class="panel-row"><span class="panel-indent">        </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^(~/|/Users/johnny/)$/</span></div>
+<div class="panel-row"><span class="panel-indent">        </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^/$/</span></div>
+<div class="panel-row"><span class="panel-indent">        </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/(^|/)\.claude($|/)/</span></div></div>
+<div class="line"><span class="indent">    </span><span class="group-name">include_guardrails_anti_patterns</span> (<span class="req-optional">OPTIONAL</span>)</div>
+<div class="line"><span class="indent">      </span><span class="field-name">include</span>: <span class="field-type">string /^// [exists]</span> — <span class="req-required">REQUIRED</span> <span class="ext ext-format">[format: exists]</span> <span class="ext ext-excludes">[excludes: 5]</span></div>
+<div class="line field-desc"><span class="indent">        </span><span class="desc-text">An @path reference to a .md file containing anti-patterns.</span></div>
+<div class="ext-panel ext-panel-excludes toggle-excludes"><div class="panel-row"><span class="panel-indent">        </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/\.\./</span></div>
+<div class="panel-row"><span class="panel-indent">        </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/(^|/)\.env($|/)/</span></div>
+<div class="panel-row"><span class="panel-indent">        </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^(~/|/Users/johnny/)$/</span></div>
+<div class="panel-row"><span class="panel-indent">        </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^/$/</span></div>
+<div class="panel-row"><span class="panel-indent">        </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/(^|/)\.claude($|/)/</span></div></div>
+<div class="line"><span class="indent">  </span><span class="field-name">success_criteria</span>: <span class="field-type">array</span> — <span class="req-required">REQUIRED</span></div>
+<div class="line"><span class="indent">    </span><span class="alt-label">| ALT1 (success_definition, success_evidence)</span>: <span class="field-name">success_definition</span>: <span class="field-type">string /^[A-Z](?:.*?\s){3,}.*[.!?;:]$/</span> [<span class="req-required">REQ</span>] <span class="ext ext-semantic sev-error">[semantic: error]</span>, <span class="field-name">success_evidence</span>: <span class="field-type">array [string /^[A-Z](?:.*?\s){3,}.*[.!?;:]$/]</span> [<span class="req-required">REQ</span>] <span class="ext ext-semantic sev-warning">[semantic: warning]</span></div>
+<div class="ext-panel ext-panel-semantic toggle-semantic sev-error"><div class="panel-row"><span class="panel-indent">      </span><span class="panel-key">intent</span> The agent&#x27;s goal state. LLMs are goal-driven — explicit success definitions pull behavior more effectively than constraints push it.</div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-check">&#x2713;</span> Describes a concrete end state, not an ongoing activity</div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-check">&#x2713;</span> Refers to the PROCESS succeeding, not data quality outcomes</div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-check">&#x2713;</span> Observable — you can tell from examining outputs whether this was achieved</div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-anti">&#x2717;</span> Confusing process success with data quality (&#x27;all entries are high quality&#x27; is data, not process)</div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-anti">&#x2717;</span> Vague outcomes: &#x27;task completed successfully&#x27;, &#x27;all items processed&#x27;</div></div>
+<div class="ext-panel ext-panel-semantic toggle-semantic sev-warning"><div class="panel-row"><span class="panel-indent">      </span><span class="panel-key">intent</span> Self-verification checklist. The agent checks each condition after processing to confirm success before reporting.</div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-check">&#x2713;</span> Each item is a concrete, observable condition — not a subjective judgment</div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-check">&#x2713;</span> Each item is independently verifiable from outputs alone</div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-check">&#x2713;</span> Conditions are sufficient — if all pass, success is confirmed</div></div>
+<div class="line"><span class="indent">    </span><span class="alt-label">| INCLUDE</span>: <span class="field-name">include</span>: <span class="field-type">string /^// [exists]</span> [<span class="req-required">REQ</span>] <span class="ext ext-format">[format: exists]</span> <span class="ext ext-excludes">[excludes: 5]</span></div>
+<div class="ext-panel ext-panel-excludes toggle-excludes"><div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/\.\./</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/(^|/)\.env($|/)/</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^(~/|/Users/johnny/)$/</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^/$/</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/(^|/)\.claude($|/)/</span></div></div>
+<div class="line"><span class="indent">  </span><span class="field-name">failure_criteria</span>: <span class="field-type">array</span> — <span class="req-required">REQUIRED</span></div>
+<div class="line"><span class="indent">    </span><span class="alt-label">| ALT1 (failure_definition, failure_evidence)</span>: <span class="field-name">failure_definition</span>: <span class="field-type">string /^[A-Z](?:.*?\s){3,}.*[.!?;:]$/</span> [<span class="req-required">REQ</span>] <span class="ext ext-semantic sev-error">[semantic: error]</span>, <span class="field-name">failure_evidence</span>: <span class="field-type">array [string /^[A-Z](?:.*?\s){3,}.*[.!?;:]$/]</span> [<span class="req-required">REQ</span>] <span class="ext ext-semantic sev-warning">[semantic: warning]</span></div>
+<div class="ext-panel ext-panel-semantic toggle-semantic sev-error"><div class="panel-row"><span class="panel-indent">      </span><span class="panel-key">intent</span> Defines process failure — not data outcomes. The agent uses this to determine when to report FAILURE vs SUCCESS with bad-data findings.</div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-check">&#x2713;</span> Describes PROCESS failure, not data quality problems</div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-check">&#x2713;</span> Specific failure conditions, not &#x27;something went wrong&#x27;</div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-check">&#x2713;</span> Distinguishable from success_definition — no overlap</div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-anti">&#x2717;</span> Treating bad data as failure (&#x27;found invalid entries&#x27; is SUCCESS if the process worked)</div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-anti">&#x2717;</span> Restating success_definition in negative form</div></div>
+<div class="ext-panel ext-panel-semantic toggle-semantic sev-warning"><div class="panel-row"><span class="panel-indent">      </span><span class="panel-key">intent</span> Process failure detection. The agent checks these conditions to determine whether to report FAILURE instead of SUCCESS.</div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-check">&#x2713;</span> Each item describes a PROCESS failure condition, not a data quality finding</div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-check">&#x2713;</span> Each item is observable from the execution environment</div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-check">&#x2713;</span> Conditions are distinct from success_evidence — no overlap</div></div>
+<div class="line"><span class="indent">    </span><span class="alt-label">| INCLUDE</span>: <span class="field-name">include</span>: <span class="field-type">string /^// [exists]</span> [<span class="req-required">REQ</span>] <span class="ext ext-format">[format: exists]</span> <span class="ext ext-excludes">[excludes: 5]</span></div>
+<div class="ext-panel ext-panel-excludes toggle-excludes"><div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/\.\./</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/(^|/)\.env($|/)/</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^(~/|/Users/johnny/)$/</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^/$/</span></div>
+<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/(^|/)\.claude($|/)/</span></div></div></div></div>
+</div>
+
+<div class="footer">
+  Source: /Users/johnny/.ai/spaces/bragi/tools/verdandi/agent-builder/output/agent-paths-resolved.schema.json
+</div>
+
+<script>
+function toggle(name, checked) {
+  document.body.classList.toggle('hide-' + name, !checked);
+}
+</script>
+
+</body>
+</html>
