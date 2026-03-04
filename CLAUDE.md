@@ -51,6 +51,16 @@ None of them felt uncertain while doing it.
 **Why it's wrong:** Verdandi is consumed by Draupnir. Changes to YAML only take effect when Draupnir regenerates the JSON Schemas. And after schema regeneration, Nornir must be rebuilt to embed the updated schemas. The cascade is: YAML → Draupnir → schemas → Nornir rebuild → pipeline uses new schemas.
 **Recovery:** After any YAML edit: `draupnir --all`, then rebuild Nornir if validation gates are affected.
 
+### Using the Old Schema Format (flat map + nullable)
+**Detection:** If you write a schema YAML with top-level `required:` list, `nullable:` list, or a flat `sections:`/`shallowsections:` map without zones...
+**Why it's wrong:** Schema level now uses `required:` / `optional:` / `conditional:` zones inside `sections:` or `shallowsections:`, same as every other level. `nullable` is removed — it was functionally identical to `optional`. See `PLAN_SCHEMA_ZONE_UNIFICATION.md`.
+**Recovery:** Read the plan's "Target Shape" section for the new YAML format.
+
+### Writing Cross-Section Conditionals Without Leading Dot
+**Detection:** If you write `field: indirect.dispatch.dispatch_mode` without a leading dot...
+**Why it's wrong:** Cross-section (root-traversal) paths use a leading dot: `field: .indirect.dispatch.dispatch_mode`. No dot means "sibling in the same object." This disambiguates same-object references from root traversal, which is critical at the schema root level where siblings are sections.
+**Recovery:** Add leading dot to all dotted conditional field paths.
+
 _This section grows from experience. If you are corrected on an error that could recur, append it here immediately._
 
 ---

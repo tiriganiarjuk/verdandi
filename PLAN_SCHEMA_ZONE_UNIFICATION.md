@@ -541,6 +541,36 @@ directly rather than overloading the zone primitive.
 
 ---
 
+## Context Refresh Protocol
+
+**CONFIDENCE != COMPETENCE.** This refactor touches the conditional system across
+multiple files in both Verdandi and Draupnir. Context loss during long sessions
+or after compaction will produce code that looks right and silently violates the
+architecture.
+
+**Before starting any phase:** Re-read these files:
+- `tools/verdandi/CLAUDE.md` (loads CONTEXT_MAP.md via @-include)
+- `tools/draupnir/CLAUDE.md` (loads CONTEXT_MAP.md via @-include)
+- This plan (`tools/verdandi/PLAN_SCHEMA_ZONE_UNIFICATION.md`)
+
+**After any compaction:** Re-read ALL THREE files above. Then state which phase
+you are in and what the next step is before writing any code.
+
+**After hitting a guardrail violation:** If the fix isn't immediately obvious,
+STOP. Re-read the relevant CLAUDE.md. The violation is a redirect if you're
+oriented; it's a blocker if you've lost the architecture.
+
+**Key files to re-read when working on specific phases:**
+
+| Phase | Re-read before starting |
+|-------|------------------------|
+| Phase 1 (leading-dot paths) | `structures/conditionals.py`, `functions/pure/converters/conditional.py`, `functions/pure/build_cross_section.py` |
+| Phase 2 (exists predicate) | Same as Phase 1 plus `structures/schema_output.py` for SchemaCondition |
+| Phase 3 (schema zones) | `structures/top_level.py`, `functions/impure/exporter.py`, `functions/pure/converters/zone.py`, `functions/pure/converters/top_level.py` |
+| Phase 4 (regeneration) | `tools/draupnir/QUICKSTART.md` for invocation, `tools/regin/CLAUDE.md` for downstream |
+
+---
+
 ## Execution Sequence
 
 ### Phase 1: Leading-Dot Cross-Section Paths

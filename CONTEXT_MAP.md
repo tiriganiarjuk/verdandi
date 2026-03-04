@@ -92,13 +92,13 @@ Complete listing of verdandi's subdirectories with current file counts and conte
 
 | Directory | Files | Description |
 |-----------|-------|-------------|
-| `field/` | 139 | Where a type reference and a per-field description merge. Carries semantic meaning, x-extensions (semantic, constraint, validation), and type narrowing variants via double-underscore convention. |
+| `field/` | 136 | Where a type reference and a per-field description merge. Carries semantic meaning, x-extensions (semantic, constraint, validation), and type narrowing variants via double-underscore convention. |
 
 ### Container Tier -- Simple Containers (fields only, no nesting)
 
 | Directory | Files | Description |
 |-----------|-------|-------------|
-| `simplearray/` | 26 | Variable-length arrays of one field type. Enforcement grants (explicit/implicit x read/write/edit/append/search/inspect), guardrails, security paths/capabilities, display, frontmatter, success/failure evidence, role expertise. |
+| `simplearray/` | 27 | Variable-length arrays of one field type. Enforcement grants (explicit/implicit x read/write/edit), capabilities (requested/prohibited), security paths (raw/resolved x read/write), guardrails, display, frontmatter, success/failure evidence, role expertise. |
 | `simplegroup/` | 24 | Flat objects with required/optional/conditional zones. context_item (raw/resolved), example_entry, failure_item, instruction_step, notify_item, parameter_item, success_item, tool_path_entry, command_path_entry, and various include_* types for @include references. |
 
 ### Container Tier -- Complex Containers (can nest other containers)
@@ -106,14 +106,14 @@ Complete listing of verdandi's subdirectories with current file counts and conte
 | Directory | Files | Description |
 |-----------|-------|-------------|
 | `array/` | 20 | Variable-length arrays of simplegroups. dispatch_parameters, execution_instructions (raw/resolved/reduced), success/failure_criteria (raw/resolved/reduced), context_required/available (raw/resolved), example_entries (raw/resolved/reduced), notify, tool_path_entries, command_path_entries. |
-| `group/` | 28 | Objects containing fields + containers. metadata, role, enforcement grants (explicit/implicit), enforcement_output_tool, guardrails (raw/resolved/reduced), security IO/paths/schema/capabilities (raw/resolved), processing, return, example_group variants, dispatch, communication, context, context_resources, display_entry, hooks_config. |
+| `group/` | 27 | Objects containing fields + containers. metadata, role, enforcement grants (explicit/implicit), enforcement_output_tool, guardrails (raw/resolved/reduced), security IO/paths/schema/capabilities (raw/resolved), processing, return, example_group variants, dispatch, communication, context, context_resources, display_entry, hooks_config. |
 | `superarray/` | 4 | Variable-length arrays of groups. execution_examples (raw/resolved/reduced), display_entries. |
 
 ### Top Level
 
 | Directory | Files | Description |
 |-----------|-------|-------------|
-| `section/` | 16 | Complex container composition. criteria (raw/reduced/resolved + guardrails_reduced + success_reduced), enforcement, execution (raw/reduced/resolved + examples_reduced + instructions_reduced), indirect, security (raw/resolved), task (raw/resolved). |
+| `section/` | 15 | Complex container composition. criteria (raw/reduced/resolved + guardrails_reduced + success_reduced), enforcement, execution (raw/reduced/resolved + examples_reduced + instructions_reduced), indirect, security (raw/resolved), task. |
 | `shallowsection/` | 17 | Fields + limited containers (max 2). anti_patterns, constraints, critical_rules, dispatcher, examples_reduced, frontmatter, identity, identity_anthropic, implicit_grants, input, instructions_reduced, output, return_format, security_boundary, security_boundary_anthropic, writing_output, writing_output_anthropic. |
 | `schema/` | 13 | Root files. Deep schemas use `sections:` key, wide schemas use `shallowsections:` key (mutually exclusive). agent-raw-definition, agent-paths-resolved, agent-permissions-resolved, agent-execution-merged, agent-criteria-merged, agent-instructions-reduced, agent-examples-reduced, agent-guardrails-reduced, agent-success-reduced, agent-includes-merged, agent-universal-format, agent-universal-render, agent-anthropic-render. |
 
@@ -126,7 +126,7 @@ Complete listing of verdandi's subdirectories with current file counts and conte
 | `MIGRATION_CHECKLIST.md` | Old toolcompose to verdandi file mapping |
 | `CONTEXT_MAP.md` | This file |
 
-**Total: 351 YAML files + 4 documentation files**
+**Total: 347 YAML files + 5 documentation files** (including PLAN_SCHEMA_ZONE_UNIFICATION.md)
 
 ---
 
@@ -166,3 +166,15 @@ These are pre-rebuild artifacts. Rather than rewriting historical documents (whi
 **Draupnir enforces sections:/shallowsections: mutual exclusion** at compile time via the `exactly_one_section_type` model validator on the Schema class. A schema file must have exactly one of these keys — neither or both is a validation error.
 
 **pattern/home portability:** The `pattern/home` regex is hardcoded to `/Users/johnny/`. This is a known limitation if definitions are ever used on another machine.
+
+**ACTIVE REFACTOR: Schema Zone Unification** (branch: `refactor/schema-zone-unification`)
+
+Three changes in progress — see `PLAN_SCHEMA_ZONE_UNIFICATION.md` for full details:
+1. **Schema level gets required/optional/conditional zones** — replacing flat map + separate required/nullable lists. Nullable removed (functionally identical to optional).
+2. **Presence-based conditionals** — `exists: true` predicate added to ConditionalWhen, enabling conditions based on property presence not just value matching.
+3. **Leading-dot cross-section paths** — `field: .indirect.dispatch.dispatch_mode` (leading dot) disambiguates root traversal from same-object sibling references. Fixes ambiguity at schema root level.
+
+Key files that change in Verdandi:
+- All 13 `schema/*.yaml` files (zone restructure)
+- 8 YAML files with cross-section conditionals (leading dot migration)
+- `COMPOSITION_RULES.md` (schema level spec update)
