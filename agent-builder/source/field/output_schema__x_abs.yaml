@@ -7,7 +7,7 @@ description: >-
   enforcement property.
 constraint:
   - rule: required_when
-    field: task.processing.output_file_format
+    field: .task.processing.output_file_format
     in: [jsonl, json]
     severity: error
     reason: >-

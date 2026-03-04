@@ -5,15 +5,10 @@ description: >
   into definition+evidence entries. Parallel reducer: only touches
   success_criteria and failure_criteria. Other sections unchanged from
   paths-verified input.
-required:
-  - indirect
-  - task
-  - security
-  - execution
-  - criteria
 sections:
-  indirect: section/indirect
-  task: section/task
-  security: section/security
-  execution: section/execution
-  criteria: section/criteria_success_reduced
+  required:
+    indirect: section/indirect
+    task: section/task
+    security: section/security
+    execution: section/execution
+    criteria: section/criteria_success_reduced

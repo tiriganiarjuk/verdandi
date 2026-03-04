@@ -11,7 +11,7 @@ description: >-
   file must exist at resolution time.
 constraint:
   - rule: required_when
-    field: task.processing.output_file_format
+    field: .task.processing.output_file_format
     in: [jsonl, json]
     severity: error
     reason: >-

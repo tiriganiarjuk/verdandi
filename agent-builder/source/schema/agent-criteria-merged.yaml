@@ -5,15 +5,10 @@ description: >
   Criteria section carries both inline guardrails and inline
   success/failure criteria. Shared sections verified identical between
   inputs.
-required:
-  - indirect
-  - task
-  - security
-  - execution
-  - criteria
 sections:
-  indirect: section/indirect
-  task: section/task
-  security: section/security
-  execution: section/execution
-  criteria: section/criteria_reduced
+  required:
+    indirect: section/indirect
+    task: section/task
+    security: section/security
+    execution: section/execution
+    criteria: section/criteria_reduced

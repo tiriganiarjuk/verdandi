@@ -4,15 +4,10 @@ description: >
   Authored agent definition as written by humans. Entry point to the
   pipeline DAG. Paths are workspace-relative, includes are file
   references, no computed sections.
-required:
-  - indirect
-  - task
-  - security
-  - execution
-  - criteria
 sections:
-  indirect: section/indirect
-  task: section/task
-  security: section/security_raw
-  execution: section/execution_raw
-  criteria: section/criteria_raw
+  required:
+    indirect: section/indirect
+    task: section/task
+    security: section/security_raw
+    execution: section/execution_raw
+    criteria: section/criteria_raw

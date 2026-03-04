@@ -624,7 +624,7 @@
                 "constraints": [
                   {
                     "rule": "required_when",
-                    "field": "task.processing.output_file_format",
+                    "field": ".task.processing.output_file_format",
                     "severity": "error",
                     "reason": "Structured output (JSON or JSONL) requires a schema for validation enforcement. Without a schema, the enforcement output tool cannot validate records before writing.",
                     "in": [

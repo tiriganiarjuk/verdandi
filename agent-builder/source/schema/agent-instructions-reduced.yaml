@@ -4,15 +4,10 @@ description: >
   Level 3 content branch — instruction includes inlined into execution
   steps. Parallel reducer: only touches execution_instructions. Other
   sections unchanged from paths-verified input.
-required:
-  - indirect
-  - task
-  - security
-  - execution
-  - criteria
 sections:
-  indirect: section/indirect
-  task: section/task
-  security: section/security
-  execution: section/execution_instructions_reduced
-  criteria: section/criteria
+  required:
+    indirect: section/indirect
+    task: section/task
+    security: section/security
+    execution: section/execution_instructions_reduced
+    criteria: section/criteria

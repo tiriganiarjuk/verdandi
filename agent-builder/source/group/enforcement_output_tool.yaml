@@ -8,7 +8,7 @@ fields:
     output_tool_format:
       ref: field/output_tool_format
       only_when:
-        field: task.processing.output_file_format
+        field: .task.processing.output_file_format
         in: [jsonl, json, text, markdown]
     output_tool_write_frequency:
       ref: field/output_tool_write_frequency
@@ -23,12 +23,12 @@ fields:
     output_tool_name_needed:
       ref: field/output_tool_name_needed
       only_when:
-        field: task.processing.output_file_name_known
+        field: .task.processing.output_file_name_known
         in: [unknown, partially]
     output_tool_name_pattern:
       ref: field/output_tool_name_pattern
       only_when:
-        field: task.processing.output_file_name_known
+        field: .task.processing.output_file_name_known
         equals: partially
     output_tool_schema_path:
       ref: field/output_tool_schema__x_abs
@@ -38,10 +38,10 @@ fields:
     output_tool_file_path:
       ref: field/output_tool_file_path__abs
       only_when:
-        field: task.processing.output_file_name_known
+        field: .task.processing.output_file_name_known
         equals: known
     output_tool_directory_path:
       ref: field/output_tool_directory_path__abs
       only_when:
-        field: task.processing.output_file_name_known
+        field: .task.processing.output_file_name_known
         in: [partially, unknown]

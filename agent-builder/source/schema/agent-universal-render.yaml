@@ -5,30 +5,18 @@ description: >
   sections for rendering. Fields redistributed from 6 domain sections
   into 12 self-contained render sections. Platform-agnostic render
   format consumed by vendor-specific resolvers.
-required:
-  - dispatcher
-  - identity
-  - input
-  - instructions
-  - output
-  - return_format
-  - security_boundary
-nullable:
-  - implicit_grants
-  - examples
-  - writing_output
-  - constraints
-  - anti_patterns
 shallowsections:
-  identity: shallowsection/identity
-  security_boundary: shallowsection/security_boundary
-  implicit_grants: shallowsection/implicit_grants
-  input: shallowsection/input
-  output: shallowsection/output
-  writing_output: shallowsection/writing_output
-  constraints: shallowsection/constraints
-  anti_patterns: shallowsection/anti_patterns
-  return_format: shallowsection/return_format
-  dispatcher: shallowsection/dispatcher
-  instructions: shallowsection/instructions_reduced
-  examples: shallowsection/examples_reduced
+  required:
+    dispatcher: shallowsection/dispatcher
+    identity: shallowsection/identity
+    input: shallowsection/input
+    instructions: shallowsection/instructions_reduced
+    output: shallowsection/output
+    return_format: shallowsection/return_format
+    security_boundary: shallowsection/security_boundary
+  optional:
+    anti_patterns: shallowsection/anti_patterns
+    constraints: shallowsection/constraints
+    examples: shallowsection/examples_reduced
+    implicit_grants: shallowsection/implicit_grants
+    writing_output: shallowsection/writing_output

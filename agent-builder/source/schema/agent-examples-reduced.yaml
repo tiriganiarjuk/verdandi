@@ -4,15 +4,10 @@ description: >
   Level 3 content branch — example includes inlined into execution
   examples. Parallel reducer: only touches execution_examples. Other
   sections unchanged from paths-verified input.
-required:
-  - indirect
-  - task
-  - security
-  - execution
-  - criteria
 sections:
-  indirect: section/indirect
-  task: section/task
-  security: section/security
-  execution: section/execution_examples_reduced
-  criteria: section/criteria
+  required:
+    indirect: section/indirect
+    task: section/task
+    security: section/security
+    execution: section/execution_examples_reduced
+    criteria: section/criteria

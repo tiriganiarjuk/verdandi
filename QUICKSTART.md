@@ -89,7 +89,7 @@ The generated JSON Schemas are then consumed by:
 |-------|---------------|---------|
 | **section** | Named complex containers | `containers: {required: {metadata: group/metadata}}` |
 | **shallowsection** | Fields + limited containers (max 2) | `required: {title: field/agent_title}, containers: {...}` |
-| **schema** | Root — uses `sections:` key (deep) or `shallowsections:` key (wide), never both | `sections: {indirect: section/indirect, ...}` |
+| **schema** | Root — uses `sections:` key (deep) or `shallowsections:` key (wide), never both. Each key contains `required:`/`optional:`/`conditional:` zones. | `sections: {required: {indirect: section/indirect, ...}}` |
 
 ## Raw / Resolved / Reduced Stages
 
@@ -135,14 +135,50 @@ Three keywords control conditional presence:
 - **`always_when`**: Required when condition is true. No constraint when false.
 - **`not_when`**: Forbidden when condition is true. No constraint when false.
 
+Each condition uses exactly one predicate -- `equals`, `in`, or `exists` -- they are mutually exclusive.
+
+Value-based conditions match against a field's value:
 ```yaml
 conditional:
   dispatch_batch_size:
     ref: field/dispatch_batch_size
     only_when:
       field: dispatch_mode
-      equals: batch
+      equals: batch          # const check — single value
 ```
+
+```yaml
+conditional:
+  some_field:
+    ref: field/some_field
+    always_when:
+      field: output_format
+      in: [json, jsonl]      # enum check — any of several values
+```
+
+Presence-based conditions match on whether a field exists in the object:
+```yaml
+conditional:
+  resource_timeout:
+    ref: field/resource_timeout
+    only_when:
+      field: resource_url
+      exists: true           # presence check — field is present
+```
+
+`exists: false` is not supported. Use `not_when` with `exists: true` for the inverse.
+
+Cross-section root traversal (leading dot -- field is in a different section):
+```yaml
+conditional:
+  some_field:
+    ref: field/some_field
+    only_when:
+      field: .indirect.dispatch.dispatch_input_delivery
+      equals: streaming
+```
+
+The leading dot means "start from the schema root." Without a dot, the path is a sibling in the same object. This distinction matters when a conditional in one section depends on a value defined in another section.
 
 ## Polymorphic Arrays
 

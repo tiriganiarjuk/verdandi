@@ -5,17 +5,11 @@ description: >
   declarations via 6-phase resolution algorithm. Adds enforcement
   (explicit grants, implicit grants, output tool). Content sections
   unchanged from paths-verified input.
-required:
-  - indirect
-  - task
-  - security
-  - execution
-  - criteria
-  - enforcement
 sections:
-  indirect: section/indirect
-  task: section/task
-  security: section/security
-  execution: section/execution
-  criteria: section/criteria
-  enforcement: section/enforcement
+  required:
+    indirect: section/indirect
+    task: section/task
+    security: section/security
+    execution: section/execution
+    criteria: section/criteria
+    enforcement: section/enforcement

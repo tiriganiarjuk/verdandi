@@ -10,5 +10,5 @@ fields:
     return_schema:
       ref: field/return_schema__x_abs
       only_when:
-        field: task.return.return_mode
+        field: .task.return.return_mode
         in: [status-metrics, metrics-output]

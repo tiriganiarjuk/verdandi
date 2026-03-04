@@ -115,7 +115,7 @@ Complete listing of verdandi's subdirectories with current file counts and conte
 |-----------|-------|-------------|
 | `section/` | 15 | Complex container composition. criteria (raw/reduced/resolved + guardrails_reduced + success_reduced), enforcement, execution (raw/reduced/resolved + examples_reduced + instructions_reduced), indirect, security (raw/resolved), task. |
 | `shallowsection/` | 17 | Fields + limited containers (max 2). anti_patterns, constraints, critical_rules, dispatcher, examples_reduced, frontmatter, identity, identity_anthropic, implicit_grants, input, instructions_reduced, output, return_format, security_boundary, security_boundary_anthropic, writing_output, writing_output_anthropic. |
-| `schema/` | 13 | Root files. Deep schemas use `sections:` key, wide schemas use `shallowsections:` key (mutually exclusive). agent-raw-definition, agent-paths-resolved, agent-permissions-resolved, agent-execution-merged, agent-criteria-merged, agent-instructions-reduced, agent-examples-reduced, agent-guardrails-reduced, agent-success-reduced, agent-includes-merged, agent-universal-format, agent-universal-render, agent-anthropic-render. |
+| `schema/` | 13 | Root files. Deep schemas use `sections:` key, wide schemas use `shallowsections:` key (mutually exclusive). Each key contains `required:`/`optional:`/`conditional:` zones — the same zone pattern as every other level. Zone membership determines requirement semantics (no separate required/nullable lists). agent-raw-definition, agent-paths-resolved, agent-permissions-resolved, agent-execution-merged, agent-criteria-merged, agent-instructions-reduced, agent-examples-reduced, agent-guardrails-reduced, agent-success-reduced, agent-includes-merged, agent-universal-format, agent-universal-render, agent-anthropic-render. |
 
 ### Documentation files in this directory
 
@@ -167,14 +167,9 @@ These are pre-rebuild artifacts. Rather than rewriting historical documents (whi
 
 **pattern/home portability:** The `pattern/home` regex is hardcoded to `/Users/johnny/`. This is a known limitation if definitions are ever used on another machine.
 
-**ACTIVE REFACTOR: Schema Zone Unification** (branch: `refactor/schema-zone-unification`)
+**Schema Zone Unification** (completed — see `PLAN_SCHEMA_ZONE_UNIFICATION.md` for design rationale)
 
-Three changes in progress — see `PLAN_SCHEMA_ZONE_UNIFICATION.md` for full details:
-1. **Schema level gets required/optional/conditional zones** — replacing flat map + separate required/nullable lists. Nullable removed (functionally identical to optional).
-2. **Presence-based conditionals** — `exists: true` predicate added to ConditionalWhen, enabling conditions based on property presence not just value matching.
-3. **Leading-dot cross-section paths** — `field: .indirect.dispatch.dispatch_mode` (leading dot) disambiguates root traversal from same-object sibling references. Fixes ambiguity at schema root level.
-
-Key files that change in Verdandi:
-- All 13 `schema/*.yaml` files (zone restructure)
-- 8 YAML files with cross-section conditionals (leading dot migration)
-- `COMPOSITION_RULES.md` (schema level spec update)
+Three changes landed together:
+1. **Schema level uses required/optional/conditional zones** — replaced flat map + separate required/nullable lists. Nullable removed (functionally identical to optional).
+2. **Presence-based conditionals** — `exists: true` predicate on ConditionalWhen, enabling conditions based on property presence not just value matching.
+3. **Leading-dot cross-section paths** — `field: .indirect.dispatch.dispatch_mode` (leading dot) disambiguates root traversal from same-object sibling references.

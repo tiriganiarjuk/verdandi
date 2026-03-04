@@ -282,7 +282,7 @@ def is_cross_section(when):
 
 ### Migration
 
-22 cross-section references across 8 YAML files need a leading dot added:
+21 cross-section references across 7 YAML files need a leading dot added:
 
 - `group/security_io.yaml` (6 references)
 - `group/security_io_raw.yaml` (6 references)
@@ -560,6 +560,22 @@ you are in and what the next step is before writing any code.
 STOP. Re-read the relevant CLAUDE.md. The violation is a redirect if you're
 oriented; it's a blocker if you've lost the architecture.
 
+**Delegate mechanical work to subagents.** The main context holds the full
+mental model of the composition hierarchy, conditional routing, and zone
+semantics. Burning context on mechanical tasks (YAML find-and-replace,
+documentation updates, file migrations) is wasteful and dangerous — if
+compaction hits during grunt work, the architectural understanding is lost
+and cannot be recovered from a summary. Use subagents for:
+
+- Adding leading dots to 22 cross-section YAML references (Phase 1)
+- Rewriting 13 schema YAML files to zone format (Phase 3)
+- Documentation updates (all phases)
+- Any repetitive edit across multiple files
+
+Reserve the main context for: model design, routing decisions, exporter
+logic, test strategy, and verifying subagent output. Always ask the user
+before launching background agents.
+
 **Key files to re-read when working on specific phases:**
 
 | Phase | Re-read before starting |
@@ -612,18 +628,49 @@ Depends on Phases 1 and 2.
 
 ### Phase 4: Regeneration + Downstream
 
-1. `draupnir --all` — regenerate all schemas
-2. Compare output: required sections stay required, former-nullable become
-   plain optional (no oneOf wrapping)
-3. Regin `generate_structures.py` — regenerate Pydantic models
-4. Verify generated models are behaviorally equivalent
-5. Run full test suites
+1. Update `inspect_schema.py` BEFORE export — the inspector must recognize
+   the new `if: { required: [...] }` pattern (presence-based conditionals)
+   and produce appropriate phrasing (e.g. `REQUIRED WHEN field EXISTS`).
+   Currently it only handles value-based `if` clauses with `const`/`enum`.
+   The `.schema.json.html` sidecars are generated automatically during
+   Draupnir export, so the inspector must be correct before export runs.
+2. `draupnir --all` — regenerate all schemas + HTML inspector sidecars
+3. Compare output: required sections stay required, former-nullable become
+   plain optional (no oneOf wrapping). In sidecars: `(NULLABLE)` labels
+   become `OPTIONAL`, presence-based conditional phrasing renders correctly,
+   existing value-based conditionals unchanged.
+4. Regin `generate_structures.py` — regenerate Pydantic models
+5. Verify generated models are behaviorally equivalent
+6. Run full test suites
 
-### Phase 5: Documentation
+### Phase 5: Documentation (Tightly Coupled — Not Deferred)
 
-1. Update COMPOSITION_RULES.md
-2. Update QUICKSTART.md
-3. Update context docs and CONTEXT_MAPs
+**WARNING: Stale documentation causes LLM reversion.** When composition
+guides describe the old schema format (flat map + nullable), LLMs that
+read those guides during future sessions will revert new features to
+match the old documentation. This has happened before. Documentation
+updates are not cleanup — they are part of the feature landing.
+
+Each phase must update its corresponding documentation before the phase
+is considered complete. The documentation changes below are grouped by
+phase for clarity, but the work happens WITH the code, not after it.
+
+**Phase 1 docs (landing-dot paths):**
+1. COMPOSITION_RULES.md — add leading-dot convention to conditional docs
+2. QUICKSTART.md — update cross-section conditional examples
+
+**Phase 2 docs (exists predicate):**
+3. COMPOSITION_RULES.md — add `exists` predicate to conditional keywords
+4. QUICKSTART.md — add exists predicate examples
+
+**Phase 3 docs (schema zones):**
+5. COMPOSITION_RULES.md — rewrite schema level spec with zone pattern
+6. QUICKSTART.md — rewrite schema examples with new format
+7. context/verdandi.md — update schema level description
+
+**Phase 4 docs (post-regeneration):**
+8. CONTEXT_MAP.md (both verdandi and draupnir) — update descriptions
+9. Remove PLAN_SCHEMA_ZONE_UNIFICATION.md (completed plan = dead script)
 
 ---
 
@@ -642,6 +689,13 @@ other levels.
 immediate consumers. Code path is the cross-section builder, which is
 well-tested. But the routing (schema conditional zone → cross-section builder
 instead of same-section builder) is new plumbing.
+
+**HIGH risk — documentation drift:** Stale composition guides actively cause
+LLMs to revert new features to match old documentation. This is not
+hypothetical — it has happened. When COMPOSITION_RULES.md describes the
+flat map + nullable format and an LLM reads it during a future session,
+it will "fix" the zone-based YAML back to the old format. Documentation
+must be updated with each phase, not deferred to a cleanup pass.
 
 **Watch for:** `collect_conditional` type compatibility with new entry types.
 The `ConditionalEntry` Protocol in `structures/conditionals.py` should match

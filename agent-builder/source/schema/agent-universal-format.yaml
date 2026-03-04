@@ -6,17 +6,11 @@ description: >
   enforcement computed. Six sections: indirect, task, security,
   execution, criteria, enforcement. Platform-agnostic format for
   render stages.
-required:
-  - indirect
-  - task
-  - security
-  - execution
-  - criteria
-  - enforcement
 sections:
-  indirect: section/indirect
-  task: section/task
-  security: section/security
-  execution: section/execution_reduced
-  criteria: section/criteria_reduced
-  enforcement: section/enforcement
+  required:
+    indirect: section/indirect
+    task: section/task
+    security: section/security
+    execution: section/execution_reduced
+    criteria: section/criteria_reduced
+    enforcement: section/enforcement

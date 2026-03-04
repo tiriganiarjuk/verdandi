@@ -372,8 +372,20 @@ always_when    required when condition is true (no effect when false)
 not_when       forbidden when condition is true (no effect when false)
 ```
 
-Each conditional field declares its trigger:
+Each conditional field declares its trigger using a directional keyword
+and a predicate. The three predicates are mutually exclusive — exactly
+one must be set:
 
+```
+equals: value           const check — matches a single value
+in: [value1, value2]    enum check — matches any of several values
+exists: true            presence check — matches when the field is present
+```
+
+`exists: false` is **not supported**. Use `not_when` with `exists: true`
+for the inverse (forbidden when present).
+
+Value-based predicates (`equals`, `in`):
 ```yaml
 conditional:
   field_name:
@@ -381,6 +393,62 @@ conditional:
     only_when:
       field: sibling_field
       equals: some_value
+```
+
+Presence-based predicate (`exists`):
+```yaml
+conditional:
+  field_name:
+    ref: atom/string_plain
+    only_when:
+      field: sibling_field
+      exists: true
+```
+
+The directional keywords combine with `exists: true` the same way they
+combine with value predicates:
+
+```
+only_when   + exists: true   required when present, forbidden when absent
+always_when + exists: true   required when present, no constraint when absent
+not_when    + exists: true   forbidden when present, no constraint when absent
+```
+
+#### Conditional field path resolution
+
+The `field:` value in a conditional trigger uses two conventions:
+
+- **No dot** — same-object sibling reference. `field: dispatch_mode` means
+  "the `dispatch_mode` field in this same group/simplegroup."
+- **Leading dot** — root traversal. `field: .indirect.dispatch.dispatch_mode`
+  means "start from the schema root, traverse into the `indirect` section,
+  then `dispatch`, then read `dispatch_mode`."
+
+The leading dot disambiguates cross-section references from sibling
+references. This matters at levels where siblings are sections (schema
+root) or when a conditional in one section depends on a value defined
+in another section.
+
+Same-object (sibling):
+```yaml
+# group/dispatch.yaml — field: dispatch_mode is a sibling in this group
+conditional:
+  dispatch_batch_size:
+    ref: tuple/dispatch_batch_size
+    only_when:
+      field: dispatch_mode
+      equals: batch
+```
+
+Cross-section (root traversal):
+```yaml
+# A conditional that depends on a field in a different section
+conditional:
+  some_field:
+    ref: atom/string_plain
+    only_when:
+      field: .indirect.dispatch.dispatch_input_delivery
+      equals: streaming
 ```
 
 ---
@@ -548,24 +616,28 @@ Root file. Uses exactly one of two composition keys:
 A schema must choose one key. Never both. Draupnir enforces mutual
 exclusion at compile time.
 
+Both `sections:` and `shallowsections:` use the same zone pattern as
+every other level: `required:`, `optional:`, and `conditional:` sub-maps.
+Membership in a zone determines requirement semantics — there are no
+separate top-level `required:` or `nullable:` lists.
+
+`nullable` was removed. It was functionally identical to `optional` —
+both produce `SomeSection | None = None` in generated Pydantic models,
+and TOML (the authoring format) cannot express null.
+
 **Deep schema** (pipeline stages — domain-organized):
 
 ```yaml
 # schema/agent-raw-definition.yaml
 version: 3
 description: Authored agent definition as written by humans
-required:
-  - indirect
-  - task
-  - security
-  - execution
-  - criteria
 sections:
-  indirect: section/indirect
-  task: section/task_raw
-  security: section/security_raw
-  execution: section/execution_raw
-  criteria: section/criteria_raw
+  required:
+    indirect: section/indirect
+    task: section/task_raw
+    security: section/security_raw
+    execution: section/execution_raw
+    criteria: section/criteria_raw
 ```
 
 **Wide schema** (render stages — consumption-organized):
@@ -574,33 +646,38 @@ sections:
 # schema/agent-universal-render.yaml
 version: 1
 description: Consumption-oriented regrouping of universal-format for rendering
-required:
-  - identity
-  - input
-  - instructions
-  - output
-  - return_format
-  - dispatcher
-nullable:
-  - security_boundary
-  - implicit_grants
-  - examples
-  - writing_output
-  - constraints
-  - anti_patterns
 shallowsections:
-  identity: shallowsection/identity
-  security_boundary: shallowsection/security_boundary
-  implicit_grants: shallowsection/implicit_grants
-  input: shallowsection/input
-  output: shallowsection/output
-  writing_output: shallowsection/writing_output
-  constraints: shallowsection/constraints
-  anti_patterns: shallowsection/anti_patterns
-  return_format: shallowsection/return_format
-  dispatcher: shallowsection/dispatcher
-  instructions: shallowsection/instructions_reduced
-  examples: shallowsection/examples_reduced
+  required:
+    identity: shallowsection/identity
+    input: shallowsection/input
+    instructions: shallowsection/instructions_reduced
+    output: shallowsection/output
+    return_format: shallowsection/return_format
+    dispatcher: shallowsection/dispatcher
+  optional:
+    security_boundary: shallowsection/security_boundary
+    implicit_grants: shallowsection/implicit_grants
+    writing_output: shallowsection/writing_output
+    constraints: shallowsection/constraints
+    anti_patterns: shallowsection/anti_patterns
+    examples: shallowsection/examples_reduced
+```
+
+**Schema with conditional sections:**
+
+```yaml
+# Conditional sections use the same syntax as other levels
+shallowsections:
+  required:
+    identity: shallowsection/identity
+  optional:
+    examples: shallowsection/examples_reduced
+  conditional:
+    writing_output:
+      ref: shallowsection/writing_output
+      only_when:
+        field: .enforcement.enforcement_output_tool.tool_format
+        exists: true
 ```
 
 | Field | Required | Description |
@@ -608,14 +685,17 @@ shallowsections:
 | title | yes | PascalCase name (used for Python class generation) |
 | version | yes | Schema version |
 | description | yes | Human-readable explanation (used in scaffolding templates) |
-| required | yes | List of section names that must be present |
-| nullable | no | List of section names that may be null/absent |
-| sections | mutual | Named references to `section/` types — deep composition |
-| shallowsections | mutual | Named references to `shallowsection/` types — wide composition |
+| sections | mutual | `required`/`optional`/`conditional` — references `section/` types (deep composition) |
+| shallowsections | mutual | `required`/`optional`/`conditional` — references `shallowsection/` types (wide composition) |
 
 **`sections` and `shallowsections` are mutually exclusive.** Exactly one
 must be present. The key name signals the composition style and constrains
 what types may be referenced.
+
+**Schema-level conditionals are always cross-section.** At the schema root,
+the "siblings" are sections — complex objects, not leaf fields with matchable
+values. Every conditional at the schema level MUST use a dotted path (with
+leading dot) to reach into a section to find a field.
 
 ---
 
@@ -654,6 +734,7 @@ Draupnir validates at compile time:
 3. **Mandatory elements** — elements with `required: mandatory` must
    appear somewhere in the schema being compiled
 4. **Conditional validity** — `only_when`/`always_when`/`not_when`
-   reference fields that exist in the same container
+   reference fields that exist in the same container (no dot) or
+   use leading-dot paths for cross-section root traversal
 5. **Type consistency** — reference targets exist and are the correct
    level for their position

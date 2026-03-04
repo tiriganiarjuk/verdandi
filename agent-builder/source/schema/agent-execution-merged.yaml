@@ -4,15 +4,10 @@ description: >
   Level 4 content branch — merges instructions-reduced and
   examples-reduced. Execution section carries both inline instructions
   and inline examples. Shared sections verified identical between inputs.
-required:
-  - indirect
-  - task
-  - security
-  - execution
-  - criteria
 sections:
-  indirect: section/indirect
-  task: section/task
-  security: section/security
-  execution: section/execution_reduced
-  criteria: section/criteria
+  required:
+    indirect: section/indirect
+    task: section/task
+    security: section/security
+    execution: section/execution_reduced
+    criteria: section/criteria

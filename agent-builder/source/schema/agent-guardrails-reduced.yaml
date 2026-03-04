@@ -4,15 +4,10 @@ description: >
   Level 3 content branch — guardrail includes inlined into criteria
   constraints and anti-patterns. Parallel reducer: only touches
   guardrails. Other sections unchanged from paths-verified input.
-required:
-  - indirect
-  - task
-  - security
-  - execution
-  - criteria
 sections:
-  indirect: section/indirect
-  task: section/task
-  security: section/security
-  execution: section/execution
-  criteria: section/criteria_guardrails_reduced
+  required:
+    indirect: section/indirect
+    task: section/task
+    security: section/security
+    execution: section/execution
+    criteria: section/criteria_guardrails_reduced
