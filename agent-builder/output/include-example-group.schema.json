@@ -2,29 +2,35 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "include-example-group.schema.json",
   "title": "ExampleGroup",
+  "description": "A named group of calibration examples — includes inlined, direct entries only",
   "type": "object",
-  "description": "A named group of calibration examples \u2014 includes inlined, direct entries only",
+  "required": [
+    "example_group_name",
+    "example_entries"
+  ],
   "properties": {
     "example_group_name": {
       "title": "ExampleGroupName",
       "type": "string",
-      "description": "Name of the example group, used as the H3 heading when compiling examples into the agent prompt. Groups organize examples by what they demonstrate \u2014 \"correct rewrite\", \"incorrect compression\", \"edge cases\".\nTitle Case string \u2014 each word starts uppercase, separated by spaces. Used for display titles, section headings, and short labels. Not prose (no sentences), not an identifier (has spaces).",
-      "pattern": "^([A-Z][a-zA-Z0-9]*)(\\s[A-Z][a-zA-Z0-9]*)*$"
+      "description": "Name of the example group, used as the H3 heading when compiling examples into the agent prompt. Groups organize examples by what they demonstrate — \"correct rewrite\", \"incorrect compression\", \"edge cases\".\nTitle Case string — each word starts uppercase, separated by spaces. Used for display titles, section headings, and short labels. Not prose (no sentences), not an identifier (has spaces).",
+      "pattern": "^([A-Z][a-zA-Z0-9]*)(\\s[A-Z][a-zA-Z0-9]*)*$",
+      "minLength": 5
     },
     "example_display_headings": {
       "title": "ExampleDisplayHeadings",
       "type": "boolean",
-      "description": "Toggle per-group display of individual example headings. When false, examples render as items under the group H3. When true, each example gets its own H4 heading derived from the H2 in the resolved content. Controls detail level without changing content.\nTrue or false value"
+      "description": "Toggle per-group display of individual example headings. When false, examples render as items under the group H3. When true, each example gets its own H4 heading derived from the H2 in the resolved content. Controls detail level without changing content.\nTrue or false value",
+      "default": false
     },
     "examples_max_number": {
       "title": "ExamplesMaxNumber",
       "type": "integer",
-      "description": "Maximum number of examples to include from this group after include resolution and H2 splitting. Applied AFTER the transformer resolves @include references and splits on H2 boundaries \u2014 the count is about resolved individual examples, not raw array entries. Omit to include all examples in the group.\nWhole number value"
+      "description": "Maximum number of examples to include from this group after include resolution and H2 splitting. Applied AFTER the transformer resolves @include references and splits on H2 boundaries — the count is about resolved individual examples, not raw array entries. Omit to include all examples in the group.\nWhole number value"
     },
     "example_entries": {
       "title": "ExampleEntries",
       "type": "array",
-      "description": "Example entries \u2014 includes inlined, direct entries only",
+      "description": "Example entries — includes inlined, direct entries only",
       "items": {
         "title": "ExampleEntry",
         "type": "object",
@@ -33,8 +39,9 @@
           "example_heading": {
             "title": "ExampleHeading",
             "type": "string",
-            "description": "Heading for an individual example entry. When example_display_headings is true, this becomes the H4 heading for the example in the generated prompt. When derived from @include, the resolver extracts this from the H2 heading in the source .md file.\nNatural language prose \u2014 must contain at least one whitespace character. Mutually exclusive with all identifier types. Used for descriptions, instructions, error messages, and display labels. Not a path.",
+            "description": "Heading for an individual example entry. When example_display_headings is true, this becomes the H4 heading for the example in the generated prompt. When derived from @include, the resolver extracts this from the H2 heading in the source .md file.\nNatural language prose — must contain at least one whitespace character. Mutually exclusive with all identifier types. Used for descriptions, instructions, error messages, and display labels. Not a path.",
             "pattern": "\\s",
+            "minLength": 10,
             "not": {
               "anyOf": [
                 {
@@ -55,8 +62,9 @@
           "example_text": {
             "title": "ExampleText",
             "type": "string",
-            "description": "Inline example text for this entry. Used for short examples that don't warrant a separate .md file. Mutually exclusive with include.\nMarkdown-formatted text content. Starts with a non-path character, contains at least three whitespace characters. No path exclusions needed \u2014 the structural constraints prevent abuse while allowing markdown formatting and embedded path references. Used for example content, instructional text, and rich-text fields.",
-            "pattern": "^[^/.](?:[\\s\\S]*?\\s){3,}"
+            "description": "Inline example text for this entry. Used for short examples that don't warrant a separate .md file. Mutually exclusive with include.\nMarkdown-formatted text content. Starts with a non-path character, contains at least three whitespace characters. No path exclusions needed — the structural constraints prevent abuse while allowing markdown formatting and embedded path references. Used for example content, instructional text, and rich-text fields.",
+            "pattern": "^[^/.](?:[\\s\\S]*?\\s){3,}",
+            "minLength": 20
           }
         },
         "required": [
@@ -64,12 +72,9 @@
           "example_text"
         ],
         "additionalProperties": false
-      }
+      },
+      "minItems": 1
     }
   },
-  "required": [
-    "example_group_name",
-    "example_entries"
-  ],
   "additionalProperties": false
 }

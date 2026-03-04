@@ -2,24 +2,28 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "include-guardrails-constraints.schema.json",
   "title": "GuardrailsConstraints",
-  "type": "object",
   "description": "MUST and NEVER rules the agent must follow. Each entry is a single imperative constraint. Keep constraints specific and verifiable.\n",
+  "type": "object",
+  "required": [
+    "items"
+  ],
   "properties": {
     "items": {
       "title": "GuardrailsConstraints",
       "type": "array",
       "description": "MUST and NEVER rules the agent must follow. Each entry is a single imperative constraint. Keep constraints specific and verifiable.\n",
       "items": {
-        "title": "GuardrailsConstraints",
+        "title": "GuardrailsConstraint",
         "type": "string",
-        "description": "MUST and NEVER rules the agent must follow. Each entry is a single imperative constraint. \"MUST validate every record against schema before writing\", \"NEVER modify source data\", \"MUST process records in order\". Keep constraints specific and verifiable \u2014 vague rules get ignored.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths.",
+        "description": "MUST and NEVER rules the agent must follow. Each entry is a single imperative constraint. \"MUST validate every record against schema before writing\", \"NEVER modify source data\", \"MUST process records in order\". Keep constraints specific and verifiable — vague rules get ignored.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths.",
         "pattern": "^[A-Z](?:.*?\\s){3,}.*[.!?;:]$",
+        "minLength": 30,
         "x-semantic": {
           "intent": "Hard behavioral boundaries in the agent prompt. Violations are agent failures. Each item must be clear enough that both the agent AND a reviewer can determine whether a specific output violates it.",
           "severity": "warning",
           "checks": [
-            "Each item is actionable \u2014 agent can determine compliance from the constraint alone",
-            "Each item is verifiable \u2014 a reviewer can check violation without ambiguity",
+            "Each item is actionable — agent can determine compliance from the constraint alone",
+            "Each item is verifiable — a reviewer can check violation without ambiguity",
             "Items are specific to this agent's failure modes, not generic good practice"
           ],
           "anti_patterns": [
@@ -27,11 +31,9 @@
             "Constraints the agent cannot actually verify or enforce"
           ]
         }
-      }
+      },
+      "minItems": 1
     }
   },
-  "required": [
-    "items"
-  ],
   "additionalProperties": false
 }

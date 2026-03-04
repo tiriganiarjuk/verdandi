@@ -3,8 +3,8 @@ description: >
   Filesystem path grants after resolution — all paths absolutized.
 fields:
   required:
-    security_paths_workspace: field/workspace_path__x_abs
+    paths_workspace: field/workspace_path__x_abs
 containers:
   optional:
-    security_paths_allowed_read: simplearray/paths_allowed_read
-    security_paths_allowed_write: simplearray/paths_allowed_write
+    paths_allowed_read: simplearray/paths_allowed_read
+    paths_allowed_write: simplearray/paths_allowed_write

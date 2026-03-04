@@ -202,7 +202,7 @@
   <div class="subtitle">Level 3 permissions branch — enforcement section computed from security declarations via 6-phase resolution algorithm. Adds enforcement (explicit grants, implicit grants, output tool). Content sections unchanged from paths-verified input.</div>
   <div class="stats">
     <span class="stat">Sections: <b>6</b> total, <b>6</b> required</span>
-    <span class="stat">Semantic: <b>9</b> of <b>93</b> fields</span>
+    <span class="stat">Semantic: <b>9</b> of <b>90</b> fields</span>
   </div>
 </div>
 
@@ -288,12 +288,12 @@
 <div class="line"><span class="indent">  </span><span class="group-name">return</span> (<span class="req-required">REQUIRED</span>)</div>
 <div class="line"><span class="indent">    </span><span class="field-name">return_mode</span>: <span class="field-type">enum [status, status-metrics, metrics-output, output]</span> — <span class="req-required">REQUIRED</span></div>
 <div class="line field-desc"><span class="indent">      </span><span class="desc-text">How the agent returns results to the dispatcher.</span></div>
-<div class="line"><span class="indent">    </span><span class="field-name">return_status</span>: <span class="field-type">const &quot;Return only SUCCESS or FAILURE. SUCCESS means the process completed correctly regardless of data outcomes. FAILURE means the process itself broke.&quot;</span> — <span class="req-optional">OPTIONAL</span></div>
-<div class="line field-desc"><span class="indent">      </span><span class="desc-text">Fixed prompt instruction for the status portion of the agent return.</span></div>
-<div class="line"><span class="indent">    </span><span class="field-name">return_metrics</span>: <span class="field-type">const &quot;Include summary metrics with your return: records processed, records passed, records failed.&quot;</span> — <span class="req-optional">OPTIONAL</span></div>
-<div class="line field-desc"><span class="indent">      </span><span class="desc-text">Fixed prompt instruction for the metrics portion of the agent return.</span></div>
-<div class="line"><span class="indent">    </span><span class="field-name">return_output</span>: <span class="field-type">const &quot;Return your output directly as your final message to the dispatcher.&quot;</span> — <span class="req-optional">OPTIONAL</span></div>
-<div class="line field-desc"><span class="indent">      </span><span class="desc-text">Fixed prompt instruction for the output portion of the agent return.</span></div>
+<div class="line"><span class="indent">    </span><span class="field-name">return_status</span>: <span class="field-type">string /^[A-Z](?:.*?\s){3,}.*[.!?;:]$/</span> — <span class="req-optional">OPTIONAL</span></div>
+<div class="line field-desc"><span class="indent">      </span><span class="desc-text">Prompt instruction for the status portion of the agent return.</span></div>
+<div class="line"><span class="indent">    </span><span class="field-name">return_metrics</span>: <span class="field-type">string /^[A-Z](?:.*?\s){3,}.*[.!?;:]$/</span> — <span class="req-optional">OPTIONAL</span></div>
+<div class="line field-desc"><span class="indent">      </span><span class="desc-text">Prompt instruction for the metrics portion of the agent return.</span></div>
+<div class="line"><span class="indent">    </span><span class="field-name">return_output</span>: <span class="field-type">string /^[A-Z](?:.*?\s){3,}.*[.!?;:]$/</span> — <span class="req-optional">OPTIONAL</span></div>
+<div class="line field-desc"><span class="indent">      </span><span class="desc-text">Prompt instruction for the output portion of the agent return.</span></div>
 <div class="line"><span class="indent">  </span><span class="group-name">processing</span> (<span class="req-required">REQUIRED</span>)</div>
 <div class="line"><span class="indent">    </span><span class="field-name">capability_model</span>: <span class="field-type">enum [fast-cheap, standard, analytical, complex-reasoning, max-capability, inherit]</span> — <span class="req-required">REQUIRED</span></div>
 <div class="line field-desc"><span class="indent">      </span><span class="desc-text">Platform-agnostic capability tier for this agent.</span></div>
@@ -380,7 +380,7 @@
 <div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/(^|/)\.claude($|/)/</span></div></div>
 <div class="line"><span class="indent">    </span><span class="field-name">output_schema</span>: <span class="field-type">string /^// [exists]</span> — <span class="req-optional">OPTIONAL</span> <span class="ext ext-format">[format: exists]</span> <span class="ext ext-excludes">[excludes: 5]</span> <span class="ext ext-constraint">[constraint: 1]</span></div>
 <div class="line field-desc"><span class="indent">      </span><span class="desc-text">Schema the output data must validate against.</span></div>
-<div class="ext-panel ext-panel-constraint toggle-constraint"><div class="panel-row"><span class="panel-indent">      </span><span class="panel-rule sev-error">required_when</span> <span class="panel-key">→ task.processing.processing_output_file_format</span> — Structured output (JSON or JSONL) requires a schema for validation enforcement. Without a schema, the enforcement output tool cannot validate records before writing.</div></div>
+<div class="ext-panel ext-panel-constraint toggle-constraint"><div class="panel-row"><span class="panel-indent">      </span><span class="panel-rule sev-error">required_when</span> <span class="panel-key">→ task.processing.output_file_format</span> — Structured output (JSON or JSONL) requires a schema for validation enforcement. Without a schema, the enforcement output tool cannot validate records before writing.</div></div>
 <div class="ext-panel ext-panel-excludes toggle-excludes"><div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/\.\./</span></div>
 <div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/(^|/)\.env($|/)/</span></div>
 <div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^(~/|/Users/johnny/)$/</span></div>
@@ -605,20 +605,6 @@
 <div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^(~/|/Users/johnny/)$/</span></div>
 <div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^/$/</span></div>
 <div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/(^|/)\.claude($|/)/</span></div></div>
-<div class="line"><span class="indent">    </span><span class="field-name">search</span>: <span class="field-type">array [string /^// [exists]]</span> — <span class="req-optional">OPTIONAL</span> <span class="ext ext-format">[format: exists]</span> <span class="ext ext-excludes">[excludes: 5]</span></div>
-<div class="line field-desc"><span class="indent">      </span><span class="desc-text">Paths granted search capability from system-derived permissions (System 2).</span></div>
-<div class="ext-panel ext-panel-excludes toggle-excludes"><div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/\.\./</span></div>
-<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/(^|/)\.env($|/)/</span></div>
-<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^(~/|/Users/johnny/)$/</span></div>
-<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^/$/</span></div>
-<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/(^|/)\.claude($|/)/</span></div></div>
-<div class="line"><span class="indent">    </span><span class="field-name">inspect</span>: <span class="field-type">array [string /^// [exists]]</span> — <span class="req-optional">OPTIONAL</span> <span class="ext ext-format">[format: exists]</span> <span class="ext ext-excludes">[excludes: 5]</span></div>
-<div class="line field-desc"><span class="indent">      </span><span class="desc-text">Paths granted inspect capability from system-derived permissions (System 2).</span></div>
-<div class="ext-panel ext-panel-excludes toggle-excludes"><div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/\.\./</span></div>
-<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/(^|/)\.env($|/)/</span></div>
-<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^(~/|/Users/johnny/)$/</span></div>
-<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^/$/</span></div>
-<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/(^|/)\.claude($|/)/</span></div></div>
 <div class="line"><span class="indent">    </span><span class="field-name">write</span>: <span class="field-type">array [string /^// [exists]]</span> — <span class="req-optional">OPTIONAL</span> <span class="ext ext-format">[format: exists]</span> <span class="ext ext-excludes">[excludes: 5]</span></div>
 <div class="line field-desc"><span class="indent">      </span><span class="desc-text">Paths granted write capability from system-derived permissions (System 2).</span></div>
 <div class="ext-panel ext-panel-excludes toggle-excludes"><div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/\.\./</span></div>
@@ -633,39 +619,32 @@
 <div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^(~/|/Users/johnny/)$/</span></div>
 <div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^/$/</span></div>
 <div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/(^|/)\.claude($|/)/</span></div></div>
-<div class="line"><span class="indent">    </span><span class="field-name">append</span>: <span class="field-type">array [string /^// [exists]]</span> — <span class="req-optional">OPTIONAL</span> <span class="ext ext-format">[format: exists]</span> <span class="ext ext-excludes">[excludes: 5]</span></div>
-<div class="line field-desc"><span class="indent">      </span><span class="desc-text">Paths granted append capability from system-derived permissions (System 2).</span></div>
-<div class="ext-panel ext-panel-excludes toggle-excludes"><div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/\.\./</span></div>
-<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/(^|/)\.env($|/)/</span></div>
-<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^(~/|/Users/johnny/)$/</span></div>
-<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^/$/</span></div>
-<div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/(^|/)\.claude($|/)/</span></div></div>
 <div class="line"><span class="indent">  </span><span class="group-name">enforcement_output_tool</span> (<span class="req-optional">OPTIONAL</span>)</div>
-<div class="line"><span class="indent">    </span><span class="field-name">enforcement_output_tool_format</span>: <span class="field-type">enum [jsonl, json]</span> — <span class="req-conditional">ONLY WHEN task.processing.processing_output_file_format in [jsonl|json]</span></div>
+<div class="line"><span class="indent">    </span><span class="field-name">output_tool_format</span>: <span class="field-type">enum [jsonl, json, markdown, text]</span> — <span class="req-conditional">ONLY WHEN task.processing.output_file_format in [jsonl|json|text|markdown]</span></div>
 <div class="line field-desc"><span class="indent">      </span><span class="desc-text">Output format for the enforcement tool.</span></div>
-<div class="line"><span class="indent">    </span><span class="field-name">enforcement_output_tool_write_frequency</span>: <span class="field-type">enum [record, batch]</span> — <span class="req-conditional">ONLY WHEN enforcement_output_tool_format=jsonl</span></div>
+<div class="line"><span class="indent">    </span><span class="field-name">output_tool_write_frequency</span>: <span class="field-type">enum [record, batch]</span> — <span class="req-conditional">ONLY WHEN enforcement_output_tool_format=jsonl</span></div>
 <div class="line field-desc"><span class="indent">      </span><span class="desc-text">How often the enforcement tool flushes records to disk.</span></div>
-<div class="line"><span class="indent">    </span><span class="field-name">enforcement_output_tool_batch_size</span>: <span class="field-type">integer</span> — <span class="req-conditional">ONLY WHEN enforcement_output_tool_write_frequency=batch</span></div>
+<div class="line"><span class="indent">    </span><span class="field-name">output_tool_batch_size</span>: <span class="field-type">integer</span> — <span class="req-conditional">ONLY WHEN enforcement_output_tool_write_frequency=batch</span></div>
 <div class="line field-desc"><span class="indent">      </span><span class="desc-text">Number of records per write tool call when write frequency is batch.</span></div>
-<div class="line"><span class="indent">    </span><span class="field-name">enforcement_output_tool_name_needed</span>: <span class="field-type">boolean</span> — <span class="req-conditional">ONLY WHEN task.processing.processing_output_file_name_known in [unknown|partially]</span></div>
+<div class="line"><span class="indent">    </span><span class="field-name">output_tool_name_needed</span>: <span class="field-type">boolean</span> — <span class="req-conditional">ONLY WHEN task.processing.output_file_name_known in [unknown|partially]</span></div>
 <div class="line field-desc"><span class="indent">      </span><span class="desc-text">Whether the LLM must provide a filename when invoking the output tool.</span></div>
-<div class="line"><span class="indent">    </span><span class="field-name">enforcement_output_tool_name_pattern</span>: <span class="field-type">string /^\{[a-z][a-z0-9-]*\}(\.\.?\w+)+$/</span> — <span class="req-conditional">ONLY WHEN task.processing.processing_output_file_name_known=partially</span></div>
+<div class="line"><span class="indent">    </span><span class="field-name">output_tool_name_pattern</span>: <span class="field-type">string /^\{[a-z][a-z0-9-]*\}(\.\.?\w+)+$/</span> — <span class="req-conditional">ONLY WHEN task.processing.output_file_name_known=partially</span></div>
 <div class="line field-desc"><span class="indent">      </span><span class="desc-text">Naming pattern constraint for LLM-provided filenames.</span></div>
-<div class="line"><span class="indent">    </span><span class="field-name">enforcement_output_tool_schema_path</span>: <span class="field-type">string /^// [exists_schema]</span> — <span class="req-conditional">REQUIRED WHEN enforcement_output_tool_format in [jsonl|json]</span> <span class="ext ext-format">[format: exists_schema]</span> <span class="ext ext-excludes">[excludes: 5]</span></div>
+<div class="line"><span class="indent">    </span><span class="field-name">output_tool_schema_path</span>: <span class="field-type">string /^// [exists_schema]</span> — <span class="req-conditional">REQUIRED WHEN enforcement_output_tool_format in [jsonl|json]</span> <span class="ext ext-format">[format: exists_schema]</span> <span class="ext ext-excludes">[excludes: 5]</span></div>
 <div class="line field-desc"><span class="indent">      </span><span class="desc-text">Path to the JSON Schema file that validates enforcement tool output.</span></div>
 <div class="ext-panel ext-panel-excludes toggle-excludes"><div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/\.\./</span></div>
 <div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/(^|/)\.env($|/)/</span></div>
 <div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^(~/|/Users/johnny/)$/</span></div>
 <div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^/$/</span></div>
 <div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/(^|/)\.claude($|/)/</span></div></div>
-<div class="line"><span class="indent">    </span><span class="field-name">enforcement_output_tool_file_path</span>: <span class="field-type">string /^//</span> — <span class="req-conditional">ONLY WHEN task.processing.processing_output_file_name_known=known</span> <span class="ext ext-excludes">[excludes: 5]</span></div>
+<div class="line"><span class="indent">    </span><span class="field-name">output_tool_file_path</span>: <span class="field-type">string /^//</span> — <span class="req-conditional">ONLY WHEN task.processing.output_file_name_known=known</span> <span class="ext ext-excludes">[excludes: 5]</span></div>
 <div class="line field-desc"><span class="indent">      </span><span class="desc-text">Resolved absolute path to the output file.</span></div>
 <div class="ext-panel ext-panel-excludes toggle-excludes"><div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/\.\./</span></div>
 <div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/(^|/)\.env($|/)/</span></div>
 <div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^(~/|/Users/johnny/)$/</span></div>
 <div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/^/$/</span></div>
 <div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/(^|/)\.claude($|/)/</span></div></div>
-<div class="line"><span class="indent">    </span><span class="field-name">enforcement_output_tool_directory_path</span>: <span class="field-type">string /^//</span> — <span class="req-conditional">ONLY WHEN task.processing.processing_output_file_name_known in [partially|unknown]</span> <span class="ext ext-excludes">[excludes: 5]</span></div>
+<div class="line"><span class="indent">    </span><span class="field-name">output_tool_directory_path</span>: <span class="field-type">string /^//</span> — <span class="req-conditional">ONLY WHEN task.processing.output_file_name_known in [partially|unknown]</span> <span class="ext ext-excludes">[excludes: 5]</span></div>
 <div class="line field-desc"><span class="indent">      </span><span class="desc-text">Resolved absolute path to the output directory.</span></div>
 <div class="ext-panel ext-panel-excludes toggle-excludes"><div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/\.\./</span></div>
 <div class="panel-row"><span class="panel-indent">      </span><span class="panel-exclude">&#x2260;</span> <span class="field-type">/(^|/)\.env($|/)/</span></div>

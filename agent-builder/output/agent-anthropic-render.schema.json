@@ -6,7 +6,6 @@
   "type": "object",
   "required": [
     "identity",
-    "security_boundary",
     "input",
     "instructions",
     "output",
@@ -111,91 +110,91 @@
       "additionalProperties": false
     },
     "security_boundary": {
-      "title": "SecurityBoundaryAnthropic",
-      "type": "object",
-      "description": "Anthropic-resolved security boundary. Capabilities have been exploded to tool-path pairs and collapsed by workspace-relative path. Each display entry groups all tools and commands granted for a single path. Workspace_path has been extracted to critical_rules.\n",
-      "properties": {
-        "has_grants": {
-          "$ref": "#/$defs/atom__boolean",
-          "title": "HasGrants",
-          "description": "Whether this agent has explicit capability grants in its security boundary. When false, the security boundary display is empty and the agent operates with no tool-path restrictions beyond hooks.\nTrue or false value"
-        },
-        "display": {
-          "title": "DisplayEntries",
-          "type": "array",
-          "description": "Security boundary display entries collapsed by workspace-relative path",
-          "items": {
-            "title": "DisplayEntry",
-            "type": "object",
-            "description": "A security boundary display entry grouping all tools and commands granted for a single workspace-relative path. Produced by exploding capabilities to tools and collapsing by path.\n",
-            "properties": {
-              "path": {
-                "title": "DisplayPath",
-                "oneOf": [
-                  {
-                    "title": "PathRelative",
-                    "type": "string",
-                    "description": "Relative filesystem path starting with ./ — excludes traversal and sensitive path patterns. Workspace-relative, gets absolutized during resolution.\n",
-                    "pattern": "^\\.",
-                    "minLength": 3,
-                    "not": {
-                      "anyOf": [
-                        {
-                          "pattern": "\\.\\."
-                        },
-                        {
-                          "pattern": "(^|/)\\.env($|/)"
-                        },
-                        {
-                          "pattern": "^(~/|/Users/johnny/)$"
-                        },
-                        {
-                          "pattern": "^/$"
-                        },
-                        {
-                          "pattern": "(^|/)\\.claude($|/)"
+      "oneOf": [
+        {
+          "title": "SecurityBoundaryAnthropic",
+          "type": "object",
+          "description": "Anthropic-resolved security boundary. Capabilities have been exploded to tool-path pairs and collapsed by workspace-relative path. Each display entry groups all tools and commands granted for a single path. Workspace_path has been extracted to critical_rules.\n",
+          "properties": {
+            "display": {
+              "title": "DisplayEntries",
+              "type": "array",
+              "description": "Security boundary display entries collapsed by workspace-relative path",
+              "items": {
+                "title": "DisplayEntry",
+                "type": "object",
+                "description": "A security boundary display entry grouping all tools and commands granted for a single workspace-relative path. Produced by exploding capabilities to tools and collapsing by path.\n",
+                "properties": {
+                  "path": {
+                    "title": "DisplayPath",
+                    "oneOf": [
+                      {
+                        "title": "PathRelative",
+                        "type": "string",
+                        "description": "Relative filesystem path starting with ./ — excludes traversal and sensitive path patterns. Workspace-relative, gets absolutized during resolution.\n",
+                        "pattern": "^\\.",
+                        "minLength": 3,
+                        "not": {
+                          "anyOf": [
+                            {
+                              "pattern": "\\.\\."
+                            },
+                            {
+                              "pattern": "(^|/)\\.env($|/)"
+                            },
+                            {
+                              "pattern": "^(~/|/Users/johnny/)$"
+                            },
+                            {
+                              "pattern": "^/$"
+                            },
+                            {
+                              "pattern": "(^|/)\\.claude($|/)"
+                            }
+                          ]
                         }
-                      ]
-                    }
+                      },
+                      {
+                        "$ref": "#/$defs/atom__path_absolute"
+                      }
+                    ],
+                    "description": "Path in a security boundary display entry. Workspace-relative paths are produced by stripping the workspace root prefix from absolute grant paths (e.g., \"./truth/\", \"./schemas/\"). Paths outside the workspace remain absolute (e.g., \"/tmp/bragi/\").\nFilesystem path — either relative (./) or absolute (/)"
                   },
-                  {
-                    "$ref": "#/$defs/atom__path_absolute"
-                  }
-                ],
-                "description": "Path in a security boundary display entry. Workspace-relative paths are produced by stripping the workspace root prefix from absolute grant paths (e.g., \"./truth/\", \"./schemas/\"). Paths outside the workspace remain absolute (e.g., \"/tmp/bragi/\").\nFilesystem path — either relative (./) or absolute (/)"
-              },
-              "tools": {
-                "title": "DisplayToolsCommands",
-                "type": "array",
-                "description": "Tool and command names granted for a specific workspace-relative path",
-                "items": {
-                  "title": "DisplayToolCommand",
-                  "oneOf": [
-                    {
-                      "$ref": "#/$defs/atom__pascal_string"
+                  "tools": {
+                    "title": "DisplayToolsCommands",
+                    "type": "array",
+                    "description": "Tool and command names granted for a specific workspace-relative path",
+                    "items": {
+                      "title": "DisplayToolCommand",
+                      "oneOf": [
+                        {
+                          "$ref": "#/$defs/atom__pascal_string"
+                        },
+                        {
+                          "$ref": "#/$defs/atom__snake_string"
+                        }
+                      ],
+                      "description": "Tool or command name in a security boundary display entry. Can be a Claude Code tool name (Read, Grep, Glob, Write, Edit, Bash) or an allowed shell command (find, ls, du, wc, stat, diff, tree).\nEither a Claude Code tool name (PascalCase: Read, Grep, Bash) or a shell command name (snake_case: find, ls, du, wc, stat, diff, tree)."
                     },
-                    {
-                      "$ref": "#/$defs/atom__snake_string"
-                    }
-                  ],
-                  "description": "Tool or command name in a security boundary display entry. Can be a Claude Code tool name (Read, Grep, Glob, Write, Edit, Bash) or an allowed shell command (find, ls, du, wc, stat, diff, tree).\nEither a Claude Code tool name (PascalCase: Read, Grep, Bash) or a shell command name (snake_case: find, ls, du, wc, stat, diff, tree)."
+                    "minItems": 1
+                  }
                 },
-                "minItems": 1
-              }
-            },
-            "required": [
-              "path",
-              "tools"
-            ],
-            "additionalProperties": false
+                "required": [
+                  "path",
+                  "tools"
+                ],
+                "additionalProperties": false
+              },
+              "minItems": 1
+            }
           },
-          "minItems": 1
+          "additionalProperties": false
+        },
+        {
+          "type": "null"
         }
-      },
-      "required": [
-        "has_grants"
       ],
-      "additionalProperties": false
+      "description": "Anthropic-resolved security boundary. Capabilities have been exploded to tool-path pairs and collapsed by workspace-relative path. Each display entry groups all tools and commands granted for a single path. Workspace_path has been extracted to critical_rules.\n"
     },
     "input": {
       "title": "Input",
@@ -1115,11 +1114,6 @@
         "inherit"
       ]
     },
-    "atom__boolean": {
-      "title": "Boolean",
-      "type": "boolean",
-      "description": "True or false value"
-    },
     "atom__path_absolute": {
       "title": "PathAbsolute",
       "type": "string",
@@ -1212,6 +1206,11 @@
           }
         ]
       }
+    },
+    "atom__boolean": {
+      "title": "Boolean",
+      "type": "boolean",
+      "description": "True or false value"
     },
     "array__dispatch_parameters": {
       "title": "DispatchParameters",

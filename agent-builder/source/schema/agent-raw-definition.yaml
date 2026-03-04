@@ -12,7 +12,7 @@ required:
   - criteria
 sections:
   indirect: section/indirect
-  task: section/task_raw
+  task: section/task
   security: section/security_raw
   execution: section/execution_raw
   criteria: section/criteria_raw

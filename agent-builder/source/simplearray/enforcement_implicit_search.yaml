@@ -1,6 +1,0 @@
-title: EnforcementImplicitSearch
-items: field/enforcement_implicit_search__x_abs
-description: >
-  Paths granted search capability from system-derived permissions (System 2).
-  NOT displayed to agent. Hooks enforce silently. Covers auto-derived access
-  to directories containing context or schema files.

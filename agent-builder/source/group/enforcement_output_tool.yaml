@@ -5,43 +5,43 @@ description: >
   Fields drawn from task.processing and security declarations.
 fields:
   conditional:
-    enforcement_output_tool_format:
+    output_tool_format:
       ref: field/output_tool_format
       only_when:
-        field: task.processing.processing_output_file_format
-        in: [jsonl, json]
-    enforcement_output_tool_write_frequency:
+        field: task.processing.output_file_format
+        in: [jsonl, json, text, markdown]
+    output_tool_write_frequency:
       ref: field/output_tool_write_frequency
       only_when:
         field: enforcement_output_tool_format
         equals: jsonl
-    enforcement_output_tool_batch_size:
+    output_tool_batch_size:
       ref: field/output_tool_batch_size
       only_when:
         field: enforcement_output_tool_write_frequency
         equals: batch
-    enforcement_output_tool_name_needed:
+    output_tool_name_needed:
       ref: field/output_tool_name_needed
       only_when:
-        field: task.processing.processing_output_file_name_known
+        field: task.processing.output_file_name_known
         in: [unknown, partially]
-    enforcement_output_tool_name_pattern:
+    output_tool_name_pattern:
       ref: field/output_tool_name_pattern
       only_when:
-        field: task.processing.processing_output_file_name_known
+        field: task.processing.output_file_name_known
         equals: partially
-    enforcement_output_tool_schema_path:
+    output_tool_schema_path:
       ref: field/output_tool_schema__x_abs
       always_when:
         field: enforcement_output_tool_format
         in: [jsonl, json]
-    enforcement_output_tool_file_path:
+    output_tool_file_path:
       ref: field/output_tool_file_path__abs
       only_when:
-        field: task.processing.processing_output_file_name_known
+        field: task.processing.output_file_name_known
         equals: known
-    enforcement_output_tool_directory_path:
+    output_tool_directory_path:
       ref: field/output_tool_directory_path__abs
       only_when:
-        field: task.processing.processing_output_file_name_known
+        field: task.processing.output_file_name_known
         in: [partially, unknown]

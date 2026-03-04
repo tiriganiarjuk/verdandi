@@ -240,28 +240,6 @@
                   },
                   "minItems": 1
                 },
-                "search": {
-                  "title": "EnforcementImplicitSearch",
-                  "type": "array",
-                  "description": "Paths granted search capability from system-derived permissions (System 2). NOT displayed to agent. Hooks enforce silently. Covers auto-derived access to directories containing context or schema files.\n",
-                  "items": {
-                    "$ref": "#/$defs/element__path_exists_absolute",
-                    "title": "EnforcementImplicitSearchXAbs",
-                    "description": "Paths granted search capability from system-derived permissions (System 2). NOT displayed to agent. Hooks enforce silently. Covers auto-derived access to directories containing context or schema files.\nAbsolute path that must exist on the filesystem"
-                  },
-                  "minItems": 1
-                },
-                "inspect": {
-                  "title": "EnforcementImplicitInspect",
-                  "type": "array",
-                  "description": "Paths granted inspect capability from system-derived permissions (System 2). NOT displayed to agent. Hooks enforce silently. Covers auto-derived access to directories containing context or schema files.\n",
-                  "items": {
-                    "$ref": "#/$defs/element__path_exists_absolute",
-                    "title": "EnforcementImplicitInspectXAbs",
-                    "description": "Paths granted inspect capability from system-derived permissions (System 2). NOT displayed to agent. Hooks enforce silently. Covers auto-derived access to directories containing context or schema files.\nAbsolute path that must exist on the filesystem"
-                  },
-                  "minItems": 1
-                },
                 "write": {
                   "title": "EnforcementImplicitWrite",
                   "type": "array",
@@ -281,17 +259,6 @@
                     "$ref": "#/$defs/element__path_exists_absolute",
                     "title": "EnforcementImplicitEditXAbs",
                     "description": "Paths granted edit capability from system-derived permissions (System 2). NOT displayed to agent. Hooks enforce silently. Covers auto-derived access to scratch or temp files that require in-place modification.\nAbsolute path that must exist on the filesystem"
-                  },
-                  "minItems": 1
-                },
-                "append": {
-                  "title": "EnforcementImplicitAppend",
-                  "type": "array",
-                  "description": "Paths granted append capability from system-derived permissions (System 2). NOT displayed to agent. Hooks enforce silently. Covers auto-derived access to log files or accumulation files in temp directories.\n",
-                  "items": {
-                    "$ref": "#/$defs/element__path_exists_absolute",
-                    "title": "EnforcementImplicitAppendXAbs",
-                    "description": "Paths granted append capability from system-derived permissions (System 2). NOT displayed to agent. Hooks enforce silently. Covers auto-derived access to log files or accumulation files in temp directories.\nAbsolute path that must exist on the filesystem"
                   },
                   "minItems": 1
                 }
@@ -437,16 +404,12 @@
               "type": "object",
               "description": "Minimal output tool specification assembled by the security resolver. Present only when the agent produces structured output (JSON or JSONL). Fields drawn from task.processing and security declarations.\n",
               "properties": {
-                "enforcement_output_tool_format": {
+                "output_tool_format": {
+                  "$ref": "#/$defs/enum__output_format_kind",
                   "title": "OutputToolFormat",
-                  "type": "string",
-                  "description": "Output format for the enforcement tool. Only present when the agent produces structured output (JSON or JSONL). Text and markdown outputs do not receive enforcement output tools — they use generic write permissions instead.\nOutput format for the enforcement tool. Only present when the agent produces structured output. Text and markdown outputs do not receive enforcement output tools.",
-                  "enum": [
-                    "jsonl",
-                    "json"
-                  ]
+                  "description": "Output format for the enforcement tool. Only present when the agent produces structured output (JSON or JSONL). Text and markdown outputs do not receive enforcement output tools — they use generic write permissions instead.\nOutput format the agent produces. 'jsonl' for record-oriented output, 'json' for a single structured document, 'markdown' for prose or structured text with headings, 'text' for unstructured plain text."
                 },
-                "enforcement_output_tool_write_frequency": {
+                "output_tool_write_frequency": {
                   "title": "OutputToolWriteFrequency",
                   "type": "string",
                   "description": "How often the enforcement tool flushes records to disk. record: one record per write invocation, minimal blast radius. batch: bounded set of records per invocation, size controlled by enforcement_output_tool_batch_size. Only relevant for JSONL — JSON writes the entire file per invocation.\nHow often records are flushed to disk. 'record' means one record per write invocation with minimal blast radius. 'batch' means a bounded set of records per invocation with size controlled by batch_size.",
@@ -455,23 +418,23 @@
                     "batch"
                   ]
                 },
-                "enforcement_output_tool_batch_size": {
+                "output_tool_batch_size": {
                   "$ref": "#/$defs/atom__integer",
                   "title": "OutputToolBatchSize",
                   "description": "Number of records per write tool call when write frequency is batch. The agent accumulates this many records before invoking the write tool. Balances write frequency against data loss risk from interruption.\nWhole number value",
                   "default": 20
                 },
-                "enforcement_output_tool_name_needed": {
+                "output_tool_name_needed": {
                   "$ref": "#/$defs/atom__boolean",
                   "title": "OutputToolNameNeeded",
                   "description": "Whether the LLM must provide a filename when invoking the output tool. Only present when the output filename is not fully known at definition time. When true, the LLM provides a name or identifier that the tool uses to construct the output path within the output directory.\nTrue or false value"
                 },
-                "enforcement_output_tool_name_pattern": {
+                "output_tool_name_pattern": {
                   "$ref": "#/$defs/atom__filename_template",
                   "title": "OutputToolNamePattern",
                   "description": "Naming pattern constraint for LLM-provided filenames. Only present when the output filename is partially known — the definition provides a template or instruction and the LLM fills in the variable parts. The tool enforces this pattern when constructing the output path.\nFilename template with a {variable} placeholder and file extension. The variable becomes the --name CLI argument for the output tool. The extension segments determine the output file suffix. LLM authors write the complete template; the build system decomposes it into tool arguments and write paths."
                 },
-                "enforcement_output_tool_schema_path": {
+                "output_tool_schema_path": {
                   "title": "OutputToolSchemaXAbs",
                   "type": "string",
                   "description": "Path to the JSON Schema file that validates enforcement tool output. Required for all enforcement output tools — structured output (JSON, JSONL) always requires schema validation. The tool validates each write against this schema before committing to disk.\nAbsolute path to a JSON Schema file that must exist on the filesystem",
@@ -497,12 +460,12 @@
                     ]
                   }
                 },
-                "enforcement_output_tool_file_path": {
+                "output_tool_file_path": {
                   "$ref": "#/$defs/atom__path_absolute",
                   "title": "OutputToolFilePathAbs",
                   "description": "Resolved absolute path to the output file. Present when the output filename is fully known at definition time. The enforcement tool writes exclusively to this path.\nAbsolute filesystem path starting with / — excludes traversal and sensitive path patterns. The resolved form after absolutization."
                 },
-                "enforcement_output_tool_directory_path": {
+                "output_tool_directory_path": {
                   "$ref": "#/$defs/atom__path_absolute",
                   "title": "OutputToolDirectoryPathAbs",
                   "description": "Resolved absolute path to the output directory. Present when the output filename is not fully known at definition time. The enforcement tool writes files within this directory, with filenames constrained by enforcement_output_tool_name_pattern when available.\nAbsolute filesystem path starting with / — excludes traversal and sensitive path patterns. The resolved form after absolutization."
@@ -520,12 +483,12 @@
                   },
                   "then": {
                     "required": [
-                      "enforcement_output_tool_write_frequency"
+                      "output_tool_write_frequency"
                     ]
                   },
                   "else": {
                     "properties": {
-                      "enforcement_output_tool_write_frequency": false
+                      "output_tool_write_frequency": false
                     }
                   }
                 },
@@ -539,12 +502,12 @@
                   },
                   "then": {
                     "required": [
-                      "enforcement_output_tool_batch_size"
+                      "output_tool_batch_size"
                     ]
                   },
                   "else": {
                     "properties": {
-                      "enforcement_output_tool_batch_size": false
+                      "output_tool_batch_size": false
                     }
                   }
                 },
@@ -561,7 +524,7 @@
                   },
                   "then": {
                     "required": [
-                      "enforcement_output_tool_schema_path"
+                      "output_tool_schema_path"
                     ]
                   }
                 }
@@ -1287,16 +1250,21 @@
       ],
       "additionalProperties": false
     },
-    "field__output_format_kind": {
+    "enum__output_format_kind": {
       "title": "OutputFormatKind",
       "type": "string",
-      "description": "Output format the agent produces. Choose based on output structure: 'jsonl' for record-oriented output where each line is an independent JSON object (supports per-record and batch write frequency control). 'json' for a single structured JSON document. 'markdown' for prose or structured text with headings. 'text' for unstructured plain text. Format transformers use this to add enforcement (e.g., hooks that verify valid JSONL before allowing writes).\nOutput format the agent produces. 'jsonl' for record-oriented output, 'json' for a single structured document, 'markdown' for prose or structured text with headings, 'text' for unstructured plain text.",
+      "description": "Output format the agent produces. 'jsonl' for record-oriented output, 'json' for a single structured document, 'markdown' for prose or structured text with headings, 'text' for unstructured plain text.\n",
       "enum": [
         "jsonl",
         "json",
         "markdown",
         "text"
       ]
+    },
+    "field__output_format_kind": {
+      "$ref": "#/$defs/enum__output_format_kind",
+      "title": "OutputFormatKind",
+      "description": "Output format the agent produces. Choose based on output structure: 'jsonl' for record-oriented output where each line is an independent JSON object (supports per-record and batch write frequency control). 'json' for a single structured JSON document. 'markdown' for prose or structured text with headings. 'text' for unstructured plain text. Format transformers use this to add enforcement (e.g., hooks that verify valid JSONL before allowing writes).\nOutput format the agent produces. 'jsonl' for record-oriented output, 'json' for a single structured document, 'markdown' for prose or structured text with headings, 'text' for unstructured plain text."
     },
     "enum__output_name_known": {
       "title": "OutputNameKnown",

@@ -2,13 +2,16 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "include-example-entries.schema.json",
   "title": "ExampleEntries",
+  "description": "Example entries — includes inlined, direct entries only",
   "type": "object",
-  "description": "Example entries \u2014 includes inlined, direct entries only",
+  "required": [
+    "items"
+  ],
   "properties": {
     "items": {
       "title": "ExampleEntries",
       "type": "array",
-      "description": "Example entries \u2014 includes inlined, direct entries only",
+      "description": "Example entries — includes inlined, direct entries only",
       "items": {
         "title": "ExampleEntry",
         "type": "object",
@@ -17,8 +20,9 @@
           "example_heading": {
             "title": "ExampleHeading",
             "type": "string",
-            "description": "Heading for an individual example entry. When example_display_headings is true, this becomes the H4 heading for the example in the generated prompt. When derived from @include, the resolver extracts this from the H2 heading in the source .md file.\nNatural language prose \u2014 must contain at least one whitespace character. Mutually exclusive with all identifier types. Used for descriptions, instructions, error messages, and display labels. Not a path.",
+            "description": "Heading for an individual example entry. When example_display_headings is true, this becomes the H4 heading for the example in the generated prompt. When derived from @include, the resolver extracts this from the H2 heading in the source .md file.\nNatural language prose — must contain at least one whitespace character. Mutually exclusive with all identifier types. Used for descriptions, instructions, error messages, and display labels. Not a path.",
             "pattern": "\\s",
+            "minLength": 10,
             "not": {
               "anyOf": [
                 {
@@ -39,8 +43,9 @@
           "example_text": {
             "title": "ExampleText",
             "type": "string",
-            "description": "Inline example text for this entry. Used for short examples that don't warrant a separate .md file. Mutually exclusive with include.\nMarkdown-formatted text content. Starts with a non-path character, contains at least three whitespace characters. No path exclusions needed \u2014 the structural constraints prevent abuse while allowing markdown formatting and embedded path references. Used for example content, instructional text, and rich-text fields.",
-            "pattern": "^[^/.](?:[\\s\\S]*?\\s){3,}"
+            "description": "Inline example text for this entry. Used for short examples that don't warrant a separate .md file. Mutually exclusive with include.\nMarkdown-formatted text content. Starts with a non-path character, contains at least three whitespace characters. No path exclusions needed — the structural constraints prevent abuse while allowing markdown formatting and embedded path references. Used for example content, instructional text, and rich-text fields.",
+            "pattern": "^[^/.](?:[\\s\\S]*?\\s){3,}",
+            "minLength": 20
           }
         },
         "required": [
@@ -48,11 +53,9 @@
           "example_text"
         ],
         "additionalProperties": false
-      }
+      },
+      "minItems": 1
     }
   },
-  "required": [
-    "items"
-  ],
   "additionalProperties": false
 }

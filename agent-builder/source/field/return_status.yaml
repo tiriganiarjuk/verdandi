@@ -1,7 +1,7 @@
 title: ReturnStatus
 type: atom/string_prose
-const: "Return only SUCCESS or FAILURE. SUCCESS means the process completed correctly regardless of data outcomes. FAILURE means the process itself broke."
+default: "Return only SUCCESS or FAILURE. SUCCESS means the process completed correctly regardless of data outcomes. FAILURE means the process itself broke."
 description: >-
-  Fixed prompt instruction for the status portion of the agent return.
+  Prompt instruction for the status portion of the agent return.
   Composed into the prompt when return_mode includes status (status or status-
-  metrics). Const value — not author-editable.
+  metrics). Authors may customize to include agent-specific success criteria.

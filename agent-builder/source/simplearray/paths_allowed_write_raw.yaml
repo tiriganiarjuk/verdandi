@@ -1,0 +1,6 @@
+title: PathsAllowedWrite
+items: field/paths_allowed_write__any
+description: >-
+  MOST AGENTS DO NOT NEED THIS — write access is auto-derived from security_io
+  declarations. NEVER put output paths here — that bypasses enforcement.
+  Only add paths here for workspace locations NOT covered by security_io.

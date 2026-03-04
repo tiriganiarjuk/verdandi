@@ -2,13 +2,16 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "include-execution-instructions.schema.json",
   "title": "ExecutionInstructions",
+  "description": "Ordered processing steps — includes inlined, direct steps only",
   "type": "object",
-  "description": "Ordered processing steps \u2014 includes inlined, direct steps only",
+  "required": [
+    "items"
+  ],
   "properties": {
     "items": {
       "title": "ExecutionInstructions",
       "type": "array",
-      "description": "Ordered processing steps \u2014 includes inlined, direct steps only",
+      "description": "Ordered processing steps — includes inlined, direct steps only",
       "items": {
         "title": "InstructionStep",
         "type": "object",
@@ -26,8 +29,9 @@
           "instruction_text": {
             "title": "InstructionText",
             "type": "string",
-            "description": "Inline instruction text for this step. Used for short instructions that don't warrant a separate .md file. Mutually exclusive with include.\nMarkdown-formatted text content. Starts with a non-path character, contains at least three whitespace characters. No path exclusions needed \u2014 the structural constraints prevent abuse while allowing markdown formatting and embedded path references. Used for example content, instructional text, and rich-text fields.",
+            "description": "Inline instruction text for this step. Used for short instructions that don't warrant a separate .md file. Mutually exclusive with include.\nMarkdown-formatted text content. Starts with a non-path character, contains at least three whitespace characters. No path exclusions needed — the structural constraints prevent abuse while allowing markdown formatting and embedded path references. Used for example content, instructional text, and rich-text fields.",
             "pattern": "^[^/.](?:[\\s\\S]*?\\s){3,}",
+            "minLength": 20,
             "x-semantic": {
               "intent": "Directs agent behavior for one processing step. Each instruction must produce consistent behavior across different LLM instances.",
               "severity": "error",
@@ -44,11 +48,9 @@
           "instruction_text"
         ],
         "additionalProperties": false
-      }
+      },
+      "minItems": 1
     }
   },
-  "required": [
-    "items"
-  ],
   "additionalProperties": false
 }

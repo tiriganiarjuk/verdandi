@@ -5,8 +5,8 @@ description: >
   Write-level enables all capabilities.
 fields:
   required:
-    security_paths_workspace: field/workspace_path__x_abs
+    paths_workspace: field/workspace_path__x_abs
 containers:
   optional:
-    security_paths_allowed_read: simplearray/security_paths_allowed_read_raw
-    security_paths_allowed_write: simplearray/security_paths_allowed_write_raw
+    paths_allowed_read: simplearray/paths_allowed_read_raw
+    paths_allowed_write: simplearray/paths_allowed_write_raw

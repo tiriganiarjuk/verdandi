@@ -2,29 +2,33 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "include-failure-criteria.schema.json",
   "title": "FailureCriteria",
+  "description": "Failure criteria — includes inlined, direct items only",
   "type": "object",
-  "description": "Failure criteria \u2014 includes inlined, direct items only",
+  "required": [
+    "items"
+  ],
   "properties": {
     "items": {
       "title": "FailureCriteria",
       "type": "array",
-      "description": "Failure criteria \u2014 includes inlined, direct items only",
+      "description": "Failure criteria — includes inlined, direct items only",
       "items": {
         "title": "FailureItem",
         "type": "object",
-        "description": "A single failure criterion \u2014 FAILURE means process broke, not data quality",
+        "description": "A single failure criterion — FAILURE means process broke, not data quality",
         "properties": {
           "failure_definition": {
             "$ref": "#/$defs/atom__string_prose",
             "title": "FailureDefinition",
-            "description": "One-sentence statement of what failure means for this agent. Failure refers to the PROCESS, not the DATA. An agent that correctly identifies all inputs as invalid has SUCCEEDED \u2014 the assessment process worked. FAILURE means the process itself broke: couldn't read input, couldn't write output, unrecoverable error.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths.",
+            "description": "One-sentence statement of what failure means for this agent. Failure refers to the PROCESS, not the DATA. An agent that correctly identifies all inputs as invalid has SUCCEEDED — the assessment process worked. FAILURE means the process itself broke: couldn't read input, couldn't write output, unrecoverable error.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths.",
+            "minLength": 30,
             "x-semantic": {
-              "intent": "Defines process failure \u2014 not data outcomes. The agent uses this to determine when to report FAILURE vs SUCCESS with bad-data findings.",
+              "intent": "Defines process failure — not data outcomes. The agent uses this to determine when to report FAILURE vs SUCCESS with bad-data findings.",
               "severity": "error",
               "checks": [
                 "Describes PROCESS failure, not data quality problems",
                 "Specific failure conditions, not 'something went wrong'",
-                "Distinguishable from success_definition \u2014 no overlap"
+                "Distinguishable from success_definition — no overlap"
               ],
               "anti_patterns": [
                 "Treating bad data as failure ('found invalid entries' is SUCCESS if the process worked)",
@@ -38,7 +42,7 @@
             "description": "Observable evidence that a failure criterion has been triggered",
             "items": {
               "$ref": "#/$defs/atom__string_prose",
-              "title": "FailureEvidence",
+              "title": "FailureEvidenceItem",
               "description": "Observable conditions that prove failure. Each entry is a concrete condition indicating the process broke. \"Any record skipped without explanation\", \"Schema validation failure not resolved after retry\", \"Output file not created\". These are process failures, not data quality findings.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths.",
               "x-semantic": {
                 "intent": "Process failure detection. The agent checks these conditions to determine whether to report FAILURE instead of SUCCESS.",
@@ -46,10 +50,11 @@
                 "checks": [
                   "Each item describes a PROCESS failure condition, not a data quality finding",
                   "Each item is observable from the execution environment",
-                  "Conditions are distinct from success_evidence \u2014 no overlap"
+                  "Conditions are distinct from success_evidence — no overlap"
                 ]
               }
-            }
+            },
+            "minItems": 1
           }
         },
         "required": [
@@ -57,19 +62,18 @@
           "failure_evidence"
         ],
         "additionalProperties": false
-      }
+      },
+      "minItems": 1
     }
   },
-  "required": [
-    "items"
-  ],
   "additionalProperties": false,
   "$defs": {
     "atom__string_prose": {
       "title": "StringProse",
       "type": "string",
       "description": "Substantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths.\n",
-      "pattern": "^[A-Z](?:.*?\\s){3,}.*[.!?;:]$"
+      "pattern": "^[A-Z](?:.*?\\s){3,}.*[.!?;:]$",
+      "minLength": 20
     }
   }
 }

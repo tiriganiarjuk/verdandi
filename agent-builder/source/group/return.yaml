@@ -10,9 +10,3 @@ fields:
     return_status: field/return_status
     return_metrics: field/return_metrics
     return_output: field/return_output
-  conditional:
-    return_schema:
-      ref: field/return_schema__x_abs
-      only_when:
-        field: return_mode
-        in: [status-metrics, metrics-output]

@@ -1,7 +1,7 @@
 title: ReturnMetrics
 type: atom/string_prose
-const: "Include summary metrics with your return: records processed, records passed, records failed."
+default: "Include summary metrics with your return: records processed, records passed, records failed."
 description: >-
-  Fixed prompt instruction for the metrics portion of the agent return.
+  Prompt instruction for the metrics portion of the agent return.
   Composed into the prompt when return_mode includes metrics (status-metrics
-  or metrics-output). Const value — not author-editable.
+  or metrics-output). Authors may customize to specify agent-specific metrics.

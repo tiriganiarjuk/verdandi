@@ -2,6 +2,6 @@ title: SecurityCapabilities
 description: Platform-agnostic capability declarations
 containers:
   required:
-    security_capabilities_requested: simplearray/security_capabilities_requested
+    capabilities_requested: simplearray/capabilities_requested
   optional:
-    security_capabilities_prohibited: simplearray/security_capabilities_prohibited
+    capabilities_prohibited: simplearray/capabilities_prohibited

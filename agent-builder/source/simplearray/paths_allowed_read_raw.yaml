@@ -1,0 +1,6 @@
+title: PathsAllowedRead
+items: field/paths_allowed_read__any
+description: >-
+  MOST AGENTS DO NOT NEED THIS — read access is auto-derived from security_io,
+  security_schema, and context declarations. Only add paths here for workspace
+  locations NOT covered by those declarations.

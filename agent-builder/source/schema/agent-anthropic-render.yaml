@@ -8,7 +8,6 @@ description: >
   2 created. implicit_grants consumed during hook building.
 required:
   - identity
-  - security_boundary
   - input
   - instructions
   - output
@@ -17,6 +16,7 @@ required:
   - critical_rules
   - frontmatter
 nullable:
+  - security_boundary
   - examples
   - writing_output
   - constraints

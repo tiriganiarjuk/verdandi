@@ -3,6 +3,12 @@ description: >
   Data schema declarations after resolution — schema paths absolutized.
 fields:
   optional:
-    security_input_schema: field/input_schema__x_abs
-    security_output_schema: field/output_schema__x_abs
-    security_output_schema_embed: field/output_schema_embed
+    input_schema: field/input_schema__x_abs
+    output_schema: field/output_schema__x_abs
+    output_schema_embed: field/output_schema_embed
+  conditional:
+    return_schema:
+      ref: field/return_schema__x_abs
+      only_when:
+        field: task.return.return_mode
+        in: [status-metrics, metrics-output]

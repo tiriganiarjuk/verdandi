@@ -1,5 +1,5 @@
 title: OutputToolFormat
-type: enum/enforcement_tool_format
+type: enum/output_format_kind
 description: >-
   Output format for the enforcement tool. Only present when the agent produces
   structured output (JSON or JSONL). Text and markdown outputs do not receive

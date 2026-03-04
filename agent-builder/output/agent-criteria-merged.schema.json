@@ -327,20 +327,20 @@
             "return_status": {
               "$ref": "#/$defs/atom__string_prose",
               "title": "ReturnStatus",
-              "description": "Fixed prompt instruction for the status portion of the agent return. Composed into the prompt when return_mode includes status (status or status- metrics). Const value — not author-editable.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths.",
-              "const": "Return only SUCCESS or FAILURE. SUCCESS means the process completed correctly regardless of data outcomes. FAILURE means the process itself broke."
+              "description": "Prompt instruction for the status portion of the agent return. Composed into the prompt when return_mode includes status (status or status- metrics). Authors may customize to include agent-specific success criteria.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths.",
+              "default": "Return only SUCCESS or FAILURE. SUCCESS means the process completed correctly regardless of data outcomes. FAILURE means the process itself broke."
             },
             "return_metrics": {
               "$ref": "#/$defs/atom__string_prose",
               "title": "ReturnMetrics",
-              "description": "Fixed prompt instruction for the metrics portion of the agent return. Composed into the prompt when return_mode includes metrics (status-metrics or metrics-output). Const value — not author-editable.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths.",
-              "const": "Include summary metrics with your return: records processed, records passed, records failed."
+              "description": "Prompt instruction for the metrics portion of the agent return. Composed into the prompt when return_mode includes metrics (status-metrics or metrics-output). Authors may customize to specify agent-specific metrics.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths.",
+              "default": "Include summary metrics with your return: records processed, records passed, records failed."
             },
             "return_output": {
               "$ref": "#/$defs/atom__string_prose",
               "title": "ReturnOutput",
-              "description": "Fixed prompt instruction for the output portion of the agent return. Composed into the prompt when return_mode includes output (metrics-output or output). Const value — not author-editable.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths.",
-              "const": "Return your output directly as your final message to the dispatcher."
+              "description": "Prompt instruction for the output portion of the agent return. Composed into the prompt when return_mode includes output (metrics-output or output). Authors may customize to specify agent-specific output instructions.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths.",
+              "default": "Return your output directly as your final message to the dispatcher."
             }
           },
           "required": [
@@ -635,7 +635,7 @@
                 "constraints": [
                   {
                     "rule": "required_when",
-                    "field": "task.processing.processing_output_file_format",
+                    "field": "task.processing.output_file_format",
                     "severity": "error",
                     "reason": "Structured output (JSON or JSONL) requires a schema for validation enforcement. Without a schema, the enforcement output tool cannot validate records before writing.",
                     "in": [

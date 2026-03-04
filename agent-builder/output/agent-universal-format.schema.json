@@ -328,20 +328,20 @@
             "return_status": {
               "$ref": "#/$defs/atom__string_prose",
               "title": "ReturnStatus",
-              "description": "Fixed prompt instruction for the status portion of the agent return. Composed into the prompt when return_mode includes status (status or status- metrics). Const value — not author-editable.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths.",
-              "const": "Return only SUCCESS or FAILURE. SUCCESS means the process completed correctly regardless of data outcomes. FAILURE means the process itself broke."
+              "description": "Prompt instruction for the status portion of the agent return. Composed into the prompt when return_mode includes status (status or status- metrics). Authors may customize to include agent-specific success criteria.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths.",
+              "default": "Return only SUCCESS or FAILURE. SUCCESS means the process completed correctly regardless of data outcomes. FAILURE means the process itself broke."
             },
             "return_metrics": {
               "$ref": "#/$defs/atom__string_prose",
               "title": "ReturnMetrics",
-              "description": "Fixed prompt instruction for the metrics portion of the agent return. Composed into the prompt when return_mode includes metrics (status-metrics or metrics-output). Const value — not author-editable.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths.",
-              "const": "Include summary metrics with your return: records processed, records passed, records failed."
+              "description": "Prompt instruction for the metrics portion of the agent return. Composed into the prompt when return_mode includes metrics (status-metrics or metrics-output). Authors may customize to specify agent-specific metrics.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths.",
+              "default": "Include summary metrics with your return: records processed, records passed, records failed."
             },
             "return_output": {
               "$ref": "#/$defs/atom__string_prose",
               "title": "ReturnOutput",
-              "description": "Fixed prompt instruction for the output portion of the agent return. Composed into the prompt when return_mode includes output (metrics-output or output). Const value — not author-editable.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths.",
-              "const": "Return your output directly as your final message to the dispatcher."
+              "description": "Prompt instruction for the output portion of the agent return. Composed into the prompt when return_mode includes output (metrics-output or output). Authors may customize to specify agent-specific output instructions.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths.",
+              "default": "Return your output directly as your final message to the dispatcher."
             }
           },
           "required": [
@@ -369,15 +369,9 @@
               "default": "standard"
             },
             "output_file_format": {
+              "$ref": "#/$defs/enum__output_format_kind",
               "title": "OutputFileFormat",
-              "type": "string",
-              "description": "The output format the agent produces. Determines file extension enforcement and format validation hooks. JSONL enables record-level write frequency control via processing_output_write_frequency.\nOutput format the agent produces. 'jsonl' for record-oriented output, 'json' for a single structured document, 'markdown' for prose or structured text with headings, 'text' for unstructured plain text.",
-              "enum": [
-                "jsonl",
-                "json",
-                "markdown",
-                "text"
-              ]
+              "description": "The output format the agent produces. Determines file extension enforcement and format validation hooks. JSONL enables record-level write frequency control via processing_output_write_frequency.\nOutput format the agent produces. 'jsonl' for record-oriented output, 'json' for a single structured document, 'markdown' for prose or structured text with headings, 'text' for unstructured plain text."
             },
             "output_file_name_known": {
               "title": "OutputFileNameKnown",
@@ -630,7 +624,7 @@
                 "constraints": [
                   {
                     "rule": "required_when",
-                    "field": "task.processing.processing_output_file_format",
+                    "field": "task.processing.output_file_format",
                     "severity": "error",
                     "reason": "Structured output (JSON or JSONL) requires a schema for validation enforcement. Without a schema, the enforcement output tool cannot validate records before writing.",
                     "in": [
@@ -1152,28 +1146,6 @@
               },
               "minItems": 1
             },
-            "search": {
-              "title": "EnforcementImplicitSearch",
-              "type": "array",
-              "description": "Paths granted search capability from system-derived permissions (System 2). NOT displayed to agent. Hooks enforce silently. Covers auto-derived access to directories containing context or schema files.\n",
-              "items": {
-                "$ref": "#/$defs/element__path_exists_absolute",
-                "title": "EnforcementImplicitSearchXAbs",
-                "description": "Paths granted search capability from system-derived permissions (System 2). NOT displayed to agent. Hooks enforce silently. Covers auto-derived access to directories containing context or schema files.\nAbsolute path that must exist on the filesystem"
-              },
-              "minItems": 1
-            },
-            "inspect": {
-              "title": "EnforcementImplicitInspect",
-              "type": "array",
-              "description": "Paths granted inspect capability from system-derived permissions (System 2). NOT displayed to agent. Hooks enforce silently. Covers auto-derived access to directories containing context or schema files.\n",
-              "items": {
-                "$ref": "#/$defs/element__path_exists_absolute",
-                "title": "EnforcementImplicitInspectXAbs",
-                "description": "Paths granted inspect capability from system-derived permissions (System 2). NOT displayed to agent. Hooks enforce silently. Covers auto-derived access to directories containing context or schema files.\nAbsolute path that must exist on the filesystem"
-              },
-              "minItems": 1
-            },
             "write": {
               "title": "EnforcementImplicitWrite",
               "type": "array",
@@ -1195,17 +1167,6 @@
                 "description": "Paths granted edit capability from system-derived permissions (System 2). NOT displayed to agent. Hooks enforce silently. Covers auto-derived access to scratch or temp files that require in-place modification.\nAbsolute path that must exist on the filesystem"
               },
               "minItems": 1
-            },
-            "append": {
-              "title": "EnforcementImplicitAppend",
-              "type": "array",
-              "description": "Paths granted append capability from system-derived permissions (System 2). NOT displayed to agent. Hooks enforce silently. Covers auto-derived access to log files or accumulation files in temp directories.\n",
-              "items": {
-                "$ref": "#/$defs/element__path_exists_absolute",
-                "title": "EnforcementImplicitAppendXAbs",
-                "description": "Paths granted append capability from system-derived permissions (System 2). NOT displayed to agent. Hooks enforce silently. Covers auto-derived access to log files or accumulation files in temp directories.\nAbsolute path that must exist on the filesystem"
-              },
-              "minItems": 1
             }
           },
           "additionalProperties": false
@@ -1215,37 +1176,33 @@
           "type": "object",
           "description": "Minimal output tool specification assembled by the security resolver. Present only when the agent produces structured output (JSON or JSONL). Fields drawn from task.processing and security declarations.\n",
           "properties": {
-            "enforcement_output_tool_format": {
+            "output_tool_format": {
+              "$ref": "#/$defs/enum__output_format_kind",
               "title": "OutputToolFormat",
-              "type": "string",
-              "description": "Output format for the enforcement tool. Only present when the agent produces structured output (JSON or JSONL). Text and markdown outputs do not receive enforcement output tools — they use generic write permissions instead.\nOutput format for the enforcement tool. Only present when the agent produces structured output. Text and markdown outputs do not receive enforcement output tools.",
-              "enum": [
-                "jsonl",
-                "json"
-              ]
+              "description": "Output format for the enforcement tool. Only present when the agent produces structured output (JSON or JSONL). Text and markdown outputs do not receive enforcement output tools — they use generic write permissions instead.\nOutput format the agent produces. 'jsonl' for record-oriented output, 'json' for a single structured document, 'markdown' for prose or structured text with headings, 'text' for unstructured plain text."
             },
-            "enforcement_output_tool_write_frequency": {
+            "output_tool_write_frequency": {
               "$ref": "#/$defs/enum__write_frequency",
               "title": "OutputToolWriteFrequency",
               "description": "How often the enforcement tool flushes records to disk. record: one record per write invocation, minimal blast radius. batch: bounded set of records per invocation, size controlled by enforcement_output_tool_batch_size. Only relevant for JSONL — JSON writes the entire file per invocation.\nHow often records are flushed to disk. 'record' means one record per write invocation with minimal blast radius. 'batch' means a bounded set of records per invocation with size controlled by batch_size."
             },
-            "enforcement_output_tool_batch_size": {
+            "output_tool_batch_size": {
               "$ref": "#/$defs/atom__integer",
               "title": "OutputToolBatchSize",
               "description": "Number of records per write tool call when write frequency is batch. The agent accumulates this many records before invoking the write tool. Balances write frequency against data loss risk from interruption.\nWhole number value",
               "default": 20
             },
-            "enforcement_output_tool_name_needed": {
+            "output_tool_name_needed": {
               "$ref": "#/$defs/atom__boolean",
               "title": "OutputToolNameNeeded",
               "description": "Whether the LLM must provide a filename when invoking the output tool. Only present when the output filename is not fully known at definition time. When true, the LLM provides a name or identifier that the tool uses to construct the output path within the output directory.\nTrue or false value"
             },
-            "enforcement_output_tool_name_pattern": {
+            "output_tool_name_pattern": {
               "$ref": "#/$defs/atom__filename_template",
               "title": "OutputToolNamePattern",
               "description": "Naming pattern constraint for LLM-provided filenames. Only present when the output filename is partially known — the definition provides a template or instruction and the LLM fills in the variable parts. The tool enforces this pattern when constructing the output path.\nFilename template with a {variable} placeholder and file extension. The variable becomes the --name CLI argument for the output tool. The extension segments determine the output file suffix. LLM authors write the complete template; the build system decomposes it into tool arguments and write paths."
             },
-            "enforcement_output_tool_schema_path": {
+            "output_tool_schema_path": {
               "title": "OutputToolSchemaXAbs",
               "type": "string",
               "description": "Path to the JSON Schema file that validates enforcement tool output. Required for all enforcement output tools — structured output (JSON, JSONL) always requires schema validation. The tool validates each write against this schema before committing to disk.\nAbsolute path to a JSON Schema file that must exist on the filesystem",
@@ -1271,12 +1228,12 @@
                 ]
               }
             },
-            "enforcement_output_tool_file_path": {
+            "output_tool_file_path": {
               "$ref": "#/$defs/atom__path_absolute",
               "title": "OutputToolFilePathAbs",
               "description": "Resolved absolute path to the output file. Present when the output filename is fully known at definition time. The enforcement tool writes exclusively to this path.\nAbsolute filesystem path starting with / — excludes traversal and sensitive path patterns. The resolved form after absolutization."
             },
-            "enforcement_output_tool_directory_path": {
+            "output_tool_directory_path": {
               "$ref": "#/$defs/atom__path_absolute",
               "title": "OutputToolDirectoryPathAbs",
               "description": "Resolved absolute path to the output directory. Present when the output filename is not fully known at definition time. The enforcement tool writes files within this directory, with filenames constrained by enforcement_output_tool_name_pattern when available.\nAbsolute filesystem path starting with / — excludes traversal and sensitive path patterns. The resolved form after absolutization."
@@ -1294,12 +1251,12 @@
               },
               "then": {
                 "required": [
-                  "enforcement_output_tool_write_frequency"
+                  "output_tool_write_frequency"
                 ]
               },
               "else": {
                 "properties": {
-                  "enforcement_output_tool_write_frequency": false
+                  "output_tool_write_frequency": false
                 }
               }
             },
@@ -1313,12 +1270,12 @@
               },
               "then": {
                 "required": [
-                  "enforcement_output_tool_batch_size"
+                  "output_tool_batch_size"
                 ]
               },
               "else": {
                 "properties": {
-                  "enforcement_output_tool_batch_size": false
+                  "output_tool_batch_size": false
                 }
               }
             },
@@ -1335,7 +1292,7 @@
               },
               "then": {
                 "required": [
-                  "enforcement_output_tool_schema_path"
+                  "output_tool_schema_path"
                 ]
               }
             }
@@ -1397,6 +1354,17 @@
       "title": "Boolean",
       "type": "boolean",
       "description": "True or false value"
+    },
+    "enum__output_format_kind": {
+      "title": "OutputFormatKind",
+      "type": "string",
+      "description": "Output format the agent produces. 'jsonl' for record-oriented output, 'json' for a single structured document, 'markdown' for prose or structured text with headings, 'text' for unstructured plain text.\n",
+      "enum": [
+        "jsonl",
+        "json",
+        "markdown",
+        "text"
+      ]
     },
     "atom__filename_template": {
       "title": "FilenameTemplate",
@@ -1843,10 +1811,12 @@
             "properties": {
               "processing": {
                 "properties": {
-                  "processing_output_file_format": {
+                  "output_file_format": {
                     "enum": [
                       "jsonl",
-                      "json"
+                      "json",
+                      "text",
+                      "markdown"
                     ]
                   }
                 }
@@ -1861,7 +1831,7 @@
             "properties": {
               "enforcement_output_tool": {
                 "required": [
-                  "enforcement_output_tool_format"
+                  "output_tool_format"
                 ]
               }
             }
@@ -1874,7 +1844,7 @@
             "properties": {
               "enforcement_output_tool": {
                 "properties": {
-                  "enforcement_output_tool_format": false
+                  "output_tool_format": false
                 }
               }
             }
@@ -1889,7 +1859,7 @@
             "properties": {
               "processing": {
                 "properties": {
-                  "processing_output_file_name_known": {
+                  "output_file_name_known": {
                     "enum": [
                       "unknown",
                       "partially"
@@ -1907,7 +1877,7 @@
             "properties": {
               "enforcement_output_tool": {
                 "required": [
-                  "enforcement_output_tool_name_needed"
+                  "output_tool_name_needed"
                 ]
               }
             }
@@ -1920,7 +1890,7 @@
             "properties": {
               "enforcement_output_tool": {
                 "properties": {
-                  "enforcement_output_tool_name_needed": false
+                  "output_tool_name_needed": false
                 }
               }
             }
@@ -1935,7 +1905,7 @@
             "properties": {
               "processing": {
                 "properties": {
-                  "processing_output_file_name_known": {
+                  "output_file_name_known": {
                     "const": "partially"
                   }
                 }
@@ -1950,7 +1920,7 @@
             "properties": {
               "enforcement_output_tool": {
                 "required": [
-                  "enforcement_output_tool_name_pattern"
+                  "output_tool_name_pattern"
                 ]
               }
             }
@@ -1963,7 +1933,7 @@
             "properties": {
               "enforcement_output_tool": {
                 "properties": {
-                  "enforcement_output_tool_name_pattern": false
+                  "output_tool_name_pattern": false
                 }
               }
             }
@@ -1978,7 +1948,7 @@
             "properties": {
               "processing": {
                 "properties": {
-                  "processing_output_file_name_known": {
+                  "output_file_name_known": {
                     "const": "known"
                   }
                 }
@@ -1993,7 +1963,7 @@
             "properties": {
               "enforcement_output_tool": {
                 "required": [
-                  "enforcement_output_tool_file_path"
+                  "output_tool_file_path"
                 ]
               }
             }
@@ -2006,7 +1976,7 @@
             "properties": {
               "enforcement_output_tool": {
                 "properties": {
-                  "enforcement_output_tool_file_path": false
+                  "output_tool_file_path": false
                 }
               }
             }
@@ -2021,7 +1991,7 @@
             "properties": {
               "processing": {
                 "properties": {
-                  "processing_output_file_name_known": {
+                  "output_file_name_known": {
                     "enum": [
                       "partially",
                       "unknown"
@@ -2039,7 +2009,7 @@
             "properties": {
               "enforcement_output_tool": {
                 "required": [
-                  "enforcement_output_tool_directory_path"
+                  "output_tool_directory_path"
                 ]
               }
             }
@@ -2052,7 +2022,7 @@
             "properties": {
               "enforcement_output_tool": {
                 "properties": {
-                  "enforcement_output_tool_directory_path": false
+                  "output_tool_directory_path": false
                 }
               }
             }
