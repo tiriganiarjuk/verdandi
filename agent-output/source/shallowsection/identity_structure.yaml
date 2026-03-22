@@ -6,6 +6,6 @@ fields:
   required:
     field_ordering: field/identity_field_ordering
     fuse_declaration_and_role_description: field/identity_fuse_declaration_and_role_description
-    expertise_postscript_visible: field/identity_expertise_postscript_visible
-    closing_reminder_visible: field/identity_closing_reminder_visible
-    bold_contrast_visible: field/identity_bold_contrast_visible
+    expertise_is_strictly_limited_postscript_visible: field/identity_expertise_postscript_visible
+    closing_identity_reminder_visible: field/identity_closing_reminder_visible
+    bold_contrast_phrase_from_role_description_visible: field/identity_bold_contrast_visible

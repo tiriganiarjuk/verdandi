@@ -9,5 +9,5 @@ fields:
     declaration_heuristic_postscript: field/identity_declaration_heuristic_postscript
     responsibility_label: field/identity_responsibility_label
     expertise_label: field/identity_expertise_label
-    expertise_postscript: field/identity_expertise_postscript
-    closing_reminder: field/identity_closing_reminder
+    expertise_is_strictly_limited_postscript: field/identity_expertise_postscript
+    closing_identity_reminder: field/identity_closing_reminder
