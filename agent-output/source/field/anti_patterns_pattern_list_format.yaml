@@ -1,0 +1,6 @@
+title: AntiPatternsPatternListFormat
+type: enum/pattern_list_format
+default: "bare_bullets"
+description: >-
+  Format for rendering the anti-pattern list. Controls whether
+  entries use bare bullets, numbered items, or other list styles.

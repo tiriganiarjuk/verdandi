@@ -1,0 +1,8 @@
+title: SuccessCriteriaDisplay
+description: >-
+  Display formatting for the success criteria section. Evidence
+  format with threshold-based switching.
+fields:
+  required:
+    evidence_format: field/success_criteria_evidence_format
+    evidence_format_threshold: field/success_criteria_evidence_format_threshold

@@ -1,0 +1,6 @@
+title: ReturnFormatFilesVsStatusExplanationPreambleVisible
+type: atom/boolean
+default: true
+description: >-
+  Whether to render the explanation of the two-channel model where
+  work products go to files and the return carries a status signal.

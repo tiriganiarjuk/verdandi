@@ -1,0 +1,7 @@
+title: ReturnFormatAbortVsFailureDistinctionPreambleVisible
+type: atom/boolean
+default: true
+description: >-
+  Whether to render the semantic distinction between ABORT and
+  FAILURE. Conditional on ABORT being a valid status token for
+  this agent.

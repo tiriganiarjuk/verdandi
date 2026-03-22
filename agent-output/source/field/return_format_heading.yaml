@@ -1,0 +1,5 @@
+title: ReturnFormatHeading
+type: atom/string_text
+description: >-
+  Section heading for the return protocol section. Plain text,
+  no placeholders. Rendered at the configured heading level.

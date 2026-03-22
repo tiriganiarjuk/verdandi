@@ -8,8 +8,7 @@
     "indirect",
     "task",
     "security",
-    "execution",
-    "criteria"
+    "execution"
   ],
   "properties": {
     "indirect": {
@@ -84,7 +83,8 @@
                 "allowed",
                 "required",
                 "forbidden"
-              ]
+              ],
+              "default": "allowed"
             },
             "dispatch_input_format": {
               "title": "DispatchInputFormat",
@@ -94,7 +94,8 @@
                 "jsonl",
                 "json",
                 "text"
-              ]
+              ],
+              "default": "text"
             },
             "dispatch_input_delivery": {
               "title": "DispatchInputDelivery",
@@ -105,7 +106,8 @@
                 "inline",
                 "file",
                 "directory"
-              ]
+              ],
+              "default": "inline"
             },
             "dispatch_input_description": {
               "$ref": "#/$defs/atom__string_text",
@@ -195,6 +197,9 @@
           "allOf": [
             {
               "if": {
+                "required": [
+                  "dispatch_mode"
+                ],
                 "properties": {
                   "dispatch_mode": {
                     "const": "batch"
@@ -322,7 +327,8 @@
                 "status-metrics",
                 "metrics-output",
                 "output"
-              ]
+              ],
+              "default": "status"
             },
             "return_status": {
               "$ref": "#/$defs/atom__string_prose",
@@ -346,7 +352,84 @@
           "required": [
             "return_mode"
           ],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "allOf": [
+            {
+              "if": {
+                "required": [
+                  "return_mode"
+                ],
+                "properties": {
+                  "return_mode": {
+                    "enum": [
+                      "status",
+                      "status-metrics"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "required": [
+                  "return_status"
+                ]
+              },
+              "else": {
+                "properties": {
+                  "return_status": false
+                }
+              }
+            },
+            {
+              "if": {
+                "required": [
+                  "return_mode"
+                ],
+                "properties": {
+                  "return_mode": {
+                    "enum": [
+                      "status-metrics",
+                      "metrics-output"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "required": [
+                  "return_metrics"
+                ]
+              },
+              "else": {
+                "properties": {
+                  "return_metrics": false
+                }
+              }
+            },
+            {
+              "if": {
+                "required": [
+                  "return_mode"
+                ],
+                "properties": {
+                  "return_mode": {
+                    "enum": [
+                      "metrics-output",
+                      "output"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "required": [
+                  "return_output"
+                ]
+              },
+              "else": {
+                "properties": {
+                  "return_output": false
+                }
+              }
+            }
+          ]
         },
         "processing": {
           "title": "Processing",
@@ -366,6 +449,18 @@
                 "inherit"
               ],
               "default": "standard"
+            },
+            "output_description": {
+              "$ref": "#/$defs/atom__string_text",
+              "title": "OutputDescription",
+              "description": "Human-readable description of the output data the agent produces. Describes what the output contains and its downstream purpose. The mechanical format is captured by processing_output_file_format — this field captures domain meaning, but repeating format for human readability is acceptable. Example: \"One assessment record per input entry with quality scores and failure annotations\"\nNatural language prose — must contain at least one whitespace character. Mutually exclusive with all identifier types. Used for descriptions, instructions, error messages, and display labels. Not a path.",
+              "minLength": 20
+            },
+            "scratch_needed": {
+              "$ref": "#/$defs/atom__boolean",
+              "title": "ScratchNeeded",
+              "description": "Whether this agent needs a scratch directory for intermediate files. When true, security_io_scratch_tempdir must be provided and the agent auto- derives write access to a scoped temp path. Off by default — most agents keep intermediate state in context. Enable when an agent processes sequential data that loses coherence without file-based checkpointing, or when LLM behavior requires scratch space for processing optimization.\nTrue or false value",
+              "default": false
             },
             "output_file_format": {
               "title": "OutputFileFormat",
@@ -388,18 +483,6 @@
                 "unknown"
               ]
             },
-            "output_description": {
-              "$ref": "#/$defs/atom__string_text",
-              "title": "OutputDescription",
-              "description": "Human-readable description of the output data the agent produces. Describes what the output contains and its downstream purpose. The mechanical format is captured by processing_output_file_format — this field captures domain meaning, but repeating format for human readability is acceptable. Example: \"One assessment record per input entry with quality scores and failure annotations\"\nNatural language prose — must contain at least one whitespace character. Mutually exclusive with all identifier types. Used for descriptions, instructions, error messages, and display labels. Not a path.",
-              "minLength": 20
-            },
-            "scratch_needed": {
-              "$ref": "#/$defs/atom__boolean",
-              "title": "ScratchNeeded",
-              "description": "Whether this agent needs a scratch directory for intermediate files. When true, security_io_scratch_tempdir must be provided and the agent auto- derives write access to a scoped temp path. Off by default — most agents keep intermediate state in context. Enable when an agent processes sequential data that loses coherence without file-based checkpointing, or when LLM behavior requires scratch space for processing optimization.\nTrue or false value",
-              "default": false
-            },
             "output_file_name_template": {
               "title": "OutputFileNameTemplate",
               "type": "string",
@@ -412,12 +495,6 @@
               "title": "OutputFileNameInstruction",
               "description": "Instruction indicating what the LLM should use as the filename basis during processing. The LLM derives the identifier from the data being processed. The tool writes to output_directory/{identifier}.{extension}, where the extension is enforced by processing_output_file_format. The LLM controls the filename but not the directory or file type. Example: \"{record-identifier}\" — the LLM provides a record identifier, the tool writes to the output directory with the correct extension.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
             },
-            "output_batch_size": {
-              "$ref": "#/$defs/atom__integer",
-              "title": "OutputBatchSize",
-              "description": "Number of records per write tool call when write frequency is batch. The agent accumulates this many records before invoking the write tool. Balances write frequency against data loss risk from interruption.\nWhole number value",
-              "default": 20
-            },
             "output_write_frequency": {
               "title": "OutputWriteFrequency",
               "type": "string",
@@ -426,19 +503,72 @@
                 "record",
                 "batch"
               ]
+            },
+            "output_batch_size": {
+              "$ref": "#/$defs/atom__integer",
+              "title": "OutputBatchSize",
+              "description": "Number of records per write tool call when write frequency is batch. The agent accumulates this many records before invoking the write tool. Balances write frequency against data loss risk from interruption.\nWhole number value",
+              "default": 20
             }
           },
           "required": [
             "capability_model",
-            "output_file_format",
-            "output_file_name_known",
             "output_description",
-            "scratch_needed"
+            "scratch_needed",
+            "output_file_format",
+            "output_file_name_known"
           ],
           "additionalProperties": false,
           "allOf": [
             {
               "if": {
+                "required": [
+                  "output_file_name_known"
+                ],
+                "properties": {
+                  "output_file_name_known": {
+                    "const": "partially"
+                  }
+                }
+              },
+              "then": {
+                "required": [
+                  "output_file_name_template"
+                ]
+              },
+              "else": {
+                "properties": {
+                  "output_file_name_template": false
+                }
+              }
+            },
+            {
+              "if": {
+                "required": [
+                  "output_file_name_known"
+                ],
+                "properties": {
+                  "output_file_name_known": {
+                    "const": "unknown"
+                  }
+                }
+              },
+              "then": {
+                "required": [
+                  "output_file_name_instruction"
+                ]
+              },
+              "else": {
+                "properties": {
+                  "output_file_name_instruction": false
+                }
+              }
+            },
+            {
+              "if": {
+                "required": [
+                  "output_file_format"
+                ],
                 "properties": {
                   "output_file_format": {
                     "const": "jsonl"
@@ -453,6 +583,28 @@
               "else": {
                 "properties": {
                   "output_write_frequency": false
+                }
+              }
+            },
+            {
+              "if": {
+                "required": [
+                  "output_write_frequency"
+                ],
+                "properties": {
+                  "output_write_frequency": {
+                    "const": "batch"
+                  }
+                }
+              },
+              "then": {
+                "required": [
+                  "output_batch_size"
+                ]
+              },
+              "else": {
+                "properties": {
+                  "output_batch_size": false
                 }
               }
             }
@@ -646,18 +798,37 @@
                 ]
               }
             },
-            "output_schema_embed": {
-              "$ref": "#/$defs/atom__boolean",
-              "title": "OutputSchemaEmbed",
-              "description": "Whether to embed the output schema directly into the agent prompt. When true, the format transformer reads the schema file and inlines its content — uses context window but ensures the agent sees the schema without a tool call. When false (or omitted), the schema path is granted read access and the agent reads it via Read tool — saves context but adds a tool-call round trip. Prefer true for small schemas (under ~100 lines) or when schema adherence is critical. Prefer false for large schemas where context window conservation matters. Either way the agent knows the desired shape.\nTrue or false value"
-            },
             "return_schema": {
               "$ref": "#/$defs/element__path_exists_absolute",
               "title": "ReturnSchemaXAbs",
               "description": "Absolute path to a JSON Schema file (must end with .schema.json or .schema.yaml) defining the metric fields the agent returns. Always embedded directly into the prompt — there is no enforcement mechanism for return communication (agent-to-dispatcher LLM text). Embedding ensures the agent sees field names, types, and definitions. Schema file must exist at resolution time. Example: \"definitions/schemas/my-agent-return.schema.json\"\nAbsolute path that must exist on the filesystem"
+            },
+            "output_schema_embed": {
+              "$ref": "#/$defs/atom__boolean",
+              "title": "OutputSchemaEmbed",
+              "description": "Whether to embed the output schema directly into the agent prompt. When true, the format transformer reads the schema file and inlines its content — uses context window but ensures the agent sees the schema without a tool call. When false (or omitted), the schema path is granted read access and the agent reads it via Read tool — saves context but adds a tool-call round trip. Prefer true for small schemas (under ~100 lines) or when schema adherence is critical. Prefer false for large schemas where context window conservation matters. Either way the agent knows the desired shape.\nTrue or false value"
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "allOf": [
+            {
+              "if": {
+                "required": [
+                  "output_schema"
+                ]
+              },
+              "then": {
+                "required": [
+                  "output_schema_embed"
+                ]
+              },
+              "else": {
+                "properties": {
+                  "output_schema_embed": false
+                }
+              }
+            }
+          ]
         },
         "security_paths": {
           "title": "SecurityPaths",
@@ -760,8 +931,7 @@
       "required": [
         "security_io",
         "security_schema",
-        "security_paths",
-        "context"
+        "security_paths"
       ],
       "additionalProperties": false
     },
@@ -884,12 +1054,12 @@
     "criteria": {
       "title": "Criteria",
       "type": "object",
-      "description": "Quality criteria — include paths absolutized",
+      "description": "Quality criteria — guardrails, success conditions, failure conditions. At least one must be present.\n",
       "properties": {
         "guardrails": {
           "title": "Guardrails",
           "type": "object",
-          "description": "Behavioral constraints and failure patterns — includes resolved to absolute paths\n",
+          "description": "Behavioral constraints and known failure patterns — at least one must be present\n",
           "properties": {
             "guardrails_constraints": {
               "title": "GuardrailsConstraints",
@@ -940,12 +1110,12 @@
             "include_guardrails_constraints": {
               "title": "IncludeGuardrailsConstraints",
               "type": "object",
-              "description": "@path reference to a .md file containing constraints. Path absolutized after resolution.\n",
+              "description": "@path reference to a .md file containing constraints\n",
               "properties": {
                 "include": {
-                  "$ref": "#/$defs/element__path_exists_absolute",
-                  "title": "IncludeGuardrailsConstraintsXAbs",
-                  "description": "An @path reference to a .md file containing constraints. The resolver reads the file and extracts individual constraint items from its structure.\nAbsolute path that must exist on the filesystem"
+                  "$ref": "#/$defs/union__path_exists_any",
+                  "title": "IncludeGuardrailsConstraintsXAny",
+                  "description": "An @path reference to a .md file containing constraints. The resolver reads the file and extracts individual constraint items from its structure.\nFilesystem path that must exist — either relative or absolute"
                 }
               },
               "required": [
@@ -956,12 +1126,12 @@
             "include_guardrails_anti_patterns": {
               "title": "IncludeGuardrailsAntiPatterns",
               "type": "object",
-              "description": "@path reference to a .md file containing anti-patterns. Path absolutized after resolution.\n",
+              "description": "@path reference to a .md file containing anti-patterns\n",
               "properties": {
                 "include": {
-                  "$ref": "#/$defs/element__path_exists_absolute",
-                  "title": "IncludeGuardrailsAntiPatternsXAbs",
-                  "description": "An @path reference to a .md file containing anti-patterns. The resolver reads the file and extracts individual anti-pattern items from its structure.\nAbsolute path that must exist on the filesystem"
+                  "$ref": "#/$defs/union__path_exists_any",
+                  "title": "IncludeGuardrailsAntiPatternsXAny",
+                  "description": "An @path reference to a .md file containing anti-patterns. The resolver reads the file and extracts individual anti-pattern items from its structure.\nFilesystem path that must exist — either relative or absolute"
                 }
               },
               "required": [
@@ -975,7 +1145,7 @@
         "success_criteria": {
           "title": "SuccessCriteria",
           "type": "array",
-          "description": "Success criteria — include paths absolutized",
+          "description": "Success criteria — inline definitions or included from .md files",
           "items": {
             "oneOf": [
               {
@@ -1032,12 +1202,12 @@
               {
                 "title": "IncludeSuccessCriteria",
                 "type": "object",
-                "description": "@path reference to a .md file containing success criteria. Path absolutized after resolution.\n",
+                "description": "@path reference to a .md file containing success criteria\n",
                 "properties": {
                   "include": {
-                    "$ref": "#/$defs/element__path_exists_absolute",
-                    "title": "IncludeSuccessCriteriaXAbs",
-                    "description": "An @path reference to a .md file containing success criteria. The resolver reads the file and extracts individual success criterion items from its structure.\nAbsolute path that must exist on the filesystem"
+                    "$ref": "#/$defs/union__path_exists_any",
+                    "title": "IncludeSuccessCriteriaXAny",
+                    "description": "An @path reference to a .md file containing success criteria. The resolver reads the file and extracts individual success criterion items from its structure.\nFilesystem path that must exist — either relative or absolute"
                   }
                 },
                 "required": [
@@ -1052,7 +1222,7 @@
         "failure_criteria": {
           "title": "FailureCriteria",
           "type": "array",
-          "description": "Failure criteria — include paths absolutized",
+          "description": "Failure criteria — inline definitions or included from .md files",
           "items": {
             "oneOf": [
               {
@@ -1109,12 +1279,12 @@
               {
                 "title": "IncludeFailureCriteria",
                 "type": "object",
-                "description": "@path reference to a .md file containing failure criteria. Path absolutized after resolution.\n",
+                "description": "@path reference to a .md file containing failure criteria\n",
                 "properties": {
                   "include": {
-                    "$ref": "#/$defs/element__path_exists_absolute",
-                    "title": "IncludeFailureCriteriaXAbs",
-                    "description": "An @path reference to a .md file containing failure criteria. The resolver reads the file and extracts individual failure criterion items from its structure.\nAbsolute path that must exist on the filesystem"
+                    "$ref": "#/$defs/union__path_exists_any",
+                    "title": "IncludeFailureCriteriaXAny",
+                    "description": "An @path reference to a .md file containing failure criteria. The resolver reads the file and extracts individual failure criterion items from its structure.\nFilesystem path that must exist — either relative or absolute"
                   }
                 },
                 "required": [
@@ -1127,11 +1297,6 @@
           "minItems": 1
         }
       },
-      "required": [
-        "guardrails",
-        "success_criteria",
-        "failure_criteria"
-      ],
       "additionalProperties": false
     }
   },
@@ -1296,6 +1461,41 @@
       "description": "Markdown-formatted text content. Starts with a non-path character, contains at least three whitespace characters. No path exclusions needed — the structural constraints prevent abuse while allowing markdown formatting and embedded path references. Used for example content, instructional text, and rich-text fields.\n",
       "pattern": "^[^/.](?:[\\s\\S]*?\\s){3,}",
       "minLength": 20
+    },
+    "union__path_exists_any": {
+      "title": "PathExistsAny",
+      "oneOf": [
+        {
+          "title": "PathExistsRelative",
+          "type": "string",
+          "description": "Relative path that must exist on the filesystem at resolution time",
+          "format": "exists",
+          "pattern": "^\\.",
+          "not": {
+            "anyOf": [
+              {
+                "pattern": "\\.\\."
+              },
+              {
+                "pattern": "(^|/)\\.env($|/)"
+              },
+              {
+                "pattern": "^(~/|/Users/johnny/)$"
+              },
+              {
+                "pattern": "^/$"
+              },
+              {
+                "pattern": "(^|/)\\.claude($|/)"
+              }
+            ]
+          }
+        },
+        {
+          "$ref": "#/$defs/element__path_exists_absolute"
+        }
+      ],
+      "description": "Filesystem path that must exist — either relative or absolute"
     }
   },
   "allOf": [
@@ -1309,7 +1509,10 @@
                   "dispatch_input_delivery": {
                     "const": "file"
                   }
-                }
+                },
+                "required": [
+                  "dispatch_input_delivery"
+                ]
               }
             }
           }
@@ -1352,7 +1555,10 @@
                   "dispatch_input_delivery": {
                     "const": "directory"
                   }
-                }
+                },
+                "required": [
+                  "dispatch_input_delivery"
+                ]
               }
             }
           }
@@ -1395,7 +1601,10 @@
                   "dispatch_input_delivery": {
                     "const": "tempfile"
                   }
-                }
+                },
+                "required": [
+                  "dispatch_input_delivery"
+                ]
               }
             }
           }
@@ -1438,7 +1647,10 @@
                   "scratch_needed": {
                     "const": true
                   }
-                }
+                },
+                "required": [
+                  "scratch_needed"
+                ]
               }
             }
           }
@@ -1481,7 +1693,10 @@
                   "output_file_name_known": {
                     "const": "known"
                   }
-                }
+                },
+                "required": [
+                  "output_file_name_known"
+                ]
               }
             }
           }
@@ -1527,7 +1742,10 @@
                       "unknown"
                     ]
                   }
-                }
+                },
+                "required": [
+                  "output_file_name_known"
+                ]
               }
             }
           }
@@ -1573,7 +1791,10 @@
                       "metrics-output"
                     ]
                   }
-                }
+                },
+                "required": [
+                  "return_mode"
+                ]
               }
             }
           }

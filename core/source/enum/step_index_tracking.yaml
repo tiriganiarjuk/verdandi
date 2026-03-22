@@ -1,0 +1,6 @@
+title: StepIndexTracking
+values: [n_only, n_of_m]
+description: >
+  How step numbers render in instruction headers. 'n_only' shows
+  just the step number (Step 3). 'n_of_m' shows step number and
+  total (Step 3 of 7).

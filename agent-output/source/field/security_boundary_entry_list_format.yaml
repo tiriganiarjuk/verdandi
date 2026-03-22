@@ -1,0 +1,6 @@
+title: SecurityBoundaryEntryListFormat
+type: enum/entry_list_format
+default: "bullet"
+description: >-
+  Marker style for the display entry list. Controls whether entries
+  render with bullets, numbers, or dashes.

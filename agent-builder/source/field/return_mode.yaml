@@ -1,5 +1,6 @@
 title: ReturnMode
 type: enum/return_mode
+default: status
 description: >-
   How the agent returns results to the dispatcher. status: return only SUCCESS
   or FAILURE. status-metrics: return status plus summary metrics. metrics-

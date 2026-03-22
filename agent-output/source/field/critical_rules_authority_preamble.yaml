@@ -1,0 +1,6 @@
+title: CriticalRulesAuthorityPreamble
+type: atom/string_prose
+description: >-
+  Authority establishment before rules are listed. Declares that
+  critical rules override all other instructions and that violation
+  equals task failure. Position: preamble after heading.

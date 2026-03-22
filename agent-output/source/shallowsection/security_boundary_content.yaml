@@ -1,0 +1,14 @@
+title: SecurityBoundaryContent
+description: >-
+  Content prose for the security boundary section. Filesystem map
+  intro, section closing, entry templates, and framing variant
+  sub-tables.
+fields:
+  required:
+    filesystem_map_intro: field/security_boundary_filesystem_map_intro
+    section_closing: field/security_boundary_section_closing
+    compound_entry_template: field/security_boundary_compound_entry_template
+    grouped_tool_header: field/security_boundary_grouped_tool_header
+containers:
+  required:
+    framing_variant: group/framing_variant_content

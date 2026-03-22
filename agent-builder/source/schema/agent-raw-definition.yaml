@@ -10,4 +10,5 @@ sections:
     task: section/task
     security: section/security_raw
     execution: section/execution_raw
+  optional:
     criteria: section/criteria_raw

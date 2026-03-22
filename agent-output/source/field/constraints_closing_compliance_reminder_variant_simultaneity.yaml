@@ -1,0 +1,6 @@
+title: ConstraintsClosingComplianceReminderVariantSimultaneity
+type: atom/string_template
+description: >-
+  Closing reminder variant emphasizing simultaneous application.
+  Contains {{constraint_count}} placeholder. Stresses that all
+  constraints must be satisfied concurrently, not selectively.

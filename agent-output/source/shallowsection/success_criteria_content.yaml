@@ -1,0 +1,14 @@
+title: SuccessCriteriaContent
+description: >-
+  Content prose for the success criteria section. Heading, plain
+  prose, and variant sub-tables for definition framing, evidence
+  framing, and definition-to-evidence transition.
+fields:
+  required:
+    heading: field/success_criteria_heading
+    verification_guidance_suffix: field/success_criteria_verification_guidance_suffix
+    success_failure_independence_statement: field/success_criteria_success_failure_independence_statement
+    multi_criteria_transition: field/success_criteria_multi_criteria_transition
+containers:
+  required:
+    variants: group/success_criteria_variant_content

@@ -1,0 +1,9 @@
+title: StringTemplate
+type: string
+pattern: pattern/template_marker
+min_length: 5
+description: >
+  Prose string containing at least one {{placeholder}} interpolation marker.
+  The renderer substitutes marker contents with data field values at
+  composition time. Used for content.toml template blobs like headings,
+  declarations, and labels that embed agent-specific data in prose.

@@ -1,0 +1,6 @@
+title: ExamplesSectionPreambleVisible
+type: atom/boolean
+default: true
+description: >-
+  Whether to render the section preamble explaining how to read
+  examples (GOOD/BAD/WHY pattern).

@@ -1,0 +1,7 @@
+title: SuccessCriteria
+description: >
+  Success criteria the agent must strive to meet. Null when no
+  success criteria defined.
+containers:
+  required:
+    criteria: array/success_criteria_reduced

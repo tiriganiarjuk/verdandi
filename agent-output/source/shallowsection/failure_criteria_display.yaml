@@ -1,0 +1,7 @@
+title: FailureCriteriaDisplay
+description: >-
+  Display formatting for the failure criteria section. Evidence
+  format.
+fields:
+  required:
+    evidence_format: field/failure_criteria_evidence_format

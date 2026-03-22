@@ -1,0 +1,7 @@
+title: SuccessCriteriaOutputVsAgentVoice
+type: enum/output_vs_agent_voice
+default: "output_centric"
+description: >-
+  Voice paradigm for success criteria prose. 'output_centric'
+  describes success in terms of what the output looks like.
+  'agent_centric' describes success in terms of what the agent did.

@@ -1,0 +1,6 @@
+title: ReturnFormatAbortVsFailureDistinctionPreamble
+type: atom/string_prose
+description: >-
+  Prose distinguishing ABORT from FAILURE. ABORT means the work
+  should not be attempted. It is not failure — it is a responsible
+  decision to stop before producing bad output.

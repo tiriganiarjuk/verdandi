@@ -1,0 +1,7 @@
+title: SuccessCriteriaSuccessFailureIndependenceStatementVisible
+type: atom/boolean
+default: true
+description: >-
+  Whether to render the statement clarifying that success and failure
+  criteria are independent evaluations. Prevents models from treating
+  them as inverses of each other.

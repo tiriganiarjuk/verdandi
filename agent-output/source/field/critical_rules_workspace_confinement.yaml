@@ -1,0 +1,5 @@
+title: CriticalRulesWorkspaceConfinement
+type: atom/string_template
+description: >-
+  Workspace confinement rule text. Template with {{workspace_path}}
+  placeholder. Declares that nothing outside the workspace exists.

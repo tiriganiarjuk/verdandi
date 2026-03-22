@@ -1,0 +1,8 @@
+title: MustNormalization
+values: [preserve_voice, normalize_outliers, prefix_tags]
+description: >
+  How MUST/MUST-NOT polarity is handled in constraint lists.
+  'preserve_voice' renders constraints as authored with no normalization.
+  'normalize_outliers' rewrites minority-polarity items to match the
+  dominant voice. 'prefix_tags' prepends [MUST] or [MUST NOT] tags
+  to each constraint regardless of authored voice.

@@ -1,0 +1,7 @@
+title: ExamplesSuppressLoneGroupHeading
+type: atom/boolean
+default: true
+description: >-
+  Whether to suppress the group heading when only one example group
+  exists. When true, a single-group agent skips the group heading
+  and promotes entries directly under the section heading.

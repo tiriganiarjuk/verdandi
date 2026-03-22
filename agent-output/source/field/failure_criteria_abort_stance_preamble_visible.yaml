@@ -1,0 +1,7 @@
+title: FailureCriteriaAbortStancePreambleVisible
+type: atom/boolean
+default: true
+description: >-
+  Whether to render the behavioral preamble that reframes abort as
+  the correct action when failure conditions are detected. Sets the
+  model's stance before individual failure modes are listed.

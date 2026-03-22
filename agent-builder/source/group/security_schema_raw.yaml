@@ -6,10 +6,14 @@ fields:
   optional:
     input_schema: field/input_schema__x_any
     output_schema: field/output_schema__x_any
-    output_schema_embed: field/output_schema_embed
   conditional:
     return_schema:
-      ref: field/return_schema__x_abs
+      ref: field/return_schema__x_any
       only_when:
         field: .task.return.return_mode
         in: [status-metrics, metrics-output]
+    output_schema_embed:
+      ref: field/output_schema_embed
+      only_when:
+        field: output_schema
+        exists: true

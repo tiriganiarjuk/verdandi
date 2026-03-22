@@ -1,0 +1,6 @@
+title: InstructionsStepIndexTracking
+type: enum/step_index_tracking
+default: "n_of_m"
+description: >-
+  How step numbers render in headers. 'n_only' shows just the step
+  number. 'n_of_m' shows step number and total.

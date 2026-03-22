@@ -1,0 +1,7 @@
+title: CriticalRulesWorkspacePathFormat
+type: enum/inline_format
+default: "backtick"
+description: >-
+  How the workspace path renders inline in critical rules prose.
+  'backtick' wraps in code backticks. 'plain' renders as-is.
+  'bold' wraps in markdown bold.

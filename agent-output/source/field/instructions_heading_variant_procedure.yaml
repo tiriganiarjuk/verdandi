@@ -1,0 +1,5 @@
+title: InstructionsHeadingVariantProcedure
+type: atom/string_text
+description: >-
+  Heading text when heading_variant is "procedure". Uses formal
+  procedural language.

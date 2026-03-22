@@ -1,0 +1,7 @@
+title: EvidenceTransitionVariantKey
+values: [goal_then_criteria, proof, dual_presentation]
+description: >
+  How the transition from definition to evidence renders.
+  'goal_then_criteria' frames evidence as what meeting the standard
+  means. 'proof' frames evidence as proof of the definition.
+  'dual_presentation' frames evidence as a confirmation check.

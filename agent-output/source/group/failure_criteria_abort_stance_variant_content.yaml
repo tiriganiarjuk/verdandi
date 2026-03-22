@@ -1,0 +1,10 @@
+title: FailureCriteriaAbortStanceVariantContent
+description: >-
+  Shared variant content for failure criteria abort stance. Contains
+  two content families (preamble, definition_label) that both switch
+  together based on the abort_stance_variant selector in structure.
+  Each family is a simplegroup with one field per variant key.
+containers:
+  required:
+    preamble: simplegroup/failure_criteria_abort_stance_preamble_variant
+    definition_label: simplegroup/failure_criteria_abort_stance_definition_label_variant

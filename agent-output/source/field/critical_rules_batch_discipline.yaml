@@ -1,0 +1,6 @@
+title: CriticalRulesBatchDiscipline
+type: atom/string_template
+description: >-
+  Batch discipline rule text. Template with {{batch_size}} and
+  {{tool_name}} placeholders. Requires processing in batches with
+  immediate writes after each batch.

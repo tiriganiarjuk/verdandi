@@ -1,0 +1,17 @@
+title: SuccessCriteriaStructure
+description: >-
+  Structure controls for the success criteria section. Variant
+  selectors for definition framing, evidence framing, and transition
+  style. Voice, evidence handling, and multi-criteria relationship.
+fields:
+  required:
+    section_visible: field/success_criteria_section_visible
+    max_entries_rendered: field/success_criteria_max_entries_rendered
+    definition_framing_variant: field/success_criteria_definition_framing_variant
+    evidence_framing_variant: field/success_criteria_evidence_framing_variant
+    definition_to_evidence_transition_variant: field/success_criteria_definition_to_evidence_transition_variant
+    evidence_type_handling: field/success_criteria_evidence_type_handling
+    output_vs_agent_voice: field/success_criteria_output_vs_agent_voice
+    success_failure_independence_statement_visible: field/success_criteria_success_failure_independence_statement_visible
+    verification_guidance_suffix_visible: field/success_criteria_verification_guidance_suffix_visible
+    multi_criteria_relationship: field/success_criteria_multi_criteria_relationship

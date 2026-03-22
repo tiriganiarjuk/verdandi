@@ -1,0 +1,6 @@
+title: WritingOutputToolMandateVisible
+type: atom/boolean
+default: true
+description: >-
+  Whether to render the tool exclusivity mandate establishing that
+  output flows through exactly one tool with no exceptions.

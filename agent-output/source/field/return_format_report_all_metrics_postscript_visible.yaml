@@ -1,0 +1,6 @@
+title: ReturnFormatReportAllMetricsPostscriptVisible
+type: atom/boolean
+default: true
+description: >-
+  Whether to render the metrics obligation postscript reminding the
+  agent to report all specified metrics for its return state.

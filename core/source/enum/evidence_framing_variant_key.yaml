@@ -1,0 +1,7 @@
+title: EvidenceFramingVariantKey
+values: [properties, verification_checklist, quality_signals]
+description: >
+  How success criteria evidence lists render. 'properties' frames
+  evidence as output properties. 'verification_checklist' frames
+  evidence as items to verify before declaring completion.
+  'quality_signals' frames evidence as observable indicators of success.

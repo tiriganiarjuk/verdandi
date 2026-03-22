@@ -1,0 +1,7 @@
+title: FramingVariant
+values: [territory, environmental, cage]
+description: >
+  Posture for security boundary presentation. 'territory' frames
+  the workspace as the agent's domain. 'environmental' frames it as
+  the operating context. 'cage' frames it as a confinement boundary.
+  Governs heading, workspace path declaration, and section preamble.

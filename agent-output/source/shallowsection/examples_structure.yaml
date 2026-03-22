@@ -1,0 +1,23 @@
+title: ExamplesStructure
+description: >-
+  Structure controls for the examples section. Preamble visibility,
+  group heading suppression, override toggles with conditional
+  override values, and framing sentence toggle.
+fields:
+  required:
+    section_preamble_visible: field/examples_section_preamble_visible
+    suppress_lone_group_heading: field/examples_suppress_lone_group_heading
+    example_display_headings_override: field/examples_example_display_headings_override
+    examples_max_number_override: field/examples_max_number_override
+    group_framing_sentence_visible: field/examples_group_framing_sentence_visible
+  conditional:
+    example_display_headings:
+      ref: field/examples_example_display_headings
+      only_when:
+        field: example_display_headings_override
+        equals: true
+    examples_max_number:
+      ref: field/examples_max_number
+      only_when:
+        field: examples_max_number_override
+        equals: true

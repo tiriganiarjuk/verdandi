@@ -1,0 +1,7 @@
+title: IdentityResponsibilityFormatThreshold
+type: atom/integer
+default: 3
+description: >-
+  Item count threshold for responsibility format switching. When
+  identity_responsibility_format is a pair, items above this count
+  use the first format, items at or below use the second.

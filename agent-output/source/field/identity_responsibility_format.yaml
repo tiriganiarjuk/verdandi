@@ -1,0 +1,7 @@
+title: IdentityResponsibilityFormat
+type: union/format_or_pair
+description: >-
+  How the responsibility field renders when it contains multiple items.
+  Plain string means always that format. Two-element array means
+  threshold-based switching. Threshold is
+  identity_responsibility_format_threshold.

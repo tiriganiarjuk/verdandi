@@ -1,0 +1,7 @@
+title: InstructionsStepBodyContainer
+type: enum/body_container
+default: "none"
+description: >-
+  Visual container wrapping each step body. 'none' renders directly.
+  'blockquote' indents in a blockquote. 'bare_with_endmarker' appends
+  an end marker for visual boundary closure.

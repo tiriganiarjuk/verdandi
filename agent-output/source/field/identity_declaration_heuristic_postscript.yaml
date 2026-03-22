@@ -1,0 +1,6 @@
+title: IdentityDeclarationHeuristicPostscript
+type: atom/string_template
+description: >-
+  Reinforcement postscript after the identity declaration. Template
+  with {{role_identity}} placeholder. Anchors decision-making to the
+  declared identity. Position: after declaration, before responsibility.

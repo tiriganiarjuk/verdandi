@@ -4,10 +4,10 @@ description: >
   consumption. Workspace path extracted from security_boundary. Tool
   summary fields duplicated from resolved writing_output. These fields
   are fully resolved and will not change again.
-required:
-  workspace_path: field/workspace_path__x_abs
-  has_output_tool: field/has_output_tool
-optional:
-  tool_name: field/tool_name
-  name_needed: field/output_tool_name_needed
-  batch_size: field/output_tool_batch_size
+fields:
+  required:
+    has_output_tool: field/has_output_tool
+  optional:
+    tool_name: field/tool_name
+    name_needed: field/output_tool_name_needed
+    batch_size: field/output_tool_batch_size

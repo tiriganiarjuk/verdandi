@@ -1,0 +1,6 @@
+title: ReturnFormatReportAllMetricsPostscript
+type: atom/string_prose
+description: >-
+  Postscript reminding the agent to report all metrics specified for
+  its return state. The dispatcher and downstream processes depend
+  on these values being present.

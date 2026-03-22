@@ -1,0 +1,9 @@
+title: SuccessCriteriaDefinitionFramingVariant
+description: >-
+  Variant alternatives for how success definitions render. Keys
+  match enum/definition_framing_variant_key values. Structure
+  selects one.
+required:
+  declarative_assertion: field/success_criteria_definition_framing_variant_declarative_assertion
+  conditional_gate: field/success_criteria_definition_framing_variant_conditional_gate
+  completion_identity: field/success_criteria_definition_framing_variant_completion_identity

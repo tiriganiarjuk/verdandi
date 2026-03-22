@@ -1,0 +1,7 @@
+title: CriticalRulesWorkspaceConfinementVisible
+type: atom/boolean
+default: true
+description: >-
+  Whether to render the workspace confinement rule. Declares that
+  nothing outside the workspace path exists. Hooks enforce this
+  regardless — the toggle tests whether the prose helps.

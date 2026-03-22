@@ -1,0 +1,7 @@
+title: CriticalRulesInternalHierarchy
+type: enum/rule_hierarchy
+default: "flat"
+description: >-
+  Internal organization of critical rules. 'flat' renders all rules
+  in a single list. 'universal_then_output_tool' groups into universal
+  rules (always apply) followed by output-tool-specific rules.

@@ -1,0 +1,7 @@
+title: DefinitionFramingVariantKey
+values: [declarative_assertion, conditional_gate, completion_identity]
+description: >
+  How success criteria definitions render. 'declarative_assertion'
+  states the criterion directly. 'conditional_gate' frames it as
+  a necessary condition for completion. 'completion_identity' frames
+  it as what the agent has achieved when done.

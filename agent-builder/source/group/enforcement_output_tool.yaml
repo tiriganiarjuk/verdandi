@@ -13,12 +13,12 @@ fields:
     output_tool_write_frequency:
       ref: field/output_tool_write_frequency
       only_when:
-        field: enforcement_output_tool_format
+        field: output_tool_format
         equals: jsonl
     output_tool_batch_size:
       ref: field/output_tool_batch_size
       only_when:
-        field: enforcement_output_tool_write_frequency
+        field: output_tool_write_frequency
         equals: batch
     output_tool_name_needed:
       ref: field/output_tool_name_needed

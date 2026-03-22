@@ -2,25 +2,26 @@ title: Dispatcher
 description: >
   Everything the dispatcher skill needs to launch and feed the agent:
   identity, mode, batching, input/output format, parameters.
-required:
-  agent_name: field/agent_name
-  agent_description: field/agent_description
-  dispatch_mode: field/dispatch_mode
-  background_mode: field/dispatch_background_mode
-  input_format: field/dispatch_input_format
-  input_delivery: field/input_delivery
-  input_description: field/input_description
-  output_format: field/output_format_kind
-  output_name_known: field/output_name_known
-  return_mode: field/return_mode
-optional:
-  max_agents: field/dispatch_max_agents
-conditional:
-  batch_size:
-    ref: field/dispatch_batch_size
-    only_when:
-      field: dispatch_mode
-      equals: batch
+fields:
+  required:
+    agent_name: field/agent_name
+    agent_description: field/agent_description
+    dispatch_mode: field/dispatch_mode
+    background_mode: field/dispatch_background_mode
+    input_format: field/dispatch_input_format
+    input_delivery: field/input_delivery
+    input_description: field/input_description
+    output_format: field/output_format_kind
+    output_name_known: field/output_name_known
+    return_mode: field/return_mode
+  optional:
+    max_agents: field/dispatch_max_agents
+  conditional:
+    batch_size:
+      ref: field/dispatch_batch_size
+      only_when:
+        field: dispatch_mode
+        equals: batch
 containers:
   optional:
     parameters: array/dispatch_parameters

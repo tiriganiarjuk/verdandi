@@ -1,0 +1,11 @@
+title: FramingVariantContent
+description: >-
+  Shared variant content for security boundary framing. Contains three
+  content families (heading, workspace_path_declaration, section_preamble)
+  that all switch together based on the framing_variant selector in
+  structure. Each family is a simplegroup with one field per variant key.
+containers:
+  required:
+    heading: simplegroup/framing_variant_heading
+    workspace_path_declaration: simplegroup/framing_variant_workspace_path_declaration
+    section_preamble: simplegroup/framing_variant_section_preamble

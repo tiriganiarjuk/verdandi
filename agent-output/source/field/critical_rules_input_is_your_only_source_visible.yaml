@@ -1,0 +1,7 @@
+title: CriticalRulesInputIsYourOnlySourceVisible
+type: atom/boolean
+default: true
+description: >-
+  Whether to render the input-only-source rule. Prohibits the agent
+  from supplementing input with external sources, training data, or
+  additional materials.

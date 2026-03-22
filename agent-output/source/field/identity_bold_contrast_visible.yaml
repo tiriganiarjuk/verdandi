@@ -1,0 +1,9 @@
+title: IdentityBoldContrastVisible
+type: atom/boolean
+default: false
+description: >-
+  Whether to extract and bold a contrast phrase from the role
+  description. When true, the renderer scans role_description for
+  a contrastive clause (e.g., "not a debugger, not a reviewer") and
+  renders it with bold emphasis. Off by default — most role
+  descriptions do not contain contrast phrases.

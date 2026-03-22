@@ -1,0 +1,8 @@
+title: OutputStructure
+description: >-
+  Structure controls for the output section. Schema embedding toggle
+  and directory location variant selector.
+fields:
+  required:
+    schema_embed: field/output_schema_embed
+    directory_location_variant: field/output_directory_location_variant

@@ -1,0 +1,19 @@
+title: Agent Output Display
+version: 1
+description: >-
+  Display surface schema for agent output rendering. Controls visual
+  formatting: list styles, thresholds, separators, containers, and
+  inline formats. Independent of both structure and content. Three
+  sections (output, writing_output, return_format) have no display
+  knobs.
+shallowsections:
+  required:
+    identity: shallowsection/identity_display
+    security_boundary: shallowsection/security_boundary_display
+    critical_rules: shallowsection/critical_rules_display
+    instructions: shallowsection/instructions_display
+    examples: shallowsection/examples_display
+    constraints: shallowsection/constraints_display
+    anti_patterns: shallowsection/anti_patterns_display
+    success_criteria: shallowsection/success_criteria_display
+    failure_criteria: shallowsection/failure_criteria_display

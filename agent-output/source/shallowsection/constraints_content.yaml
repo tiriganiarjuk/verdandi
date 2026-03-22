@@ -1,0 +1,15 @@
+title: ConstraintsContent
+description: >-
+  Content prose for the constraints section. Heading, plain prose
+  fields, and variant sub-tables for preamble, closing reminder,
+  and no-inferred-constraints warning.
+fields:
+  required:
+    heading: field/constraints_heading
+    constraints_are_not_steps: field/constraints_are_not_steps
+    constraint_count_heading: field/constraints_constraint_count_heading
+    hierarchy_tier_comparison: field/constraints_hierarchy_tier_comparison
+    hierarchy_three_tier_explanation: field/constraints_hierarchy_three_tier_explanation
+containers:
+  required:
+    variants: group/constraints_variant_content

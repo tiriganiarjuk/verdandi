@@ -1,0 +1,6 @@
+title: NoInferredConstraintsVariantKey
+values: [light, explicit]
+description: >
+  How the constraint exhaustiveness statement renders. 'light' is a
+  brief acknowledgment. 'explicit' states the count and forbids
+  inferring additional constraints not listed.

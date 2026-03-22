@@ -1,0 +1,6 @@
+title: SuccessCriteriaDefinitionFramingVariantDeclarativeAssertion
+type: atom/string_template
+description: >-
+  Definition framing that states the success definition directly.
+  Contains {{DEFINITION}} placeholder replaced with the authored
+  definition text.

@@ -1,0 +1,7 @@
+title: VisibilityMode
+values: [auto, always, never]
+description: >
+  Tri-state visibility control for optional prose fragments. 'auto'
+  delegates to a threshold or data condition — the renderer decides.
+  'always' forces the fragment to render regardless of conditions.
+  'never' suppresses the fragment regardless of conditions.

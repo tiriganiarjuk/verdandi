@@ -1,0 +1,8 @@
+title: MarkerPlacement
+values: [header_fused, body_prefix, visual_formatting]
+description: >
+  Where exact/judgment mode markers appear in instruction steps.
+  'header_fused' embeds the marker in the step header text.
+  'body_prefix' places the marker as the first line of the step body.
+  'visual_formatting' uses visual cues (e.g., bold vs italic) to
+  distinguish modes without explicit text markers.

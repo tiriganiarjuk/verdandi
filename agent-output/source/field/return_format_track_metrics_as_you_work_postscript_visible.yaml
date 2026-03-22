@@ -1,0 +1,7 @@
+title: ReturnFormatTrackMetricsAsYouWorkPostscriptVisible
+type: atom/boolean
+default: true
+description: >-
+  Whether to render the retroactive orientation postscript
+  establishing that return requirements imply tracking requirements
+  throughout execution.

@@ -1,0 +1,11 @@
+title: SecurityBoundaryDisplay
+description: >-
+  Display formatting for the security boundary section. Path style,
+  toolset formats, intro threshold, and entry list format.
+fields:
+  required:
+    path_style: field/security_boundary_path_style
+    uniform_toolset_format: field/security_boundary_uniform_toolset_format
+    heterogeneous_toolset_format: field/security_boundary_heterogeneous_toolset_format
+    filesystem_map_intro_visibility_threshold: field/security_boundary_filesystem_map_intro_visibility_threshold
+    entry_list_format: field/security_boundary_entry_list_format

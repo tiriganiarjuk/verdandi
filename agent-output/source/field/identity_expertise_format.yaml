@@ -1,0 +1,6 @@
+title: IdentityExpertiseFormat
+type: union/format_or_pair
+description: >-
+  How the expertise list renders. Plain string means always that format.
+  Two-element array means threshold-based switching: first element above
+  threshold, second at or below. Threshold is identity_expertise_format_threshold.

@@ -1,0 +1,7 @@
+title: CriticalRulesRulePresentation
+type: enum/rule_presentation
+default: "single_sentence"
+description: >-
+  How individual rules render. 'single_sentence' presents each rule
+  as a dense single sentence. 'heading_plus_body' gives each rule a
+  bold heading with an explanatory body beneath.

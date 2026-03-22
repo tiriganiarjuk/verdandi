@@ -1,0 +1,7 @@
+title: SuccessCriteriaEvidenceFormatThreshold
+type: atom/integer
+default: 5
+description: >-
+  Evidence count threshold for format switching when evidence_format
+  is a pair. Below this count the first format applies; at or above,
+  the second format applies.

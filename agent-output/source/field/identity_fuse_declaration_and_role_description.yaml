@@ -1,0 +1,8 @@
+title: IdentityFuseDeclarationAndRoleDescription
+type: atom/boolean
+default: false
+description: >-
+  Whether to merge the identity declaration and role description into
+  a single paragraph. When false, declaration and role description
+  render as separate blocks. When true, they fuse into one flowing
+  paragraph.

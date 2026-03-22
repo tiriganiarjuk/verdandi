@@ -1,0 +1,7 @@
+title: SectionPreambleVariantKey
+values: [standalone, references_instructions, references_critical_rules]
+description: >
+  Constraints section preamble posture. 'standalone' frames constraints
+  as self-contained governance. 'references_instructions' connects them
+  to the instruction steps. 'references_critical_rules' positions them
+  relative to the critical rules tier.

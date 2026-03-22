@@ -1,0 +1,8 @@
+title: FailureCriteriaAbortStanceVariant
+type: enum/abort_stance_variant_key
+default: "obligation"
+description: >-
+  Selects the behavioral posture for abort conditions. 'obligation'
+  frames stopping as a duty (MUST stop). 'permission' frames stopping
+  as the correct action (the right thing to do). Governs both
+  preamble and definition label variants.

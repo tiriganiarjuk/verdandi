@@ -1,0 +1,7 @@
+title: SecurityBoundarySectionClosing
+type: atom/string_prose
+description: >-
+  Closing statement after the display entries. Instructs the agent
+  on what to do when a needed path is not listed. Position: postscript
+  after the entry list. Visibility controlled by
+  security_boundary_section_closing_visible.

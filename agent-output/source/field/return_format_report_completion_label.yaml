@@ -1,0 +1,5 @@
+title: ReturnFormatReportCompletionLabel
+type: atom/string_text
+description: >-
+  Label text introducing the completion report format. Plain text,
+  no placeholders. Precedes the structured return template.

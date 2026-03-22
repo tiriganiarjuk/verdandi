@@ -1,0 +1,7 @@
+title: SecurityBoundarySectionClosingVisible
+type: atom/boolean
+default: false
+description: >-
+  Whether to render a closing statement after the display entries.
+  Off by default — the entries are self-contained and hooks enforce
+  access regardless of prose.

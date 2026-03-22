@@ -1,0 +1,6 @@
+title: CriticalRulesNoInventionVisible
+type: atom/boolean
+default: true
+description: >-
+  Whether to render the no-invention rule. Requires every claim in
+  output to trace to input. Silence is correct when data is absent.

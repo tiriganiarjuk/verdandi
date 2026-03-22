@@ -1,0 +1,6 @@
+title: ToolNameRepetition
+values: [repeat, shorthand]
+description: >
+  How a tool name is referenced after first mention. 'repeat' uses the
+  full tool name at every mention. 'shorthand' defines the full name
+  once, then uses "the tool" for subsequent references.

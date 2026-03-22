@@ -10,4 +10,5 @@ sections:
     task: section/task
     security: section/security
     execution: section/execution_reduced
-    criteria: section/criteria_reduced
+  optional:
+    criteria: section/criteria

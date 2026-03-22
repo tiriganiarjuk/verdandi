@@ -1,0 +1,7 @@
+title: FailureCriteriaCiteDefinitionAndEvidencePostscriptVisible
+type: atom/boolean
+default: false
+description: >-
+  Whether to render the postscript connecting definition/evidence
+  hierarchy to return_format reporting. Off by default — only
+  needed when the reporting structure is complex.

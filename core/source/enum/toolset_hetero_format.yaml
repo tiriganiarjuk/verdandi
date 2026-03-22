@@ -1,0 +1,6 @@
+title: ToolsetHeteroFormat
+values: [per_entry_list, per_entry_prose]
+description: >
+  How tool names render when display entries have different tool sets.
+  'per_entry_list' shows tools as a list alongside each entry.
+  'per_entry_prose' embeds tools in natural language alongside each entry.

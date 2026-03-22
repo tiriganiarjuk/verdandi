@@ -1,0 +1,5 @@
+title: ReturnFormatDoNotFabricateMetricsPostscript
+type: atom/string_prose
+description: >-
+  Postscript requiring the agent to report actual metrics from
+  execution. Do not fabricate values to match the expected format.

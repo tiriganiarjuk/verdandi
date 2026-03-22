@@ -1,0 +1,5 @@
+title: SuccessCriteriaHeading
+type: atom/string_text
+description: >-
+  Section heading for success criteria. Plain text, no placeholders.
+  Rendered at the configured heading level.

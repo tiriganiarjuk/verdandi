@@ -1,0 +1,6 @@
+title: FailureCriteriaMaxEntriesRendered
+type: atom/integer
+default: 0
+description: >-
+  Maximum number of failure criteria entries to render. Zero means
+  render all entries without limit.

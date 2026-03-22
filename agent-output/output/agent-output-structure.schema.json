@@ -1,0 +1,999 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agent-output-structure.schema.json",
+  "title": "Agent Output Structure",
+  "description": "Structure surface schema for agent output rendering. Controls what renders and which variant of content to use. Visibility toggles, variant selectors, override gates, and presentation modes across all 12 sections.",
+  "type": "object",
+  "required": [
+    "identity",
+    "security_boundary",
+    "critical_rules",
+    "instructions",
+    "examples",
+    "constraints",
+    "anti_patterns",
+    "success_criteria",
+    "failure_criteria",
+    "output",
+    "writing_output",
+    "return_format"
+  ],
+  "properties": {
+    "identity": {
+      "title": "IdentityStructure",
+      "type": "object",
+      "description": "Structure controls for the identity section. Field ordering, declaration fusion, and visibility toggles for optional prose.",
+      "properties": {
+        "field_ordering": {
+          "title": "IdentityFieldOrdering",
+          "type": "string",
+          "description": "Structural variant for identity section field sequence. Controls whether the section leads with role identity and declaration (identity_first) or with scope and responsibility (responsibility_first).\nStructural variant for identity section field sequence. 'identity_first' leads with role identity and declaration. 'responsibility_first' leads with scope and responsibility.",
+          "enum": [
+            "identity_first",
+            "responsibility_first"
+          ],
+          "default": "identity_first"
+        },
+        "fuse_declaration_and_role_description": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "IdentityFuseDeclarationAndRoleDescription",
+          "description": "Whether to merge the identity declaration and role description into a single paragraph. When false, declaration and role description render as separate blocks. When true, they fuse into one flowing paragraph.\nTrue or false value",
+          "default": false
+        },
+        "expertise_postscript_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "IdentityExpertisePostscriptVisible",
+          "description": "Whether to render the expertise limitation postscript after the expertise list. When true, a reinforcement statement constraining expertise to the listed areas appears after the list. When false, the expertise list renders without a closing constraint.\nTrue or false value",
+          "default": true
+        },
+        "closing_reminder_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "IdentityClosingReminderVisible",
+          "description": "Whether to render a closing identity reminder at the end of the identity section. When true, a reinforcement sentence restating the agent's role identity appears as the section closer. Off by default — identity is established at the top and does not need restating unless experiments show drift.\nTrue or false value",
+          "default": false
+        },
+        "bold_contrast_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "IdentityBoldContrastVisible",
+          "description": "Whether to extract and bold a contrast phrase from the role description. When true, the renderer scans role_description for a contrastive clause (e.g., \"not a debugger, not a reviewer\") and renders it with bold emphasis. Off by default — most role descriptions do not contain contrast phrases.\nTrue or false value",
+          "default": false
+        }
+      },
+      "required": [
+        "field_ordering",
+        "fuse_declaration_and_role_description",
+        "expertise_postscript_visible",
+        "closing_reminder_visible",
+        "bold_contrast_visible"
+      ],
+      "additionalProperties": false
+    },
+    "security_boundary": {
+      "title": "SecurityBoundaryStructure",
+      "type": "object",
+      "description": "Structure controls for the security boundary section. Visibility toggles, workspace path fusion, and framing variant selector.",
+      "properties": {
+        "fuse_workspace_path_and_resolver": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "SecurityBoundaryFuseWorkspacePathAndResolver",
+          "description": "Whether to merge the workspace path declaration with the path resolution instruction in a single sentence. When true, renders as one flowing statement. When false, workspace path and resolution instruction render as separate lines.\nTrue or false value",
+          "default": true
+        },
+        "filesystem_map_intro_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "SecurityBoundaryFilesystemMapIntroVisible",
+          "description": "Whether to render an introductory line before the filesystem display entries. Visibility may also be governed by filesystem_map_intro_visibility_threshold in display — the threshold overrides this toggle when entry count is below it.\nTrue or false value",
+          "default": true
+        },
+        "section_preamble_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "SecurityBoundarySectionPreambleVisible",
+          "description": "Whether to render a preamble between the section heading and the display entries. The preamble text is selected by framing_variant in content.\nTrue or false value",
+          "default": true
+        },
+        "section_closing_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "SecurityBoundarySectionClosingVisible",
+          "description": "Whether to render a closing statement after the display entries. Off by default — the entries are self-contained and hooks enforce access regardless of prose.\nTrue or false value",
+          "default": false
+        },
+        "tool_names_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "SecurityBoundaryToolNamesVisible",
+          "description": "Whether to show tool names alongside paths in display entries. When false, entries show paths only. Hooks enforce tool access regardless — this controls what the agent sees, not what it can do.\nTrue or false value",
+          "default": true
+        },
+        "framing_variant": {
+          "title": "SecurityBoundaryFramingVariant",
+          "type": "string",
+          "description": "Posture for the security boundary section. Selects which content variant renders for heading, workspace_path_declaration, and section_preamble simultaneously. All three content families use the same variant key.\nPosture for security boundary presentation. 'territory' frames the workspace as the agent's domain. 'environmental' frames it as the operating context. 'cage' frames it as a confinement boundary. Governs heading, workspace path declaration, and section preamble.",
+          "enum": [
+            "territory",
+            "environmental",
+            "cage"
+          ],
+          "default": "territory"
+        }
+      },
+      "required": [
+        "fuse_workspace_path_and_resolver",
+        "filesystem_map_intro_visible",
+        "section_preamble_visible",
+        "section_closing_visible",
+        "tool_names_visible",
+        "framing_variant"
+      ],
+      "additionalProperties": false
+    },
+    "critical_rules": {
+      "title": "CriticalRulesStructure",
+      "type": "object",
+      "description": "Structure controls for the critical rules section. Visibility toggles for each rule, presentation format, and hierarchy mode.",
+      "properties": {
+        "authority_preamble_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "CriticalRulesAuthorityPreambleVisible",
+          "description": "Whether to render the authority preamble establishing that critical rules override all other instructions. Sets the stakes before individual rules are listed.\nTrue or false value",
+          "default": true
+        },
+        "rule_count_awareness_prelude_visible": {
+          "$ref": "#/$defs/enum__visibility_mode",
+          "title": "CriticalRulesRuleCountAwarenessPreludeVisible",
+          "description": "Whether to render the rule count awareness prelude. 'auto' renders when rule count exceeds the auto_threshold. 'always' forces it on. 'never' suppresses it. The prelude tells the agent how many rules to expect.\nTri-state visibility control for optional prose fragments. 'auto' delegates to a threshold or data condition — the renderer decides. 'always' forces the fragment to render regardless of conditions. 'never' suppresses the fragment regardless of conditions.",
+          "default": "auto"
+        },
+        "rule_count_awareness_prelude_auto_threshold": {
+          "$ref": "#/$defs/atom__integer",
+          "title": "CriticalRulesRuleCountAwarenessPreludeAutoThreshold",
+          "description": "Rule count threshold for the auto mode of rule_count_awareness_prelude_visible. When rule count exceeds this threshold and visibility is 'auto', the prelude renders.\nWhole number value",
+          "default": 5
+        },
+        "workspace_confinement_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "CriticalRulesWorkspaceConfinementVisible",
+          "description": "Whether to render the workspace confinement rule. Declares that nothing outside the workspace path exists. Hooks enforce this regardless — the toggle tests whether the prose helps.\nTrue or false value",
+          "default": true
+        },
+        "fail_fast_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "CriticalRulesFailFastVisible",
+          "description": "Whether to render the fail-fast rule. Instructs the agent to return FAILURE immediately on error rather than attempting recovery.\nTrue or false value",
+          "default": true
+        },
+        "input_is_your_only_source_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "CriticalRulesInputIsYourOnlySourceVisible",
+          "description": "Whether to render the input-only-source rule. Prohibits the agent from supplementing input with external sources, training data, or additional materials.\nTrue or false value",
+          "default": true
+        },
+        "no_invention_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "CriticalRulesNoInventionVisible",
+          "description": "Whether to render the no-invention rule. Requires every claim in output to trace to input. Silence is correct when data is absent.\nTrue or false value",
+          "default": true
+        },
+        "output_tool_exclusivity_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "CriticalRulesOutputToolExclusivityVisible",
+          "description": "Whether to render the output tool exclusivity rule. Declares that the named tool is the only output mechanism. Conditional on has_output_tool — data gate suppresses when no tool exists.\nTrue or false value",
+          "default": true
+        },
+        "batch_discipline_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "CriticalRulesBatchDisciplineVisible",
+          "description": "Whether to render the batch discipline rule. Requires processing in batches of the specified size with immediate writes. Conditional on both has_output_tool and batch_size being present.\nTrue or false value",
+          "default": true
+        },
+        "discipline_over_helpfulness_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "CriticalRulesDisciplineOverHelpfulnessVisible",
+          "description": "Whether to render the discipline-over-helpfulness rule. Reframes discipline as the helpful behavior. Off by default — experimental rule testing whether explicit reframing reduces helpfulness drift.\nTrue or false value",
+          "default": false
+        },
+        "rule_presentation": {
+          "title": "CriticalRulesRulePresentation",
+          "type": "string",
+          "description": "How individual rules render. 'single_sentence' presents each rule as a dense single sentence. 'heading_plus_body' gives each rule a bold heading with an explanatory body beneath.\nHow critical rules render. 'single_sentence' presents each rule as a single dense sentence. 'heading_plus_body' gives each rule a bold heading with an explanatory body beneath.",
+          "enum": [
+            "single_sentence",
+            "heading_plus_body"
+          ],
+          "default": "single_sentence"
+        },
+        "internal_hierarchy": {
+          "title": "CriticalRulesInternalHierarchy",
+          "type": "string",
+          "description": "Internal organization of critical rules. 'flat' renders all rules in a single list. 'universal_then_output_tool' groups into universal rules (always apply) followed by output-tool-specific rules.\nInternal organization of critical rules. 'flat' renders all rules in a single list with no grouping. 'universal_then_output_tool' groups rules into universal rules (always apply) followed by output-tool-specific rules (conditional on has_output_tool).",
+          "enum": [
+            "flat",
+            "universal_then_output_tool"
+          ],
+          "default": "flat"
+        }
+      },
+      "required": [
+        "authority_preamble_visible",
+        "rule_count_awareness_prelude_visible",
+        "rule_count_awareness_prelude_auto_threshold",
+        "workspace_confinement_visible",
+        "fail_fast_visible",
+        "input_is_your_only_source_visible",
+        "no_invention_visible",
+        "output_tool_exclusivity_visible",
+        "batch_discipline_visible",
+        "discipline_over_helpfulness_visible",
+        "rule_presentation",
+        "internal_hierarchy"
+      ],
+      "additionalProperties": false
+    },
+    "instructions": {
+      "title": "InstructionsStructure",
+      "type": "object",
+      "description": "Structure controls for the instructions section. Heading variant, mode infrastructure, preamble components, step structure, closer, and scaffolding tier.",
+      "properties": {
+        "heading_variant": {
+          "title": "InstructionsHeadingVariant",
+          "type": "string",
+          "description": "Selects which heading variant renders for the instructions section. 'default' uses a plain heading. 'procedure' uses formal procedural language. 'steps_with_count' includes the total step count.\nInstructions section heading style. 'default' uses a plain heading. 'procedure' uses formal procedural language. 'steps_with_count' includes the total step count in the heading.",
+          "enum": [
+            "default",
+            "procedure",
+            "steps_with_count"
+          ],
+          "default": "default"
+        },
+        "exact_vs_judgment_explanation_visible": {
+          "$ref": "#/$defs/enum__visibility_mode",
+          "title": "InstructionsExactVsJudgmentExplanationVisible",
+          "description": "Whether to render the exact/judgment mode explanation. 'auto' renders when instruction modes are mixed (both exact and judgment steps present). 'always' forces it on. 'never' suppresses it.\nTri-state visibility control for optional prose fragments. 'auto' delegates to a threshold or data condition — the renderer decides. 'always' forces the fragment to render regardless of conditions. 'never' suppresses the fragment regardless of conditions.",
+          "default": "auto"
+        },
+        "exact_vs_judgment_marker_placement": {
+          "title": "InstructionsExactVsJudgmentMarkerPlacement",
+          "type": "string",
+          "description": "Where exact/judgment mode markers appear in instruction steps. 'header_fused' embeds in the step header. 'body_prefix' places as the first line of step body. 'visual_formatting' uses visual cues to distinguish modes without explicit text.\nWhere exact/judgment mode markers appear in instruction steps. 'header_fused' embeds the marker in the step header text. 'body_prefix' places the marker as the first line of the step body. 'visual_formatting' uses visual cues (e.g., bold vs italic) to distinguish modes without explicit text markers.",
+          "enum": [
+            "header_fused",
+            "body_prefix",
+            "visual_formatting"
+          ],
+          "default": "header_fused"
+        },
+        "signal_at_mode_change_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "InstructionsSignalAtModeChangeVisible",
+          "description": "Whether to render a transition signal when consecutive steps switch between exact and judgment modes. Off by default — mode markers in headers are usually sufficient.\nTrue or false value",
+          "default": false
+        },
+        "instructions_preamble_step_count_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "InstructionsPreambleStepCountVisible",
+          "description": "Whether to render the step count statement in the preamble. Tells the agent how many steps to expect.\nTrue or false value",
+          "default": true
+        },
+        "instructions_preamble_no_add_skip_reorder_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "InstructionsPreambleNoAddSkipReorderVisible",
+          "description": "Whether to render the prohibition against adding, skipping, or reordering steps in the preamble.\nTrue or false value",
+          "default": true
+        },
+        "instructions_preamble_exact_vs_judgment_preview_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "InstructionsPreambleExactVsJudgmentPreviewVisible",
+          "description": "Whether to render the exact/judgment mode preview in the preamble. Previews that some steps are exact (no interpretation) and some require judgment.\nTrue or false value",
+          "default": true
+        },
+        "instructions_preamble_no_extra_operations_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "InstructionsPreambleNoExtraOperationsVisible",
+          "description": "Whether to render the prohibition against supplementing steps with general knowledge or adding unspecified operations.\nTrue or false value",
+          "default": true
+        },
+        "step_index_tracking": {
+          "title": "InstructionsStepIndexTracking",
+          "type": "string",
+          "description": "How step numbers render in headers. 'n_only' shows just the step number. 'n_of_m' shows step number and total.\nHow step numbers render in instruction headers. 'n_only' shows just the step number (Step 3). 'n_of_m' shows step number and total (Step 3 of 7).",
+          "enum": [
+            "n_only",
+            "n_of_m"
+          ],
+          "default": "n_of_m"
+        },
+        "step_done_when_suffix_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "InstructionsStepDoneWhenSuffixVisible",
+          "description": "Whether to render a completion condition suffix after each step body. Off by default — most steps are self-evident about completion.\nTrue or false value",
+          "default": false
+        },
+        "section_closer_guardrail_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "InstructionsSectionCloserGuardrailVisible",
+          "description": "Whether to render the section closer reinforcing that the listed steps are the complete task with no additions.\nTrue or false value",
+          "default": true
+        },
+        "section_closer_exact_vs_judgment_recap_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "InstructionsSectionCloserExactVsJudgmentRecapVisible",
+          "description": "Whether to render a mode recap in the section closer summarizing which steps were exact and which required judgment.\nTrue or false value",
+          "default": false
+        },
+        "cross_step_dependency_phrases_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "InstructionsCrossStepDependencyPhrasesVisible",
+          "description": "Whether to render dependency phrases indicating which earlier steps a step's output depends on. Off by default — adds noise for simple linear workflows.\nTrue or false value",
+          "default": false
+        },
+        "halfway_point_reminder_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "InstructionsHalfwayPointReminderVisible",
+          "description": "Whether to render a progress reminder at the midpoint of the step list. Off by default — only useful for long instruction sets where the agent may lose orientation.\nTrue or false value",
+          "default": false
+        },
+        "structural_complexity_override": {
+          "title": "InstructionsStructuralComplexityOverride",
+          "type": "string",
+          "description": "Scaffolding tier for instruction rendering. 'auto' selects from step count using activation thresholds. 'lightweight' uses minimal scaffolding. 'standard' adds preamble, markers, and closers. 'heavy' adds progress reminders, dependencies, and recaps.\nStructural complexity tier for instruction rendering. 'auto' selects tier from step count using activation thresholds. 'lightweight' uses minimal scaffolding (few steps, little overhead). 'standard' adds preamble, mode markers, and closers. 'heavy' adds progress reminders, dependency phrases, and detailed recaps.",
+          "enum": [
+            "auto",
+            "lightweight",
+            "standard",
+            "heavy"
+          ],
+          "default": "auto"
+        }
+      },
+      "required": [
+        "heading_variant",
+        "exact_vs_judgment_explanation_visible",
+        "exact_vs_judgment_marker_placement",
+        "signal_at_mode_change_visible",
+        "instructions_preamble_step_count_visible",
+        "instructions_preamble_no_add_skip_reorder_visible",
+        "instructions_preamble_exact_vs_judgment_preview_visible",
+        "instructions_preamble_no_extra_operations_visible",
+        "step_index_tracking",
+        "step_done_when_suffix_visible",
+        "section_closer_guardrail_visible",
+        "section_closer_exact_vs_judgment_recap_visible",
+        "cross_step_dependency_phrases_visible",
+        "halfway_point_reminder_visible",
+        "structural_complexity_override"
+      ],
+      "additionalProperties": false
+    },
+    "examples": {
+      "title": "ExamplesStructure",
+      "type": "object",
+      "description": "Structure controls for the examples section. Preamble visibility, group heading suppression, override toggles with conditional override values, and framing sentence toggle.",
+      "properties": {
+        "section_preamble_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "ExamplesSectionPreambleVisible",
+          "description": "Whether to render the section preamble explaining how to read examples (GOOD/BAD/WHY pattern).\nTrue or false value",
+          "default": true
+        },
+        "suppress_lone_group_heading": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "ExamplesSuppressLoneGroupHeading",
+          "description": "Whether to suppress the group heading when only one example group exists. When true, a single-group agent skips the group heading and promotes entries directly under the section heading.\nTrue or false value",
+          "default": true
+        },
+        "example_display_headings_override": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "ExamplesExampleDisplayHeadingsOverride",
+          "description": "Whether to override the per-group example_display_headings from data. When false, data passes through unchanged. When true, the sibling examples_example_display_headings value is used instead.\nTrue or false value",
+          "default": false
+        },
+        "examples_max_number_override": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "ExamplesMaxNumberOverride",
+          "description": "Whether to override the per-group examples_max_number from data. When false, data passes through unchanged. When true, the sibling examples_max_number value is used instead.\nTrue or false value",
+          "default": false
+        },
+        "group_framing_sentence_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "ExamplesGroupFramingSentenceVisible",
+          "description": "Whether to render a framing sentence between the group heading and its first entry. Off by default — group headings are usually self-explanatory.\nTrue or false value",
+          "default": false
+        },
+        "example_display_headings": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "ExamplesExampleDisplayHeadings",
+          "description": "Override value for example entry headings. Only applies when examples_example_display_headings_override is true. Controls whether individual example entries show their headings.\nTrue or false value",
+          "default": true
+        },
+        "examples_max_number": {
+          "$ref": "#/$defs/atom__integer",
+          "title": "ExamplesMaxNumber",
+          "description": "Override value for maximum examples to render per group. Only applies when examples_max_number_override is true. 0 means no truncation. N > 0 caps at N entries, preserving author priority order.\nWhole number value",
+          "default": 0
+        }
+      },
+      "required": [
+        "section_preamble_visible",
+        "suppress_lone_group_heading",
+        "example_display_headings_override",
+        "examples_max_number_override",
+        "group_framing_sentence_visible"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "required": [
+              "example_display_headings_override"
+            ],
+            "properties": {
+              "example_display_headings_override": {
+                "const": true
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "example_display_headings"
+            ]
+          },
+          "else": {
+            "properties": {
+              "example_display_headings": false
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "examples_max_number_override"
+            ],
+            "properties": {
+              "examples_max_number_override": {
+                "const": true
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "examples_max_number"
+            ]
+          },
+          "else": {
+            "properties": {
+              "examples_max_number": false
+            }
+          }
+        }
+      ]
+    },
+    "constraints": {
+      "title": "ConstraintsStructure",
+      "type": "object",
+      "description": "Structure controls for the constraints section. Master visibility, entry limit, visibility toggles, and variant selectors conditional on their paired visibility toggle.",
+      "properties": {
+        "section_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "ConstraintsSectionVisible",
+          "description": "Whether to render the constraints section at all. When false, the entire section is suppressed regardless of other constraint settings.\nTrue or false value",
+          "default": true
+        },
+        "max_entries_rendered": {
+          "$ref": "#/$defs/atom__integer",
+          "title": "ConstraintsMaxEntriesRendered",
+          "description": "Maximum number of constraint entries to render. Zero means render all entries without limit. Positive values cap the list, useful for token budget control when constraint counts are high.\nWhole number value",
+          "default": 0
+        },
+        "section_preamble_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "ConstraintsSectionPreambleVisible",
+          "description": "Whether to render the preamble text before the constraint list. The preamble establishes context for how constraints should be interpreted relative to other sections.\nTrue or false value",
+          "default": true
+        },
+        "constraints_are_not_steps_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "ConstraintsAreNotStepsVisible",
+          "description": "Whether to render the clarification that constraints are not sequential steps. Prevents models from treating a constraint list as a procedure to follow in order.\nTrue or false value",
+          "default": true
+        },
+        "no_inferred_constraints_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "ConstraintsNoInferredConstraintsVisible",
+          "description": "Whether to render an explicit warning against inferring constraints not listed. Off by default — only needed when models tend to invent additional constraints from context.\nTrue or false value",
+          "default": false
+        },
+        "closing_compliance_reminder_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "ConstraintsClosingComplianceReminderVisible",
+          "description": "Whether to render a closing reminder about constraint compliance after the constraint list. Reinforces obligation at the boundary where the model transitions to the next section.\nTrue or false value",
+          "default": true
+        },
+        "constraint_count_heading_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "ConstraintsConstraintCountHeadingVisible",
+          "description": "Whether to render a heading that includes the constraint count. Makes the model aware of how many constraints exist, which can improve compliance tracking.\nTrue or false value",
+          "default": true
+        },
+        "section_preamble_variant": {
+          "title": "ConstraintsSectionPreambleVariant",
+          "type": "string",
+          "description": "Selects which preamble variant to use for the constraints section. 'standalone' frames constraints independently. 'references_instructions' and 'references_critical_rules' frame constraints relative to other sections.\nConstraints section preamble posture. 'standalone' frames constraints as self-contained governance. 'references_instructions' connects them to the instruction steps. 'references_critical_rules' positions them relative to the critical rules tier.",
+          "enum": [
+            "standalone",
+            "references_instructions",
+            "references_critical_rules"
+          ],
+          "default": "standalone"
+        },
+        "closing_compliance_reminder_variant": {
+          "title": "ConstraintsClosingComplianceReminderVariant",
+          "type": "string",
+          "description": "Selects the tone of the closing compliance reminder. 'evaluation_warning' frames compliance as tied to evaluation. 'simultaneity' emphasizes that all constraints apply simultaneously.\nConstraints closing reinforcement posture. 'evaluation_warning' reminds the agent that output will be audited against each constraint. 'simultaneity' reminds the agent that all constraints apply at once.",
+          "enum": [
+            "evaluation_warning",
+            "simultaneity"
+          ],
+          "default": "evaluation_warning"
+        },
+        "no_inferred_constraints_variant": {
+          "title": "ConstraintsNoInferredConstraintsVariant",
+          "type": "string",
+          "description": "Selects how strongly the no-inferred-constraints warning is worded. 'light' is a brief reminder. 'explicit' is a template-based warning that names the constraint count.\nHow the constraint exhaustiveness statement renders. 'light' is a brief acknowledgment. 'explicit' states the count and forbids inferring additional constraints not listed.",
+          "enum": [
+            "light",
+            "explicit"
+          ],
+          "default": "light"
+        }
+      },
+      "required": [
+        "section_visible",
+        "max_entries_rendered",
+        "section_preamble_visible",
+        "constraints_are_not_steps_visible",
+        "no_inferred_constraints_visible",
+        "closing_compliance_reminder_visible",
+        "constraint_count_heading_visible"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "required": [
+              "section_preamble_visible"
+            ],
+            "properties": {
+              "section_preamble_visible": {
+                "const": true
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "section_preamble_variant"
+            ]
+          },
+          "else": {
+            "properties": {
+              "section_preamble_variant": false
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "closing_compliance_reminder_visible"
+            ],
+            "properties": {
+              "closing_compliance_reminder_visible": {
+                "const": true
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "closing_compliance_reminder_variant"
+            ]
+          },
+          "else": {
+            "properties": {
+              "closing_compliance_reminder_variant": false
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "no_inferred_constraints_visible"
+            ],
+            "properties": {
+              "no_inferred_constraints_visible": {
+                "const": true
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "no_inferred_constraints_variant"
+            ]
+          },
+          "else": {
+            "properties": {
+              "no_inferred_constraints_variant": false
+            }
+          }
+        }
+      ]
+    },
+    "anti_patterns": {
+      "title": "AntiPatternsStructure",
+      "type": "object",
+      "description": "Structure controls for the anti-patterns section. Master visibility, entry limit, preamble and distinction toggles.",
+      "properties": {
+        "section_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "AntiPatternsSectionVisible",
+          "description": "Whether to render the anti-patterns section at all. When false, the entire section is suppressed regardless of other anti-pattern settings.\nTrue or false value",
+          "default": true
+        },
+        "max_entries_rendered": {
+          "$ref": "#/$defs/atom__integer",
+          "title": "AntiPatternsMaxEntriesRendered",
+          "description": "Maximum number of anti-pattern entries to render. Zero means render all entries without limit.\nWhole number value",
+          "default": 0
+        },
+        "section_preamble_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "AntiPatternsSectionPreambleVisible",
+          "description": "Whether to render the preamble text before the anti-pattern list. The preamble establishes what anti-patterns are and how the model should avoid them.\nTrue or false value",
+          "default": true
+        },
+        "constraints_vs_anti_patterns_distinction_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "AntiPatternsConstraintsVsAntiPatternsDistinctionVisible",
+          "description": "Whether to render text distinguishing anti-patterns from constraints. Clarifies that anti-patterns are behaviors to avoid while constraints are rules to follow.\nTrue or false value",
+          "default": true
+        }
+      },
+      "required": [
+        "section_visible",
+        "max_entries_rendered",
+        "section_preamble_visible",
+        "constraints_vs_anti_patterns_distinction_visible"
+      ],
+      "additionalProperties": false
+    },
+    "success_criteria": {
+      "title": "SuccessCriteriaStructure",
+      "type": "object",
+      "description": "Structure controls for the success criteria section. Variant selectors for definition framing, evidence framing, and transition style. Voice, evidence handling, and multi-criteria relationship.",
+      "properties": {
+        "section_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "SuccessCriteriaSectionVisible",
+          "description": "Whether to render the success criteria section at all. When false, the entire section is suppressed regardless of other settings.\nTrue or false value",
+          "default": true
+        },
+        "max_entries_rendered": {
+          "$ref": "#/$defs/atom__integer",
+          "title": "SuccessCriteriaMaxEntriesRendered",
+          "description": "Maximum number of success criteria entries to render. Zero means render all entries without limit.\nWhole number value",
+          "default": 0
+        },
+        "definition_framing_variant": {
+          "title": "SuccessCriteriaDefinitionFramingVariant",
+          "type": "string",
+          "description": "Selects how the success definition statement renders. 'declarative_assertion' states the definition directly. 'conditional_gate' frames it as an if-and-only-if condition. 'completion_identity' frames it as agent self-recognition.\nHow success criteria definitions render. 'declarative_assertion' states the criterion directly. 'conditional_gate' frames it as a necessary condition for completion. 'completion_identity' frames it as what the agent has achieved when done.",
+          "enum": [
+            "declarative_assertion",
+            "conditional_gate",
+            "completion_identity"
+          ],
+          "default": "declarative_assertion"
+        },
+        "evidence_framing_variant": {
+          "title": "SuccessCriteriaEvidenceFramingVariant",
+          "type": "string",
+          "description": "Selects how the evidence list introduction renders. 'properties' frames evidence as output properties. 'verification_checklist' frames as items to verify. 'quality_signals' frames as observable truth conditions.\nHow success criteria evidence lists render. 'properties' frames evidence as output properties. 'verification_checklist' frames evidence as items to verify before declaring completion. 'quality_signals' frames evidence as observable indicators of success.",
+          "enum": [
+            "properties",
+            "verification_checklist",
+            "quality_signals"
+          ],
+          "default": "properties"
+        },
+        "definition_to_evidence_transition_variant": {
+          "title": "SuccessCriteriaDefinitionToEvidenceTransitionVariant",
+          "type": "string",
+          "description": "Selects the transitional phrase between definition and evidence. 'goal_then_criteria' uses a goal-oriented bridge. 'proof' uses a proof-oriented bridge. 'dual_presentation' uses a confirmation-oriented bridge.\nHow the transition from definition to evidence renders. 'goal_then_criteria' frames evidence as what meeting the standard means. 'proof' frames evidence as proof of the definition. 'dual_presentation' frames evidence as a confirmation check.",
+          "enum": [
+            "goal_then_criteria",
+            "proof",
+            "dual_presentation"
+          ],
+          "default": "goal_then_criteria"
+        },
+        "evidence_type_handling": {
+          "title": "SuccessCriteriaEvidenceTypeHandling",
+          "type": "string",
+          "description": "How evidence items render relative to their type markers. 'undifferentiated' renders all evidence items uniformly. 'graduated_language' varies language based on evidence type.\nHow evidence items are rendered relative to their type markers. 'graduated_language' adds per-item type markers distinguishing mechanical from judgment evidence. 'undifferentiated' renders all evidence items equally with no type distinction.",
+          "enum": [
+            "graduated_language",
+            "undifferentiated"
+          ],
+          "default": "undifferentiated"
+        },
+        "output_vs_agent_voice": {
+          "title": "SuccessCriteriaOutputVsAgentVoice",
+          "type": "string",
+          "description": "Voice paradigm for success criteria prose. 'output_centric' describes success in terms of what the output looks like. 'agent_centric' describes success in terms of what the agent did.\nVoice paradigm for success criteria prose. 'output_centric' frames criteria in terms of what the output must be. 'agent_centric' frames criteria in terms of what the agent must achieve.",
+          "enum": [
+            "output_centric",
+            "agent_centric"
+          ],
+          "default": "output_centric"
+        },
+        "success_failure_independence_statement_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "SuccessCriteriaSuccessFailureIndependenceStatementVisible",
+          "description": "Whether to render the statement clarifying that success and failure criteria are independent evaluations. Prevents models from treating them as inverses of each other.\nTrue or false value",
+          "default": true
+        },
+        "verification_guidance_suffix_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "SuccessCriteriaVerificationGuidanceSuffixVisible",
+          "description": "Whether to render the verification guidance suffix after evidence. Off by default. When enabled, reminds the model that some criteria are mechanically verifiable while others require judgment.\nTrue or false value",
+          "default": false
+        },
+        "multi_criteria_relationship": {
+          "title": "SuccessCriteriaMultiCriteriaRelationship",
+          "type": "string",
+          "description": "How multiple success criteria relate to each other. 'independent_blocks' renders each criterion as a standalone block. 'numbered_dimensions' renders criteria as numbered evaluation dimensions. Only applies when criteria count exceeds one.\nHow multiple success criteria relate to each other. 'independent_blocks' renders each criterion as a standalone block. 'numbered_dimensions' numbers criteria as dimensions of a single quality assessment.",
+          "enum": [
+            "independent_blocks",
+            "numbered_dimensions"
+          ],
+          "default": "independent_blocks"
+        }
+      },
+      "required": [
+        "section_visible",
+        "max_entries_rendered",
+        "definition_framing_variant",
+        "evidence_framing_variant",
+        "definition_to_evidence_transition_variant",
+        "evidence_type_handling",
+        "output_vs_agent_voice",
+        "success_failure_independence_statement_visible",
+        "verification_guidance_suffix_visible",
+        "multi_criteria_relationship"
+      ],
+      "additionalProperties": false
+    },
+    "failure_criteria": {
+      "title": "FailureCriteriaStructure",
+      "type": "object",
+      "description": "Structure controls for the failure criteria section. Master visibility, entry limit, visibility toggles, and abort stance variant conditional on preamble visibility.",
+      "properties": {
+        "section_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "FailureCriteriaSectionVisible",
+          "description": "Whether to render the failure criteria section at all. When false, the entire section is suppressed regardless of other settings.\nTrue or false value",
+          "default": true
+        },
+        "max_entries_rendered": {
+          "$ref": "#/$defs/atom__integer",
+          "title": "FailureCriteriaMaxEntriesRendered",
+          "description": "Maximum number of failure criteria entries to render. Zero means render all entries without limit.\nWhole number value",
+          "default": 0
+        },
+        "abort_stance_preamble_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "FailureCriteriaAbortStancePreambleVisible",
+          "description": "Whether to render the behavioral preamble that reframes abort as the correct action when failure conditions are detected. Sets the model's stance before individual failure modes are listed.\nTrue or false value",
+          "default": true
+        },
+        "cite_definition_and_evidence_postscript_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "FailureCriteriaCiteDefinitionAndEvidencePostscriptVisible",
+          "description": "Whether to render the postscript connecting definition/evidence hierarchy to return_format reporting. Off by default — only needed when the reporting structure is complex.\nTrue or false value",
+          "default": false
+        },
+        "check_before_and_during_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "FailureCriteriaCheckBeforeAndDuringVisible",
+          "description": "Whether to render the generic temporal instruction about checking failure conditions before starting and monitoring throughout. Off by default.\nTrue or false value",
+          "default": false
+        },
+        "abort_stance_variant": {
+          "title": "FailureCriteriaAbortStanceVariant",
+          "type": "string",
+          "description": "Selects the behavioral posture for abort conditions. 'obligation' frames stopping as a duty (MUST stop). 'permission' frames stopping as the correct action (the right thing to do). Governs both preamble and definition label variants.\nFailure criteria behavioral posture. 'obligation' frames stopping as a duty — the agent MUST stop when conditions are met. 'permission' frames stopping as the correct action — the agent is allowed to stop rather than forcing bad output.",
+          "enum": [
+            "obligation",
+            "permission"
+          ],
+          "default": "obligation"
+        }
+      },
+      "required": [
+        "section_visible",
+        "max_entries_rendered",
+        "abort_stance_preamble_visible",
+        "cite_definition_and_evidence_postscript_visible",
+        "check_before_and_during_visible"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "required": [
+              "abort_stance_preamble_visible"
+            ],
+            "properties": {
+              "abort_stance_preamble_visible": {
+                "const": true
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "abort_stance_variant"
+            ]
+          },
+          "else": {
+            "properties": {
+              "abort_stance_variant": false
+            }
+          }
+        }
+      ]
+    },
+    "output": {
+      "title": "OutputStructure",
+      "type": "object",
+      "description": "Structure controls for the output section. Schema embedding toggle and directory location variant selector.",
+      "properties": {
+        "schema_embed": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "OutputSchemaEmbed",
+          "description": "Whether to inline the output schema content directly in the prompt. When true, the full schema is embedded. When false, only a path reference is rendered.\nTrue or false value",
+          "default": false
+        },
+        "directory_location_variant": {
+          "title": "OutputDirectoryLocationVariant",
+          "type": "string",
+          "description": "Selects how the output directory location is declared. 'standard' states the directory path. 'with_boundary' adds an explicit boundary constraint that all files must be within the directory.\nHow output directory location renders. 'standard' states the directory path plainly. 'with_boundary' adds a confinement statement restricting output to that directory and its children.",
+          "enum": [
+            "standard",
+            "with_boundary"
+          ],
+          "default": "standard"
+        }
+      },
+      "required": [
+        "schema_embed",
+        "directory_location_variant"
+      ],
+      "additionalProperties": false
+    },
+    "writing_output": {
+      "title": "WritingOutputStructure",
+      "type": "object",
+      "description": "Structure controls for the writing output section. Visibility toggles for transition preamble, tool mandate, and heredoc explanation.",
+      "properties": {
+        "transition_preamble_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "WritingOutputTransitionPreambleVisible",
+          "description": "Whether to render the transition sentence connecting from the instructions section to the output mechanics section.\nTrue or false value",
+          "default": true
+        },
+        "tool_mandate_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "WritingOutputToolMandateVisible",
+          "description": "Whether to render the tool exclusivity mandate establishing that output flows through exactly one tool with no exceptions.\nTrue or false value",
+          "default": true
+        },
+        "heredoc_explanation_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "WritingOutputHeredocExplanationVisible",
+          "description": "Whether to render the heredoc syntax explanation. Off by default. Only needed when agents mangle heredoc delimiters in their tool invocations.\nTrue or false value",
+          "default": false
+        }
+      },
+      "required": [
+        "transition_preamble_visible",
+        "tool_mandate_visible",
+        "heredoc_explanation_visible"
+      ],
+      "additionalProperties": false
+    },
+    "return_format": {
+      "title": "ReturnFormatStructure",
+      "type": "object",
+      "description": "Structure controls for the return format section. Visibility toggles for protocol components, metrics obligations, and cross-references.",
+      "properties": {
+        "files_vs_status_explanation_preamble_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "ReturnFormatFilesVsStatusExplanationPreambleVisible",
+          "description": "Whether to render the explanation of the two-channel model where work products go to files and the return carries a status signal.\nTrue or false value",
+          "default": true
+        },
+        "token_must_be_first_word_preamble_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "ReturnFormatTokenMustBeFirstWordPreambleVisible",
+          "description": "Whether to render the protocol preamble establishing that the return token must appear as the first word and is parsed programmatically.\nTrue or false value",
+          "default": true
+        },
+        "report_all_metrics_postscript_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "ReturnFormatReportAllMetricsPostscriptVisible",
+          "description": "Whether to render the metrics obligation postscript reminding the agent to report all specified metrics for its return state.\nTrue or false value",
+          "default": true
+        },
+        "abort_vs_failure_distinction_preamble_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "ReturnFormatAbortVsFailureDistinctionPreambleVisible",
+          "description": "Whether to render the semantic distinction between ABORT and FAILURE. Conditional on ABORT being a valid status token for this agent.\nTrue or false value",
+          "default": true
+        },
+        "honest_failure_over_dubious_success_preamble_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "ReturnFormatHonestFailureOverDubiousSuccessPreambleVisible",
+          "description": "Whether to render the failure honesty preamble granting explicit permission to return a clean FAILURE rather than a dubious SUCCESS.\nTrue or false value",
+          "default": true
+        },
+        "track_metrics_as_you_work_postscript_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "ReturnFormatTrackMetricsAsYouWorkPostscriptVisible",
+          "description": "Whether to render the retroactive orientation postscript establishing that return requirements imply tracking requirements throughout execution.\nTrue or false value",
+          "default": true
+        },
+        "do_not_fabricate_metrics_postscript_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "ReturnFormatDoNotFabricateMetricsPostscriptVisible",
+          "description": "Whether to render the accuracy clause requiring the agent to report actual metrics from execution rather than fabricating values to match the expected format.\nTrue or false value",
+          "default": true
+        },
+        "failure_cross_reference_preamble_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "ReturnFormatFailureCrossReferencePreambleVisible",
+          "description": "Whether to render a cross-reference to the failure_criteria section. Off by default. When enabled, connects the return protocol to the failure conditions defined elsewhere.\nTrue or false value",
+          "default": false
+        }
+      },
+      "required": [
+        "files_vs_status_explanation_preamble_visible",
+        "token_must_be_first_word_preamble_visible",
+        "report_all_metrics_postscript_visible",
+        "abort_vs_failure_distinction_preamble_visible",
+        "honest_failure_over_dubious_success_preamble_visible",
+        "track_metrics_as_you_work_postscript_visible",
+        "do_not_fabricate_metrics_postscript_visible",
+        "failure_cross_reference_preamble_visible"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "atom__boolean": {
+      "title": "Boolean",
+      "type": "boolean",
+      "description": "True or false value"
+    },
+    "enum__visibility_mode": {
+      "title": "VisibilityMode",
+      "type": "string",
+      "description": "Tri-state visibility control for optional prose fragments. 'auto' delegates to a threshold or data condition — the renderer decides. 'always' forces the fragment to render regardless of conditions. 'never' suppresses the fragment regardless of conditions.\n",
+      "enum": [
+        "auto",
+        "always",
+        "never"
+      ]
+    },
+    "atom__integer": {
+      "title": "Integer",
+      "type": "integer",
+      "description": "Whole number value"
+    }
+  }
+}

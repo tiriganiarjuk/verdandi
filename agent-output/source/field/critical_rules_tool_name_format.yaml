@@ -1,0 +1,6 @@
+title: CriticalRulesToolNameFormat
+type: enum/inline_format
+default: "backtick"
+description: >-
+  How the output tool name renders inline in critical rules prose.
+  'backtick' wraps in code backticks. 'plain' renders as-is.

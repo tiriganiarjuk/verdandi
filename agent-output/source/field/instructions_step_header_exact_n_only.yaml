@@ -1,0 +1,5 @@
+title: InstructionsStepHeaderExactNOnly
+type: atom/string_template
+description: >-
+  Step header for exact-mode steps with n_only tracking. Template
+  with {{step_n}} placeholder. No total shown.

@@ -1,0 +1,6 @@
+title: ConstraintsConstraintCountHeading
+type: atom/string_template
+description: >-
+  Template for the constraint count heading. Contains
+  {{constraint_count}} placeholder replaced at render time with
+  the actual number of constraints.

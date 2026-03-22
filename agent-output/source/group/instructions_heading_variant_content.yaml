@@ -1,0 +1,8 @@
+title: InstructionsHeadingVariantContent
+description: >-
+  Wrapper group for the instructions heading variant sub-table.
+  Contains one simplegroup with variant alternatives for the
+  instructions section heading.
+containers:
+  required:
+    heading_variant: simplegroup/instructions_heading_variant

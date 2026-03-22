@@ -1,0 +1,10 @@
+title: ExamplesDisplay
+description: >-
+  Display formatting for the examples section. Entry heading format,
+  body container, and separators for entries and groups.
+fields:
+  required:
+    entry_heading_format: field/examples_entry_heading_format
+    entry_body_container: field/examples_entry_body_container
+    entry_separator: field/examples_entry_separator
+    multi_group_separator: field/examples_multi_group_separator

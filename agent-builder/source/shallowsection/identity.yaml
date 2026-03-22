@@ -4,14 +4,15 @@ description: >
   Title is derived from agent_name (split hyphens, capitalize).
   Capability tier is unresolved — vendor model resolution happens
   at the platform-specific render stage.
-required:
-  title: field/agent_title
-  description: field/agent_description
-  role_identity: field/role_identity
-  role_responsibility: field/role_responsibility
-  capability_tier: field/agent_capability_tier
-optional:
-  role_description: field/role_description
+fields:
+  required:
+    title: field/agent_title
+    description: field/agent_description
+    role_identity: field/role_identity
+    role_responsibility: field/role_responsibility
+    capability_tier: field/agent_capability_tier
+  optional:
+    role_description: field/role_description
 containers:
   optional:
     role_expertise: simplearray/role_expertise

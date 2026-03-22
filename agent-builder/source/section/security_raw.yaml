@@ -7,6 +7,6 @@ containers:
     security_io: group/security_io_raw
     security_schema: group/security_schema_raw
     security_paths: group/security_paths_raw
-    context: group/context_raw
   optional:
+    context: group/context_raw
     security_capabilities: group/security_capabilities

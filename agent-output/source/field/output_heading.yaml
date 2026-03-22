@@ -1,0 +1,5 @@
+title: OutputHeading
+type: atom/string_text
+description: >-
+  Section heading for the output section. Plain text, no placeholders.
+  Rendered at the configured heading level.

@@ -1,0 +1,6 @@
+title: AntiPatternsSectionPreamble
+type: atom/string_prose
+description: >-
+  Preamble prose for the anti-patterns section. Establishes what
+  anti-patterns represent and how the model should interpret and
+  avoid them during task execution.

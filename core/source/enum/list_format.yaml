@@ -1,0 +1,7 @@
+title: ListFormat
+values: [bulleted, numbered, inline, prose, bare]
+description: >
+  How a list of items renders visually. 'bulleted' uses dash or bullet
+  markers. 'numbered' uses sequential integers. 'inline' joins items on
+  one line with a separator. 'prose' flows items as natural language.
+  'bare' renders items with no markers or joining.

@@ -1,0 +1,7 @@
+title: PathDisplayStyle
+values: [relative_dotslash, relative_bare, absolute]
+description: >
+  How filesystem paths render in agent-facing output. 'relative_dotslash'
+  strips the workspace prefix and prepends ./ (e.g., ./src/main.py).
+  'relative_bare' strips the prefix with no ./ (e.g., src/main.py).
+  'absolute' renders the full absolute path as-is.

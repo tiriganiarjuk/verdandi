@@ -1,0 +1,6 @@
+title: CriticalRulesHeading
+type: atom/string_text
+description: >-
+  Section heading for critical rules. Plain text, no placeholders.
+  Rendered as H2. Typically emphatic — all caps or strong language
+  to signal inviolability.

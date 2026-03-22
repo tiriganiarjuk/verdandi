@@ -1,0 +1,6 @@
+title: WritingOutputInvocationPreamble
+type: atom/string_prose
+description: >-
+  Preamble introducing the invocation template. Instructs the agent
+  to copy the template exactly, substituting only the marked
+  placeholders.

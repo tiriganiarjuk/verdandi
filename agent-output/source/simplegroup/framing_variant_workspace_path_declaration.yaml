@@ -1,0 +1,9 @@
+title: FramingVariantWorkspacePathDeclaration
+description: >-
+  Variant alternatives for the workspace path declaration. Keys match
+  enum/framing_variant values. Structure selects one. Templates
+  contain {{WORKSPACE_PATH}} placeholder.
+required:
+  territory: field/framing_variant_workspace_path_declaration_territory
+  environmental: field/framing_variant_workspace_path_declaration_environmental
+  cage: field/framing_variant_workspace_path_declaration_cage

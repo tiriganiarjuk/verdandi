@@ -1,0 +1,5 @@
+title: WritingOutputTransitionPreamble
+type: atom/string_prose
+description: >-
+  Transition sentence connecting from instructions to the output
+  mechanics section. Bridges the what-to-do with the how-to-deliver.

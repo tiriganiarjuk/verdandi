@@ -1,0 +1,463 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agent-output-display.schema.json",
+  "title": "Agent Output Display",
+  "description": "Display surface schema for agent output rendering. Controls visual formatting: list styles, thresholds, separators, containers, and inline formats. Independent of both structure and content. Three sections (output, writing_output, return_format) have no display knobs.",
+  "type": "object",
+  "required": [
+    "identity",
+    "security_boundary",
+    "critical_rules",
+    "instructions",
+    "examples",
+    "constraints",
+    "anti_patterns",
+    "success_criteria",
+    "failure_criteria"
+  ],
+  "properties": {
+    "identity": {
+      "title": "IdentityDisplay",
+      "type": "object",
+      "description": "Display formatting for the identity section. Format and threshold pairs for expertise and responsibility lists.",
+      "properties": {
+        "expertise_format": {
+          "$ref": "#/$defs/union__format_or_pair",
+          "title": "IdentityExpertiseFormat",
+          "description": "How the expertise list renders. Plain string means always that format. Two-element array means threshold-based switching: first element above threshold, second at or below. Threshold is identity_expertise_format_threshold.\nPolymorphic format field. A plain string enum value means always use that format. A two-element array means threshold-based switching — first element above threshold, second at or below. Type tells behavior: string = unconditional, array = conditional."
+        },
+        "expertise_format_threshold": {
+          "$ref": "#/$defs/atom__integer",
+          "title": "IdentityExpertiseFormatThreshold",
+          "description": "Item count threshold for expertise format switching. When identity_expertise_format is a pair, items above this count use the first format, items at or below use the second.\nWhole number value",
+          "default": 3
+        },
+        "responsibility_format": {
+          "$ref": "#/$defs/union__format_or_pair",
+          "title": "IdentityResponsibilityFormat",
+          "description": "How the responsibility field renders when it contains multiple items. Plain string means always that format. Two-element array means threshold-based switching. Threshold is identity_responsibility_format_threshold.\nPolymorphic format field. A plain string enum value means always use that format. A two-element array means threshold-based switching — first element above threshold, second at or below. Type tells behavior: string = unconditional, array = conditional."
+        },
+        "responsibility_format_threshold": {
+          "$ref": "#/$defs/atom__integer",
+          "title": "IdentityResponsibilityFormatThreshold",
+          "description": "Item count threshold for responsibility format switching. When identity_responsibility_format is a pair, items above this count use the first format, items at or below use the second.\nWhole number value",
+          "default": 3
+        }
+      },
+      "required": [
+        "expertise_format",
+        "expertise_format_threshold",
+        "responsibility_format",
+        "responsibility_format_threshold"
+      ],
+      "additionalProperties": false
+    },
+    "security_boundary": {
+      "title": "SecurityBoundaryDisplay",
+      "type": "object",
+      "description": "Display formatting for the security boundary section. Path style, toolset formats, intro threshold, and entry list format.",
+      "properties": {
+        "path_style": {
+          "title": "SecurityBoundaryPathStyle",
+          "type": "string",
+          "description": "How filesystem paths render in display entries. Controls whether paths show as relative with ./ prefix, relative bare, or absolute.\nHow filesystem paths render in agent-facing output. 'relative_dotslash' strips the workspace prefix and prepends ./ (e.g., ./src/main.py). 'relative_bare' strips the prefix with no ./ (e.g., src/main.py). 'absolute' renders the full absolute path as-is.",
+          "enum": [
+            "relative_dotslash",
+            "relative_bare",
+            "absolute"
+          ],
+          "default": "relative_dotslash"
+        },
+        "uniform_toolset_format": {
+          "title": "SecurityBoundaryUniformToolsetFormat",
+          "type": "string",
+          "description": "How tool names render when all display entries share the same tool set. \"grouped\" shows the tool list once above all entries. \"per_entry\" repeats the tool list alongside each entry.\nHow tool names render when all display entries share the same tool set. 'grouped' shows the tool list once above all entries. 'per_entry' repeats the tool list alongside each entry.",
+          "enum": [
+            "grouped",
+            "per_entry"
+          ],
+          "default": "grouped"
+        },
+        "heterogeneous_toolset_format": {
+          "title": "SecurityBoundaryHeterogeneousToolsetFormat",
+          "type": "string",
+          "description": "How tool names render when display entries have different tool sets. \"per_entry_list\" shows tools as a list alongside each entry. \"per_entry_prose\" embeds tools in natural language.\nHow tool names render when display entries have different tool sets. 'per_entry_list' shows tools as a list alongside each entry. 'per_entry_prose' embeds tools in natural language alongside each entry.",
+          "enum": [
+            "per_entry_list",
+            "per_entry_prose"
+          ],
+          "default": "per_entry_list"
+        },
+        "filesystem_map_intro_visibility_threshold": {
+          "$ref": "#/$defs/atom__integer",
+          "title": "SecurityBoundaryFilesystemMapIntroVisibilityThreshold",
+          "description": "Entry count threshold for showing the filesystem map intro line. When entry count is at or below this threshold, the intro is suppressed (too few entries to need introduction). Above the threshold, the intro renders.\nWhole number value",
+          "default": 4
+        },
+        "entry_list_format": {
+          "title": "SecurityBoundaryEntryListFormat",
+          "type": "string",
+          "description": "Marker style for the display entry list. Controls whether entries render with bullets, numbers, or dashes.\nMarker style for list entries. 'bullet' uses bullet point markers. 'numbered' uses sequential integers. 'dash' uses dash markers.",
+          "enum": [
+            "bullet",
+            "numbered",
+            "dash"
+          ],
+          "default": "bullet"
+        }
+      },
+      "required": [
+        "path_style",
+        "uniform_toolset_format",
+        "heterogeneous_toolset_format",
+        "filesystem_map_intro_visibility_threshold",
+        "entry_list_format"
+      ],
+      "additionalProperties": false
+    },
+    "critical_rules": {
+      "title": "CriticalRulesDisplay",
+      "type": "object",
+      "description": "Display formatting for the critical rules section. Inline format for workspace path, tool name, and batch size. Tool name repetition strategy and rule separator.",
+      "properties": {
+        "workspace_path_format": {
+          "$ref": "#/$defs/enum__inline_format",
+          "title": "CriticalRulesWorkspacePathFormat",
+          "description": "How the workspace path renders inline in critical rules prose. 'backtick' wraps in code backticks. 'plain' renders as-is. 'bold' wraps in markdown bold.\nHow a single value renders inline. 'backtick' wraps in code backticks. 'plain' renders as-is. 'bold' wraps in markdown bold. 'metadata' renders as a key-value label (e.g., \"Batch size = N\").",
+          "default": "backtick"
+        },
+        "tool_name_format": {
+          "$ref": "#/$defs/enum__inline_format",
+          "title": "CriticalRulesToolNameFormat",
+          "description": "How the output tool name renders inline in critical rules prose. 'backtick' wraps in code backticks. 'plain' renders as-is.\nHow a single value renders inline. 'backtick' wraps in code backticks. 'plain' renders as-is. 'bold' wraps in markdown bold. 'metadata' renders as a key-value label (e.g., \"Batch size = N\").",
+          "default": "backtick"
+        },
+        "tool_name_repetition": {
+          "title": "CriticalRulesToolNameRepetition",
+          "type": "string",
+          "description": "How the tool name is referenced after first mention. 'repeat' uses the full name every time. 'shorthand' defines once then uses \"the tool\" for subsequent references.\nHow a tool name is referenced after first mention. 'repeat' uses the full tool name at every mention. 'shorthand' defines the full name once, then uses \"the tool\" for subsequent references.",
+          "enum": [
+            "repeat",
+            "shorthand"
+          ],
+          "default": "repeat"
+        },
+        "batch_size_format": {
+          "$ref": "#/$defs/enum__inline_format",
+          "title": "CriticalRulesBatchSizeFormat",
+          "description": "How the batch size value renders inline. 'plain' renders the number directly. 'bold' wraps in markdown bold. 'metadata' renders as a key-value label.\nHow a single value renders inline. 'backtick' wraps in code backticks. 'plain' renders as-is. 'bold' wraps in markdown bold. 'metadata' renders as a key-value label (e.g., \"Batch size = N\").",
+          "default": "plain"
+        },
+        "rule_separator": {
+          "title": "CriticalRulesRuleSeparator",
+          "type": "string",
+          "description": "Content separator between individual critical rules. Controls visual density of the rule list. 'newline' for dense packing, 'double_newline' for visual separation between rules.\nContent separator between repeated blocks. Declarative intent — the renderer maps each value to the actual string. 'newline' is a single line break. 'double_newline' is two line breaks (visual paragraph gap). 'horizontal_rule' is a markdown --- rule. 'blank_line' is an empty line. Extensible via union with fence types when more complex separators are needed.",
+          "enum": [
+            "newline",
+            "double_newline",
+            "horizontal_rule",
+            "blank_line"
+          ],
+          "default": "double_newline"
+        }
+      },
+      "required": [
+        "workspace_path_format",
+        "tool_name_format",
+        "tool_name_repetition",
+        "batch_size_format",
+        "rule_separator"
+      ],
+      "additionalProperties": false
+    },
+    "instructions": {
+      "title": "InstructionsDisplay",
+      "type": "object",
+      "description": "Display formatting for the instructions section. Step header format, body container, scaffolding tier thresholds, and recap format.",
+      "properties": {
+        "step_header_format": {
+          "$ref": "#/$defs/enum__heading_format",
+          "title": "InstructionsStepHeaderFormat",
+          "description": "How step headers render. 'bold' uses markdown bold text inline. 'h3' uses a level-3 heading. 'h4' uses a level-4 heading.\nHow a sub-block heading renders. 'bold' uses markdown bold text inline. 'h3' uses a level-3 heading. 'h4' uses a level-4 heading. Section-level headings (H2) are invariant and not configurable.",
+          "default": "bold"
+        },
+        "step_body_container": {
+          "$ref": "#/$defs/enum__body_container",
+          "title": "InstructionsStepBodyContainer",
+          "description": "Visual container wrapping each step body. 'none' renders directly. 'blockquote' indents in a blockquote. 'bare_with_endmarker' appends an end marker for visual boundary closure.\nVisual container wrapping a content body. 'none' renders content directly with no wrapping. 'blockquote' indents content in a markdown blockquote. 'bare_with_endmarker' renders content directly but appends an end marker for visual boundary closure.",
+          "default": "none"
+        },
+        "scaffolding_tier_lightweight_activation_threshold": {
+          "$ref": "#/$defs/atom__integer",
+          "title": "InstructionsScaffoldingTierLightweightActivationThreshold",
+          "description": "Step count threshold for lightweight scaffolding tier activation. When structural_complexity_override is 'auto' and step count is at or below this value, lightweight tier is used.\nWhole number value",
+          "default": 3
+        },
+        "scaffolding_tier_standard_activation_threshold": {
+          "$ref": "#/$defs/atom__integer",
+          "title": "InstructionsScaffoldingTierStandardActivationThreshold",
+          "description": "Step count threshold for standard scaffolding tier activation. When structural_complexity_override is 'auto' and step count is above lightweight but at or below this value, standard tier is used. Above this threshold, heavy tier activates.\nWhole number value",
+          "default": 7
+        },
+        "exact_vs_judgment_recap_format": {
+          "title": "InstructionsExactVsJudgmentRecapFormat",
+          "type": "string",
+          "description": "How the mode recap renders in the section closer. 'prose' summarizes as flowing text. 'tabular' presents as a structured mapping of step numbers to modes.\nHow a mode recap renders in section closers. 'prose' summarizes modes as flowing text. 'tabular' presents modes in a structured table or list mapping step numbers to their modes.",
+          "enum": [
+            "prose",
+            "tabular"
+          ],
+          "default": "prose"
+        }
+      },
+      "required": [
+        "step_header_format",
+        "step_body_container",
+        "scaffolding_tier_lightweight_activation_threshold",
+        "scaffolding_tier_standard_activation_threshold",
+        "exact_vs_judgment_recap_format"
+      ],
+      "additionalProperties": false
+    },
+    "examples": {
+      "title": "ExamplesDisplay",
+      "type": "object",
+      "description": "Display formatting for the examples section. Entry heading format, body container, and separators for entries and groups.",
+      "properties": {
+        "entry_heading_format": {
+          "$ref": "#/$defs/enum__heading_format",
+          "title": "ExamplesEntryHeadingFormat",
+          "description": "How example entry headings render. 'bold' uses markdown bold (preserves boundaries without visual density for many entries). 'h3' or 'h4' uses heading levels.\nHow a sub-block heading renders. 'bold' uses markdown bold text inline. 'h3' uses a level-3 heading. 'h4' uses a level-4 heading. Section-level headings (H2) are invariant and not configurable.",
+          "default": "bold"
+        },
+        "entry_body_container": {
+          "$ref": "#/$defs/enum__body_container",
+          "title": "ExamplesEntryBodyContainer",
+          "description": "Visual container for example entry content. 'bare_with_endmarker' renders directly with an end marker for boundary closure. 'blockquote' indents. 'none' renders directly.\nVisual container wrapping a content body. 'none' renders content directly with no wrapping. 'blockquote' indents content in a markdown blockquote. 'bare_with_endmarker' renders content directly but appends an end marker for visual boundary closure.",
+          "default": "bare_with_endmarker"
+        },
+        "entry_separator": {
+          "$ref": "#/$defs/enum__separator_style",
+          "title": "ExamplesEntrySeparator",
+          "description": "Visual separator between example entries within a group. Used when entry headings are off (per-group data controls this).\nVisual separator between repeated blocks. 'horizontal_rule' inserts a markdown horizontal rule (---) between items. 'none' uses only whitespace separation.",
+          "default": "horizontal_rule"
+        },
+        "multi_group_separator": {
+          "$ref": "#/$defs/enum__separator_style",
+          "title": "ExamplesMultiGroupSeparator",
+          "description": "Visual separator between example groups when multiple groups exist. 'horizontal_rule' inserts a markdown rule. 'none' uses whitespace only.\nVisual separator between repeated blocks. 'horizontal_rule' inserts a markdown horizontal rule (---) between items. 'none' uses only whitespace separation.",
+          "default": "horizontal_rule"
+        }
+      },
+      "required": [
+        "entry_heading_format",
+        "entry_body_container",
+        "entry_separator",
+        "multi_group_separator"
+      ],
+      "additionalProperties": false
+    },
+    "constraints": {
+      "title": "ConstraintsDisplay",
+      "type": "object",
+      "description": "Display formatting for the constraints section. Enumeration format with threshold, visibility thresholds for closing reminder and count heading, must normalization, and polarity grouping threshold.",
+      "properties": {
+        "enumeration_format": {
+          "$ref": "#/$defs/union__format_or_pair",
+          "title": "ConstraintsEnumerationFormat",
+          "description": "Format for rendering the constraint list. A single enum value uses that format always. A pair switches at the threshold — first format below, second format at or above the threshold.\nPolymorphic format field. A plain string enum value means always use that format. A two-element array means threshold-based switching — first element above threshold, second at or below. Type tells behavior: string = unconditional, array = conditional."
+        },
+        "enumeration_format_threshold": {
+          "$ref": "#/$defs/atom__integer",
+          "title": "ConstraintsEnumerationFormatThreshold",
+          "description": "Constraint count threshold for format switching when enumeration_format is a pair. Below this count the first format applies; at or above, the second format applies.\nWhole number value",
+          "default": 6
+        },
+        "closing_compliance_reminder_visibility_threshold": {
+          "$ref": "#/$defs/atom__integer",
+          "title": "ConstraintsClosingComplianceReminderVisibilityThreshold",
+          "description": "Constraint count threshold for showing the closing compliance reminder. When constraint count is at or above this value and visibility is enabled, the reminder renders.\nWhole number value",
+          "default": 6
+        },
+        "constraint_count_heading_visibility_threshold": {
+          "$ref": "#/$defs/atom__integer",
+          "title": "ConstraintsConstraintCountHeadingVisibilityThreshold",
+          "description": "Constraint count threshold for showing the count heading. When constraint count is at or above this value and visibility is enabled, the count heading renders.\nWhole number value",
+          "default": 6
+        },
+        "must_vs_must_not_normalization": {
+          "title": "ConstraintsMustVsMustNotNormalization",
+          "type": "string",
+          "description": "How must/must-not phrasing is normalized across constraints. 'preserve_voice' keeps authored phrasing. Other values rewrite constraints to a consistent polarity style.\nHow MUST/MUST-NOT polarity is handled in constraint lists. 'preserve_voice' renders constraints as authored with no normalization. 'normalize_outliers' rewrites minority-polarity items to match the dominant voice. 'prefix_tags' prepends [MUST] or [MUST NOT] tags to each constraint regardless of authored voice.",
+          "enum": [
+            "preserve_voice",
+            "normalize_outliers",
+            "prefix_tags"
+          ],
+          "default": "preserve_voice"
+        },
+        "polarity_grouping_activation_threshold": {
+          "$ref": "#/$defs/atom__integer",
+          "title": "ConstraintsPolarityGroupingActivationThreshold",
+          "description": "Constraint count threshold for activating polarity grouping. When constraint count reaches this value, constraints are split into must and must-not groups for clarity.\nWhole number value",
+          "default": 11
+        }
+      },
+      "required": [
+        "enumeration_format",
+        "enumeration_format_threshold",
+        "closing_compliance_reminder_visibility_threshold",
+        "constraint_count_heading_visibility_threshold",
+        "must_vs_must_not_normalization",
+        "polarity_grouping_activation_threshold"
+      ],
+      "additionalProperties": false
+    },
+    "anti_patterns": {
+      "title": "AntiPatternsDisplay",
+      "type": "object",
+      "description": "Display formatting for the anti-patterns section. Pattern list format.",
+      "properties": {
+        "pattern_list_format": {
+          "title": "AntiPatternsPatternListFormat",
+          "type": "string",
+          "description": "Format for rendering the anti-pattern list. Controls whether entries use bare bullets, numbered items, or other list styles.\nHow anti-pattern entries render. 'bare_bullets' renders each pattern as a plain bullet point. 'bold_prohibition' renders with bold \"Do not\" prefix formatting to emphasize the prohibition.",
+          "enum": [
+            "bare_bullets",
+            "bold_prohibition"
+          ],
+          "default": "bare_bullets"
+        }
+      },
+      "required": [
+        "pattern_list_format"
+      ],
+      "additionalProperties": false
+    },
+    "success_criteria": {
+      "title": "SuccessCriteriaDisplay",
+      "type": "object",
+      "description": "Display formatting for the success criteria section. Evidence format with threshold-based switching.",
+      "properties": {
+        "evidence_format": {
+          "$ref": "#/$defs/union__format_or_pair",
+          "title": "SuccessCriteriaEvidenceFormat",
+          "description": "Format for rendering the evidence list. A single enum value uses that format always. A pair switches at the threshold — first format below, second format at or above the threshold.\nPolymorphic format field. A plain string enum value means always use that format. A two-element array means threshold-based switching — first element above threshold, second at or below. Type tells behavior: string = unconditional, array = conditional."
+        },
+        "evidence_format_threshold": {
+          "$ref": "#/$defs/atom__integer",
+          "title": "SuccessCriteriaEvidenceFormatThreshold",
+          "description": "Evidence count threshold for format switching when evidence_format is a pair. Below this count the first format applies; at or above, the second format applies.\nWhole number value",
+          "default": 5
+        }
+      },
+      "required": [
+        "evidence_format",
+        "evidence_format_threshold"
+      ],
+      "additionalProperties": false
+    },
+    "failure_criteria": {
+      "title": "FailureCriteriaDisplay",
+      "type": "object",
+      "description": "Display formatting for the failure criteria section. Evidence format.",
+      "properties": {
+        "evidence_format": {
+          "$ref": "#/$defs/enum__list_format",
+          "title": "FailureCriteriaEvidenceFormat",
+          "description": "Format for rendering failure evidence lists. Unlike success criteria which uses threshold-based switching, failure evidence uses a single fixed format.\nHow a list of items renders visually. 'bulleted' uses dash or bullet markers. 'numbered' uses sequential integers. 'inline' joins items on one line with a separator. 'prose' flows items as natural language. 'bare' renders items with no markers or joining.",
+          "default": "bare"
+        }
+      },
+      "required": [
+        "evidence_format"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "enum__list_format": {
+      "title": "ListFormat",
+      "type": "string",
+      "description": "How a list of items renders visually. 'bulleted' uses dash or bullet markers. 'numbered' uses sequential integers. 'inline' joins items on one line with a separator. 'prose' flows items as natural language. 'bare' renders items with no markers or joining.\n",
+      "enum": [
+        "bulleted",
+        "numbered",
+        "inline",
+        "prose",
+        "bare"
+      ]
+    },
+    "union__format_or_pair": {
+      "title": "FormatOrPair",
+      "oneOf": [
+        {
+          "$ref": "#/$defs/enum__list_format"
+        },
+        {
+          "title": "FormatPair",
+          "type": "array",
+          "description": "Threshold-based format switching pair. First element is the format used when item count is above the threshold. Second element is the format used at or below the threshold. Example: [bulleted, inline] with threshold 3 means bulleted above 3, inline at or below 3.\n",
+          "prefixItems": [
+            {
+              "$ref": "#/$defs/enum__list_format"
+            },
+            {
+              "$ref": "#/$defs/enum__list_format"
+            }
+          ],
+          "items": false,
+          "minItems": 2,
+          "maxItems": 2
+        }
+      ],
+      "description": "Polymorphic format field. A plain string enum value means always use that format. A two-element array means threshold-based switching — first element above threshold, second at or below. Type tells behavior: string = unconditional, array = conditional.\n"
+    },
+    "atom__integer": {
+      "title": "Integer",
+      "type": "integer",
+      "description": "Whole number value"
+    },
+    "enum__inline_format": {
+      "title": "InlineFormat",
+      "type": "string",
+      "description": "How a single value renders inline. 'backtick' wraps in code backticks. 'plain' renders as-is. 'bold' wraps in markdown bold. 'metadata' renders as a key-value label (e.g., \"Batch size = N\").\n",
+      "enum": [
+        "backtick",
+        "plain",
+        "bold",
+        "metadata"
+      ]
+    },
+    "enum__heading_format": {
+      "title": "HeadingFormat",
+      "type": "string",
+      "description": "How a sub-block heading renders. 'bold' uses markdown bold text inline. 'h3' uses a level-3 heading. 'h4' uses a level-4 heading. Section-level headings (H2) are invariant and not configurable.\n",
+      "enum": [
+        "bold",
+        "h3",
+        "h4"
+      ]
+    },
+    "enum__body_container": {
+      "title": "BodyContainer",
+      "type": "string",
+      "description": "Visual container wrapping a content body. 'none' renders content directly with no wrapping. 'blockquote' indents content in a markdown blockquote. 'bare_with_endmarker' renders content directly but appends an end marker for visual boundary closure.\n",
+      "enum": [
+        "none",
+        "blockquote",
+        "bare_with_endmarker"
+      ]
+    },
+    "enum__separator_style": {
+      "title": "SeparatorStyle",
+      "type": "string",
+      "description": "Visual separator between repeated blocks. 'horizontal_rule' inserts a markdown horizontal rule (---) between items. 'none' uses only whitespace separation.\n",
+      "enum": [
+        "horizontal_rule",
+        "none"
+      ]
+    }
+  }
+}

@@ -1,0 +1,7 @@
+title: AbortStanceVariantKey
+values: [obligation, permission]
+description: >
+  Failure criteria behavioral posture. 'obligation' frames stopping as
+  a duty — the agent MUST stop when conditions are met. 'permission'
+  frames stopping as the correct action — the agent is allowed to stop
+  rather than forcing bad output.

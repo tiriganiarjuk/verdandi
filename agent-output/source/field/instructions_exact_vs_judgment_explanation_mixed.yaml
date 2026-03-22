@@ -1,0 +1,5 @@
+title: InstructionsExactVsJudgmentExplanationMixed
+type: atom/string_prose
+description: >-
+  Explanation of the exact/judgment distinction when both modes are
+  present. Rendered when visibility is 'auto' and modes are mixed.

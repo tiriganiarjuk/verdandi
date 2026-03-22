@@ -1,0 +1,7 @@
+title: MultiCriteriaRelationship
+values: [independent_blocks, numbered_dimensions]
+description: >
+  How multiple success criteria relate to each other.
+  'independent_blocks' renders each criterion as a standalone block.
+  'numbered_dimensions' numbers criteria as dimensions of a single
+  quality assessment.

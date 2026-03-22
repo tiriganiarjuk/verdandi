@@ -1,0 +1,7 @@
+title: FormatPair
+items: [enum/list_format, enum/list_format]
+description: >
+  Threshold-based format switching pair. First element is the format
+  used when item count is above the threshold. Second element is the
+  format used at or below the threshold. Example: [bulleted, inline]
+  with threshold 3 means bulleted above 3, inline at or below 3.

@@ -1,0 +1,6 @@
+title: ReturnFormatTokenMustBeFirstWordTokensTwo
+type: atom/string_prose
+description: >-
+  Prose listing the two terminal states: SUCCESS or FAILURE. Used
+  when the agent definition does not include ABORT as a valid
+  return token.

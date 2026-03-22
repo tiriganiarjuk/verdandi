@@ -1,0 +1,7 @@
+title: ReturnFormatFailureCrossReferencePreambleVisible
+type: atom/boolean
+default: false
+description: >-
+  Whether to render a cross-reference to the failure_criteria
+  section. Off by default. When enabled, connects the return
+  protocol to the failure conditions defined elsewhere.

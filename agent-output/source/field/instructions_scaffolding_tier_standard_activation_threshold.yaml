@@ -1,0 +1,8 @@
+title: InstructionsScaffoldingTierStandardActivationThreshold
+type: atom/integer
+default: 7
+description: >-
+  Step count threshold for standard scaffolding tier activation.
+  When structural_complexity_override is 'auto' and step count is
+  above lightweight but at or below this value, standard tier is used.
+  Above this threshold, heavy tier activates.

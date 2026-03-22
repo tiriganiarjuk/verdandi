@@ -1,0 +1,6 @@
+title: SecurityBoundaryCompoundEntryTemplate
+type: atom/string_template
+description: >-
+  Template for rendering a single display entry when tools are shown
+  per-entry. Contains {{PATH}} and {{TOOLS}} placeholders. Used when
+  tool sets differ across entries (heterogeneous format).

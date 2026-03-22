@@ -1,0 +1,6 @@
+title: DirectoryLocationVariantKey
+values: [standard, with_boundary]
+description: >
+  How output directory location renders. 'standard' states the
+  directory path plainly. 'with_boundary' adds a confinement
+  statement restricting output to that directory and its children.

@@ -1,0 +1,6 @@
+title: SeparatorStyle
+values: [horizontal_rule, none]
+description: >
+  Visual separator between repeated blocks. 'horizontal_rule' inserts
+  a markdown horizontal rule (---) between items. 'none' uses only
+  whitespace separation.

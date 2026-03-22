@@ -1,0 +1,7 @@
+title: CriticalRulesBatchSizeFormat
+type: enum/inline_format
+default: "plain"
+description: >-
+  How the batch size value renders inline. 'plain' renders the number
+  directly. 'bold' wraps in markdown bold. 'metadata' renders as a
+  key-value label.

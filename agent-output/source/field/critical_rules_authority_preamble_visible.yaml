@@ -1,0 +1,7 @@
+title: CriticalRulesAuthorityPreambleVisible
+type: atom/boolean
+default: true
+description: >-
+  Whether to render the authority preamble establishing that critical
+  rules override all other instructions. Sets the stakes before
+  individual rules are listed.

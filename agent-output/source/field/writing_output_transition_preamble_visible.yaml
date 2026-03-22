@@ -1,0 +1,6 @@
+title: WritingOutputTransitionPreambleVisible
+type: atom/boolean
+default: true
+description: >-
+  Whether to render the transition sentence connecting from the
+  instructions section to the output mechanics section.

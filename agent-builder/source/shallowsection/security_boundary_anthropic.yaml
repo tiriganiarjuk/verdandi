@@ -4,6 +4,9 @@ description: >
   to tool-path pairs and collapsed by workspace-relative path. Each
   display entry groups all tools and commands granted for a single path.
   Workspace_path has been extracted to critical_rules.
+fields:
+  required:
+    workspace_path: field/workspace_path__x_abs
 containers:
   optional:
     display: superarray/display_entries

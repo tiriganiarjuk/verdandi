@@ -1,0 +1,6 @@
+title: ToolsetFormat
+values: [grouped, per_entry]
+description: >
+  How tool names render when all display entries share the same tool set.
+  'grouped' shows the tool list once above all entries. 'per_entry'
+  repeats the tool list alongside each entry.

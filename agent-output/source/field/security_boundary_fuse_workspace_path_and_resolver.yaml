@@ -1,0 +1,8 @@
+title: SecurityBoundaryFuseWorkspacePathAndResolver
+type: atom/boolean
+default: true
+description: >-
+  Whether to merge the workspace path declaration with the path
+  resolution instruction in a single sentence. When true, renders
+  as one flowing statement. When false, workspace path and resolution
+  instruction render as separate lines.

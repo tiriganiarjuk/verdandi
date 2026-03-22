@@ -1,0 +1,15 @@
+title: ReturnFormatStructure
+description: >-
+  Structure controls for the return format section. Visibility
+  toggles for protocol components, metrics obligations, and
+  cross-references.
+fields:
+  required:
+    files_vs_status_explanation_preamble_visible: field/return_format_files_vs_status_explanation_preamble_visible
+    token_must_be_first_word_preamble_visible: field/return_format_token_must_be_first_word_preamble_visible
+    report_all_metrics_postscript_visible: field/return_format_report_all_metrics_postscript_visible
+    abort_vs_failure_distinction_preamble_visible: field/return_format_abort_vs_failure_distinction_preamble_visible
+    honest_failure_over_dubious_success_preamble_visible: field/return_format_honest_failure_over_dubious_success_preamble_visible
+    track_metrics_as_you_work_postscript_visible: field/return_format_track_metrics_as_you_work_postscript_visible
+    do_not_fabricate_metrics_postscript_visible: field/return_format_do_not_fabricate_metrics_postscript_visible
+    failure_cross_reference_preamble_visible: field/return_format_failure_cross_reference_preamble_visible

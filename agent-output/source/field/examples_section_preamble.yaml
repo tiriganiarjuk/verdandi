@@ -1,0 +1,6 @@
+title: ExamplesSectionPreamble
+type: atom/string_prose
+description: >-
+  Preamble explaining the example format. Describes the GOOD/BAD/WHY
+  pattern and how to learn principles from examples. Position: after
+  heading, before first group.

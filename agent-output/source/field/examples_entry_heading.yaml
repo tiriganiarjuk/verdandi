@@ -1,0 +1,6 @@
+title: ExamplesEntryHeading
+type: atom/string_template
+description: >-
+  Template for rendering individual example entry headings. Contains
+  {{example_heading}} placeholder. Display format controlled by
+  examples_entry_heading_format in display.

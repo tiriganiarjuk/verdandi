@@ -1,0 +1,6 @@
+title: SecurityBoundaryFilesystemMapIntro
+type: atom/string_text
+description: >-
+  Introductory line before the filesystem display entries. Plain text
+  with no placeholders. Position: label before the entry list.
+  Visibility controlled by security_boundary_filesystem_map_intro_visible.

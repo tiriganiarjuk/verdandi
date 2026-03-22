@@ -1,0 +1,6 @@
+title: HeadingFormat
+values: [bold, h3, h4]
+description: >
+  How a sub-block heading renders. 'bold' uses markdown bold text
+  inline. 'h3' uses a level-3 heading. 'h4' uses a level-4 heading.
+  Section-level headings (H2) are invariant and not configurable.

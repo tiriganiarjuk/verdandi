@@ -1,0 +1,6 @@
+title: ReturnFormatTokenMustBeFirstWordPreamble
+type: atom/string_prose
+description: >-
+  Prose establishing that the return must begin with a protocol
+  token. The dispatch layer parses this token programmatically.
+  It must not be paraphrased or embedded in prose.

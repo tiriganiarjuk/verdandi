@@ -5,6 +5,6 @@ containers:
     security_io: group/security_io
     security_schema: group/security_schema
     security_paths: group/security_paths
-    context: group/context
   optional:
+    context: group/context
     security_capabilities: group/security_capabilities

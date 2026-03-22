@@ -1,0 +1,15 @@
+title: OutputContent
+description: >-
+  Content prose for the output section. Heading, description and
+  format templates, schema prose, and directory location variant
+  sub-table.
+fields:
+  required:
+    heading: field/output_heading
+    output_description: field/output_output_description
+    format_declaration: field/output_format_declaration
+    schema_embedded_preamble: field/output_schema_embedded_preamble
+    schema_reference: field/output_schema_reference
+containers:
+  required:
+    directory_location_variant: group/output_directory_location_variant_content

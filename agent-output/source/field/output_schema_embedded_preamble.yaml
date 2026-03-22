@@ -1,0 +1,6 @@
+title: OutputSchemaEmbeddedPreamble
+type: atom/string_prose
+description: >-
+  Preamble text rendered when schema_embed is true. Introduces
+  the inline schema and instructs the model that every record must
+  validate against it.

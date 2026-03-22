@@ -1,0 +1,7 @@
+title: ReturnFormatTokenMustBeFirstWordPreambleVisible
+type: atom/boolean
+default: true
+description: >-
+  Whether to render the protocol preamble establishing that the
+  return token must appear as the first word and is parsed
+  programmatically.

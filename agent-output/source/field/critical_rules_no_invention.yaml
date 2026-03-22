@@ -1,0 +1,6 @@
+title: CriticalRulesNoInvention
+type: atom/string_prose
+description: >-
+  No-invention rule text. Requires every claim in output to trace
+  to input. If you cannot point to the source, do not include it.
+  Silence is correct when data is absent.

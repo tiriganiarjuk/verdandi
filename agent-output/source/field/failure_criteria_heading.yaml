@@ -1,0 +1,6 @@
+title: FailureCriteriaHeading
+type: atom/string_text
+description: >-
+  Section heading for failure criteria. Plain text, no placeholders.
+  Rendered at the configured heading level. Typically uses "Abort
+  Conditions" rather than "Failure Criteria."

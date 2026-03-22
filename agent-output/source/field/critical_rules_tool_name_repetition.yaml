@@ -1,0 +1,7 @@
+title: CriticalRulesToolNameRepetition
+type: enum/tool_name_repetition
+default: "repeat"
+description: >-
+  How the tool name is referenced after first mention. 'repeat' uses
+  the full name every time. 'shorthand' defines once then uses
+  "the tool" for subsequent references.

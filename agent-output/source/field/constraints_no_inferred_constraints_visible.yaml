@@ -1,0 +1,7 @@
+title: ConstraintsNoInferredConstraintsVisible
+type: atom/boolean
+default: false
+description: >-
+  Whether to render an explicit warning against inferring constraints
+  not listed. Off by default — only needed when models tend to invent
+  additional constraints from context.

@@ -1,0 +1,7 @@
+title: ExamplesExampleDisplayHeadings
+type: atom/boolean
+default: true
+description: >-
+  Override value for example entry headings. Only applies when
+  examples_example_display_headings_override is true. Controls
+  whether individual example entries show their headings.

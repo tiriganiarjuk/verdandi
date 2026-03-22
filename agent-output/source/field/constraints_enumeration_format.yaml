@@ -1,0 +1,6 @@
+title: ConstraintsEnumerationFormat
+type: union/format_or_pair
+description: >-
+  Format for rendering the constraint list. A single enum value
+  uses that format always. A pair switches at the threshold —
+  first format below, second format at or above the threshold.

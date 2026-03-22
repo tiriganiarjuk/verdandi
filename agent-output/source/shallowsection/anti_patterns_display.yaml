@@ -1,0 +1,7 @@
+title: AntiPatternsDisplay
+description: >-
+  Display formatting for the anti-patterns section. Pattern list
+  format.
+fields:
+  required:
+    pattern_list_format: field/anti_patterns_pattern_list_format

@@ -1,0 +1,6 @@
+title: RulePresentation
+values: [single_sentence, heading_plus_body]
+description: >
+  How critical rules render. 'single_sentence' presents each rule as
+  a single dense sentence. 'heading_plus_body' gives each rule a bold
+  heading with an explanatory body beneath.

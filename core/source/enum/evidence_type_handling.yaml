@@ -1,0 +1,7 @@
+title: EvidenceTypeHandling
+values: [graduated_language, undifferentiated]
+description: >
+  How evidence items are rendered relative to their type markers.
+  'graduated_language' adds per-item type markers distinguishing
+  mechanical from judgment evidence. 'undifferentiated' renders all
+  evidence items equally with no type distinction.

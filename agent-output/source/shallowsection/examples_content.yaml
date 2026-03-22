@@ -1,0 +1,10 @@
+title: ExamplesContent
+description: >-
+  Content prose for the examples section. Heading, preamble,
+  group framing sentence, and entry heading template.
+fields:
+  required:
+    heading: field/examples_heading
+    section_preamble: field/examples_section_preamble
+    group_framing_sentence: field/examples_group_framing_sentence
+    entry_heading: field/examples_entry_heading

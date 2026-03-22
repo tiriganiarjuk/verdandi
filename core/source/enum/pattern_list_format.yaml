@@ -1,0 +1,6 @@
+title: PatternListFormat
+values: [bare_bullets, bold_prohibition]
+description: >
+  How anti-pattern entries render. 'bare_bullets' renders each pattern
+  as a plain bullet point. 'bold_prohibition' renders with bold "Do not"
+  prefix formatting to emphasize the prohibition.

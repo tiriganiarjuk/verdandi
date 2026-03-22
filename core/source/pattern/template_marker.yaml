@@ -1,0 +1,6 @@
+title: TemplateMarker
+regex: "\\{\\{[a-zA-Z_]+\\}\\}"
+description: >
+  Contains at least one {{placeholder}} interpolation marker. Double-brace
+  delimiters with an alphabetic-or-underscore identifier inside. Used to
+  distinguish template strings (requiring interpolation) from plain prose.

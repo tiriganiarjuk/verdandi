@@ -3,14 +3,24 @@ description: >
   How the agent reports results: return mode, optional instructions for
   status/metrics/output, schema for structured returns, and success/failure
   criteria. Aggregates from task.return and criteria sections.
-required:
-  mode: field/return_mode
-optional:
-  status_instruction: field/status_instruction
-  metrics_instruction: field/metrics_instruction
-  output_instruction: field/output_instruction
-  return_schema: field/return_schema__x_abs
-containers:
+fields:
+  required:
+    mode: field/return_mode
   optional:
-    success_criteria: array/success_criteria_reduced
-    failure_criteria: array/failure_criteria_reduced
+    return_schema: field/return_schema__x_abs
+  conditional:
+    status_instruction:
+      ref: field/status_instruction
+      only_when:
+        field: mode
+        in: [status, status-metrics]
+    metrics_instruction:
+      ref: field/metrics_instruction
+      only_when:
+        field: mode
+        in: [status-metrics, metrics-output]
+    output_instruction:
+      ref: field/output_instruction
+      only_when:
+        field: mode
+        in: [metrics-output, output]

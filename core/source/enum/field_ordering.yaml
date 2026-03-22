@@ -1,0 +1,6 @@
+title: FieldOrdering
+values: [identity_first, responsibility_first]
+description: >
+  Structural variant for identity section field sequence.
+  'identity_first' leads with role identity and declaration.
+  'responsibility_first' leads with scope and responsibility.

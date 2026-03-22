@@ -1,5 +1,6 @@
 title: DispatchBackgroundMode
 type: enum/dispatch_background_mode
+default: allowed
 description: >-
   Background execution policy for this agent. Determines how the dispatcher
   handles this agent's execution lifecycle. 'allowed' means the dispatcher

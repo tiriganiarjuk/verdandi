@@ -1,0 +1,6 @@
+title: ClosingComplianceVariantKey
+values: [evaluation_warning, simultaneity]
+description: >
+  Constraints closing reinforcement posture. 'evaluation_warning'
+  reminds the agent that output will be audited against each constraint.
+  'simultaneity' reminds the agent that all constraints apply at once.

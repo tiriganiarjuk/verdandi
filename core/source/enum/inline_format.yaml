@@ -1,0 +1,6 @@
+title: InlineFormat
+values: [backtick, plain, bold, metadata]
+description: >
+  How a single value renders inline. 'backtick' wraps in code backticks.
+  'plain' renders as-is. 'bold' wraps in markdown bold. 'metadata'
+  renders as a key-value label (e.g., "Batch size = N").

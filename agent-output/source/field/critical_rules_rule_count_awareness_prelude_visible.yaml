@@ -1,0 +1,8 @@
+title: CriticalRulesRuleCountAwarenessPreludeVisible
+type: enum/visibility_mode
+default: "auto"
+description: >-
+  Whether to render the rule count awareness prelude. 'auto' renders
+  when rule count exceeds the auto_threshold. 'always' forces it on.
+  'never' suppresses it. The prelude tells the agent how many rules
+  to expect.

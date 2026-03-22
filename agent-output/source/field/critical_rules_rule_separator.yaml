@@ -1,0 +1,7 @@
+title: CriticalRulesRuleSeparator
+type: enum/separator_content
+default: "double_newline"
+description: >-
+  Content separator between individual critical rules. Controls
+  visual density of the rule list. 'newline' for dense packing,
+  'double_newline' for visual separation between rules.

@@ -1,0 +1,7 @@
+title: ConstraintsClosingComplianceReminderVisible
+type: atom/boolean
+default: true
+description: >-
+  Whether to render a closing reminder about constraint compliance
+  after the constraint list. Reinforces obligation at the boundary
+  where the model transitions to the next section.

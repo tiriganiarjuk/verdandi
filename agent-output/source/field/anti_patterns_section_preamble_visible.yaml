@@ -1,0 +1,7 @@
+title: AntiPatternsSectionPreambleVisible
+type: atom/boolean
+default: true
+description: >-
+  Whether to render the preamble text before the anti-pattern list.
+  The preamble establishes what anti-patterns are and how the model
+  should avoid them.

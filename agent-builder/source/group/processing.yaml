@@ -5,17 +5,28 @@ description: >
 fields:
   required:
     capability_model: field/agent_capability_model
-    output_file_format: field/output_file_format
-    output_file_name_known: field/output_file_name_known
     output_description: field/output_description
     scratch_needed: field/scratch_needed
-  optional:
-    output_file_name_template: field/output_file_name_template
-    output_file_name_instruction: field/output_file_name_instruction
-    output_batch_size: field/output_batch_size
+    output_file_format: field/output_file_format
+    output_file_name_known: field/output_file_name_known
   conditional:
+    output_file_name_template:
+      ref: field/output_file_name_template
+      only_when:
+        field: output_file_name_known
+        equals: partially
+    output_file_name_instruction:
+      ref: field/output_file_name_instruction
+      only_when:
+        field: output_file_name_known
+        equals: unknown
     output_write_frequency:
       ref: field/output_write_frequency
       only_when:
         field: output_file_format
         equals: jsonl
+    output_batch_size:
+      ref: field/output_batch_size
+      only_when:
+        field: output_write_frequency
+        equals: batch

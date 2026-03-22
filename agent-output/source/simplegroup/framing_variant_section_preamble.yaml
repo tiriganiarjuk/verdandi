@@ -1,0 +1,8 @@
+title: FramingVariantSectionPreamble
+description: >-
+  Variant alternatives for the section preamble introducing display
+  entries. Keys match enum/framing_variant values. Structure selects one.
+required:
+  territory: field/framing_variant_section_preamble_territory
+  environmental: field/framing_variant_section_preamble_environmental
+  cage: field/framing_variant_section_preamble_cage

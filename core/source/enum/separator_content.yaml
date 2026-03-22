@@ -1,0 +1,9 @@
+title: SeparatorContent
+values: [newline, double_newline, horizontal_rule, blank_line]
+description: >
+  Content separator between repeated blocks. Declarative intent —
+  the renderer maps each value to the actual string. 'newline' is a
+  single line break. 'double_newline' is two line breaks (visual
+  paragraph gap). 'horizontal_rule' is a markdown --- rule.
+  'blank_line' is an empty line. Extensible via union with fence
+  types when more complex separators are needed.

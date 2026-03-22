@@ -1,0 +1,6 @@
+title: ConstraintsSectionPreambleVariantReferencesInstructions
+type: atom/string_prose
+description: >-
+  Preamble variant that frames constraints relative to the
+  instructions section. Establishes that constraints modify or
+  restrict how instructions are carried out.

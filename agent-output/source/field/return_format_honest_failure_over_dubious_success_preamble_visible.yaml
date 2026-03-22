@@ -1,0 +1,6 @@
+title: ReturnFormatHonestFailureOverDubiousSuccessPreambleVisible
+type: atom/boolean
+default: true
+description: >-
+  Whether to render the failure honesty preamble granting explicit
+  permission to return a clean FAILURE rather than a dubious SUCCESS.

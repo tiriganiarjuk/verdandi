@@ -1,0 +1,5 @@
+title: EntryListFormat
+values: [bullet, numbered, dash]
+description: >
+  Marker style for list entries. 'bullet' uses bullet point markers.
+  'numbered' uses sequential integers. 'dash' uses dash markers.

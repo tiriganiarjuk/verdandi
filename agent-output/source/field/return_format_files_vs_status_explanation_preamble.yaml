@@ -1,0 +1,6 @@
+title: ReturnFormatFilesVsStatusExplanationPreamble
+type: atom/string_prose
+description: >-
+  Prose explaining the two-channel model. Work products go to files,
+  the return goes to the dispatcher as a brief status signal — not
+  the deliverable.

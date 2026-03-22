@@ -10,13 +10,15 @@ shallowsections:
     dispatcher: shallowsection/dispatcher
     identity: shallowsection/identity
     input: shallowsection/input
-    instructions: shallowsection/instructions_reduced
-    output: shallowsection/output
     return_format: shallowsection/return_format
+    output: shallowsection/output
     security_boundary: shallowsection/security_boundary
+    instructions: shallowsection/instructions_reduced
   optional:
+    implicit_grants: shallowsection/implicit_grants
+    examples: shallowsection/examples_reduced
     anti_patterns: shallowsection/anti_patterns
     constraints: shallowsection/constraints
-    examples: shallowsection/examples_reduced
-    implicit_grants: shallowsection/implicit_grants
+    success_criteria: shallowsection/success_criteria
+    failure_criteria: shallowsection/failure_criteria
     writing_output: shallowsection/writing_output

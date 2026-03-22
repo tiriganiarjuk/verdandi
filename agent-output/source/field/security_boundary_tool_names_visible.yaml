@@ -1,0 +1,7 @@
+title: SecurityBoundaryToolNamesVisible
+type: atom/boolean
+default: true
+description: >-
+  Whether to show tool names alongside paths in display entries.
+  When false, entries show paths only. Hooks enforce tool access
+  regardless — this controls what the agent sees, not what it can do.

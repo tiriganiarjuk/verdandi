@@ -1,0 +1,6 @@
+title: OutputVsAgentVoice
+values: [output_centric, agent_centric]
+description: >
+  Voice paradigm for success criteria prose. 'output_centric' frames
+  criteria in terms of what the output must be. 'agent_centric' frames
+  criteria in terms of what the agent must achieve.

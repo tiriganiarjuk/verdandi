@@ -1,0 +1,7 @@
+title: ExamplesMaxNumberOverride
+type: atom/boolean
+default: false
+description: >-
+  Whether to override the per-group examples_max_number from data.
+  When false, data passes through unchanged. When true, the sibling
+  examples_max_number value is used instead.

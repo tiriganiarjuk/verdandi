@@ -1,0 +1,7 @@
+title: OutputDirectoryLocationVariantWithBoundary
+type: atom/string_template
+description: >-
+  Directory location variant that states the output directory and
+  adds an explicit boundary constraint. Contains {{OUTPUT_DIRECTORY}}
+  placeholder. All files must be within this directory or its
+  subdirectories.

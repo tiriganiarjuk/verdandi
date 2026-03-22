@@ -1,0 +1,6 @@
+title: RecapFormat
+values: [prose, tabular]
+description: >
+  How a mode recap renders in section closers. 'prose' summarizes modes
+  as flowing text. 'tabular' presents modes in a structured table or
+  list mapping step numbers to their modes.

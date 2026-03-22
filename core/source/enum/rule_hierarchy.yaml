@@ -1,0 +1,7 @@
+title: RuleHierarchy
+values: [flat, universal_then_output_tool]
+description: >
+  Internal organization of critical rules. 'flat' renders all rules
+  in a single list with no grouping. 'universal_then_output_tool'
+  groups rules into universal rules (always apply) followed by
+  output-tool-specific rules (conditional on has_output_tool).

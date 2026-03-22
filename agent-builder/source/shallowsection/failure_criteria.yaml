@@ -1,0 +1,7 @@
+title: FailureCriteria
+description: >
+  Failure criteria the agent must avoid. Null when no
+  failure criteria defined.
+containers:
+  required:
+    criteria: array/failure_criteria_reduced

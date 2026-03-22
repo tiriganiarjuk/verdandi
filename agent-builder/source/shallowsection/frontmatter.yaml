@@ -4,11 +4,12 @@ description: >
   file. Composed from identity, resolved model, exploded tool grants,
   and fully resolved hook configuration. The hooks container carries
   the complete Claude Code hook configuration for path enforcement.
-required:
-  name: field/agent_title
-  description: field/agent_description
-  model: field/anthropic_model
-  permission_mode: field/permission_mode
+fields:
+  required:
+    name: field/agent_title
+    description: field/agent_description
+    model: field/anthropic_model
+    permission_mode: field/permission_mode
 containers:
   required:
     tools: simplearray/frontmatter_tools

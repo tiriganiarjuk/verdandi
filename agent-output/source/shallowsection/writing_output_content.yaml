@@ -1,0 +1,13 @@
+title: WritingOutputContent
+description: >-
+  Content prose for the writing output section. Heading, transition
+  preamble, tool mandate, identity label, invocation preamble, and
+  heredoc explanation.
+fields:
+  required:
+    heading: field/writing_output_heading
+    transition_preamble: field/writing_output_transition_preamble
+    tool_mandate: field/writing_output_tool_mandate
+    tool_identity_label: field/writing_output_tool_identity_label
+    invocation_preamble: field/writing_output_invocation_preamble
+    heredoc_explanation: field/writing_output_heredoc_explanation

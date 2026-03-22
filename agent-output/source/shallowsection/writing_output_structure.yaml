@@ -1,0 +1,10 @@
+title: WritingOutputStructure
+description: >-
+  Structure controls for the writing output section. Visibility
+  toggles for transition preamble, tool mandate, and heredoc
+  explanation.
+fields:
+  required:
+    transition_preamble_visible: field/writing_output_transition_preamble_visible
+    tool_mandate_visible: field/writing_output_tool_mandate_visible
+    heredoc_explanation_visible: field/writing_output_heredoc_explanation_visible

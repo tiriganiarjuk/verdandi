@@ -1,0 +1,7 @@
+title: FailureCriteriaCiteDefinitionAndEvidencePostscript
+type: atom/string_prose
+description: >-
+  Postscript instructing the model to cite both the failure
+  definition and evidence when reporting failure. Connects the
+  definition/evidence hierarchy to the return_format reporting
+  structure.

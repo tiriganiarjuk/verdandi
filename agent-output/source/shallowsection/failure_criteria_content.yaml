@@ -1,0 +1,15 @@
+title: FailureCriteriaContent
+description: >-
+  Content prose for the failure criteria section. Heading, plain
+  prose, and abort stance variant sub-tables for preamble and
+  definition label.
+fields:
+  required:
+    heading: field/failure_criteria_heading
+    any_one_triggers_abort: field/failure_criteria_any_one_triggers_abort
+    evidence_preamble: field/failure_criteria_evidence_preamble
+    cite_definition_and_evidence_postscript: field/failure_criteria_cite_definition_and_evidence_postscript
+    check_before_and_during: field/failure_criteria_check_before_and_during
+containers:
+  required:
+    abort_stance_variant: group/failure_criteria_abort_stance_variant_content

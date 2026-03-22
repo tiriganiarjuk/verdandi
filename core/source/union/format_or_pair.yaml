@@ -1,0 +1,7 @@
+title: FormatOrPair
+union: [enum/list_format, tuple/format_pair]
+description: >
+  Polymorphic format field. A plain string enum value means always use
+  that format. A two-element array means threshold-based switching —
+  first element above threshold, second at or below. Type tells
+  behavior: string = unconditional, array = conditional.

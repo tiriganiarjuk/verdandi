@@ -1,0 +1,5 @@
+title: FramingVariantHeadingEnvironmental
+type: atom/string_text
+description: >-
+  Section heading when framing_variant is "environmental". Frames the
+  workspace as the operating context.

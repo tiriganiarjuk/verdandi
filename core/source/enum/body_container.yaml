@@ -1,0 +1,7 @@
+title: BodyContainer
+values: [none, blockquote, bare_with_endmarker]
+description: >
+  Visual container wrapping a content body. 'none' renders content
+  directly with no wrapping. 'blockquote' indents content in a markdown
+  blockquote. 'bare_with_endmarker' renders content directly but appends
+  an end marker for visual boundary closure.

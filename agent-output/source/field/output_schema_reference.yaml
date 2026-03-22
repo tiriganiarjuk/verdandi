@@ -1,0 +1,6 @@
+title: OutputSchemaReference
+type: atom/string_template
+description: >-
+  Template for the schema path reference when schema_embed is false.
+  Contains {{SCHEMA_PATH}} placeholder. Instructs the model to read
+  the schema at the given path and conform output to it.

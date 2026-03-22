@@ -1,5 +1,6 @@
 title: DispatchInputDelivery
 type: enum/dispatch_input_delivery
+default: inline
 description: >-
   How input data reaches the agent. 'file' means the agent reads from a pre-
   determined file path declared in the definition — also requires

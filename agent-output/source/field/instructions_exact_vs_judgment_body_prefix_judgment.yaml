@@ -1,0 +1,5 @@
+title: InstructionsExactVsJudgmentBodyPrefixJudgment
+type: atom/string_text
+description: >-
+  Body prefix for judgment-mode steps when marker_placement is
+  'body_prefix'. Short directive text preceding the step body.

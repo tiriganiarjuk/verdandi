@@ -1,0 +1,6 @@
+title: InstructionsPreambleNoAddSkipReorderVisible
+type: atom/boolean
+default: true
+description: >-
+  Whether to render the prohibition against adding, skipping, or
+  reordering steps in the preamble.

@@ -8,10 +8,10 @@
     "dispatcher",
     "identity",
     "input",
-    "instructions",
-    "output",
     "return_format",
-    "security_boundary"
+    "output",
+    "security_boundary",
+    "instructions"
   ],
   "properties": {
     "dispatcher": {
@@ -46,7 +46,8 @@
             "allowed",
             "required",
             "forbidden"
-          ]
+          ],
+          "default": "allowed"
         },
         "input_format": {
           "$ref": "#/$defs/field__dispatch_input_format"
@@ -112,6 +113,9 @@
       "allOf": [
         {
           "if": {
+            "required": [
+              "dispatch_mode"
+            ],
             "properties": {
               "dispatch_mode": {
                 "const": "batch"
@@ -251,7 +255,8 @@
         "delivery": {
           "$ref": "#/$defs/enum__dispatch_input_delivery",
           "title": "DispatchInputDelivery",
-          "description": "How input data reaches the agent. 'file' means the agent reads from a pre- determined file path declared in the definition — also requires security_io_input_file in [security.security_io]. 'directory' means the agent reads from a pre-determined directory path — also requires security_io_input_directory in [security.security_io]. 'tempfile' means the dispatcher writes input to a scoped temp directory and passes the path as parameter — preserves context window for large inputs; also requires security_io_input_tempdir in [security.security_io]. 'inline' means embedded directly in the agent prompt (small inputs only, no file paths or security_io fields needed).\nHow input data reaches the agent. 'tempfile' means the dispatcher writes to a scoped temp directory and passes the path as parameter. 'inline' means embedded directly in the agent prompt. 'file' means the agent reads from a pre-determined file path. 'directory' means the agent reads from a pre-determined directory path."
+          "description": "How input data reaches the agent. 'file' means the agent reads from a pre- determined file path declared in the definition — also requires security_io_input_file in [security.security_io]. 'directory' means the agent reads from a pre-determined directory path — also requires security_io_input_directory in [security.security_io]. 'tempfile' means the dispatcher writes input to a scoped temp directory and passes the path as parameter — preserves context window for large inputs; also requires security_io_input_tempdir in [security.security_io]. 'inline' means embedded directly in the agent prompt (small inputs only, no file paths or security_io fields needed).\nHow input data reaches the agent. 'tempfile' means the dispatcher writes to a scoped temp directory and passes the path as parameter. 'inline' means embedded directly in the agent prompt. 'file' means the agent reads from a pre-determined file path. 'directory' means the agent reads from a pre-determined directory path.",
+          "default": "inline"
         },
         "input_schema": {
           "$ref": "#/$defs/element__path_exists_absolute",
@@ -295,57 +300,116 @@
       ],
       "additionalProperties": false
     },
-    "instructions": {
-      "title": "Instructions",
+    "return_format": {
+      "title": "ReturnFormat",
       "type": "object",
-      "description": "Ordered processing steps — includes inlined, for render consumption",
+      "description": "How the agent reports results: return mode, optional instructions for status/metrics/output, schema for structured returns, and success/failure criteria. Aggregates from task.return and criteria sections.\n",
       "properties": {
-        "steps": {
-          "title": "ExecutionInstructions",
-          "type": "array",
-          "description": "Ordered processing steps — includes inlined, direct steps only",
-          "items": {
-            "title": "InstructionStep",
-            "type": "object",
-            "description": "Inline instruction step with processing mode boundary",
-            "properties": {
-              "instruction_mode": {
-                "title": "InstructionMode",
-                "type": "string",
-                "description": "Processing mode boundary. DETERMINISTIC steps are mechanical operations (reading input, writing output, validating schema) where the LLM must follow exact procedures with no creativity. PROBABILISTIC steps require LLM intelligence (rewriting text, making quality judgments, creative decisions). The transformer uses mode declarations to compile different prompt patterns for each step type.\nProcessing mode boundary. 'deterministic' steps are mechanical operations where the LLM must follow exact procedures. 'probabilistic' steps require LLM intelligence for creative or evaluative work.",
-                "enum": [
-                  "deterministic",
-                  "probabilistic"
-                ]
-              },
-              "instruction_text": {
-                "$ref": "#/$defs/atom__string_markdown",
-                "title": "InstructionText",
-                "description": "Inline instruction text for this step. Used for short instructions that don't warrant a separate .md file. Mutually exclusive with include.\nMarkdown-formatted text content. Starts with a non-path character, contains at least three whitespace characters. No path exclusions needed — the structural constraints prevent abuse while allowing markdown formatting and embedded path references. Used for example content, instructional text, and rich-text fields.",
-                "x-semantic": {
-                  "intent": "Directs agent behavior for one processing step. Each instruction must produce consistent behavior across different LLM instances.",
-                  "severity": "error",
-                  "checks": [
-                    "Specific enough that two different LLMs would produce similar outputs",
-                    "Describes concrete actions, not aspirational goals",
-                    "Scoped to a single processing step, not the entire task"
-                  ]
-                }
-              }
-            },
-            "required": [
-              "instruction_mode",
-              "instruction_text"
-            ],
-            "additionalProperties": false
-          },
-          "minItems": 1
+        "mode": {
+          "$ref": "#/$defs/field__return_mode"
+        },
+        "return_schema": {
+          "$ref": "#/$defs/element__path_exists_absolute",
+          "title": "ReturnSchemaXAbs",
+          "description": "Absolute path to a JSON Schema file (must end with .schema.json or .schema.yaml) defining the metric fields the agent returns. Always embedded directly into the prompt — there is no enforcement mechanism for return communication (agent-to-dispatcher LLM text). Embedding ensures the agent sees field names, types, and definitions. Schema file must exist at resolution time. Example: \"definitions/schemas/my-agent-return.schema.json\"\nAbsolute path that must exist on the filesystem"
+        },
+        "status_instruction": {
+          "$ref": "#/$defs/atom__string_prose",
+          "title": "StatusInstruction",
+          "description": "Prompt instruction telling the agent how to report its completion status in its return. Composed into the agent prompt when return mode includes status. Example: \"Return only SUCCESS or FAILURE.\"\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
+        },
+        "metrics_instruction": {
+          "$ref": "#/$defs/atom__string_prose",
+          "title": "MetricsInstruction",
+          "description": "Prompt instruction telling the agent how to report summary metrics in its return. Composed into the agent prompt when return mode includes metrics. Example: \"Include summary metrics with your return: records processed, records passed, records failed.\"\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
+        },
+        "output_instruction": {
+          "$ref": "#/$defs/atom__string_prose",
+          "title": "OutputInstruction",
+          "description": "Prompt instruction telling the agent how to deliver its output data in its return. Composed into the agent prompt when return mode includes output. Example: \"Return your output directly as your final message to the dispatcher.\"\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
         }
       },
       "required": [
-        "steps"
+        "mode"
       ],
-      "additionalProperties": false
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "required": [
+              "mode"
+            ],
+            "properties": {
+              "mode": {
+                "enum": [
+                  "status",
+                  "status-metrics"
+                ]
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "status_instruction"
+            ]
+          },
+          "else": {
+            "properties": {
+              "status_instruction": false
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "mode"
+            ],
+            "properties": {
+              "mode": {
+                "enum": [
+                  "status-metrics",
+                  "metrics-output"
+                ]
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "metrics_instruction"
+            ]
+          },
+          "else": {
+            "properties": {
+              "metrics_instruction": false
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "mode"
+            ],
+            "properties": {
+              "mode": {
+                "enum": [
+                  "metrics-output",
+                  "output"
+                ]
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "output_instruction"
+            ]
+          },
+          "else": {
+            "properties": {
+              "output_instruction": false
+            }
+          }
+        }
+      ]
     },
     "output": {
       "title": "Output",
@@ -371,11 +435,6 @@
           "title": "SchemaPathXAbs",
           "description": "Path to the JSON Schema file that validates enforcement tool output. Required for all enforcement output tools — structured output (JSON, JSONL) always requires schema validation. The tool validates each write against this schema before committing to disk.\nAbsolute path that must exist on the filesystem"
         },
-        "schema_embed": {
-          "$ref": "#/$defs/atom__boolean",
-          "title": "SchemaEmbed",
-          "description": "Whether to embed the output schema directly into the agent prompt. When true, the format transformer reads the schema file and inlines its content — uses context window but ensures the agent sees the schema without a tool call. When false (or omitted), the schema path is granted read access and the agent reads it via Read tool — saves context but adds a tool-call round trip. Prefer true for small schemas (under ~100 lines) or when schema adherence is critical. Prefer false for large schemas where context window conservation matters. Either way the agent knows the desired shape.\nTrue or false value"
-        },
         "output_file": {
           "$ref": "#/$defs/atom__path_absolute",
           "title": "OutputFileAbs",
@@ -395,6 +454,11 @@
           "$ref": "#/$defs/atom__string_prose",
           "title": "NameInstruction",
           "description": "Instruction indicating what the LLM should use as the filename basis during processing. The LLM derives the identifier from the data being processed. The tool writes to output_directory/{identifier}.{extension}, where the extension is enforced by processing_output_file_format. The LLM controls the filename but not the directory or file type. Example: \"{record-identifier}\" — the LLM provides a record identifier, the tool writes to the output directory with the correct extension.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
+        },
+        "schema_embed": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "SchemaEmbed",
+          "description": "Whether to embed the output schema directly into the agent prompt. When true, the format transformer reads the schema file and inlines its content — uses context window but ensures the agent sees the schema without a tool call. When false (or omitted), the schema path is granted read access and the agent reads it via Read tool — saves context but adds a tool-call round trip. Prefer true for small schemas (under ~100 lines) or when schema adherence is critical. Prefer false for large schemas where context window conservation matters. Either way the agent knows the desired shape.\nTrue or false value"
         }
       },
       "required": [
@@ -402,155 +466,70 @@
         "format",
         "name_known"
       ],
-      "additionalProperties": false
-    },
-    "return_format": {
-      "title": "ReturnFormat",
-      "type": "object",
-      "description": "How the agent reports results: return mode, optional instructions for status/metrics/output, schema for structured returns, and success/failure criteria. Aggregates from task.return and criteria sections.\n",
-      "properties": {
-        "mode": {
-          "$ref": "#/$defs/field__return_mode"
-        },
-        "status_instruction": {
-          "$ref": "#/$defs/atom__string_prose",
-          "title": "StatusInstruction",
-          "description": "Prompt instruction telling the agent how to report its completion status in its return. Composed into the agent prompt when return mode includes status. Example: \"Return only SUCCESS or FAILURE.\"\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
-        },
-        "metrics_instruction": {
-          "$ref": "#/$defs/atom__string_prose",
-          "title": "MetricsInstruction",
-          "description": "Prompt instruction telling the agent how to report summary metrics in its return. Composed into the agent prompt when return mode includes metrics. Example: \"Include summary metrics with your return: records processed, records passed, records failed.\"\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
-        },
-        "output_instruction": {
-          "$ref": "#/$defs/atom__string_prose",
-          "title": "OutputInstruction",
-          "description": "Prompt instruction telling the agent how to deliver its output data in its return. Composed into the agent prompt when return mode includes output. Example: \"Return your output directly as your final message to the dispatcher.\"\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
-        },
-        "return_schema": {
-          "$ref": "#/$defs/element__path_exists_absolute",
-          "title": "ReturnSchemaXAbs",
-          "description": "Absolute path to a JSON Schema file (must end with .schema.json or .schema.yaml) defining the metric fields the agent returns. Always embedded directly into the prompt — there is no enforcement mechanism for return communication (agent-to-dispatcher LLM text). Embedding ensures the agent sees field names, types, and definitions. Schema file must exist at resolution time. Example: \"definitions/schemas/my-agent-return.schema.json\"\nAbsolute path that must exist on the filesystem"
-        },
-        "success_criteria": {
-          "title": "SuccessCriteria",
-          "type": "array",
-          "description": "Success criteria — includes inlined, direct items only",
-          "items": {
-            "title": "SuccessItem",
-            "type": "object",
-            "description": "A single success criterion with definition and observable evidence",
-            "properties": {
-              "success_definition": {
-                "$ref": "#/$defs/atom__string_prose",
-                "title": "SuccessDefinition",
-                "description": "One-sentence statement of what success means for this agent. LLMs are goal- driven — explicit success definitions pull harder than constraints. Write as a positive outcome: \"Every input record has been assessed and a valid QC report written to disk.\"\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths.",
-                "minLength": 30,
-                "x-semantic": {
-                  "intent": "The agent's goal state. LLMs are goal-driven — explicit success definitions pull behavior more effectively than constraints push it.",
-                  "severity": "error",
-                  "checks": [
-                    "Describes a concrete end state, not an ongoing activity",
-                    "Refers to the PROCESS succeeding, not data quality outcomes",
-                    "Observable — you can tell from examining outputs whether this was achieved"
-                  ],
-                  "anti_patterns": [
-                    "Confusing process success with data quality ('all entries are high quality' is data, not process)",
-                    "Vague outcomes: 'task completed successfully', 'all items processed'"
-                  ]
-                }
-              },
-              "success_evidence": {
-                "title": "SuccessEvidence",
-                "type": "array",
-                "description": "Observable evidence that a success criterion has been met",
-                "items": {
-                  "$ref": "#/$defs/atom__string_prose",
-                  "title": "SuccessEvidenceItem",
-                  "description": "Observable conditions that prove success. Each entry is a concrete, verifiable statement the agent can check. \"Output record count equals input record count\", \"Every record passes schema validation\". These become the agent's self-verification checklist.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths.",
-                  "x-semantic": {
-                    "intent": "Self-verification checklist. The agent checks each condition after processing to confirm success before reporting.",
-                    "severity": "warning",
-                    "checks": [
-                      "Each item is a concrete, observable condition — not a subjective judgment",
-                      "Each item is independently verifiable from outputs alone",
-                      "Conditions are sufficient — if all pass, success is confirmed"
-                    ]
-                  }
-                },
-                "minItems": 1
-              }
-            },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
             "required": [
-              "success_definition",
-              "success_evidence"
+              "name_known"
             ],
-            "additionalProperties": false
-          },
-          "minItems": 1
-        },
-        "failure_criteria": {
-          "title": "FailureCriteria",
-          "type": "array",
-          "description": "Failure criteria — includes inlined, direct items only",
-          "items": {
-            "title": "FailureItem",
-            "type": "object",
-            "description": "A single failure criterion — FAILURE means process broke, not data quality",
             "properties": {
-              "failure_definition": {
-                "$ref": "#/$defs/atom__string_prose",
-                "title": "FailureDefinition",
-                "description": "One-sentence statement of what failure means for this agent. Failure refers to the PROCESS, not the DATA. An agent that correctly identifies all inputs as invalid has SUCCEEDED — the assessment process worked. FAILURE means the process itself broke: couldn't read input, couldn't write output, unrecoverable error.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths.",
-                "minLength": 30,
-                "x-semantic": {
-                  "intent": "Defines process failure — not data outcomes. The agent uses this to determine when to report FAILURE vs SUCCESS with bad-data findings.",
-                  "severity": "error",
-                  "checks": [
-                    "Describes PROCESS failure, not data quality problems",
-                    "Specific failure conditions, not 'something went wrong'",
-                    "Distinguishable from success_definition — no overlap"
-                  ],
-                  "anti_patterns": [
-                    "Treating bad data as failure ('found invalid entries' is SUCCESS if the process worked)",
-                    "Restating success_definition in negative form"
-                  ]
-                }
-              },
-              "failure_evidence": {
-                "title": "FailureEvidence",
-                "type": "array",
-                "description": "Observable evidence that a failure criterion has been triggered",
-                "items": {
-                  "$ref": "#/$defs/atom__string_prose",
-                  "title": "FailureEvidenceItem",
-                  "description": "Observable conditions that prove failure. Each entry is a concrete condition indicating the process broke. \"Any record skipped without explanation\", \"Schema validation failure not resolved after retry\", \"Output file not created\". These are process failures, not data quality findings.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths.",
-                  "x-semantic": {
-                    "intent": "Process failure detection. The agent checks these conditions to determine whether to report FAILURE instead of SUCCESS.",
-                    "severity": "warning",
-                    "checks": [
-                      "Each item describes a PROCESS failure condition, not a data quality finding",
-                      "Each item is observable from the execution environment",
-                      "Conditions are distinct from success_evidence — no overlap"
-                    ]
-                  }
-                },
-                "minItems": 1
+              "name_known": {
+                "const": "partially"
               }
-            },
-            "required": [
-              "failure_definition",
-              "failure_evidence"
-            ],
-            "additionalProperties": false
+            }
           },
-          "minItems": 1
+          "then": {
+            "required": [
+              "name_template"
+            ]
+          },
+          "else": {
+            "properties": {
+              "name_template": false
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "name_known"
+            ],
+            "properties": {
+              "name_known": {
+                "const": "unknown"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "name_instruction"
+            ]
+          },
+          "else": {
+            "properties": {
+              "name_instruction": false
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "schema_path"
+            ]
+          },
+          "then": {
+            "required": [
+              "schema_embed"
+            ]
+          },
+          "else": {
+            "properties": {
+              "schema_embed": false
+            }
+          }
         }
-      },
-      "required": [
-        "mode"
-      ],
-      "additionalProperties": false
+      ]
     },
     "security_boundary": {
       "title": "SecurityBoundary",
@@ -642,71 +621,107 @@
       ],
       "additionalProperties": false
     },
-    "anti_patterns": {
-      "title": "AntiPatterns",
+    "instructions": {
+      "title": "Instructions",
       "type": "object",
-      "description": "Known failure patterns the agent must avoid. Null when no anti-patterns defined.\n",
+      "description": "Ordered processing steps — includes inlined, for render consumption",
       "properties": {
-        "patterns": {
-          "title": "GuardrailsAntiPatterns",
+        "steps": {
+          "title": "ExecutionInstructions",
           "type": "array",
-          "description": "Common mistakes to avoid. Each entry describes a specific wrong behavior the agent might exhibit and why it's wrong.\n",
+          "description": "Ordered processing steps — includes inlined, direct steps only",
           "items": {
-            "$ref": "#/$defs/atom__string_prose",
-            "title": "GuardrailsAntiPattern",
-            "description": "Common mistakes to avoid. Each entry describes a specific wrong behavior the agent might exhibit and why it's wrong. \"Do not batch-summarize from memory — process each record individually from the source file\", \"Do not infer missing fields — mark them as absent\". Anti-patterns are learned from observed agent failures.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths.",
-            "minLength": 30,
-            "x-semantic": {
-              "intent": "Calibrates the LLM against its own failure modes. Each item must describe a specific, recognizable mistake — not a generic warning.",
-              "severity": "warning",
-              "checks": [
-                "Each item describes a specific mistake, not a category of mistakes",
-                "Each item is recognizable — agent can detect when it is about to do this",
-                "Items are grounded in observed LLM failure modes, not hypothetical risks"
-              ]
-            }
+            "title": "InstructionStep",
+            "type": "object",
+            "description": "Inline instruction step with processing mode boundary",
+            "properties": {
+              "instruction_mode": {
+                "title": "InstructionMode",
+                "type": "string",
+                "description": "Processing mode boundary. DETERMINISTIC steps are mechanical operations (reading input, writing output, validating schema) where the LLM must follow exact procedures with no creativity. PROBABILISTIC steps require LLM intelligence (rewriting text, making quality judgments, creative decisions). The transformer uses mode declarations to compile different prompt patterns for each step type.\nProcessing mode boundary. 'deterministic' steps are mechanical operations where the LLM must follow exact procedures. 'probabilistic' steps require LLM intelligence for creative or evaluative work.",
+                "enum": [
+                  "deterministic",
+                  "probabilistic"
+                ]
+              },
+              "instruction_text": {
+                "$ref": "#/$defs/atom__string_markdown",
+                "title": "InstructionText",
+                "description": "Inline instruction text for this step. Used for short instructions that don't warrant a separate .md file. Mutually exclusive with include.\nMarkdown-formatted text content. Starts with a non-path character, contains at least three whitespace characters. No path exclusions needed — the structural constraints prevent abuse while allowing markdown formatting and embedded path references. Used for example content, instructional text, and rich-text fields.",
+                "x-semantic": {
+                  "intent": "Directs agent behavior for one processing step. Each instruction must produce consistent behavior across different LLM instances.",
+                  "severity": "error",
+                  "checks": [
+                    "Specific enough that two different LLMs would produce similar outputs",
+                    "Describes concrete actions, not aspirational goals",
+                    "Scoped to a single processing step, not the entire task"
+                  ]
+                }
+              }
+            },
+            "required": [
+              "instruction_mode",
+              "instruction_text"
+            ],
+            "additionalProperties": false
           },
           "minItems": 1
         }
       },
       "required": [
-        "patterns"
+        "steps"
       ],
       "additionalProperties": false
     },
-    "constraints": {
-      "title": "Constraints",
+    "implicit_grants": {
+      "title": "ImplicitGrants",
       "type": "object",
-      "description": "Behavioral constraint rules the agent must follow. Null when no constraints defined.\n",
+      "description": "Resolver-derived capability grants for hook enforcement only. Not displayed to the agent. Same shape as security_boundary capabilities but from implicit sources (context paths, schema paths, etc.).\n",
       "properties": {
-        "rules": {
-          "title": "GuardrailsConstraints",
-          "type": "array",
-          "description": "MUST and NEVER rules the agent must follow. Each entry is a single imperative constraint. Keep constraints specific and verifiable.\n",
-          "items": {
-            "$ref": "#/$defs/atom__string_prose",
-            "title": "GuardrailsConstraint",
-            "description": "MUST and NEVER rules the agent must follow. Each entry is a single imperative constraint. \"MUST validate every record against schema before writing\", \"NEVER modify source data\", \"MUST process records in order\". Keep constraints specific and verifiable — vague rules get ignored.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths.",
-            "minLength": 30,
-            "x-semantic": {
-              "intent": "Hard behavioral boundaries in the agent prompt. Violations are agent failures. Each item must be clear enough that both the agent AND a reviewer can determine whether a specific output violates it.",
-              "severity": "warning",
-              "checks": [
-                "Each item is actionable — agent can determine compliance from the constraint alone",
-                "Each item is verifiable — a reviewer can check violation without ambiguity",
-                "Items are specific to this agent's failure modes, not generic good practice"
-              ],
-              "anti_patterns": [
-                "Vague directives: 'be careful', 'ensure quality', 'be thorough'",
-                "Constraints the agent cannot actually verify or enforce"
-              ]
+        "capabilities": {
+          "title": "EnforcementImplicitGrants",
+          "type": "object",
+          "description": "System-derived capability-keyed path grants (System 2). NOT displayed to agent. Hooks enforce silently. Covers auto-derived access from context paths, schema files, input files, temp directories.\n",
+          "properties": {
+            "read": {
+              "title": "EnforcementImplicitRead",
+              "type": "array",
+              "description": "Paths granted read capability from system-derived permissions (System 2). NOT displayed to agent. Hooks enforce silently. Covers auto-derived access to context files, schema files, input files, temp directories.\n",
+              "items": {
+                "$ref": "#/$defs/element__path_exists_absolute",
+                "title": "EnforcementImplicitReadXAbs",
+                "description": "Paths granted read capability from system-derived permissions (System 2). NOT displayed to agent. Hooks enforce silently. Covers auto-derived access to context files, schema files, input files, temp directories.\nAbsolute path that must exist on the filesystem"
+              },
+              "minItems": 1
+            },
+            "write": {
+              "title": "EnforcementImplicitWrite",
+              "type": "array",
+              "description": "Paths granted write capability from system-derived permissions (System 2). NOT displayed to agent. Hooks enforce silently. Covers auto-derived access to scratch temp directories and output temp directories.\n",
+              "items": {
+                "$ref": "#/$defs/element__path_exists_absolute",
+                "title": "EnforcementImplicitWriteXAbs",
+                "description": "Paths granted write capability from system-derived permissions (System 2). NOT displayed to agent. Hooks enforce silently. Covers auto-derived access to scratch temp directories and output temp directories.\nAbsolute path that must exist on the filesystem"
+              },
+              "minItems": 1
+            },
+            "edit": {
+              "title": "EnforcementImplicitEdit",
+              "type": "array",
+              "description": "Paths granted edit capability from system-derived permissions (System 2). NOT displayed to agent. Hooks enforce silently. Covers auto-derived access to scratch or temp files that require in-place modification.\n",
+              "items": {
+                "$ref": "#/$defs/element__path_exists_absolute",
+                "title": "EnforcementImplicitEditXAbs",
+                "description": "Paths granted edit capability from system-derived permissions (System 2). NOT displayed to agent. Hooks enforce silently. Covers auto-derived access to scratch or temp files that require in-place modification.\nAbsolute path that must exist on the filesystem"
+              },
+              "minItems": 1
             }
           },
-          "minItems": 1
+          "additionalProperties": false
         }
       },
       "required": [
-        "rules"
+        "capabilities"
       ],
       "additionalProperties": false
     },
@@ -784,55 +799,207 @@
       ],
       "additionalProperties": false
     },
-    "implicit_grants": {
-      "title": "ImplicitGrants",
+    "anti_patterns": {
+      "title": "AntiPatterns",
       "type": "object",
-      "description": "Resolver-derived capability grants for hook enforcement only. Not displayed to the agent. Same shape as security_boundary capabilities but from implicit sources (context paths, schema paths, etc.).\n",
+      "description": "Known failure patterns the agent must avoid. Null when no anti-patterns defined.\n",
       "properties": {
-        "capabilities": {
-          "title": "EnforcementImplicitGrants",
-          "type": "object",
-          "description": "System-derived capability-keyed path grants (System 2). NOT displayed to agent. Hooks enforce silently. Covers auto-derived access from context paths, schema files, input files, temp directories.\n",
-          "properties": {
-            "read": {
-              "title": "EnforcementImplicitRead",
-              "type": "array",
-              "description": "Paths granted read capability from system-derived permissions (System 2). NOT displayed to agent. Hooks enforce silently. Covers auto-derived access to context files, schema files, input files, temp directories.\n",
-              "items": {
-                "$ref": "#/$defs/element__path_exists_absolute",
-                "title": "EnforcementImplicitReadXAbs",
-                "description": "Paths granted read capability from system-derived permissions (System 2). NOT displayed to agent. Hooks enforce silently. Covers auto-derived access to context files, schema files, input files, temp directories.\nAbsolute path that must exist on the filesystem"
-              },
-              "minItems": 1
-            },
-            "write": {
-              "title": "EnforcementImplicitWrite",
-              "type": "array",
-              "description": "Paths granted write capability from system-derived permissions (System 2). NOT displayed to agent. Hooks enforce silently. Covers auto-derived access to scratch temp directories and output temp directories.\n",
-              "items": {
-                "$ref": "#/$defs/element__path_exists_absolute",
-                "title": "EnforcementImplicitWriteXAbs",
-                "description": "Paths granted write capability from system-derived permissions (System 2). NOT displayed to agent. Hooks enforce silently. Covers auto-derived access to scratch temp directories and output temp directories.\nAbsolute path that must exist on the filesystem"
-              },
-              "minItems": 1
-            },
-            "edit": {
-              "title": "EnforcementImplicitEdit",
-              "type": "array",
-              "description": "Paths granted edit capability from system-derived permissions (System 2). NOT displayed to agent. Hooks enforce silently. Covers auto-derived access to scratch or temp files that require in-place modification.\n",
-              "items": {
-                "$ref": "#/$defs/element__path_exists_absolute",
-                "title": "EnforcementImplicitEditXAbs",
-                "description": "Paths granted edit capability from system-derived permissions (System 2). NOT displayed to agent. Hooks enforce silently. Covers auto-derived access to scratch or temp files that require in-place modification.\nAbsolute path that must exist on the filesystem"
-              },
-              "minItems": 1
+        "patterns": {
+          "title": "GuardrailsAntiPatterns",
+          "type": "array",
+          "description": "Common mistakes to avoid. Each entry describes a specific wrong behavior the agent might exhibit and why it's wrong.\n",
+          "items": {
+            "$ref": "#/$defs/atom__string_prose",
+            "title": "GuardrailsAntiPattern",
+            "description": "Common mistakes to avoid. Each entry describes a specific wrong behavior the agent might exhibit and why it's wrong. \"Do not batch-summarize from memory — process each record individually from the source file\", \"Do not infer missing fields — mark them as absent\". Anti-patterns are learned from observed agent failures.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths.",
+            "minLength": 30,
+            "x-semantic": {
+              "intent": "Calibrates the LLM against its own failure modes. Each item must describe a specific, recognizable mistake — not a generic warning.",
+              "severity": "warning",
+              "checks": [
+                "Each item describes a specific mistake, not a category of mistakes",
+                "Each item is recognizable — agent can detect when it is about to do this",
+                "Items are grounded in observed LLM failure modes, not hypothetical risks"
+              ]
             }
           },
-          "additionalProperties": false
+          "minItems": 1
         }
       },
       "required": [
-        "capabilities"
+        "patterns"
+      ],
+      "additionalProperties": false
+    },
+    "constraints": {
+      "title": "Constraints",
+      "type": "object",
+      "description": "Behavioral constraint rules the agent must follow. Null when no constraints defined.\n",
+      "properties": {
+        "rules": {
+          "title": "GuardrailsConstraints",
+          "type": "array",
+          "description": "MUST and NEVER rules the agent must follow. Each entry is a single imperative constraint. Keep constraints specific and verifiable.\n",
+          "items": {
+            "$ref": "#/$defs/atom__string_prose",
+            "title": "GuardrailsConstraint",
+            "description": "MUST and NEVER rules the agent must follow. Each entry is a single imperative constraint. \"MUST validate every record against schema before writing\", \"NEVER modify source data\", \"MUST process records in order\". Keep constraints specific and verifiable — vague rules get ignored.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths.",
+            "minLength": 30,
+            "x-semantic": {
+              "intent": "Hard behavioral boundaries in the agent prompt. Violations are agent failures. Each item must be clear enough that both the agent AND a reviewer can determine whether a specific output violates it.",
+              "severity": "warning",
+              "checks": [
+                "Each item is actionable — agent can determine compliance from the constraint alone",
+                "Each item is verifiable — a reviewer can check violation without ambiguity",
+                "Items are specific to this agent's failure modes, not generic good practice"
+              ],
+              "anti_patterns": [
+                "Vague directives: 'be careful', 'ensure quality', 'be thorough'",
+                "Constraints the agent cannot actually verify or enforce"
+              ]
+            }
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "rules"
+      ],
+      "additionalProperties": false
+    },
+    "success_criteria": {
+      "title": "SuccessCriteria",
+      "type": "object",
+      "description": "Success criteria the agent must strive to meet. Null when no success criteria defined.\n",
+      "properties": {
+        "criteria": {
+          "title": "SuccessCriteria",
+          "type": "array",
+          "description": "Success criteria — includes inlined, direct items only",
+          "items": {
+            "title": "SuccessItem",
+            "type": "object",
+            "description": "A single success criterion with definition and observable evidence",
+            "properties": {
+              "success_definition": {
+                "$ref": "#/$defs/atom__string_prose",
+                "title": "SuccessDefinition",
+                "description": "One-sentence statement of what success means for this agent. LLMs are goal- driven — explicit success definitions pull harder than constraints. Write as a positive outcome: \"Every input record has been assessed and a valid QC report written to disk.\"\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths.",
+                "minLength": 30,
+                "x-semantic": {
+                  "intent": "The agent's goal state. LLMs are goal-driven — explicit success definitions pull behavior more effectively than constraints push it.",
+                  "severity": "error",
+                  "checks": [
+                    "Describes a concrete end state, not an ongoing activity",
+                    "Refers to the PROCESS succeeding, not data quality outcomes",
+                    "Observable — you can tell from examining outputs whether this was achieved"
+                  ],
+                  "anti_patterns": [
+                    "Confusing process success with data quality ('all entries are high quality' is data, not process)",
+                    "Vague outcomes: 'task completed successfully', 'all items processed'"
+                  ]
+                }
+              },
+              "success_evidence": {
+                "title": "SuccessEvidence",
+                "type": "array",
+                "description": "Observable evidence that a success criterion has been met",
+                "items": {
+                  "$ref": "#/$defs/atom__string_prose",
+                  "title": "SuccessEvidenceItem",
+                  "description": "Observable conditions that prove success. Each entry is a concrete, verifiable statement the agent can check. \"Output record count equals input record count\", \"Every record passes schema validation\". These become the agent's self-verification checklist.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths.",
+                  "x-semantic": {
+                    "intent": "Self-verification checklist. The agent checks each condition after processing to confirm success before reporting.",
+                    "severity": "warning",
+                    "checks": [
+                      "Each item is a concrete, observable condition — not a subjective judgment",
+                      "Each item is independently verifiable from outputs alone",
+                      "Conditions are sufficient — if all pass, success is confirmed"
+                    ]
+                  }
+                },
+                "minItems": 1
+              }
+            },
+            "required": [
+              "success_definition",
+              "success_evidence"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "criteria"
+      ],
+      "additionalProperties": false
+    },
+    "failure_criteria": {
+      "title": "FailureCriteria",
+      "type": "object",
+      "description": "Failure criteria the agent must avoid. Null when no failure criteria defined.\n",
+      "properties": {
+        "criteria": {
+          "title": "FailureCriteria",
+          "type": "array",
+          "description": "Failure criteria — includes inlined, direct items only",
+          "items": {
+            "title": "FailureItem",
+            "type": "object",
+            "description": "A single failure criterion — FAILURE means process broke, not data quality",
+            "properties": {
+              "failure_definition": {
+                "$ref": "#/$defs/atom__string_prose",
+                "title": "FailureDefinition",
+                "description": "One-sentence statement of what failure means for this agent. Failure refers to the PROCESS, not the DATA. An agent that correctly identifies all inputs as invalid has SUCCEEDED — the assessment process worked. FAILURE means the process itself broke: couldn't read input, couldn't write output, unrecoverable error.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths.",
+                "minLength": 30,
+                "x-semantic": {
+                  "intent": "Defines process failure — not data outcomes. The agent uses this to determine when to report FAILURE vs SUCCESS with bad-data findings.",
+                  "severity": "error",
+                  "checks": [
+                    "Describes PROCESS failure, not data quality problems",
+                    "Specific failure conditions, not 'something went wrong'",
+                    "Distinguishable from success_definition — no overlap"
+                  ],
+                  "anti_patterns": [
+                    "Treating bad data as failure ('found invalid entries' is SUCCESS if the process worked)",
+                    "Restating success_definition in negative form"
+                  ]
+                }
+              },
+              "failure_evidence": {
+                "title": "FailureEvidence",
+                "type": "array",
+                "description": "Observable evidence that a failure criterion has been triggered",
+                "items": {
+                  "$ref": "#/$defs/atom__string_prose",
+                  "title": "FailureEvidenceItem",
+                  "description": "Observable conditions that prove failure. Each entry is a concrete condition indicating the process broke. \"Any record skipped without explanation\", \"Schema validation failure not resolved after retry\", \"Output file not created\". These are process failures, not data quality findings.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths.",
+                  "x-semantic": {
+                    "intent": "Process failure detection. The agent checks these conditions to determine whether to report FAILURE instead of SUCCESS.",
+                    "severity": "warning",
+                    "checks": [
+                      "Each item describes a PROCESS failure condition, not a data quality finding",
+                      "Each item is observable from the execution environment",
+                      "Conditions are distinct from success_evidence — no overlap"
+                    ]
+                  }
+                },
+                "minItems": 1
+              }
+            },
+            "required": [
+              "failure_definition",
+              "failure_evidence"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "criteria"
       ],
       "additionalProperties": false
     },
@@ -917,8 +1084,11 @@
           "allOf": [
             {
               "if": {
+                "required": [
+                  "output_tool_format"
+                ],
                 "properties": {
-                  "enforcement_output_tool_format": {
+                  "output_tool_format": {
                     "const": "jsonl"
                   }
                 }
@@ -936,8 +1106,11 @@
             },
             {
               "if": {
+                "required": [
+                  "output_tool_write_frequency"
+                ],
                 "properties": {
-                  "enforcement_output_tool_write_frequency": {
+                  "output_tool_write_frequency": {
                     "const": "batch"
                   }
                 }
@@ -955,6 +1128,9 @@
             },
             {
               "if": {
+                "required": [
+                  "enforcement_output_tool_format"
+                ],
                 "properties": {
                   "enforcement_output_tool_format": {
                     "enum": [
@@ -1015,7 +1191,8 @@
         "jsonl",
         "json",
         "text"
-      ]
+      ],
+      "default": "text"
     },
     "enum__dispatch_input_delivery": {
       "title": "DispatchInputDelivery",
@@ -1092,7 +1269,8 @@
         "status-metrics",
         "metrics-output",
         "output"
-      ]
+      ],
+      "default": "status"
     },
     "atom__integer": {
       "title": "Integer",
@@ -1245,19 +1423,19 @@
       ],
       "additionalProperties": false
     },
-    "atom__string_markdown": {
-      "title": "StringMarkdown",
-      "type": "string",
-      "description": "Markdown-formatted text content. Starts with a non-path character, contains at least three whitespace characters. No path exclusions needed — the structural constraints prevent abuse while allowing markdown formatting and embedded path references. Used for example content, instructional text, and rich-text fields.\n",
-      "pattern": "^[^/.](?:[\\s\\S]*?\\s){3,}",
-      "minLength": 20
-    },
     "atom__filename_template": {
       "title": "FilenameTemplate",
       "type": "string",
       "description": "Filename template with a {variable} placeholder and file extension. The variable becomes the --name CLI argument for the output tool. The extension segments determine the output file suffix. LLM authors write the complete template; the build system decomposes it into tool arguments and write paths.\n",
       "pattern": "^\\{[a-z][a-z0-9-]*\\}(\\.\\.?\\w+)+$",
       "minLength": 5
+    },
+    "atom__string_markdown": {
+      "title": "StringMarkdown",
+      "type": "string",
+      "description": "Markdown-formatted text content. Starts with a non-path character, contains at least three whitespace characters. No path exclusions needed — the structural constraints prevent abuse while allowing markdown formatting and embedded path references. Used for example content, instructional text, and rich-text fields.\n",
+      "pattern": "^[^/.](?:[\\s\\S]*?\\s){3,}",
+      "minLength": 20
     }
   }
 }

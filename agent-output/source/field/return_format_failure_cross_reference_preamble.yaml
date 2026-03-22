@@ -1,0 +1,6 @@
+title: ReturnFormatFailureCrossReferencePreamble
+type: atom/string_prose
+description: >-
+  Cross-reference prose connecting the return protocol to the
+  failure criteria section. Clarifies that failure conditions are
+  defined elsewhere and this section covers how to report failure.

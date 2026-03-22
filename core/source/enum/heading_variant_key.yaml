@@ -1,0 +1,6 @@
+title: HeadingVariantKey
+values: [default, procedure, steps_with_count]
+description: >
+  Instructions section heading style. 'default' uses a plain heading.
+  'procedure' uses formal procedural language. 'steps_with_count'
+  includes the total step count in the heading.

@@ -1,0 +1,8 @@
+title: ScaffoldingTier
+values: [auto, lightweight, standard, heavy]
+description: >
+  Structural complexity tier for instruction rendering. 'auto' selects
+  tier from step count using activation thresholds. 'lightweight' uses
+  minimal scaffolding (few steps, little overhead). 'standard' adds
+  preamble, mode markers, and closers. 'heavy' adds progress reminders,
+  dependency phrases, and detailed recaps.

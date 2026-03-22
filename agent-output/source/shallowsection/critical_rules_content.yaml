@@ -1,0 +1,16 @@
+title: CriticalRulesContent
+description: >-
+  Content prose for the critical rules section. Heading, authority
+  preamble, and one prose template per rule.
+fields:
+  required:
+    heading: field/critical_rules_heading
+    authority_preamble: field/critical_rules_authority_preamble
+    workspace_confinement: field/critical_rules_workspace_confinement
+    output_tool_exclusivity: field/critical_rules_output_tool_exclusivity
+    batch_discipline: field/critical_rules_batch_discipline
+    fail_fast: field/critical_rules_fail_fast
+    input_is_your_only_source: field/critical_rules_input_is_your_only_source
+    no_invention: field/critical_rules_no_invention
+    discipline_over_helpfulness: field/critical_rules_discipline_over_helpfulness
+    rule_count_awareness_prelude: field/critical_rules_rule_count_awareness_prelude

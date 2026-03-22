@@ -3,12 +3,13 @@ description: >
   What the agent receives: data format, delivery mechanism, schema for
   validation, parameters, and context resources. Context items use
   resolved variants (absolute paths).
-required:
-  description: field/input_description
-  format: field/dispatch_input_format
-  delivery: field/dispatch_input_delivery
-optional:
-  input_schema: field/input_schema__x_abs
+fields:
+  required:
+    description: field/input_description
+    format: field/dispatch_input_format
+    delivery: field/dispatch_input_delivery
+  optional:
+    input_schema: field/input_schema__x_abs
 containers:
   optional:
     parameters: array/dispatch_parameters

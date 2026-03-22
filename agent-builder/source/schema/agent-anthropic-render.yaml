@@ -8,17 +8,19 @@ description: >
   2 created. implicit_grants consumed during hook building.
 shallowsections:
   required:
-    critical_rules: shallowsection/critical_rules
     dispatcher: shallowsection/dispatcher
     frontmatter: shallowsection/frontmatter
     identity: shallowsection/identity_anthropic
     input: shallowsection/input
-    instructions: shallowsection/instructions_reduced
-    output: shallowsection/output
     return_format: shallowsection/return_format
+    output: shallowsection/output
+    instructions: shallowsection/instructions_reduced
+    critical_rules: shallowsection/critical_rules
   optional:
-    anti_patterns: shallowsection/anti_patterns
-    constraints: shallowsection/constraints
-    examples: shallowsection/examples_reduced
     security_boundary: shallowsection/security_boundary_anthropic
+    examples: shallowsection/examples_reduced
+    constraints: shallowsection/constraints
+    anti_patterns: shallowsection/anti_patterns
+    success_criteria: shallowsection/success_criteria
+    failure_criteria: shallowsection/failure_criteria
     writing_output: shallowsection/writing_output_anthropic

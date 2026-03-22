@@ -1,0 +1,12 @@
+title: CriticalRulesDisplay
+description: >-
+  Display formatting for the critical rules section. Inline format
+  for workspace path, tool name, and batch size. Tool name
+  repetition strategy and rule separator.
+fields:
+  required:
+    workspace_path_format: field/critical_rules_workspace_path_format
+    tool_name_format: field/critical_rules_tool_name_format
+    tool_name_repetition: field/critical_rules_tool_name_repetition
+    batch_size_format: field/critical_rules_batch_size_format
+    rule_separator: field/critical_rules_rule_separator

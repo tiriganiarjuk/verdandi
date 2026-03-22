@@ -1,0 +1,7 @@
+title: SuccessCriteriaVerificationGuidanceSuffixVisible
+type: atom/boolean
+default: false
+description: >-
+  Whether to render the verification guidance suffix after evidence.
+  Off by default. When enabled, reminds the model that some criteria
+  are mechanically verifiable while others require judgment.

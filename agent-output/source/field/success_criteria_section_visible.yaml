@@ -1,0 +1,6 @@
+title: SuccessCriteriaSectionVisible
+type: atom/boolean
+default: true
+description: >-
+  Whether to render the success criteria section at all. When false,
+  the entire section is suppressed regardless of other settings.

@@ -1,0 +1,30 @@
+title: ConstraintsStructure
+description: >-
+  Structure controls for the constraints section. Master visibility,
+  entry limit, visibility toggles, and variant selectors conditional
+  on their paired visibility toggle.
+fields:
+  required:
+    section_visible: field/constraints_section_visible
+    max_entries_rendered: field/constraints_max_entries_rendered
+    section_preamble_visible: field/constraints_section_preamble_visible
+    constraints_are_not_steps_visible: field/constraints_are_not_steps_visible
+    no_inferred_constraints_visible: field/constraints_no_inferred_constraints_visible
+    closing_compliance_reminder_visible: field/constraints_closing_compliance_reminder_visible
+    constraint_count_heading_visible: field/constraints_constraint_count_heading_visible
+  conditional:
+    section_preamble_variant:
+      ref: field/constraints_section_preamble_variant
+      only_when:
+        field: section_preamble_visible
+        equals: true
+    closing_compliance_reminder_variant:
+      ref: field/constraints_closing_compliance_reminder_variant
+      only_when:
+        field: closing_compliance_reminder_visible
+        equals: true
+    no_inferred_constraints_variant:
+      ref: field/constraints_no_inferred_constraints_variant
+      only_when:
+        field: no_inferred_constraints_visible
+        equals: true

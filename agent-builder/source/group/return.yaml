@@ -6,7 +6,19 @@ description: >
 fields:
   required:
     return_mode: field/return_mode
-  optional:
-    return_status: field/return_status
-    return_metrics: field/return_metrics
-    return_output: field/return_output
+  conditional:
+    return_status:
+      ref: field/return_status
+      only_when:
+        field: return_mode
+        in: [status, status-metrics]
+    return_metrics:
+      ref: field/return_metrics
+      only_when:
+        field: return_mode
+        in: [status-metrics, metrics-output]
+    return_output:
+      ref: field/return_output
+      only_when:
+        field: return_mode
+        in: [metrics-output, output]

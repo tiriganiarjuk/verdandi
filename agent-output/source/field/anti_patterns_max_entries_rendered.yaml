@@ -1,0 +1,6 @@
+title: AntiPatternsMaxEntriesRendered
+type: atom/integer
+default: 0
+description: >-
+  Maximum number of anti-pattern entries to render. Zero means
+  render all entries without limit.

@@ -1,0 +1,7 @@
+title: OutputSchemaEmbed
+type: atom/boolean
+default: false
+description: >-
+  Whether to inline the output schema content directly in the prompt.
+  When true, the full schema is embedded. When false, only a path
+  reference is rendered.

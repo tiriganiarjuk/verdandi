@@ -3,14 +3,28 @@ description: >
   What the agent produces: format, file location, naming rules, and
   optional schema for validation. Aggregates fields from task.processing,
   security.security_schema, and security.security_io.
-required:
-  description: field/output_description
-  format: field/output_format_kind
-  name_known: field/name_known
-optional:
-  schema_path: field/schema_path__x_abs
-  schema_embed: field/schema_embed
-  output_file: field/output_file__abs
-  output_directory: field/output_directory__abs
-  name_template: field/name_template
-  name_instruction: field/name_instruction
+fields:
+  required:
+    description: field/output_description
+    format: field/output_format_kind
+    name_known: field/name_known
+  optional:
+    schema_path: field/schema_path__x_abs
+    output_file: field/output_file__abs
+    output_directory: field/output_directory__abs
+  conditional:
+    name_template:
+      ref: field/name_template
+      only_when:
+        field: name_known
+        equals: partially
+    name_instruction:
+      ref: field/name_instruction
+      only_when:
+        field: name_known
+        equals: unknown
+    schema_embed:
+      ref: field/schema_embed
+      only_when:
+        field: schema_path
+        exists: true

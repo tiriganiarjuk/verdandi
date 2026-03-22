@@ -1,0 +1,18 @@
+title: CriticalRulesStructure
+description: >-
+  Structure controls for the critical rules section. Visibility
+  toggles for each rule, presentation format, and hierarchy mode.
+fields:
+  required:
+    authority_preamble_visible: field/critical_rules_authority_preamble_visible
+    rule_count_awareness_prelude_visible: field/critical_rules_rule_count_awareness_prelude_visible
+    rule_count_awareness_prelude_auto_threshold: field/critical_rules_rule_count_awareness_prelude_auto_threshold
+    workspace_confinement_visible: field/critical_rules_workspace_confinement_visible
+    fail_fast_visible: field/critical_rules_fail_fast_visible
+    input_is_your_only_source_visible: field/critical_rules_input_is_your_only_source_visible
+    no_invention_visible: field/critical_rules_no_invention_visible
+    output_tool_exclusivity_visible: field/critical_rules_output_tool_exclusivity_visible
+    batch_discipline_visible: field/critical_rules_batch_discipline_visible
+    discipline_over_helpfulness_visible: field/critical_rules_discipline_over_helpfulness_visible
+    rule_presentation: field/critical_rules_rule_presentation
+    internal_hierarchy: field/critical_rules_internal_hierarchy
