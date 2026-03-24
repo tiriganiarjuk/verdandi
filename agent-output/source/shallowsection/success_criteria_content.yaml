@@ -11,4 +11,6 @@ fields:
     multi_criteria_transition: field/success_criteria_multi_criteria_transition
 containers:
   required:
-    variants: group/success_criteria_variant_content
+    definition_framing_variant: simplegroup/success_criteria_definition_framing_variant
+    evidence_framing_variant: simplegroup/success_criteria_evidence_framing_variant
+    definition_to_evidence_transition_variant: simplegroup/success_criteria_definition_to_evidence_transition_variant

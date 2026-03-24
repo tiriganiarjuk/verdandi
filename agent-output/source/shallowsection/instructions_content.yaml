@@ -27,4 +27,4 @@ fields:
     exact_vs_judgment_explanation_uniform_judgment: field/instructions_exact_vs_judgment_explanation_uniform_judgment
 containers:
   required:
-    heading_variant: group/instructions_heading_variant_content
+    heading_variant: simplegroup/instructions_heading_variant

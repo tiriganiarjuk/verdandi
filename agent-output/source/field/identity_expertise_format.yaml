@@ -1,5 +1,6 @@
 title: IdentityExpertiseFormat
 type: union/format_or_pair
+default: ["bulleted", "inline"]
 description: >-
   How the expertise list renders. Plain string means always that format.
   Two-element array means threshold-based switching: first element above

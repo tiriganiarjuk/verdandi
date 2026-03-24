@@ -1,8 +1,0 @@
-title: OutputDirectoryLocationVariantContent
-description: >-
-  Wrapper group for the output directory location variant sub-table.
-  Contains one simplegroup with variant alternatives for how the
-  output directory location is declared.
-containers:
-  required:
-    directory_location_variant: simplegroup/output_directory_location_variant

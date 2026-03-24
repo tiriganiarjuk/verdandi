@@ -1,5 +1,6 @@
 title: ConstraintsEnumerationFormat
 type: union/format_or_pair
+default: ["bulleted", "numbered"]
 description: >-
   Format for rendering the constraint list. A single enum value
   uses that format always. A pair switches at the threshold —

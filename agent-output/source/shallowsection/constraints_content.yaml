@@ -12,4 +12,6 @@ fields:
     hierarchy_three_tier_explanation: field/constraints_hierarchy_three_tier_explanation
 containers:
   required:
-    variants: group/constraints_variant_content
+    section_preamble_variant: simplegroup/constraints_section_preamble_variant
+    closing_compliance_reminder_variant: simplegroup/constraints_closing_compliance_reminder_variant
+    no_inferred_constraints_variant: simplegroup/constraints_no_inferred_constraints_variant

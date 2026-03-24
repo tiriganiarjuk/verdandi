@@ -24,7 +24,11 @@
         "expertise_format": {
           "$ref": "#/$defs/union__format_or_pair",
           "title": "IdentityExpertiseFormat",
-          "description": "How the expertise list renders. Plain string means always that format. Two-element array means threshold-based switching: first element above threshold, second at or below. Threshold is identity_expertise_format_threshold.\nPolymorphic format field. A plain string enum value means always use that format. A two-element array means threshold-based switching — first element above threshold, second at or below. Type tells behavior: string = unconditional, array = conditional."
+          "description": "How the expertise list renders. Plain string means always that format. Two-element array means threshold-based switching: first element above threshold, second at or below. Threshold is identity_expertise_format_threshold.\nPolymorphic format field. A plain string enum value means always use that format. A two-element array means threshold-based switching — first element above threshold, second at or below. Type tells behavior: string = unconditional, array = conditional.",
+          "default": [
+            "bulleted",
+            "inline"
+          ]
         },
         "expertise_format_threshold": {
           "$ref": "#/$defs/atom__integer",
@@ -35,7 +39,11 @@
         "responsibility_format": {
           "$ref": "#/$defs/union__format_or_pair",
           "title": "IdentityResponsibilityFormat",
-          "description": "How the responsibility field renders when it contains multiple items. Plain string means always that format. Two-element array means threshold-based switching. Threshold is identity_responsibility_format_threshold.\nPolymorphic format field. A plain string enum value means always use that format. A two-element array means threshold-based switching — first element above threshold, second at or below. Type tells behavior: string = unconditional, array = conditional."
+          "description": "How the responsibility field renders when it contains multiple items. Plain string means always that format. Two-element array means threshold-based switching. Threshold is identity_responsibility_format_threshold.\nPolymorphic format field. A plain string enum value means always use that format. A two-element array means threshold-based switching — first element above threshold, second at or below. Type tells behavior: string = unconditional, array = conditional.",
+          "default": [
+            "bulleted",
+            "prose"
+          ]
         },
         "responsibility_format_threshold": {
           "$ref": "#/$defs/atom__integer",
@@ -265,7 +273,11 @@
         "enumeration_format": {
           "$ref": "#/$defs/union__format_or_pair",
           "title": "ConstraintsEnumerationFormat",
-          "description": "Format for rendering the constraint list. A single enum value uses that format always. A pair switches at the threshold — first format below, second format at or above the threshold.\nPolymorphic format field. A plain string enum value means always use that format. A two-element array means threshold-based switching — first element above threshold, second at or below. Type tells behavior: string = unconditional, array = conditional."
+          "description": "Format for rendering the constraint list. A single enum value uses that format always. A pair switches at the threshold — first format below, second format at or above the threshold.\nPolymorphic format field. A plain string enum value means always use that format. A two-element array means threshold-based switching — first element above threshold, second at or below. Type tells behavior: string = unconditional, array = conditional.",
+          "default": [
+            "bulleted",
+            "numbered"
+          ]
         },
         "enumeration_format_threshold": {
           "$ref": "#/$defs/atom__integer",
@@ -342,7 +354,11 @@
         "evidence_format": {
           "$ref": "#/$defs/union__format_or_pair",
           "title": "SuccessCriteriaEvidenceFormat",
-          "description": "Format for rendering the evidence list. A single enum value uses that format always. A pair switches at the threshold — first format below, second format at or above the threshold.\nPolymorphic format field. A plain string enum value means always use that format. A two-element array means threshold-based switching — first element above threshold, second at or below. Type tells behavior: string = unconditional, array = conditional."
+          "description": "Format for rendering the evidence list. A single enum value uses that format always. A pair switches at the threshold — first format below, second format at or above the threshold.\nPolymorphic format field. A plain string enum value means always use that format. A two-element array means threshold-based switching — first element above threshold, second at or below. Type tells behavior: string = unconditional, array = conditional.",
+          "default": [
+            "bulleted",
+            "numbered"
+          ]
         },
         "evidence_format_threshold": {
           "$ref": "#/$defs/atom__integer",

@@ -798,15 +798,15 @@ containers:
 | required | no | Named `field/` references |
 | optional | no | Named `field/` references |
 | conditional | no | Named conditional entries referencing `field/` |
-| containers | no | `required`/`optional` zones — values reference `simplearray/`, `array/`, `superarray/`, `group/` |
+| containers | no | `required`/`optional` zones — values reference `simplegroup/`, `simplearray/`, `array/`, `superarray/`, `group/` |
 
 At least one of `required`, `optional`, `conditional`, or `containers`
 must exist.
 
-**Container limit:** Maximum 2 containers per shallowsection. This
+**Container limit:** Maximum 3 containers per shallowsection. This
 prevents abuse — shallowsections are for mostly-flat structures with
 occasional nesting, not an excuse to avoid proper deep composition.
-If you need more than 2 containers, use section/ with groups.
+If you need more than 3 containers, use section/ with groups.
 
 ---
 

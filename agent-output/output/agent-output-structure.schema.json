@@ -40,19 +40,19 @@
           "description": "Whether to merge the identity declaration and role description into a single paragraph. When false, declaration and role description render as separate blocks. When true, they fuse into one flowing paragraph.\nTrue or false value",
           "default": false
         },
-        "expertise_postscript_visible": {
+        "expertise_is_strictly_limited_postscript_visible": {
           "$ref": "#/$defs/atom__boolean",
           "title": "IdentityExpertisePostscriptVisible",
           "description": "Whether to render the expertise limitation postscript after the expertise list. When true, a reinforcement statement constraining expertise to the listed areas appears after the list. When false, the expertise list renders without a closing constraint.\nTrue or false value",
           "default": true
         },
-        "closing_reminder_visible": {
+        "closing_identity_reminder_visible": {
           "$ref": "#/$defs/atom__boolean",
           "title": "IdentityClosingReminderVisible",
           "description": "Whether to render a closing identity reminder at the end of the identity section. When true, a reinforcement sentence restating the agent's role identity appears as the section closer. Off by default — identity is established at the top and does not need restating unless experiments show drift.\nTrue or false value",
           "default": false
         },
-        "bold_contrast_visible": {
+        "bold_contrast_phrase_from_role_description_visible": {
           "$ref": "#/$defs/atom__boolean",
           "title": "IdentityBoldContrastVisible",
           "description": "Whether to extract and bold a contrast phrase from the role description. When true, the renderer scans role_description for a contrastive clause (e.g., \"not a debugger, not a reviewer\") and renders it with bold emphasis. Off by default — most role descriptions do not contain contrast phrases.\nTrue or false value",
@@ -62,9 +62,9 @@
       "required": [
         "field_ordering",
         "fuse_declaration_and_role_description",
-        "expertise_postscript_visible",
-        "closing_reminder_visible",
-        "bold_contrast_visible"
+        "expertise_is_strictly_limited_postscript_visible",
+        "closing_identity_reminder_visible",
+        "bold_contrast_phrase_from_role_description_visible"
       ],
       "additionalProperties": false
     },
