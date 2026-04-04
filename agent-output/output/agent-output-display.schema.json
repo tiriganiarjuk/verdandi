@@ -20,7 +20,7 @@
     "identity": {
       "title": "IdentityDisplay",
       "type": "object",
-      "description": "Display formatting for the identity section. Format and threshold pairs for expertise and responsibility lists.",
+      "description": "Display formatting for the identity section. Format and threshold pair for the expertise list.",
       "properties": {
         "role_expertise_format": {
           "$ref": "#/$defs/union__format_or_pair",
@@ -36,28 +36,11 @@
           "title": "IdentityRoleExpertiseFormatThreshold",
           "description": "Item count threshold for expertise format switching. When identity_expertise_format is a pair, items above this count use the first format, items at or below use the second.\nWhole number value",
           "default": 3
-        },
-        "role_responsibility_format": {
-          "$ref": "#/$defs/union__format_or_pair",
-          "title": "IdentityRoleResponsibilityFormat",
-          "description": "How the responsibility field renders when it contains multiple items. Plain string means always that format. Two-element array means threshold-based switching. Threshold is identity_responsibility_format_threshold.\nPolymorphic format field. A plain string enum value means always use that format. A two-element array means threshold-based switching — first element above threshold, second at or below. Type tells behavior: string = unconditional, array = conditional.",
-          "default": [
-            "bulleted",
-            "prose"
-          ]
-        },
-        "role_responsibility_format_threshold": {
-          "$ref": "#/$defs/atom__integer",
-          "title": "IdentityRoleResponsibilityFormatThreshold",
-          "description": "Item count threshold for responsibility format switching. When identity_responsibility_format is a pair, items above this count use the first format, items at or below use the second.\nWhole number value",
-          "default": 3
         }
       },
       "required": [
         "role_expertise_format",
-        "role_expertise_format_threshold",
-        "role_responsibility_format",
-        "role_responsibility_format_threshold"
+        "role_expertise_format_threshold"
       ],
       "additionalProperties": false
     },
