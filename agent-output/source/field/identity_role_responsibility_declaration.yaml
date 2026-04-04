@@ -1,4 +1,4 @@
-title: IdentityRoleResponsibilityLabel
+title: IdentityRoleResponsibilityDeclaration
 type: atom/string_template
 description: >-
   Label introducing the agent's responsibility scope. Template with

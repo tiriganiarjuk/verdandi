@@ -40,9 +40,9 @@
           "title": "IdentityDeclarationHeuristicPostscript",
           "description": "Reinforcement postscript after the identity declaration. Template with {{role_identity}} placeholder. Anchors decision-making to the declared identity. Position: after declaration, before responsibility.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
         },
-        "role_responsibility_label": {
+        "role_responsibility_declaration": {
           "$ref": "#/$defs/atom__string_template",
-          "title": "IdentityRoleResponsibilityLabel",
+          "title": "IdentityRoleResponsibilityDeclaration",
           "description": "Label introducing the agent's responsibility scope. Template with {{role_responsibility}} placeholder. Position: label immediately before the responsibility data.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
         },
         "role_expertise_label": {
@@ -65,7 +65,7 @@
         "heading",
         "declaration",
         "declaration_heuristic_postscript",
-        "role_responsibility_label",
+        "role_responsibility_declaration",
         "role_expertise_label",
         "role_expertise_is_strictly_limited_postscript",
         "closing_identity_reminder"

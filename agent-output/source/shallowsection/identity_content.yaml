@@ -7,7 +7,7 @@ fields:
     heading: field/identity_heading
     declaration: field/identity_declaration
     declaration_heuristic_postscript: field/identity_declaration_heuristic_postscript
-    role_responsibility_label: field/identity_role_responsibility_label
+    role_responsibility_declaration: field/identity_role_responsibility_declaration
     role_expertise_label: field/identity_role_expertise_label
     role_expertise_is_strictly_limited_postscript: field/identity_role_expertise_postscript
     closing_identity_reminder: field/identity_closing_reminder
