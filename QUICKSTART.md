@@ -14,43 +14,43 @@ Verdandi is static data. You edit YAML files, then run Draupnir to compile them 
 
 ```bash
 # Regenerate all schemas from Verdandi YAML
-/Users/johnny/.ai/spaces/bragi/tools/draupnir/src/draupnir/cli.py --all
+cd /Users/johnny/.ai/smidja/draupnir && uv run draupnir --all
 
 # Check for drift without writing (dry run)
-/Users/johnny/.ai/spaces/bragi/tools/draupnir/src/draupnir/cli.py --check
+cd /Users/johnny/.ai/smidja/draupnir && uv run draupnir --check
 
 # List available schemas
-/Users/johnny/.ai/spaces/bragi/tools/draupnir/src/draupnir/cli.py --list
+cd /Users/johnny/.ai/smidja/draupnir && uv run draupnir --list
 ```
 
 ### Input
 
-~348 YAML files in `tools/verdandi/` organized into 15 subdirectories (one per composition level). Each file defines a single reusable type.
+YAML files in `{project}/source/` organized into 15 subdirectories (one per composition level). Each file defines a single reusable type. Two projects: `agent-builder` (pipeline schemas) and `agent-output` (rendering surface schemas). Shared primitives live in `core/source/` and are symlinked into each project.
 
 ### Output
 
-JSON Schema files written to `schemas/agent-*.schema.json` (13 schemas covering every pipeline stage from raw definition through Anthropic render). HTML sidecar inspection files are generated alongside.
+JSON Schema files written to `{project}/output/*.schema.json`. agent-builder produces 13 pipeline schemas; agent-output produces 3 rendering surface schemas. HTML sidecar inspection files are generated alongside.
 
 ### After editing Verdandi YAML
 
 The full cascade is:
 
-1. Edit YAML in `tools/verdandi/`
-2. Run Draupnir to regenerate schemas
-3. Rebuild Nornir to embed updated schemas (`cargo build --release` in `tools/nornir/`)
+1. Edit YAML in `{project}/source/`
+2. Run Draupnir to regenerate schemas: `cd /Users/johnny/.ai/smidja/draupnir && uv run draupnir --all`
+3. Rebuild Nornir gates to embed updated schemas: `nornir_deploy --build gates`
 4. Downstream consumers automatically pick up the new schemas
 
 ## How It Works
 
-Verdandi contains ~348 YAML files organized into 15 subdirectories (one per composition level). Each file defines a single reusable type. Higher-level types reference lower-level types by file path (e.g., `field/dispatch_mode` means `field/dispatch_mode.yaml`).
+Each project contains YAML files organized into 15 subdirectories (one per composition level). Each file defines a single reusable type. Higher-level types reference lower-level types by file path (e.g., `field/dispatch_mode` means `field/dispatch_mode.yaml`).
 
-**Draupnir** (`tools/draupnir/`) is the compiler. It reads all Verdandi YAML files in dependency order, validates them into frozen Pydantic models, and generates JSON Schema files to `schemas/`.
+**Draupnir** (`/Users/johnny/.ai/smidja/draupnir/`) is the compiler. It reads all Verdandi YAML files in dependency order, validates them into frozen Pydantic models, and generates JSON Schema files to `{project}/output/`.
 
 The generated JSON Schemas are then consumed by:
-- **Nornir** for runtime validation of agent TOML definitions
+- **Nornir** for runtime validation of agent TOML definitions at pipeline boundaries
+- **Regin** to auto-generate Pydantic models for the pipeline resolution stages
 - **scaffold_definition.py** to generate TOML authoring scaffolds
 - **inspect_schema.py** to generate HTML inspection reports
-- **transform_to_universal** to generate Pydantic model modules for the resolution pipeline
 
 ## The Type Hierarchy
 
@@ -88,7 +88,7 @@ The generated JSON Schemas are then consumed by:
 | Level | What It Holds | Example |
 |-------|---------------|---------|
 | **section** | Named complex containers | `containers: {required: {metadata: group/metadata}}` |
-| **shallowsection** | Fields + limited containers (max 2) | `required: {title: field/agent_title}, containers: {...}` |
+| **shallowsection** | Fields + limited containers (max 3) | `required: {title: field/agent_title}, containers: {...}` |
 | **schema** | Root — uses `sections:` key (deep) or `shallowsections:` key (wide), never both. Each key contains `required:`/`optional:`/`conditional:` zones. | `sections: {required: {indirect: section/indirect, ...}}` |
 
 ## Raw / Resolved / Reduced Stages
@@ -201,7 +201,7 @@ This is a typed, known shape -- not arbitrary data.
 
 4. **Do not add fields to a type that violate its tier.** A simplegroup holds fields, tuples, and simplearrays — anything below it in the hierarchy. If you need nested containers (arrays, groups), use group.
 
-5. **Do not create a shallowsection with more than 2 containers.** Use section + group for deeper nesting.
+5. **Do not create a shallowsection with more than 3 containers.** Use section + group for deeper nesting.
 
 6. **Do not create inline type declarations above the pattern level.** Everything is a file reference.
 
@@ -217,16 +217,12 @@ Read these files first, in this order, when working with Verdandi:
 
 | Priority | File | What It Gives You |
 |----------|------|-------------------|
-| 1 | `tools/verdandi/CLAUDE.md` | Context refresh protocol -- common mistakes and how to avoid them |
-| 2 | `tools/verdandi/COMPOSITION_RULES.md` | Formal specification of all 15 levels, their fields, and the composition rule. The authoritative reference. |
-| 3 | `context/verdandi.md` | Comprehensive exploration: architecture, relationships, design decisions, current state |
-| 4 | `tools/verdandi/VERDANDI_REDESIGN.md` | Field membrane design rationale |
-| 5 | `tools/verdandi/MIGRATION_CHECKLIST.md` | Maps old toolcompose files to Verdandi equivalents -- provenance of each type |
-| 6 | `tools/draupnir/CLAUDE.md` | Architectural constraints for the Draupnir compiler that consumes Verdandi |
-| 7 | `definitions/TOOL_BUILDING.md` (Section 5) | How Verdandi fits the end-to-end pipeline |
+| 1 | `CLAUDE.md` | Context refresh protocol -- common mistakes and how to avoid them |
+| 2 | `COMPOSITION_RULES.md` | Formal specification of all 15 levels, their fields, and the composition rule. The authoritative reference. |
+| 3 | `CONTEXT_MAP.md` | Multi-project architecture, schema references, consuming tools, directory inventory |
+| 4 | `VERDANDI_REDESIGN.md` | Field membrane design rationale |
+| 5 | `/Users/johnny/.ai/smidja/draupnir/CLAUDE.md` | Architectural constraints for the Draupnir compiler that consumes Verdandi |
 
 ### Quick orientation files
 
-- **Generated schemas** (`schemas/agent-*.schema.json`): The JSON Schema output. What Verdandi ultimately produces.
-- **Agent definitions** (`definitions/agents/`): TOML files that conform to the generated schemas. Shows how Verdandi types appear in practice.
-- **scaffold_definition.py** (`tools/scaffold_definition.py`): Generates TOML scaffolds from schemas. Shows how schema structure maps to authoring experience.
+- **Generated schemas** (`{project}/output/*.schema.json`): The JSON Schema output. What Verdandi ultimately produces.

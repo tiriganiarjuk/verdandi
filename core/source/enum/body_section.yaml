@@ -1,0 +1,18 @@
+title: BodySection
+values:
+  - identity
+  - security_boundary
+  - critical_rules
+  - input
+  - instructions
+  - examples
+  - output
+  - writing_output
+  - constraints
+  - anti_patterns
+  - success_criteria
+  - failure_criteria
+  - return_format
+description: >-
+  Body section names for render ordering. The 13 sections that
+  appear in the agent prompt body.

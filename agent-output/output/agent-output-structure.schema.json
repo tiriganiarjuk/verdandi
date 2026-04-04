@@ -5,6 +5,7 @@
   "description": "Structure surface schema for agent output rendering. Controls what renders and which variant of content to use. Visibility toggles, variant selectors, override gates, and presentation modes across all 12 sections.",
   "type": "object",
   "required": [
+    "section_order",
     "identity",
     "security_boundary",
     "critical_rules",
@@ -19,6 +20,45 @@
     "return_format"
   ],
   "properties": {
+    "section_order": {
+      "title": "SectionOrderStructure",
+      "type": "object",
+      "description": "Controls the render order of body sections in the agent prompt.",
+      "properties": {
+        "order": {
+          "title": "SectionOrder",
+          "type": "array",
+          "description": "Render order of all 13 body sections. Every section must appear exactly once — any permutation is valid.",
+          "items": {
+            "title": "SectionOrderItem",
+            "type": "string",
+            "description": "A body section name in the render order sequence.\nBody section names for render ordering. The 13 sections that appear in the agent prompt body.",
+            "enum": [
+              "identity",
+              "security_boundary",
+              "critical_rules",
+              "input",
+              "instructions",
+              "examples",
+              "output",
+              "writing_output",
+              "constraints",
+              "anti_patterns",
+              "success_criteria",
+              "failure_criteria",
+              "return_format"
+            ]
+          },
+          "minItems": 13,
+          "maxItems": 13,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "order"
+      ],
+      "additionalProperties": false
+    },
     "identity": {
       "title": "IdentityStructure",
       "type": "object",
@@ -980,6 +1020,11 @@
       "type": "boolean",
       "description": "True or false value"
     },
+    "atom__integer": {
+      "title": "Integer",
+      "type": "integer",
+      "description": "Whole number value"
+    },
     "enum__visibility_mode": {
       "title": "VisibilityMode",
       "type": "string",
@@ -989,11 +1034,6 @@
         "always",
         "never"
       ]
-    },
-    "atom__integer": {
-      "title": "Integer",
-      "type": "integer",
-      "description": "Whole number value"
     }
   }
 }

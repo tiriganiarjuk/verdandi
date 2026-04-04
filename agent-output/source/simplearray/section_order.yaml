@@ -1,0 +1,8 @@
+title: SectionOrder
+items: field/section_order_item
+min_items: 13
+max_items: 13
+unique_items: true
+description: >-
+  Render order of all 13 body sections. Every section must appear
+  exactly once — any permutation is valid.

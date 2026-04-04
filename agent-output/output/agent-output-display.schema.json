@@ -405,6 +405,11 @@
         "bare"
       ]
     },
+    "atom__integer": {
+      "title": "Integer",
+      "type": "integer",
+      "description": "Whole number value"
+    },
     "union__format_or_pair": {
       "title": "FormatOrPair",
       "oneOf": [
@@ -430,30 +435,13 @@
       ],
       "description": "Polymorphic format field. A plain string enum value means always use that format. A two-element array means threshold-based switching — first element above threshold, second at or below. Type tells behavior: string = unconditional, array = conditional.\n"
     },
-    "atom__integer": {
-      "title": "Integer",
-      "type": "integer",
-      "description": "Whole number value"
-    },
-    "enum__inline_format": {
-      "title": "InlineFormat",
+    "enum__separator_style": {
+      "title": "SeparatorStyle",
       "type": "string",
-      "description": "How a single value renders inline. 'backtick' wraps in code backticks. 'plain' renders as-is. 'bold' wraps in markdown bold. 'metadata' renders as a key-value label (e.g., \"Batch size = N\").\n",
+      "description": "Visual separator between repeated blocks. 'horizontal_rule' inserts a markdown horizontal rule (---) between items. 'none' uses only whitespace separation.\n",
       "enum": [
-        "backtick",
-        "plain",
-        "bold",
-        "metadata"
-      ]
-    },
-    "enum__heading_format": {
-      "title": "HeadingFormat",
-      "type": "string",
-      "description": "How a sub-block heading renders. 'bold' uses markdown bold text inline. 'h3' uses a level-3 heading. 'h4' uses a level-4 heading. Section-level headings (H2) are invariant and not configurable.\n",
-      "enum": [
-        "bold",
-        "h3",
-        "h4"
+        "horizontal_rule",
+        "none"
       ]
     },
     "enum__body_container": {
@@ -466,13 +454,25 @@
         "bare_with_endmarker"
       ]
     },
-    "enum__separator_style": {
-      "title": "SeparatorStyle",
+    "enum__heading_format": {
+      "title": "HeadingFormat",
       "type": "string",
-      "description": "Visual separator between repeated blocks. 'horizontal_rule' inserts a markdown horizontal rule (---) between items. 'none' uses only whitespace separation.\n",
+      "description": "How a sub-block heading renders. 'bold' uses markdown bold text inline. 'h3' uses a level-3 heading. 'h4' uses a level-4 heading. Section-level headings (H2) are invariant and not configurable.\n",
       "enum": [
-        "horizontal_rule",
-        "none"
+        "bold",
+        "h3",
+        "h4"
+      ]
+    },
+    "enum__inline_format": {
+      "title": "InlineFormat",
+      "type": "string",
+      "description": "How a single value renders inline. 'backtick' wraps in code backticks. 'plain' renders as-is. 'bold' wraps in markdown bold. 'metadata' renders as a key-value label (e.g., \"Batch size = N\").\n",
+      "enum": [
+        "backtick",
+        "plain",
+        "bold",
+        "metadata"
       ]
     }
   }

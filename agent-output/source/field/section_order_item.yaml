@@ -1,0 +1,4 @@
+title: SectionOrderItem
+type: enum/body_section
+description: >-
+  A body section name in the render order sequence.

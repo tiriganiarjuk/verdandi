@@ -1615,79 +1615,11 @@
   },
   "additionalProperties": false,
   "$defs": {
-    "atom__kebab_string": {
-      "title": "KebabString",
+    "pattern__absolute": {
+      "title": "Absolute",
       "type": "string",
-      "description": "Lowercase kebab-case string — words separated by hyphens. Used for identifiers that must be URL-safe and filesystem-safe.\n",
-      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
-      "minLength": 3
-    },
-    "atom__string_prose": {
-      "title": "StringProse",
-      "type": "string",
-      "description": "Substantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths.\n",
-      "pattern": "^[A-Z](?:.*?\\s){3,}.*[.!?;:]$",
-      "minLength": 20
-    },
-    "atom__string_text": {
-      "title": "StringText",
-      "type": "string",
-      "description": "Natural language prose — must contain at least one whitespace character. Mutually exclusive with all identifier types. Used for descriptions, instructions, error messages, and display labels. Not a path.\n",
-      "pattern": "\\s",
-      "minLength": 10,
-      "not": {
-        "anyOf": [
-          {
-            "pattern": "^/"
-          },
-          {
-            "pattern": "^\\."
-          },
-          {
-            "pattern": "\\/[^\\/]+\\.\\w{1,4}$"
-          },
-          {
-            "pattern": "\\w+\\/\\w+\\/\\w+"
-          }
-        ]
-      }
-    },
-    "atom__integer": {
-      "title": "Integer",
-      "type": "integer",
-      "description": "Whole number value"
-    },
-    "atom__boolean": {
-      "title": "Boolean",
-      "type": "boolean",
-      "description": "True or false value"
-    },
-    "enum__output_format_kind": {
-      "title": "OutputFormatKind",
-      "type": "string",
-      "description": "Output format the agent produces. 'jsonl' for record-oriented output, 'json' for a single structured document, 'markdown' for prose or structured text with headings, 'text' for unstructured plain text.\n",
-      "enum": [
-        "jsonl",
-        "json",
-        "markdown",
-        "text"
-      ]
-    },
-    "atom__filename_template": {
-      "title": "FilenameTemplate",
-      "type": "string",
-      "description": "Filename template with a {variable} placeholder and file extension. The variable becomes the --name CLI argument for the output tool. The extension segments determine the output file suffix. LLM authors write the complete template; the build system decomposes it into tool arguments and write paths.\n",
-      "pattern": "^\\{[a-z][a-z0-9-]*\\}(\\.\\.?\\w+)+$",
-      "minLength": 5
-    },
-    "enum__write_frequency": {
-      "title": "WriteFrequency",
-      "type": "string",
-      "description": "How often records are flushed to disk. 'record' means one record per write invocation with minimal blast radius. 'batch' means a bounded set of records per invocation with size controlled by batch_size.\n",
-      "enum": [
-        "record",
-        "batch"
-      ]
+      "description": "Starts with forward slash — absolute path prefix",
+      "pattern": "^/"
     },
     "atom__path_absolute": {
       "title": "PathAbsolute",
@@ -1741,12 +1673,99 @@
         ]
       }
     },
+    "atom__string_markdown": {
+      "title": "StringMarkdown",
+      "type": "string",
+      "description": "Markdown-formatted text content. Starts with a non-path character, contains at least three whitespace characters. No path exclusions needed — the structural constraints prevent abuse while allowing markdown formatting and embedded path references. Used for example content, instructional text, and rich-text fields.\n",
+      "pattern": "^[^/.](?:[\\s\\S]*?\\s){3,}",
+      "minLength": 20
+    },
+    "atom__string_text": {
+      "title": "StringText",
+      "type": "string",
+      "description": "Natural language prose — must contain at least one whitespace character. Mutually exclusive with all identifier types. Used for descriptions, instructions, error messages, and display labels. Not a path.\n",
+      "pattern": "\\s",
+      "minLength": 10,
+      "not": {
+        "anyOf": [
+          {
+            "pattern": "^/"
+          },
+          {
+            "pattern": "^\\."
+          },
+          {
+            "pattern": "\\/[^\\/]+\\.\\w{1,4}$"
+          },
+          {
+            "pattern": "\\w+\\/\\w+\\/\\w+"
+          }
+        ]
+      }
+    },
+    "atom__string_prose": {
+      "title": "StringProse",
+      "type": "string",
+      "description": "Substantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths.\n",
+      "pattern": "^[A-Z](?:.*?\\s){3,}.*[.!?;:]$",
+      "minLength": 20
+    },
     "atom__title_string": {
       "title": "TitleString",
       "type": "string",
       "description": "Title Case string — each word starts uppercase, separated by spaces. Used for display titles, section headings, and short labels. Not prose (no sentences), not an identifier (has spaces).\n",
       "pattern": "^([A-Z][a-zA-Z0-9]*)(\\s[A-Z][a-zA-Z0-9]*)*$",
       "minLength": 3
+    },
+    "atom__boolean": {
+      "title": "Boolean",
+      "type": "boolean",
+      "description": "True or false value"
+    },
+    "atom__integer": {
+      "title": "Integer",
+      "type": "integer",
+      "description": "Whole number value"
+    },
+    "enum__capabilities": {
+      "title": "Capabilities",
+      "type": "string",
+      "description": "Platform-agnostic capability descriptor. Format transformers map these to vendor-specific tools. read: file read. search: find files by name or content. write: create or overwrite files. edit: targeted modification. append: add content to end of files. inspect: read-only command execution.\n",
+      "enum": [
+        "read",
+        "search",
+        "write",
+        "edit",
+        "append",
+        "inspect"
+      ]
+    },
+    "atom__filename_template": {
+      "title": "FilenameTemplate",
+      "type": "string",
+      "description": "Filename template with a {variable} placeholder and file extension. The variable becomes the --name CLI argument for the output tool. The extension segments determine the output file suffix. LLM authors write the complete template; the build system decomposes it into tool arguments and write paths.\n",
+      "pattern": "^\\{[a-z][a-z0-9-]*\\}(\\.\\.?\\w+)+$",
+      "minLength": 5
+    },
+    "enum__write_frequency": {
+      "title": "WriteFrequency",
+      "type": "string",
+      "description": "How often records are flushed to disk. 'record' means one record per write invocation with minimal blast radius. 'batch' means a bounded set of records per invocation with size controlled by batch_size.\n",
+      "enum": [
+        "record",
+        "batch"
+      ]
+    },
+    "enum__output_format_kind": {
+      "title": "OutputFormatKind",
+      "type": "string",
+      "description": "Output format the agent produces. 'jsonl' for record-oriented output, 'json' for a single structured document, 'markdown' for prose or structured text with headings, 'text' for unstructured plain text.\n",
+      "enum": [
+        "jsonl",
+        "json",
+        "markdown",
+        "text"
+      ]
     },
     "simplegroup__context_item": {
       "title": "ContextItem",
@@ -1782,25 +1801,12 @@
       ],
       "additionalProperties": false
     },
-    "enum__capabilities": {
-      "title": "Capabilities",
+    "atom__kebab_string": {
+      "title": "KebabString",
       "type": "string",
-      "description": "Platform-agnostic capability descriptor. Format transformers map these to vendor-specific tools. read: file read. search: find files by name or content. write: create or overwrite files. edit: targeted modification. append: add content to end of files. inspect: read-only command execution.\n",
-      "enum": [
-        "read",
-        "search",
-        "write",
-        "edit",
-        "append",
-        "inspect"
-      ]
-    },
-    "atom__string_markdown": {
-      "title": "StringMarkdown",
-      "type": "string",
-      "description": "Markdown-formatted text content. Starts with a non-path character, contains at least three whitespace characters. No path exclusions needed — the structural constraints prevent abuse while allowing markdown formatting and embedded path references. Used for example content, instructional text, and rich-text fields.\n",
-      "pattern": "^[^/.](?:[\\s\\S]*?\\s){3,}",
-      "minLength": 20
+      "description": "Lowercase kebab-case string — words separated by hyphens. Used for identifiers that must be URL-safe and filesystem-safe.\n",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "minLength": 3
     }
   },
   "allOf": [

@@ -1362,52 +1362,47 @@
   },
   "additionalProperties": false,
   "$defs": {
-    "atom__kebab_string": {
-      "title": "KebabString",
+    "pattern__relative": {
+      "title": "Relative",
       "type": "string",
-      "description": "Lowercase kebab-case string — words separated by hyphens. Used for identifiers that must be URL-safe and filesystem-safe.\n",
-      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
-      "minLength": 3
+      "description": "Starts with dot — relative path prefix (e.g., ./src/file.py)",
+      "pattern": "^\\."
     },
-    "atom__string_prose": {
-      "title": "StringProse",
+    "pattern__traversal": {
+      "title": "Traversal",
       "type": "string",
-      "description": "Substantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths.\n",
-      "pattern": "^[A-Z](?:.*?\\s){3,}.*[.!?;:]$",
-      "minLength": 20
+      "description": "Parent directory traversal — any path containing \"..\" is a violation regardless of whether it resolves to a safe location.\n",
+      "pattern": "\\.\\."
     },
-    "atom__string_text": {
-      "title": "StringText",
+    "pattern__env": {
+      "title": "Env",
       "type": "string",
-      "description": "Natural language prose — must contain at least one whitespace character. Mutually exclusive with all identifier types. Used for descriptions, instructions, error messages, and display labels. Not a path.\n",
-      "pattern": "\\s",
-      "minLength": 10,
-      "not": {
-        "anyOf": [
-          {
-            "pattern": "^/"
-          },
-          {
-            "pattern": "^\\."
-          },
-          {
-            "pattern": "\\/[^\\/]+\\.\\w{1,4}$"
-          },
-          {
-            "pattern": "\\w+\\/\\w+\\/\\w+"
-          }
-        ]
-      }
+      "description": ".env files and directories at any depth. Secrets must never be accessible to agents.\n",
+      "pattern": "(^|/)\\.env($|/)"
     },
-    "atom__integer": {
-      "title": "Integer",
-      "type": "integer",
-      "description": "Whole number value"
+    "pattern__home": {
+      "title": "Home",
+      "type": "string",
+      "description": "Home directory in isolation — granting ~/ or its expanded form gives access to the entire home tree. Always a security violation.\n",
+      "pattern": "^(~/|/Users/johnny/)$"
     },
-    "atom__boolean": {
-      "title": "Boolean",
-      "type": "boolean",
-      "description": "True or false value"
+    "pattern__root": {
+      "title": "Root",
+      "type": "string",
+      "description": "Filesystem root in isolation — granting / gives access to the entire filesystem. Always a security violation.\n",
+      "pattern": "^/$"
+    },
+    "pattern__claude": {
+      "title": "Claude",
+      "type": "string",
+      "description": ".claude directories at any depth. Agents must not read or modify their own control infrastructure.\n",
+      "pattern": "(^|/)\\.claude($|/)"
+    },
+    "pattern__absolute": {
+      "title": "Absolute",
+      "type": "string",
+      "description": "Starts with forward slash — absolute path prefix",
+      "pattern": "^/"
     },
     "atom__path_relative": {
       "title": "PathRelative",
@@ -1461,18 +1456,6 @@
         ]
       }
     },
-    "union__path_any": {
-      "title": "PathAny",
-      "oneOf": [
-        {
-          "$ref": "#/$defs/atom__path_relative"
-        },
-        {
-          "$ref": "#/$defs/atom__path_absolute"
-        }
-      ],
-      "description": "Filesystem path — either relative (./) or absolute (/)"
-    },
     "element__path_exists_absolute": {
       "title": "PathExistsAbsolute",
       "type": "string",
@@ -1495,6 +1478,36 @@
           },
           {
             "pattern": "(^|/)\\.claude($|/)"
+          }
+        ]
+      }
+    },
+    "atom__string_markdown": {
+      "title": "StringMarkdown",
+      "type": "string",
+      "description": "Markdown-formatted text content. Starts with a non-path character, contains at least three whitespace characters. No path exclusions needed — the structural constraints prevent abuse while allowing markdown formatting and embedded path references. Used for example content, instructional text, and rich-text fields.\n",
+      "pattern": "^[^/.](?:[\\s\\S]*?\\s){3,}",
+      "minLength": 20
+    },
+    "atom__string_text": {
+      "title": "StringText",
+      "type": "string",
+      "description": "Natural language prose — must contain at least one whitespace character. Mutually exclusive with all identifier types. Used for descriptions, instructions, error messages, and display labels. Not a path.\n",
+      "pattern": "\\s",
+      "minLength": 10,
+      "not": {
+        "anyOf": [
+          {
+            "pattern": "^/"
+          },
+          {
+            "pattern": "^\\."
+          },
+          {
+            "pattern": "\\/[^\\/]+\\.\\w{1,4}$"
+          },
+          {
+            "pattern": "\\w+\\/\\w+\\/\\w+"
           }
         ]
       }
@@ -1534,11 +1547,60 @@
       ],
       "description": "Filesystem path that must exist — either relative or absolute"
     },
+    "atom__string_prose": {
+      "title": "StringProse",
+      "type": "string",
+      "description": "Substantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths.\n",
+      "pattern": "^[A-Z](?:.*?\\s){3,}.*[.!?;:]$",
+      "minLength": 20
+    },
     "atom__title_string": {
       "title": "TitleString",
       "type": "string",
       "description": "Title Case string — each word starts uppercase, separated by spaces. Used for display titles, section headings, and short labels. Not prose (no sentences), not an identifier (has spaces).\n",
       "pattern": "^([A-Z][a-zA-Z0-9]*)(\\s[A-Z][a-zA-Z0-9]*)*$",
+      "minLength": 3
+    },
+    "atom__boolean": {
+      "title": "Boolean",
+      "type": "boolean",
+      "description": "True or false value"
+    },
+    "union__path_any": {
+      "title": "PathAny",
+      "oneOf": [
+        {
+          "$ref": "#/$defs/atom__path_relative"
+        },
+        {
+          "$ref": "#/$defs/atom__path_absolute"
+        }
+      ],
+      "description": "Filesystem path — either relative (./) or absolute (/)"
+    },
+    "atom__integer": {
+      "title": "Integer",
+      "type": "integer",
+      "description": "Whole number value"
+    },
+    "enum__capabilities": {
+      "title": "Capabilities",
+      "type": "string",
+      "description": "Platform-agnostic capability descriptor. Format transformers map these to vendor-specific tools. read: file read. search: find files by name or content. write: create or overwrite files. edit: targeted modification. append: add content to end of files. inspect: read-only command execution.\n",
+      "enum": [
+        "read",
+        "search",
+        "write",
+        "edit",
+        "append",
+        "inspect"
+      ]
+    },
+    "atom__kebab_string": {
+      "title": "KebabString",
+      "type": "string",
+      "description": "Lowercase kebab-case string — words separated by hyphens. Used for identifiers that must be URL-safe and filesystem-safe.\n",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
       "minLength": 3
     },
     "simplegroup__context_item_raw": {
@@ -1574,26 +1636,6 @@
         "context_path"
       ],
       "additionalProperties": false
-    },
-    "enum__capabilities": {
-      "title": "Capabilities",
-      "type": "string",
-      "description": "Platform-agnostic capability descriptor. Format transformers map these to vendor-specific tools. read: file read. search: find files by name or content. write: create or overwrite files. edit: targeted modification. append: add content to end of files. inspect: read-only command execution.\n",
-      "enum": [
-        "read",
-        "search",
-        "write",
-        "edit",
-        "append",
-        "inspect"
-      ]
-    },
-    "atom__string_markdown": {
-      "title": "StringMarkdown",
-      "type": "string",
-      "description": "Markdown-formatted text content. Starts with a non-path character, contains at least three whitespace characters. No path exclusions needed — the structural constraints prevent abuse while allowing markdown formatting and embedded path references. Used for example content, instructional text, and rich-text fields.\n",
-      "pattern": "^[^/.](?:[\\s\\S]*?\\s){3,}",
-      "minLength": 20
     }
   },
   "allOf": [

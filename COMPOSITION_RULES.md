@@ -950,5 +950,5 @@ Draupnir validates at compile time:
    level for their position
 6. **Schema mutual exclusion** — exactly one of `sections:` or
    `shallowsections:` must be present
-7. **Shallowsection container limit** — max 2 containers total
+7. **Shallowsection container limit** — max 3 containers total
 8. **Zone invariants** — at least one zone must be populated where required

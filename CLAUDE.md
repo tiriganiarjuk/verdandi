@@ -27,14 +27,14 @@ None of them felt uncertain while doing it.
 ## You Will Get These Things Wrong
 
 ### Editing Generated Schemas Instead of YAML Source
-**Detection:** If you find yourself editing files in `schemas/*.schema.json`...
-**Why it's wrong:** Schemas are generated artifacts. The chain is: Verdandi YAML → Draupnir → `schemas/*.schema.json`. Edit the YAML source, run Draupnir, and the schema updates. Direct edits will be silently overwritten on next generation.
-**Recovery:** Find the corresponding YAML in `tools/verdandi/` for the schema you want to change.
+**Detection:** If you find yourself editing files in `{project}/output/*.schema.json`...
+**Why it's wrong:** Schemas are generated artifacts. The chain is: Verdandi YAML → Draupnir → `{project}/output/*.schema.json`. Edit the YAML source, run Draupnir, and the schema updates. Direct edits will be silently overwritten on next generation.
+**Recovery:** Find the corresponding YAML in `{project}/source/schema/` for the schema you want to change.
 
 ### Referencing Types at the Same or Higher Level
 **Detection:** If a YAML file in `simplegroup/` references another `simplegroup/` type, or a `group/` references a `section/` type...
 **Why it's wrong:** References flow strictly downward through tiers. Tier 2 types reference Tier 1 types. Tier 3 types reference Tier 1 and Tier 2. Tier 4 references Tier 3 (and sometimes Tier 1/2). Same-level and upward references create circular dependencies that break Draupnir's supply-driven loading.
-**Recovery:** Read `tools/verdandi/COMPOSITION_RULES.md` for the formal spec of what each level can reference.
+**Recovery:** Read `COMPOSITION_RULES.md` for the formal spec of what each level can reference.
 
 ### Using Old Level Names from Stale Documentation
 **Detection:** If you find yourself looking for `primitives/`, `composed/`, `groups/`, `supergroups/`...
@@ -44,12 +44,12 @@ None of them felt uncertain while doing it.
 ### Adding Wrong Fields to a Level
 **Detection:** If you add a field like `containers:` to a `simplegroup` or `fields:` to an `array`...
 **Why it's wrong:** Each level has a specific set of allowed fields. Simplegroups have required/optional/conditional zones but no nested containers. Arrays hold simplegroups but not groups. Groups have both fields and containers sections. The COMPOSITION_RULES.md spec defines exactly what each level accepts.
-**Recovery:** Read `tools/verdandi/COMPOSITION_RULES.md` for the level you're editing.
+**Recovery:** Read `COMPOSITION_RULES.md` for the level you're editing.
 
 ### Forgetting to Run Draupnir After Changes
 **Detection:** If you edit Verdandi YAML but don't regenerate schemas...
 **Why it's wrong:** Verdandi is consumed by Draupnir. Changes to YAML only take effect when Draupnir regenerates the JSON Schemas. And after schema regeneration, Nornir must be rebuilt to embed the updated schemas. The cascade is: YAML → Draupnir → schemas → Nornir rebuild → pipeline uses new schemas.
-**Recovery:** After any YAML edit: `draupnir --all`, then rebuild Nornir if validation gates are affected.
+**Recovery:** After any YAML edit: `cd /Users/johnny/.ai/smidja/draupnir && uv run draupnir --all`, then `nornir_deploy --build gates` if validation gates are affected.
 
 ### Using the Old Schema Format (flat map + nullable)
 **Detection:** If you write a schema YAML with top-level `required:` list, `nullable:` list, or a flat `sections:`/`shallowsections:` map without zones...

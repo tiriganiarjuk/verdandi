@@ -7,6 +7,7 @@ description: >-
   all 12 sections.
 shallowsections:
   required:
+    section_order: shallowsection/section_order_structure
     identity: shallowsection/identity_structure
     security_boundary: shallowsection/security_boundary_structure
     critical_rules: shallowsection/critical_rules_structure
