@@ -1,4 +1,4 @@
-title: InstructionsStepHeaderDeterministic
+title: InstructionsInstructionModeHeaderDeterministic
 type: atom/string_template
 description: >-
   Step header for exact-mode steps with n_of_m tracking. Template

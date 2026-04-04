@@ -1,0 +1,5 @@
+title: InstructionsInstructionModeSignalAtModeChangeProbabilistic
+type: atom/string_prose
+description: >-
+  Transition signal when switching from exact to judgment mode.
+  Rendered between consecutive steps when modes change.

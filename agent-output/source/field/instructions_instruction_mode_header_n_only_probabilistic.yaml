@@ -1,4 +1,4 @@
-title: InstructionsStepHeaderProbabilisticNOnly
+title: InstructionsInstructionModeHeaderNOnlyProbabilistic
 type: atom/string_template
 description: >-
   Step header for judgment-mode steps with n_only tracking. Template

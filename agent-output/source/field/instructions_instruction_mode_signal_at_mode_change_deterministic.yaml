@@ -1,0 +1,5 @@
+title: InstructionsInstructionModeSignalAtModeChangeDeterministic
+type: atom/string_prose
+description: >-
+  Transition signal when switching from judgment to exact mode.
+  Rendered between consecutive steps when modes change.

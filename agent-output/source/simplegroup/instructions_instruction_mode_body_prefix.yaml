@@ -1,0 +1,8 @@
+title: InstructionsInstructionModeBodyPrefix
+description: >-
+  Per-mode body prefix directives. Keys match instruction_mode
+  enum values. Short text preceding the step body when
+  marker_placement is 'body_prefix'.
+required:
+  deterministic: field/instructions_instruction_mode_body_prefix_variant_deterministic
+  probabilistic: field/instructions_instruction_mode_body_prefix_variant_probabilistic
