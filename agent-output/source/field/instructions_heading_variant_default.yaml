@@ -1,4 +1,4 @@
 title: InstructionsHeadingVariantDefault
-type: atom/string_text
+type: atom/title_string
 description: >-
   Heading text when heading_variant is "default". Plain section heading.

@@ -8,6 +8,7 @@
     "section_order",
     "identity",
     "security_boundary",
+    "input",
     "critical_rules",
     "instructions",
     "examples",
@@ -80,9 +81,15 @@
           "description": "Whether to merge the identity declaration and role description into a single paragraph. When false, declaration and role description render as separate blocks. When true, they fuse into one flowing paragraph.\nTrue or false value",
           "default": false
         },
-        "expertise_is_strictly_limited_postscript_visible": {
+        "declaration_heuristic_postscript_visible": {
           "$ref": "#/$defs/atom__boolean",
-          "title": "IdentityExpertisePostscriptVisible",
+          "title": "IdentityDeclarationHeuristicPostscriptVisible",
+          "description": "Whether to render the identity declaration heuristic postscript. When true, a decision-heuristic sentence follows the declaration. When false, the declaration stands alone.\nTrue or false value",
+          "default": true
+        },
+        "role_expertise_is_strictly_limited_postscript_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "IdentityRoleExpertisePostscriptVisible",
           "description": "Whether to render the expertise limitation postscript after the expertise list. When true, a reinforcement statement constraining expertise to the listed areas appears after the list. When false, the expertise list renders without a closing constraint.\nTrue or false value",
           "default": true
         },
@@ -102,7 +109,8 @@
       "required": [
         "field_ordering",
         "fuse_declaration_and_role_description",
-        "expertise_is_strictly_limited_postscript_visible",
+        "declaration_heuristic_postscript_visible",
+        "role_expertise_is_strictly_limited_postscript_visible",
         "closing_identity_reminder_visible",
         "bold_contrast_phrase_from_role_description_visible"
       ],
@@ -162,6 +170,65 @@
         "section_closing_visible",
         "tool_names_visible",
         "framing_variant"
+      ],
+      "additionalProperties": false
+    },
+    "input": {
+      "title": "InputStructure",
+      "type": "object",
+      "description": "Structure controls for the input section. Visibility toggles for optional prose fragments and auto-threshold for parameter heading.",
+      "properties": {
+        "section_preamble_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "InputSectionPreambleVisible",
+          "description": "Whether to render the input section preamble. Conditional on context_required presence — renders when context documents exist.\nTrue or false value",
+          "default": true
+        },
+        "context_required_preamble_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "InputContextRequiredPreambleVisible",
+          "description": "Whether to render the context required preamble that establishes prerequisite vs reference reading mode.\nTrue or false value",
+          "default": true
+        },
+        "knowledge_data_transition_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "InputKnowledgeDataTransitionVisible",
+          "description": "Whether to render the cognitive transition sentence between knowledge acquisition and payload processing.\nTrue or false value",
+          "default": true
+        },
+        "input_completeness_postscript_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "InputInputCompletenessPostscriptVisible",
+          "description": "Whether to render the input completeness assertion. Off by default — experimental fragment testing whether explicit completeness reduces caveat-hedging.\nTrue or false value",
+          "default": false
+        },
+        "schema_intro_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "InputSchemaIntroVisible",
+          "description": "Whether to render the input schema introduction. Only relevant when input_schema is present in the data.\nTrue or false value",
+          "default": true
+        },
+        "parameters_heading_visible": {
+          "$ref": "#/$defs/enum__visibility_mode",
+          "title": "InputParametersHeadingVisible",
+          "description": "Whether to render the parameters sub-block heading. 'auto' renders when parameter count exceeds the auto_threshold. 'always' forces it on. 'never' suppresses it.\nTri-state visibility control for optional prose fragments. 'auto' delegates to a threshold or data condition — the renderer decides. 'always' forces the fragment to render regardless of conditions. 'never' suppresses the fragment regardless of conditions.",
+          "default": "auto"
+        },
+        "parameters_heading_auto_threshold": {
+          "$ref": "#/$defs/atom__integer",
+          "title": "InputParametersHeadingAutoThreshold",
+          "description": "Parameter count threshold for the auto mode of parameters_heading_visible. When parameter count exceeds this threshold and visibility is 'auto', the heading renders.\nWhole number value",
+          "default": 2
+        }
+      },
+      "required": [
+        "section_preamble_visible",
+        "context_required_preamble_visible",
+        "knowledge_data_transition_visible",
+        "input_completeness_postscript_visible",
+        "schema_intro_visible",
+        "parameters_heading_visible",
+        "parameters_heading_auto_threshold"
       ],
       "additionalProperties": false
     },
@@ -283,14 +350,14 @@
           ],
           "default": "default"
         },
-        "exact_vs_judgment_explanation_visible": {
+        "instruction_mode_explanation_visible": {
           "$ref": "#/$defs/enum__visibility_mode",
-          "title": "InstructionsExactVsJudgmentExplanationVisible",
+          "title": "InstructionsInstructionModeExplanationVisible",
           "description": "Whether to render the exact/judgment mode explanation. 'auto' renders when instruction modes are mixed (both exact and judgment steps present). 'always' forces it on. 'never' suppresses it.\nTri-state visibility control for optional prose fragments. 'auto' delegates to a threshold or data condition — the renderer decides. 'always' forces the fragment to render regardless of conditions. 'never' suppresses the fragment regardless of conditions.",
           "default": "auto"
         },
-        "exact_vs_judgment_marker_placement": {
-          "title": "InstructionsExactVsJudgmentMarkerPlacement",
+        "instruction_mode_marker_placement": {
+          "title": "InstructionsInstructionModeMarkerPlacement",
           "type": "string",
           "description": "Where exact/judgment mode markers appear in instruction steps. 'header_fused' embeds in the step header. 'body_prefix' places as the first line of step body. 'visual_formatting' uses visual cues to distinguish modes without explicit text.\nWhere exact/judgment mode markers appear in instruction steps. 'header_fused' embeds the marker in the step header text. 'body_prefix' places the marker as the first line of the step body. 'visual_formatting' uses visual cues (e.g., bold vs italic) to distinguish modes without explicit text markers.",
           "enum": [
@@ -318,9 +385,9 @@
           "description": "Whether to render the prohibition against adding, skipping, or reordering steps in the preamble.\nTrue or false value",
           "default": true
         },
-        "instructions_preamble_exact_vs_judgment_preview_visible": {
+        "instructions_preamble_instruction_mode_preview_visible": {
           "$ref": "#/$defs/atom__boolean",
-          "title": "InstructionsPreambleExactVsJudgmentPreviewVisible",
+          "title": "InstructionsPreambleInstructionModePreviewVisible",
           "description": "Whether to render the exact/judgment mode preview in the preamble. Previews that some steps are exact (no interpretation) and some require judgment.\nTrue or false value",
           "default": true
         },
@@ -352,9 +419,9 @@
           "description": "Whether to render the section closer reinforcing that the listed steps are the complete task with no additions.\nTrue or false value",
           "default": true
         },
-        "section_closer_exact_vs_judgment_recap_visible": {
+        "section_closer_instruction_mode_recap_visible": {
           "$ref": "#/$defs/atom__boolean",
-          "title": "InstructionsSectionCloserExactVsJudgmentRecapVisible",
+          "title": "InstructionsSectionCloserInstructionModeRecapVisible",
           "description": "Whether to render a mode recap in the section closer summarizing which steps were exact and which required judgment.\nTrue or false value",
           "default": false
         },
@@ -370,8 +437,8 @@
           "description": "Whether to render a progress reminder at the midpoint of the step list. Off by default — only useful for long instruction sets where the agent may lose orientation.\nTrue or false value",
           "default": false
         },
-        "structural_complexity_override": {
-          "title": "InstructionsStructuralComplexityOverride",
+        "scaffolding_tier_override": {
+          "title": "InstructionsScaffoldingTierOverride",
           "type": "string",
           "description": "Scaffolding tier for instruction rendering. 'auto' selects from step count using activation thresholds. 'lightweight' uses minimal scaffolding. 'standard' adds preamble, markers, and closers. 'heavy' adds progress reminders, dependencies, and recaps.\nStructural complexity tier for instruction rendering. 'auto' selects tier from step count using activation thresholds. 'lightweight' uses minimal scaffolding (few steps, little overhead). 'standard' adds preamble, mode markers, and closers. 'heavy' adds progress reminders, dependency phrases, and detailed recaps.",
           "enum": [
@@ -385,20 +452,20 @@
       },
       "required": [
         "heading_variant",
-        "exact_vs_judgment_explanation_visible",
-        "exact_vs_judgment_marker_placement",
+        "instruction_mode_explanation_visible",
+        "instruction_mode_marker_placement",
         "signal_at_mode_change_visible",
         "instructions_preamble_step_count_visible",
         "instructions_preamble_no_add_skip_reorder_visible",
-        "instructions_preamble_exact_vs_judgment_preview_visible",
+        "instructions_preamble_instruction_mode_preview_visible",
         "instructions_preamble_no_extra_operations_visible",
         "step_index_tracking",
         "step_done_when_suffix_visible",
         "section_closer_guardrail_visible",
-        "section_closer_exact_vs_judgment_recap_visible",
+        "section_closer_instruction_mode_recap_visible",
         "cross_step_dependency_phrases_visible",
         "halfway_point_reminder_visible",
-        "structural_complexity_override"
+        "scaffolding_tier_override"
       ],
       "additionalProperties": false
     },
@@ -552,6 +619,18 @@
           "description": "Whether to render a heading that includes the constraint count. Makes the model aware of how many constraints exist, which can improve compliance tracking.\nTrue or false value",
           "default": true
         },
+        "hierarchy_tier_comparison_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "ConstraintsHierarchyTierComparisonVisible",
+          "description": "Whether to render the hierarchy tier comparison prose. Cross-references critical_rules — may be confusing if that section is absent.\nTrue or false value",
+          "default": true
+        },
+        "hierarchy_three_tier_explanation_visible": {
+          "$ref": "#/$defs/atom__boolean",
+          "title": "ConstraintsHierarchyThreeTierExplanationVisible",
+          "description": "Whether to render the three-tier hierarchy explanation prose. References the critical_rules/constraints/anti_patterns hierarchy.\nTrue or false value",
+          "default": true
+        },
         "section_preamble_variant": {
           "title": "ConstraintsSectionPreambleVariant",
           "type": "string",
@@ -591,7 +670,9 @@
         "constraints_are_not_steps_visible",
         "no_inferred_constraints_visible",
         "closing_compliance_reminder_visible",
-        "constraint_count_heading_visible"
+        "constraint_count_heading_visible",
+        "hierarchy_tier_comparison_visible",
+        "hierarchy_three_tier_explanation_visible"
       ],
       "additionalProperties": false,
       "allOf": [

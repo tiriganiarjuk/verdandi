@@ -1,6 +1,6 @@
 title: ConstraintsClosingComplianceReminderVariantEvaluationWarning
-type: atom/string_template
+type: atom/string_prose
 description: >-
   Closing reminder variant that frames compliance as tied to
-  evaluation. Contains {{constraint_count}} placeholder. Warns
+  evaluation. Warns
   that constraint violations will be detected during assessment.

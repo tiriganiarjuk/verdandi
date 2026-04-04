@@ -1,5 +1,5 @@
 title: ConstraintsHeading
-type: atom/string_text
+type: atom/title_string
 description: >-
   Section heading for constraints. Plain text, no placeholders.
   Rendered at the configured heading level.

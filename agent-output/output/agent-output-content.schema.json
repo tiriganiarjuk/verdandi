@@ -7,6 +7,7 @@
   "required": [
     "identity",
     "security_boundary",
+    "input",
     "critical_rules",
     "instructions",
     "examples",
@@ -39,19 +40,19 @@
           "title": "IdentityDeclarationHeuristicPostscript",
           "description": "Reinforcement postscript after the identity declaration. Template with {{role_identity}} placeholder. Anchors decision-making to the declared identity. Position: after declaration, before responsibility.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
         },
-        "responsibility_label": {
+        "role_responsibility_label": {
           "$ref": "#/$defs/atom__string_template",
-          "title": "IdentityResponsibilityLabel",
+          "title": "IdentityRoleResponsibilityLabel",
           "description": "Label introducing the agent's responsibility scope. Template with {{role_responsibility}} placeholder. Position: label immediately before the responsibility data.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
         },
-        "expertise_label": {
+        "role_expertise_label": {
           "$ref": "#/$defs/atom__string_text",
-          "title": "IdentityExpertiseLabel",
+          "title": "IdentityRoleExpertiseLabel",
           "description": "Label introducing the expertise list. Plain text (no placeholders). Position: label immediately before the expertise data list.\nNatural language prose — must contain at least one whitespace character. Mutually exclusive with all identifier types. Used for descriptions, instructions, error messages, and display labels. Not a path."
         },
-        "expertise_is_strictly_limited_postscript": {
+        "role_expertise_is_strictly_limited_postscript": {
           "$ref": "#/$defs/atom__string_prose",
-          "title": "IdentityExpertisePostscript",
+          "title": "IdentityRoleExpertisePostscript",
           "description": "Reinforcement postscript after the expertise list. Constrains the agent's authoritative judgment to the listed areas only. Visibility controlled by identity_expertise_postscript_visible in structure. Position: postscript after expertise data.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
         },
         "closing_identity_reminder": {
@@ -64,9 +65,9 @@
         "heading",
         "declaration",
         "declaration_heuristic_postscript",
-        "responsibility_label",
-        "expertise_label",
-        "expertise_is_strictly_limited_postscript",
+        "role_responsibility_label",
+        "role_expertise_label",
+        "role_expertise_is_strictly_limited_postscript",
         "closing_identity_reminder"
       ],
       "additionalProperties": false
@@ -203,6 +204,88 @@
       ],
       "additionalProperties": false
     },
+    "input": {
+      "title": "InputContent",
+      "type": "object",
+      "description": "Content prose for the input section. Description template, context headings and preambles, parameter templates, schema intro, and completeness postscript.",
+      "properties": {
+        "heading": {
+          "$ref": "#/$defs/atom__string_text",
+          "title": "InputHeading",
+          "description": "Section heading for input. Plain text, no placeholders.\nNatural language prose — must contain at least one whitespace character. Mutually exclusive with all identifier types. Used for descriptions, instructions, error messages, and display labels. Not a path."
+        },
+        "description_format_template": {
+          "$ref": "#/$defs/atom__string_template",
+          "title": "InputDescriptionFormatTemplate",
+          "description": "Integrated description and format declaration. Template with {{format}} and {{description}} placeholders. Presents what the agent receives and in what shape as a single sentence.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
+        },
+        "section_preamble": {
+          "$ref": "#/$defs/atom__string_prose",
+          "title": "InputSectionPreamble",
+          "description": "Preamble for the input section. Sets context before any data. Conditional on context_required presence — complex agents need a framing sentence, simple agents need none.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
+        },
+        "context_required_heading": {
+          "$ref": "#/$defs/atom__string_text",
+          "title": "InputContextRequiredHeading",
+          "description": "Sub-block heading for required context resources. Introduces the reading list the agent must absorb before processing input.\nNatural language prose — must contain at least one whitespace character. Mutually exclusive with all identifier types. Used for descriptions, instructions, error messages, and display labels. Not a path."
+        },
+        "context_required_preamble": {
+          "$ref": "#/$defs/atom__string_prose",
+          "title": "InputContextRequiredPreamble",
+          "description": "Preamble for the required context sub-block. Establishes that context documents are prerequisite knowledge to absorb, not reference material to consult during work.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
+        },
+        "context_entry_template": {
+          "$ref": "#/$defs/atom__string_template",
+          "title": "InputContextEntryTemplate",
+          "description": "Template for rendering a single context entry. Contains {{context_label}} and {{context_path}} placeholders. Label-first presentation with path as the action target.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
+        },
+        "context_available_heading": {
+          "$ref": "#/$defs/atom__string_text",
+          "title": "InputContextAvailableHeading",
+          "description": "Sub-block heading for available (optional) context resources.\nNatural language prose — must contain at least one whitespace character. Mutually exclusive with all identifier types. Used for descriptions, instructions, error messages, and display labels. Not a path."
+        },
+        "knowledge_data_transition": {
+          "$ref": "#/$defs/atom__string_prose",
+          "title": "InputKnowledgeDataTransition",
+          "description": "Transition sentence between the knowledge-acquisition sub-block (context_required) and the payload sub-block (parameters). Marks the cognitive shift from learning mode to operating mode.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
+        },
+        "parameters_heading": {
+          "$ref": "#/$defs/atom__string_text",
+          "title": "InputParametersHeading",
+          "description": "Sub-block heading for dispatch parameters. Introduces the concrete handles the agent uses to locate its input data.\nNatural language prose — must contain at least one whitespace character. Mutually exclusive with all identifier types. Used for descriptions, instructions, error messages, and display labels. Not a path."
+        },
+        "parameter_entry_template": {
+          "$ref": "#/$defs/atom__string_template",
+          "title": "InputParameterEntryTemplate",
+          "description": "Template for rendering a single parameter entry. Contains {{param_name}}, {{param_type}}, and {{param_description}} placeholders. Code-formatted parameter name signals literal identifier.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
+        },
+        "input_completeness_postscript": {
+          "$ref": "#/$defs/atom__string_prose",
+          "title": "InputInputCompletenessPostscript",
+          "description": "Postscript asserting that the agent's input is complete. Reduces caveat-hedging in autonomous agents that cannot ask follow-up questions. Position: after all input sub-blocks.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
+        },
+        "schema_intro": {
+          "$ref": "#/$defs/atom__string_template",
+          "title": "InputSchemaIntro",
+          "description": "Template introducing the input validation schema. Contains {{input_schema}} placeholder for the schema path.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
+        }
+      },
+      "required": [
+        "heading",
+        "description_format_template",
+        "section_preamble",
+        "context_required_heading",
+        "context_required_preamble",
+        "context_entry_template",
+        "context_available_heading",
+        "knowledge_data_transition",
+        "parameters_heading",
+        "parameter_entry_template",
+        "input_completeness_postscript",
+        "schema_intro"
+      ],
+      "additionalProperties": false
+    },
     "critical_rules": {
       "title": "CriticalRulesContent",
       "type": "object",
@@ -288,9 +371,9 @@
           "title": "InstructionsPreambleNoAddSkipReorder",
           "description": "Prohibition against adding, skipping, or reordering steps. Position: preamble component.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
         },
-        "instructions_preamble_exact_vs_judgment_preview": {
+        "instructions_preamble_instruction_mode_preview": {
           "$ref": "#/$defs/atom__string_prose",
-          "title": "InstructionsPreambleExactVsJudgmentPreview",
+          "title": "InstructionsPreambleInstructionModePreview",
           "description": "Preview of exact/judgment mode distinction in the preamble. Explains that some steps are mechanical and some require reasoning.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
         },
         "instructions_preamble_no_extra_operations": {
@@ -298,44 +381,44 @@
           "title": "InstructionsPreambleNoExtraOperations",
           "description": "Prohibition against supplementing steps with general knowledge or adding unspecified operations. Each step is a complete specification.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
         },
-        "step_header_exact": {
+        "step_header_deterministic": {
           "$ref": "#/$defs/atom__string_template",
-          "title": "InstructionsStepHeaderExact",
+          "title": "InstructionsStepHeaderDeterministic",
           "description": "Step header for exact-mode steps with n_of_m tracking. Template with {{step_n}} and {{step_total}} placeholders.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
         },
-        "step_header_judgment": {
+        "step_header_probabilistic": {
           "$ref": "#/$defs/atom__string_template",
-          "title": "InstructionsStepHeaderJudgment",
+          "title": "InstructionsStepHeaderProbabilistic",
           "description": "Step header for judgment-mode steps with n_of_m tracking. Template with {{step_n}} and {{step_total}} placeholders.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
         },
-        "step_header_exact_n_only": {
+        "step_header_deterministic_n_only": {
           "$ref": "#/$defs/atom__string_template",
-          "title": "InstructionsStepHeaderExactNOnly",
+          "title": "InstructionsStepHeaderDeterministicNOnly",
           "description": "Step header for exact-mode steps with n_only tracking. Template with {{step_n}} placeholder. No total shown.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
         },
-        "step_header_judgment_n_only": {
+        "step_header_probabilistic_n_only": {
           "$ref": "#/$defs/atom__string_template",
-          "title": "InstructionsStepHeaderJudgmentNOnly",
+          "title": "InstructionsStepHeaderProbabilisticNOnly",
           "description": "Step header for judgment-mode steps with n_only tracking. Template with {{step_n}} placeholder. No total shown.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
         },
-        "exact_vs_judgment_body_prefix_exact": {
+        "instruction_mode_body_prefix_deterministic": {
           "$ref": "#/$defs/atom__string_text",
-          "title": "InstructionsExactVsJudgmentBodyPrefixExact",
+          "title": "InstructionsInstructionModeBodyPrefixDeterministic",
           "description": "Body prefix for exact-mode steps when marker_placement is 'body_prefix'. Short directive text preceding the step body.\nNatural language prose — must contain at least one whitespace character. Mutually exclusive with all identifier types. Used for descriptions, instructions, error messages, and display labels. Not a path."
         },
-        "exact_vs_judgment_body_prefix_judgment": {
+        "instruction_mode_body_prefix_probabilistic": {
           "$ref": "#/$defs/atom__string_text",
-          "title": "InstructionsExactVsJudgmentBodyPrefixJudgment",
+          "title": "InstructionsInstructionModeBodyPrefixProbabilistic",
           "description": "Body prefix for judgment-mode steps when marker_placement is 'body_prefix'. Short directive text preceding the step body.\nNatural language prose — must contain at least one whitespace character. Mutually exclusive with all identifier types. Used for descriptions, instructions, error messages, and display labels. Not a path."
         },
-        "signal_at_mode_change_to_exact": {
+        "signal_at_mode_change_to_deterministic": {
           "$ref": "#/$defs/atom__string_prose",
-          "title": "InstructionsSignalAtModeChangeToExact",
+          "title": "InstructionsSignalAtModeChangeToDeterministic",
           "description": "Transition signal when switching from judgment to exact mode. Rendered between consecutive steps when modes change. Visibility controlled by instructions_signal_at_mode_change_visible.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
         },
-        "signal_at_mode_change_to_judgment": {
+        "signal_at_mode_change_to_probabilistic": {
           "$ref": "#/$defs/atom__string_prose",
-          "title": "InstructionsSignalAtModeChangeToJudgment",
+          "title": "InstructionsSignalAtModeChangeToProbabilistic",
           "description": "Transition signal when switching from exact to judgment mode. Rendered between consecutive steps when modes change. Visibility controlled by instructions_signal_at_mode_change_visible.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
         },
         "step_done_when_suffix": {
@@ -358,24 +441,24 @@
           "title": "InstructionsSectionCloserGuardrail",
           "description": "Section closer reinforcing completeness. Template with {{step_count}} placeholder. States that the listed steps are the complete task.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
         },
-        "section_closer_exact_vs_judgment_recap": {
+        "section_closer_instruction_mode_recap": {
           "$ref": "#/$defs/atom__string_template",
-          "title": "InstructionsSectionCloserExactVsJudgmentRecap",
+          "title": "InstructionsSectionCloserInstructionModeRecap",
           "description": "Mode recap in the section closer. Template with {{mode_recap_text}} placeholder. Summarizes which steps were exact and which judgment.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
         },
-        "exact_vs_judgment_explanation_mixed": {
+        "instruction_mode_explanation_mixed": {
           "$ref": "#/$defs/atom__string_prose",
-          "title": "InstructionsExactVsJudgmentExplanationMixed",
+          "title": "InstructionsInstructionModeExplanationMixed",
           "description": "Explanation of the exact/judgment distinction when both modes are present. Rendered when visibility is 'auto' and modes are mixed.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
         },
-        "exact_vs_judgment_explanation_uniform_exact": {
+        "instruction_mode_explanation_uniform_deterministic": {
           "$ref": "#/$defs/atom__string_prose",
-          "title": "InstructionsExactVsJudgmentExplanationUniformExact",
+          "title": "InstructionsInstructionModeExplanationUniformDeterministic",
           "description": "Explanation when all steps are exact mode. Rendered when visibility is 'always' and all steps share the same mode.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
         },
-        "exact_vs_judgment_explanation_uniform_judgment": {
+        "instruction_mode_explanation_uniform_probabilistic": {
           "$ref": "#/$defs/atom__string_prose",
-          "title": "InstructionsExactVsJudgmentExplanationUniformJudgment",
+          "title": "InstructionsInstructionModeExplanationUniformProbabilistic",
           "description": "Explanation when all steps are judgment mode. Rendered when visibility is 'always' and all steps share the same mode.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
         },
         "heading_variant": {
@@ -410,24 +493,24 @@
       "required": [
         "instructions_preamble_step_count",
         "instructions_preamble_no_add_skip_reorder",
-        "instructions_preamble_exact_vs_judgment_preview",
+        "instructions_preamble_instruction_mode_preview",
         "instructions_preamble_no_extra_operations",
-        "step_header_exact",
-        "step_header_judgment",
-        "step_header_exact_n_only",
-        "step_header_judgment_n_only",
-        "exact_vs_judgment_body_prefix_exact",
-        "exact_vs_judgment_body_prefix_judgment",
-        "signal_at_mode_change_to_exact",
-        "signal_at_mode_change_to_judgment",
+        "step_header_deterministic",
+        "step_header_probabilistic",
+        "step_header_deterministic_n_only",
+        "step_header_probabilistic_n_only",
+        "instruction_mode_body_prefix_deterministic",
+        "instruction_mode_body_prefix_probabilistic",
+        "signal_at_mode_change_to_deterministic",
+        "signal_at_mode_change_to_probabilistic",
         "step_done_when_suffix",
         "cross_step_dependency_phrases",
         "halfway_point_reminder",
         "section_closer_guardrail",
-        "section_closer_exact_vs_judgment_recap",
-        "exact_vs_judgment_explanation_mixed",
-        "exact_vs_judgment_explanation_uniform_exact",
-        "exact_vs_judgment_explanation_uniform_judgment",
+        "section_closer_instruction_mode_recap",
+        "instruction_mode_explanation_mixed",
+        "instruction_mode_explanation_uniform_deterministic",
+        "instruction_mode_explanation_uniform_probabilistic",
         "heading_variant"
       ],
       "additionalProperties": false
@@ -452,9 +535,9 @@
           "title": "ExamplesGroupFramingSentence",
           "description": "Framing sentence between group heading and entries. Template with {{example_group_name}} placeholder. Visibility controlled by examples_group_framing_sentence_visible.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
         },
-        "entry_heading": {
+        "example_heading": {
           "$ref": "#/$defs/atom__string_template",
-          "title": "ExamplesEntryHeading",
+          "title": "ExamplesExampleHeading",
           "description": "Template for rendering individual example entry headings. Contains {{example_heading}} placeholder. Display format controlled by examples_entry_heading_format in display.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
         }
       },
@@ -462,7 +545,7 @@
         "heading",
         "section_preamble",
         "group_framing_sentence",
-        "entry_heading"
+        "example_heading"
       ],
       "additionalProperties": false
     },
