@@ -210,9 +210,9 @@
       "description": "Content prose for the input section. Description template, context headings and preambles, parameter templates, schema intro, and completeness postscript.",
       "properties": {
         "heading": {
-          "$ref": "#/$defs/atom__string_text",
+          "$ref": "#/$defs/atom__title_string",
           "title": "InputHeading",
-          "description": "Section heading for input. Plain text, no placeholders.\nNatural language prose — must contain at least one whitespace character. Mutually exclusive with all identifier types. Used for descriptions, instructions, error messages, and display labels. Not a path."
+          "description": "Section heading for input. Plain text, no placeholders.\nTitle Case string — each word starts uppercase, separated by spaces. Used for display titles, section headings, and short labels. Not prose (no sentences), not an identifier (has spaces)."
         },
         "description_format_template": {
           "$ref": "#/$defs/atom__string_template",
@@ -250,9 +250,9 @@
           "description": "Transition sentence between the knowledge-acquisition sub-block (context_required) and the payload sub-block (parameters). Marks the cognitive shift from learning mode to operating mode.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
         },
         "parameters_heading": {
-          "$ref": "#/$defs/atom__string_text",
+          "$ref": "#/$defs/atom__title_string",
           "title": "InputParametersHeading",
-          "description": "Sub-block heading for dispatch parameters. Introduces the concrete handles the agent uses to locate its input data.\nNatural language prose — must contain at least one whitespace character. Mutually exclusive with all identifier types. Used for descriptions, instructions, error messages, and display labels. Not a path."
+          "description": "Sub-block heading for dispatch parameters. Introduces the concrete handles the agent uses to locate its input data.\nTitle Case string — each word starts uppercase, separated by spaces. Used for display titles, section headings, and short labels. Not prose (no sentences), not an identifier (has spaces)."
         },
         "parameter_entry_template": {
           "$ref": "#/$defs/atom__string_template",
@@ -467,14 +467,14 @@
           "description": "Variant alternatives for the instructions section heading. Keys match enum/heading_variant_key values. Structure selects one.",
           "properties": {
             "default": {
-              "$ref": "#/$defs/atom__string_text",
+              "$ref": "#/$defs/atom__title_string",
               "title": "InstructionsHeadingVariantDefault",
-              "description": "Heading text when heading_variant is \"default\". Plain section heading.\nNatural language prose — must contain at least one whitespace character. Mutually exclusive with all identifier types. Used for descriptions, instructions, error messages, and display labels. Not a path."
+              "description": "Heading text when heading_variant is \"default\". Plain section heading.\nTitle Case string — each word starts uppercase, separated by spaces. Used for display titles, section headings, and short labels. Not prose (no sentences), not an identifier (has spaces)."
             },
             "procedure": {
-              "$ref": "#/$defs/atom__string_text",
+              "$ref": "#/$defs/atom__title_string",
               "title": "InstructionsHeadingVariantProcedure",
-              "description": "Heading text when heading_variant is \"procedure\". Uses formal procedural language.\nNatural language prose — must contain at least one whitespace character. Mutually exclusive with all identifier types. Used for descriptions, instructions, error messages, and display labels. Not a path."
+              "description": "Heading text when heading_variant is \"procedure\". Uses formal procedural language.\nTitle Case string — each word starts uppercase, separated by spaces. Used for display titles, section headings, and short labels. Not prose (no sentences), not an identifier (has spaces)."
             },
             "steps_with_count": {
               "$ref": "#/$defs/atom__string_template",
@@ -555,9 +555,9 @@
       "description": "Content prose for the constraints section. Heading, plain prose fields, and variant sub-tables for preamble, closing reminder, and no-inferred-constraints warning.",
       "properties": {
         "heading": {
-          "$ref": "#/$defs/atom__string_text",
+          "$ref": "#/$defs/atom__title_string",
           "title": "ConstraintsHeading",
-          "description": "Section heading for constraints. Plain text, no placeholders. Rendered at the configured heading level.\nNatural language prose — must contain at least one whitespace character. Mutually exclusive with all identifier types. Used for descriptions, instructions, error messages, and display labels. Not a path."
+          "description": "Section heading for constraints. Plain text, no placeholders. Rendered at the configured heading level.\nTitle Case string — each word starts uppercase, separated by spaces. Used for display titles, section headings, and short labels. Not prose (no sentences), not an identifier (has spaces)."
         },
         "constraints_are_not_steps": {
           "$ref": "#/$defs/atom__string_prose",
@@ -613,9 +613,9 @@
           "description": "Variant alternatives for the closing compliance reminder. Keys match enum/closing_compliance_variant_key values. Structure selects one.",
           "properties": {
             "evaluation_warning": {
-              "$ref": "#/$defs/atom__string_template",
+              "$ref": "#/$defs/atom__string_prose",
               "title": "ConstraintsClosingComplianceReminderVariantEvaluationWarning",
-              "description": "Closing reminder variant that frames compliance as tied to evaluation. Contains {{constraint_count}} placeholder. Warns that constraint violations will be detected during assessment.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
+              "description": "Closing reminder variant that frames compliance as tied to evaluation. Warns that constraint violations will be detected during assessment.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
             },
             "simultaneity": {
               "$ref": "#/$defs/atom__string_template",
@@ -713,9 +713,9 @@
           "description": "Statement clarifying that success criteria define quality while failure criteria define breakage, and that these are independent evaluations not inverses of each other.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
         },
         "multi_criteria_transition": {
-          "$ref": "#/$defs/atom__string_text",
+          "$ref": "#/$defs/atom__title_string",
           "title": "SuccessCriteriaMultiCriteriaTransition",
-          "description": "Transitional text between multiple success criteria blocks. Used when criteria count exceeds one to introduce subsequent criteria after the first.\nNatural language prose — must contain at least one whitespace character. Mutually exclusive with all identifier types. Used for descriptions, instructions, error messages, and display labels. Not a path."
+          "description": "Transitional text between multiple success criteria blocks. Used when criteria count exceeds one to introduce subsequent criteria after the first.\nTitle Case string — each word starts uppercase, separated by spaces. Used for display titles, section headings, and short labels. Not prose (no sentences), not an identifier (has spaces)."
         },
         "definition_framing_variant": {
           "title": "SuccessCriteriaDefinitionFramingVariant",
@@ -1146,6 +1146,13 @@
       "description": "Prose string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose.\n",
       "pattern": "\\{\\{[a-zA-Z_]+\\}\\}",
       "minLength": 5
+    },
+    "atom__title_string": {
+      "title": "TitleString",
+      "type": "string",
+      "description": "Title Case string — each word starts uppercase, separated by spaces. Used for display titles, section headings, and short labels. Not prose (no sentences), not an identifier (has spaces).\n",
+      "pattern": "^([A-Z][a-zA-Z0-9]*)(\\s[A-Z][a-zA-Z0-9]*)*$",
+      "minLength": 3
     }
   }
 }

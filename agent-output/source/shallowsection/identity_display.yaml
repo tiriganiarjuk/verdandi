@@ -1,10 +1,8 @@
 title: IdentityDisplay
 description: >-
   Display formatting for the identity section. Format and threshold
-  pairs for expertise and responsibility lists.
+  pair for the expertise list.
 fields:
   required:
     role_expertise_format: field/identity_role_expertise_format
     role_expertise_format_threshold: field/identity_role_expertise_format_threshold
-    role_responsibility_format: field/identity_role_responsibility_format
-    role_responsibility_format_threshold: field/identity_role_responsibility_format_threshold
