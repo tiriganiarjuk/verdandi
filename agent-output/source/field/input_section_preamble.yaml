@@ -1,0 +1,6 @@
+title: InputSectionPreamble
+type: atom/string_prose
+description: >-
+  Preamble for the input section. Sets context before any data.
+  Conditional on context_required presence — complex agents need
+  a framing sentence, simple agents need none.

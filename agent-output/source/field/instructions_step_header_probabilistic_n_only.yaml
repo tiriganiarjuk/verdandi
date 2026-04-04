@@ -1,0 +1,5 @@
+title: InstructionsStepHeaderProbabilisticNOnly
+type: atom/string_template
+description: >-
+  Step header for judgment-mode steps with n_only tracking. Template
+  with {{step_n}} placeholder. No total shown.

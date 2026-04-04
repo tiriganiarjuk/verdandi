@@ -1,0 +1,19 @@
+title: InputContent
+description: >-
+  Content prose for the input section. Description template,
+  context headings and preambles, parameter templates, schema
+  intro, and completeness postscript.
+fields:
+  required:
+    heading: field/input_heading
+    description_format_template: field/input_description_format_template
+    section_preamble: field/input_section_preamble
+    context_required_heading: field/input_context_required_heading
+    context_required_preamble: field/input_context_required_preamble
+    context_entry_template: field/input_context_entry_template
+    context_available_heading: field/input_context_available_heading
+    knowledge_data_transition: field/input_knowledge_data_transition
+    parameters_heading: field/input_parameters_heading
+    parameter_entry_template: field/input_parameter_entry_template
+    input_completeness_postscript: field/input_input_completeness_postscript
+    schema_intro: field/input_schema_intro

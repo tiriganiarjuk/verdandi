@@ -1,0 +1,7 @@
+title: InputInputCompletenessPostscriptVisible
+type: atom/boolean
+default: false
+description: >-
+  Whether to render the input completeness assertion. Off by
+  default — experimental fragment testing whether explicit
+  completeness reduces caveat-hedging.

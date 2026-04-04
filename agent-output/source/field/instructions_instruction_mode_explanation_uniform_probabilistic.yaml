@@ -1,0 +1,5 @@
+title: InstructionsInstructionModeExplanationUniformProbabilistic
+type: atom/string_prose
+description: >-
+  Explanation when all steps are judgment mode. Rendered when visibility
+  is 'always' and all steps share the same mode.

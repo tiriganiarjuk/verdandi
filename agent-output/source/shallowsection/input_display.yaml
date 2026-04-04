@@ -1,0 +1,10 @@
+title: InputDisplay
+description: >-
+  Display formatting for the input section. Context list format
+  and parameter list format with threshold switching.
+fields:
+  required:
+    context_required_format: field/input_context_required_format
+    context_available_format: field/input_context_available_format
+    parameters_format: field/input_parameters_format
+    parameters_format_threshold: field/input_parameters_format_threshold

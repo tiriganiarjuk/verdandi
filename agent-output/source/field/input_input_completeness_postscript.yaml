@@ -1,0 +1,6 @@
+title: InputInputCompletenessPostscript
+type: atom/string_prose
+description: >-
+  Postscript asserting that the agent's input is complete. Reduces
+  caveat-hedging in autonomous agents that cannot ask follow-up
+  questions. Position: after all input sub-blocks.

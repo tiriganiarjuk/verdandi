@@ -4,7 +4,7 @@ description: >-
   body container, and separators for entries and groups.
 fields:
   required:
-    entry_heading_format: field/examples_entry_heading_format
-    entry_body_container: field/examples_entry_body_container
-    entry_separator: field/examples_entry_separator
+    example_heading_format: field/examples_example_heading_format
+    example_body_container: field/examples_example_body_container
+    example_separator: field/examples_example_separator
     multi_group_separator: field/examples_multi_group_separator

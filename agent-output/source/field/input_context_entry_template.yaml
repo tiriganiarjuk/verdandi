@@ -1,0 +1,6 @@
+title: InputContextEntryTemplate
+type: atom/string_template
+description: >-
+  Template for rendering a single context entry. Contains
+  {{context_label}} and {{context_path}} placeholders. Label-first
+  presentation with path as the action target.

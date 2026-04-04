@@ -1,0 +1,6 @@
+title: InputSectionPreambleVisible
+type: atom/boolean
+default: true
+description: >-
+  Whether to render the input section preamble. Conditional on
+  context_required presence — renders when context documents exist.

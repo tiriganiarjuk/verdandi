@@ -1,7 +1,0 @@
-title: InstructionsExactVsJudgmentExplanationVisible
-type: enum/visibility_mode
-default: "auto"
-description: >-
-  Whether to render the exact/judgment mode explanation. 'auto' renders
-  when instruction modes are mixed (both exact and judgment steps
-  present). 'always' forces it on. 'never' suppresses it.

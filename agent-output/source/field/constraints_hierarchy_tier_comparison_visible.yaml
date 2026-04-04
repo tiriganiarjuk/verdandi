@@ -1,0 +1,7 @@
+title: ConstraintsHierarchyTierComparisonVisible
+type: atom/boolean
+default: true
+description: >-
+  Whether to render the hierarchy tier comparison prose.
+  Cross-references critical_rules — may be confusing if
+  that section is absent.

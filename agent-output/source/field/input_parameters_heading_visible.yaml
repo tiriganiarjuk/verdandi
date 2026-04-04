@@ -1,0 +1,7 @@
+title: InputParametersHeadingVisible
+type: enum/visibility_mode
+default: "auto"
+description: >-
+  Whether to render the parameters sub-block heading. 'auto'
+  renders when parameter count exceeds the auto_threshold.
+  'always' forces it on. 'never' suppresses it.

@@ -1,0 +1,7 @@
+title: ConstraintsRulesFormatThreshold
+type: atom/integer
+default: 6
+description: >-
+  Constraint count threshold for format switching when
+  enumeration_format is a pair. Below this count the first format
+  applies; at or above, the second format applies.

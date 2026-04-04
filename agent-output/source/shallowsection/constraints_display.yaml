@@ -5,8 +5,8 @@ description: >-
   count heading, must normalization, and polarity grouping threshold.
 fields:
   required:
-    enumeration_format: field/constraints_enumeration_format
-    enumeration_format_threshold: field/constraints_enumeration_format_threshold
+    rules_format: field/constraints_rules_format
+    rules_format_threshold: field/constraints_rules_format_threshold
     closing_compliance_reminder_visibility_threshold: field/constraints_closing_compliance_reminder_visibility_threshold
     constraint_count_heading_visibility_threshold: field/constraints_constraint_count_heading_visibility_threshold
     must_vs_must_not_normalization: field/constraints_must_vs_must_not_normalization

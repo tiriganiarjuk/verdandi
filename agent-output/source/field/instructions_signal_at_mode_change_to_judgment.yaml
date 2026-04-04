@@ -1,6 +1,0 @@
-title: InstructionsSignalAtModeChangeToJudgment
-type: atom/string_prose
-description: >-
-  Transition signal when switching from exact to judgment mode.
-  Rendered between consecutive steps when modes change. Visibility
-  controlled by instructions_signal_at_mode_change_visible.

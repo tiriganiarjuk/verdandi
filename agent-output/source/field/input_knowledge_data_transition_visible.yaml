@@ -1,0 +1,6 @@
+title: InputKnowledgeDataTransitionVisible
+type: atom/boolean
+default: true
+description: >-
+  Whether to render the cognitive transition sentence between
+  knowledge acquisition and payload processing.

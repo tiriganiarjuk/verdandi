@@ -9,4 +9,4 @@ fields:
     step_body_container: field/instructions_step_body_container
     scaffolding_tier_lightweight_activation_threshold: field/instructions_scaffolding_tier_lightweight_activation_threshold
     scaffolding_tier_standard_activation_threshold: field/instructions_scaffolding_tier_standard_activation_threshold
-    exact_vs_judgment_recap_format: field/instructions_exact_vs_judgment_recap_format
+    instruction_mode_recap_format: field/instructions_instruction_mode_recap_format

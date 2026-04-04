@@ -1,0 +1,4 @@
+title: InputHeading
+type: atom/string_text
+description: >-
+  Section heading for input. Plain text, no placeholders.

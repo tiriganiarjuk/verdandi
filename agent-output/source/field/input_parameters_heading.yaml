@@ -1,0 +1,5 @@
+title: InputParametersHeading
+type: atom/string_text
+description: >-
+  Sub-block heading for dispatch parameters. Introduces the
+  concrete handles the agent uses to locate its input data.

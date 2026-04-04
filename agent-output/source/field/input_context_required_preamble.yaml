@@ -1,0 +1,6 @@
+title: InputContextRequiredPreamble
+type: atom/string_prose
+description: >-
+  Preamble for the required context sub-block. Establishes that
+  context documents are prerequisite knowledge to absorb, not
+  reference material to consult during work.

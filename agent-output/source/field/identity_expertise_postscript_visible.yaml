@@ -1,8 +1,0 @@
-title: IdentityExpertisePostscriptVisible
-type: atom/boolean
-default: true
-description: >-
-  Whether to render the expertise limitation postscript after the
-  expertise list. When true, a reinforcement statement constraining
-  expertise to the listed areas appears after the list. When false,
-  the expertise list renders without a closing constraint.

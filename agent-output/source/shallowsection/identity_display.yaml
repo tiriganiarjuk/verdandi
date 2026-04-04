@@ -4,7 +4,7 @@ description: >-
   pairs for expertise and responsibility lists.
 fields:
   required:
-    expertise_format: field/identity_expertise_format
-    expertise_format_threshold: field/identity_expertise_format_threshold
-    responsibility_format: field/identity_responsibility_format
-    responsibility_format_threshold: field/identity_responsibility_format_threshold
+    role_expertise_format: field/identity_role_expertise_format
+    role_expertise_format_threshold: field/identity_role_expertise_format_threshold
+    role_responsibility_format: field/identity_role_responsibility_format
+    role_responsibility_format_threshold: field/identity_role_responsibility_format_threshold

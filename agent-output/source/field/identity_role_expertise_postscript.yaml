@@ -1,0 +1,7 @@
+title: IdentityRoleExpertisePostscript
+type: atom/string_prose
+description: >-
+  Reinforcement postscript after the expertise list. Constrains the
+  agent's authoritative judgment to the listed areas only. Visibility
+  controlled by identity_expertise_postscript_visible in structure.
+  Position: postscript after expertise data.

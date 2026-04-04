@@ -1,0 +1,5 @@
+title: InputContextAvailableFormat
+type: enum/list_format
+default: "bulleted"
+description: >-
+  Format for rendering the available context resource list.

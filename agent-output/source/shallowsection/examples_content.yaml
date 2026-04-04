@@ -7,4 +7,4 @@ fields:
     heading: field/examples_heading
     section_preamble: field/examples_section_preamble
     group_framing_sentence: field/examples_group_framing_sentence
-    entry_heading: field/examples_entry_heading
+    example_heading: field/examples_example_heading

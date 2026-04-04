@@ -7,24 +7,24 @@ fields:
   required:
     instructions_preamble_step_count: field/instructions_preamble_step_count
     instructions_preamble_no_add_skip_reorder: field/instructions_preamble_no_add_skip_reorder
-    instructions_preamble_exact_vs_judgment_preview: field/instructions_preamble_exact_vs_judgment_preview
+    instructions_preamble_instruction_mode_preview: field/instructions_preamble_instruction_mode_preview
     instructions_preamble_no_extra_operations: field/instructions_preamble_no_extra_operations
-    step_header_exact: field/instructions_step_header_exact
-    step_header_judgment: field/instructions_step_header_judgment
-    step_header_exact_n_only: field/instructions_step_header_exact_n_only
-    step_header_judgment_n_only: field/instructions_step_header_judgment_n_only
-    exact_vs_judgment_body_prefix_exact: field/instructions_exact_vs_judgment_body_prefix_exact
-    exact_vs_judgment_body_prefix_judgment: field/instructions_exact_vs_judgment_body_prefix_judgment
-    signal_at_mode_change_to_exact: field/instructions_signal_at_mode_change_to_exact
-    signal_at_mode_change_to_judgment: field/instructions_signal_at_mode_change_to_judgment
+    step_header_deterministic: field/instructions_step_header_deterministic
+    step_header_probabilistic: field/instructions_step_header_probabilistic
+    step_header_deterministic_n_only: field/instructions_step_header_deterministic_n_only
+    step_header_probabilistic_n_only: field/instructions_step_header_probabilistic_n_only
+    instruction_mode_body_prefix_deterministic: field/instructions_instruction_mode_body_prefix_deterministic
+    instruction_mode_body_prefix_probabilistic: field/instructions_instruction_mode_body_prefix_probabilistic
+    signal_at_mode_change_to_deterministic: field/instructions_signal_at_mode_change_to_deterministic
+    signal_at_mode_change_to_probabilistic: field/instructions_signal_at_mode_change_to_probabilistic
     step_done_when_suffix: field/instructions_step_done_when_suffix
     cross_step_dependency_phrases: field/instructions_cross_step_dependency_phrases
     halfway_point_reminder: field/instructions_halfway_point_reminder
     section_closer_guardrail: field/instructions_section_closer_guardrail
-    section_closer_exact_vs_judgment_recap: field/instructions_section_closer_exact_vs_judgment_recap
-    exact_vs_judgment_explanation_mixed: field/instructions_exact_vs_judgment_explanation_mixed
-    exact_vs_judgment_explanation_uniform_exact: field/instructions_exact_vs_judgment_explanation_uniform_exact
-    exact_vs_judgment_explanation_uniform_judgment: field/instructions_exact_vs_judgment_explanation_uniform_judgment
+    section_closer_instruction_mode_recap: field/instructions_section_closer_instruction_mode_recap
+    instruction_mode_explanation_mixed: field/instructions_instruction_mode_explanation_mixed
+    instruction_mode_explanation_uniform_deterministic: field/instructions_instruction_mode_explanation_uniform_deterministic
+    instruction_mode_explanation_uniform_probabilistic: field/instructions_instruction_mode_explanation_uniform_probabilistic
 containers:
   required:
     heading_variant: simplegroup/instructions_heading_variant

@@ -1,0 +1,7 @@
+title: InputParametersFormat
+type: union/format_or_pair
+default: ["bulleted", "prose"]
+description: >-
+  Format for rendering the parameter list. Prose for small lists
+  (1-2 parameters), bullets for larger lists. A pair switches at
+  the threshold.

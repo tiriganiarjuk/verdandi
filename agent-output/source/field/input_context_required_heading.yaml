@@ -1,0 +1,5 @@
+title: InputContextRequiredHeading
+type: atom/string_text
+description: >-
+  Sub-block heading for required context resources. Introduces
+  the reading list the agent must absorb before processing input.

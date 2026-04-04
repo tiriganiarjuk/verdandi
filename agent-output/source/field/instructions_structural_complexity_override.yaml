@@ -1,8 +1,0 @@
-title: InstructionsStructuralComplexityOverride
-type: enum/scaffolding_tier
-default: "auto"
-description: >-
-  Scaffolding tier for instruction rendering. 'auto' selects from
-  step count using activation thresholds. 'lightweight' uses minimal
-  scaffolding. 'standard' adds preamble, markers, and closers.
-  'heavy' adds progress reminders, dependencies, and recaps.

@@ -1,0 +1,6 @@
+title: InputContextRequiredFormat
+type: enum/list_format
+default: "numbered"
+description: >-
+  Format for rendering the required context reading list.
+  Numbered implies reading order. Bulleted implies unordered set.

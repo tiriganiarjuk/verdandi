@@ -1,5 +1,0 @@
-title: IdentityExpertiseLabel
-type: atom/string_text
-description: >-
-  Label introducing the expertise list. Plain text (no placeholders).
-  Position: label immediately before the expertise data list.

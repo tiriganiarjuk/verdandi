@@ -4,4 +4,4 @@ description: >-
   format.
 fields:
   required:
-    pattern_list_format: field/anti_patterns_pattern_list_format
+    patterns_format: field/anti_patterns_patterns_format

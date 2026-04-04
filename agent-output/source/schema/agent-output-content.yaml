@@ -9,6 +9,7 @@ shallowsections:
   required:
     identity: shallowsection/identity_content
     security_boundary: shallowsection/security_boundary_content
+    input: shallowsection/input_content
     critical_rules: shallowsection/critical_rules_content
     instructions: shallowsection/instructions_content
     examples: shallowsection/examples_content

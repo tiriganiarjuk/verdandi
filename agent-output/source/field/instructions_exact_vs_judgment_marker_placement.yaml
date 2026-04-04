@@ -1,8 +1,0 @@
-title: InstructionsExactVsJudgmentMarkerPlacement
-type: enum/marker_placement
-default: "header_fused"
-description: >-
-  Where exact/judgment mode markers appear in instruction steps.
-  'header_fused' embeds in the step header. 'body_prefix' places as
-  the first line of step body. 'visual_formatting' uses visual cues
-  to distinguish modes without explicit text.

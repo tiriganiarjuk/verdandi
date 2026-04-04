@@ -1,0 +1,7 @@
+title: InputParametersHeadingAutoThreshold
+type: atom/integer
+default: 2
+description: >-
+  Parameter count threshold for the auto mode of
+  parameters_heading_visible. When parameter count exceeds this
+  threshold and visibility is 'auto', the heading renders.

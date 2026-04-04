@@ -6,17 +6,17 @@ description: >-
 fields:
   required:
     heading_variant: field/instructions_heading_variant
-    exact_vs_judgment_explanation_visible: field/instructions_exact_vs_judgment_explanation_visible
-    exact_vs_judgment_marker_placement: field/instructions_exact_vs_judgment_marker_placement
+    instruction_mode_explanation_visible: field/instructions_instruction_mode_explanation_visible
+    instruction_mode_marker_placement: field/instructions_instruction_mode_marker_placement
     signal_at_mode_change_visible: field/instructions_signal_at_mode_change_visible
     instructions_preamble_step_count_visible: field/instructions_preamble_step_count_visible
     instructions_preamble_no_add_skip_reorder_visible: field/instructions_preamble_no_add_skip_reorder_visible
-    instructions_preamble_exact_vs_judgment_preview_visible: field/instructions_preamble_exact_vs_judgment_preview_visible
+    instructions_preamble_instruction_mode_preview_visible: field/instructions_preamble_instruction_mode_preview_visible
     instructions_preamble_no_extra_operations_visible: field/instructions_preamble_no_extra_operations_visible
     step_index_tracking: field/instructions_step_index_tracking
     step_done_when_suffix_visible: field/instructions_step_done_when_suffix_visible
     section_closer_guardrail_visible: field/instructions_section_closer_guardrail_visible
-    section_closer_exact_vs_judgment_recap_visible: field/instructions_section_closer_exact_vs_judgment_recap_visible
+    section_closer_instruction_mode_recap_visible: field/instructions_section_closer_instruction_mode_recap_visible
     cross_step_dependency_phrases_visible: field/instructions_cross_step_dependency_phrases_visible
     halfway_point_reminder_visible: field/instructions_halfway_point_reminder_visible
-    structural_complexity_override: field/instructions_structural_complexity_override
+    scaffolding_tier_override: field/instructions_scaffolding_tier_override

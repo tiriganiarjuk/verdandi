@@ -10,6 +10,7 @@ shallowsections:
     section_order: shallowsection/section_order_structure
     identity: shallowsection/identity_structure
     security_boundary: shallowsection/security_boundary_structure
+    input: shallowsection/input_structure
     critical_rules: shallowsection/critical_rules_structure
     instructions: shallowsection/instructions_structure
     examples: shallowsection/examples_structure

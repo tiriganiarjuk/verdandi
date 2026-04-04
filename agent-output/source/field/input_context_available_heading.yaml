@@ -1,0 +1,4 @@
+title: InputContextAvailableHeading
+type: atom/string_text
+description: >-
+  Sub-block heading for available (optional) context resources.

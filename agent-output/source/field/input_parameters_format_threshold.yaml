@@ -1,0 +1,7 @@
+title: InputParametersFormatThreshold
+type: atom/integer
+default: 2
+description: >-
+  Parameter count threshold for format switching when
+  parameters_format is a pair. At or below this count the second
+  format applies; above it the first format applies.
