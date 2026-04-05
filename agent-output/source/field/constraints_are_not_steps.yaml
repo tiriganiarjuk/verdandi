@@ -1,6 +1,0 @@
-title: ConstraintsAreNotSteps
-type: atom/string_prose
-description: >-
-  Prose clarifying that constraints are not sequential steps.
-  Prevents the model from treating a numbered or bulleted constraint
-  list as a procedure to execute in order.

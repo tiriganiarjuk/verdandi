@@ -1,0 +1,6 @@
+title: SuccessCriteriaSuccessFailureIndependenceStatementPostscript
+type: atom/string_prose
+description: >-
+  Statement clarifying that success criteria define quality while
+  failure criteria define breakage, and that these are independent
+  evaluations not inverses of each other.

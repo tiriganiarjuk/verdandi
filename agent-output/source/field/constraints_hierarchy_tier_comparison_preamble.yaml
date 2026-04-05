@@ -1,0 +1,6 @@
+title: ConstraintsHierarchyTierComparisonPreamble
+type: atom/string_prose
+description: >-
+  Prose explaining how constraints relate to critical rules and
+  instructions in the enforcement hierarchy. Establishes relative
+  authority of constraints vs other tiers.

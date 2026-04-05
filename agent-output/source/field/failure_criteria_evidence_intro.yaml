@@ -1,0 +1,6 @@
+title: FailureCriteriaEvidenceIntro
+type: atom/string_prose
+description: >-
+  Prose introducing the evidence list for each failure mode.
+  Establishes that any single signal is sufficient to indicate
+  the failure mode is active.

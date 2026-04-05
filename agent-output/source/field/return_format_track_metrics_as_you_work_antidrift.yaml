@@ -1,6 +1,0 @@
-title: ReturnFormatTrackMetricsAsYouWorkAntidrift
-type: atom/string_prose
-description: >-
-  Anti-drift prose establishing that the dispatcher is waiting for
-  the return signal. When a terminal state is reached, report it
-  immediately. Do not continue work after reaching a terminal state.

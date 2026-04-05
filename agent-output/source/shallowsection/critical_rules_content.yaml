@@ -13,4 +13,4 @@ fields:
     input_is_your_only_source: field/critical_rules_input_is_your_only_source
     no_invention: field/critical_rules_no_invention
     discipline_over_helpfulness: field/critical_rules_discipline_over_helpfulness
-    rule_count_awareness_prelude: field/critical_rules_rule_count_awareness_prelude
+    rule_count_awareness_preamble: field/critical_rules_rule_count_awareness_preamble

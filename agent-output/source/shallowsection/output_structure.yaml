@@ -5,4 +5,4 @@ description: >-
 fields:
   required:
     schema_embed: field/output_schema_embed
-    directory_location_variant: field/output_directory_location_variant
+    directory_location_b_variant: field/output_directory_location_b_variant

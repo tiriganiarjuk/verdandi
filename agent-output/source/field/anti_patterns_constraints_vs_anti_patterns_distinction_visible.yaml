@@ -1,7 +1,0 @@
-title: AntiPatternsConstraintsVsAntiPatternsDistinctionVisible
-type: atom/boolean
-default: true
-description: >-
-  Whether to render text distinguishing anti-patterns from
-  constraints. Clarifies that anti-patterns are behaviors to avoid
-  while constraints are rules to follow.

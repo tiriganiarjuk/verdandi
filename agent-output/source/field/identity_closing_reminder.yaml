@@ -1,7 +1,0 @@
-title: IdentityClosingReminder
-type: atom/string_template
-description: >-
-  Optional closing sentence restating the agent's role identity.
-  Template with {{role_identity}} placeholder. Visibility controlled
-  by identity_closing_reminder_visible in structure. Position: last
-  element of the section.

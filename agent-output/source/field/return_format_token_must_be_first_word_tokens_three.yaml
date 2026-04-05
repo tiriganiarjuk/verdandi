@@ -1,6 +1,0 @@
-title: ReturnFormatTokenMustBeFirstWordTokensThree
-type: atom/string_prose
-description: >-
-  Prose listing the three terminal states: SUCCESS, FAILURE, or
-  ABORT. Used when the agent definition includes ABORT as a valid
-  return token.

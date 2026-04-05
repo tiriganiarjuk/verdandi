@@ -1,7 +1,0 @@
-title: FailureCriteriaAbortStancePreambleVariant
-description: >-
-  Variant alternatives for the abort stance preamble. Keys match
-  enum/abort_stance_variant_key values. Structure selects one.
-required:
-  obligation: field/failure_criteria_abort_stance_preamble_variant_obligation
-  permission: field/failure_criteria_abort_stance_preamble_variant_permission

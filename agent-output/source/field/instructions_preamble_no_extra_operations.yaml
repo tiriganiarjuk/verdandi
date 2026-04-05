@@ -1,5 +1,0 @@
-title: InstructionsPreambleNoExtraOperations
-type: atom/string_prose
-description: >-
-  Prohibition against supplementing steps with general knowledge or
-  adding unspecified operations. Each step is a complete specification.

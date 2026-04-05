@@ -7,7 +7,7 @@ fields:
   required:
     heading: field/writing_output_heading
     transition_preamble: field/writing_output_transition_preamble
-    tool_mandate: field/writing_output_tool_mandate
+    tool_mandate_preamble: field/writing_output_tool_mandate_preamble
     tool_identity_label: field/writing_output_tool_identity_label
     invocation_preamble: field/writing_output_invocation_preamble
-    heredoc_explanation: field/writing_output_heredoc_explanation
+    heredoc_explanation_postscript: field/writing_output_heredoc_explanation_postscript

@@ -1,7 +1,0 @@
-title: OutputDirectoryLocationVariant
-type: enum/directory_location_variant_key
-default: "standard"
-description: >-
-  Selects how the output directory location is declared. 'standard'
-  states the directory path. 'with_boundary' adds an explicit
-  boundary constraint that all files must be within the directory.

@@ -1,9 +1,0 @@
-title: SuccessCriteriaDefinitionToEvidenceTransitionVariant
-description: >-
-  Variant alternatives for the transition between definition and
-  evidence. Keys match enum/evidence_transition_variant_key values.
-  Structure selects one.
-required:
-  goal_then_criteria: field/success_criteria_definition_to_evidence_transition_variant_goal_then_criteria
-  proof: field/success_criteria_definition_to_evidence_transition_variant_proof
-  dual_presentation: field/success_criteria_definition_to_evidence_transition_variant_dual_presentation

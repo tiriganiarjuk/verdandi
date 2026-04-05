@@ -6,17 +6,17 @@ description: >-
   variant sub-table.
 fields:
   required:
-    instructions_preamble_step_count: field/instructions_preamble_step_count
-    instructions_preamble_no_add_skip_reorder: field/instructions_preamble_no_add_skip_reorder
-    instructions_preamble_instruction_mode_preview: field/instructions_preamble_instruction_mode_preview
-    instructions_preamble_no_extra_operations: field/instructions_preamble_no_extra_operations
-    step_done_when_suffix: field/instructions_step_done_when_suffix
-    cross_step_dependency_phrases: field/instructions_cross_step_dependency_phrases
-    halfway_point_reminder: field/instructions_halfway_point_reminder
-    section_closer_guardrail: field/instructions_section_closer_guardrail
-    section_closer_instruction_mode_recap: field/instructions_section_closer_instruction_mode_recap
+    step_count_preamble: field/instructions_step_count_preamble
+    no_add_skip_reorder_preamble: field/instructions_no_add_skip_reorder_preamble
+    instruction_mode_preview_preamble: field/instructions_instruction_mode_preview_preamble
+    no_extra_operations_preamble: field/instructions_no_extra_operations_preamble
+    step_done_when_postscript: field/instructions_step_done_when_postscript
+    cross_step_dependency_label: field/instructions_cross_step_dependency_label
+    reminder_midpoint: field/instructions_reminder_midpoint
+    guardrail_closing: field/instructions_guardrail_closing
+    instruction_mode_recap_closing: field/instructions_instruction_mode_recap_closing
 containers:
   required:
-    heading_variant: simplegroup/instructions_heading_variant
+    heading_h_variant: simplegroup/instructions_heading_h_variant
     instruction_mode: group/instructions_instruction_mode_content
-    instruction_mode_explanation_variant: simplegroup/instructions_instruction_mode_explanation_variant
+    instruction_mode_explanation_p_variant: simplegroup/instructions_instruction_mode_explanation_p_variant

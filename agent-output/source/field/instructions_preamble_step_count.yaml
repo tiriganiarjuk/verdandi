@@ -1,5 +1,0 @@
-title: InstructionsPreambleStepCount
-type: atom/string_template
-description: >-
-  Step count statement in the preamble. Template with {{step_count}}
-  placeholder. Tells the agent how many steps to expect.

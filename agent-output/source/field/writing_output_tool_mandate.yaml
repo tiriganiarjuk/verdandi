@@ -1,6 +1,0 @@
-title: WritingOutputToolMandate
-type: atom/string_prose
-description: >-
-  Prose establishing that output flows through one channel only.
-  The agent does not write files directly or choose alternative
-  tools. Enforces single-tool exclusivity.

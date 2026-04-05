@@ -1,0 +1,5 @@
+title: WritingOutputHeredocExplanationPostscript
+type: atom/string_prose
+description: >-
+  Explanation of heredoc syntax for passing multi-line JSON to the
+  output tool. Clarifies that EOF markers delimit the content block.

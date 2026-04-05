@@ -1,5 +1,0 @@
-title: SuccessCriteriaEvidenceFramingVariantQualitySignals
-type: atom/string_prose
-description: >-
-  Evidence introduction framing evidence items as truth conditions.
-  The model knows it has succeeded when all conditions are true.

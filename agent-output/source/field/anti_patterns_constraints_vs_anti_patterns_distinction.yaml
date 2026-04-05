@@ -1,6 +1,0 @@
-title: AntiPatternsConstraintsVsAntiPatternsDistinction
-type: atom/string_prose
-description: >-
-  Prose explaining the distinction between constraints and
-  anti-patterns. Constraints are mandatory rules; anti-patterns
-  are behavioral pitfalls to recognize and avoid.

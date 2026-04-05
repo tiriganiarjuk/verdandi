@@ -1,0 +1,6 @@
+title: ConstraintsHierarchyThreeTierExplanationPreambleVisible
+type: atom/boolean
+default: true
+description: >-
+  Whether to render the three-tier hierarchy explanation prose.
+  References the critical_rules/constraints/anti_patterns hierarchy.

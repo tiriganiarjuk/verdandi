@@ -1,0 +1,8 @@
+title: InstructionsHeadingHVariant
+description: >-
+  Variant alternatives for the instructions section heading. Keys
+  match enum/heading_variant_key values. Structure selects one.
+required:
+  default: field/instructions_heading_h_variant_default
+  procedure: field/instructions_heading_h_variant_procedure
+  steps_with_count: field/instructions_heading_h_variant_steps_with_count

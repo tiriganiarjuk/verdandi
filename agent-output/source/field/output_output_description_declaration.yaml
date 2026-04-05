@@ -1,0 +1,6 @@
+title: OutputOutputDescriptionDeclaration
+type: atom/string_template
+description: >-
+  Template describing what the agent produces. Contains
+  {{DESCRIPTION}} placeholder replaced with the authored output
+  description from the agent definition.

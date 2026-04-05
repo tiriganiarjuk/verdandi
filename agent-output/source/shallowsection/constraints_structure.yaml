@@ -8,25 +8,25 @@ fields:
     section_visible: field/constraints_section_visible
     max_entries_rendered: field/constraints_max_entries_rendered
     section_preamble_visible: field/constraints_section_preamble_visible
-    constraints_are_not_steps_visible: field/constraints_are_not_steps_visible
+    constraints_are_not_steps_preamble_visible: field/constraints_are_not_steps_preamble_visible
     no_inferred_constraints_visible: field/constraints_no_inferred_constraints_visible
     closing_compliance_reminder_visible: field/constraints_closing_compliance_reminder_visible
     constraint_count_heading_visible: field/constraints_constraint_count_heading_visible
-    hierarchy_tier_comparison_visible: field/constraints_hierarchy_tier_comparison_visible
-    hierarchy_three_tier_explanation_visible: field/constraints_hierarchy_three_tier_explanation_visible
+    hierarchy_tier_comparison_preamble_visible: field/constraints_hierarchy_tier_comparison_preamble_visible
+    hierarchy_three_tier_explanation_preamble_visible: field/constraints_hierarchy_three_tier_explanation_preamble_visible
   conditional:
-    section_preamble_variant:
-      ref: field/constraints_section_preamble_variant
+    section_preamble_p_variant:
+      ref: field/constraints_section_preamble_p_variant
       only_when:
         field: section_preamble_visible
         equals: true
-    closing_compliance_reminder_variant:
-      ref: field/constraints_closing_compliance_reminder_variant
+    closing_compliance_reminder_c_variant:
+      ref: field/constraints_closing_compliance_reminder_c_variant
       only_when:
         field: closing_compliance_reminder_visible
         equals: true
-    no_inferred_constraints_variant:
-      ref: field/constraints_no_inferred_constraints_variant
+    no_inferred_constraints_p_variant:
+      ref: field/constraints_no_inferred_constraints_p_variant
       only_when:
         field: no_inferred_constraints_visible
         equals: true

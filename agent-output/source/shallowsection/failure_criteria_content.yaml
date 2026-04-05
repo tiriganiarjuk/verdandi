@@ -6,10 +6,11 @@ description: >-
 fields:
   required:
     heading: field/failure_criteria_heading
-    any_one_triggers_abort: field/failure_criteria_any_one_triggers_abort
-    evidence_preamble: field/failure_criteria_evidence_preamble
+    any_one_triggers_abort_preamble: field/failure_criteria_any_one_triggers_abort_preamble
+    evidence_intro: field/failure_criteria_evidence_intro
     cite_definition_and_evidence_postscript: field/failure_criteria_cite_definition_and_evidence_postscript
-    check_before_and_during: field/failure_criteria_check_before_and_during
+    check_before_and_during_postscript: field/failure_criteria_check_before_and_during_postscript
 containers:
   required:
-    abort_stance_variant: group/failure_criteria_abort_stance_variant_content
+    abort_stance_preamble_p_variant: simplegroup/failure_criteria_abort_stance_preamble_p_variant
+    abort_stance_definition_label_b_variant: simplegroup/failure_criteria_abort_stance_definition_label_b_variant

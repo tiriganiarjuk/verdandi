@@ -1,0 +1,7 @@
+title: CriticalRulesRuleCountAwarenessPreambleAutoThreshold
+type: atom/integer
+default: 5
+description: >-
+  Rule count threshold for the auto mode of
+  rule_count_awareness_preamble_visible. When rule count exceeds this
+  threshold and visibility is 'auto', the preamble renders.

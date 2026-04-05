@@ -1,8 +1,0 @@
-title: SuccessCriteriaEvidenceFramingVariant
-type: enum/evidence_framing_variant_key
-default: "properties"
-description: >-
-  Selects how the evidence list introduction renders.
-  'properties' frames evidence as output properties.
-  'verification_checklist' frames as items to verify.
-  'quality_signals' frames as observable truth conditions.

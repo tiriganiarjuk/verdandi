@@ -7,8 +7,8 @@ fields:
   required:
     section_preamble_visible: field/input_section_preamble_visible
     context_required_preamble_visible: field/input_context_required_preamble_visible
-    knowledge_data_transition_visible: field/input_knowledge_data_transition_visible
+    parameters_transition_visible: field/input_parameters_transition_visible
     input_completeness_postscript_visible: field/input_input_completeness_postscript_visible
-    schema_intro_visible: field/input_schema_intro_visible
+    schema_label_visible: field/input_schema_label_visible
     parameters_heading_visible: field/input_parameters_heading_visible
     parameters_heading_auto_threshold: field/input_parameters_heading_auto_threshold

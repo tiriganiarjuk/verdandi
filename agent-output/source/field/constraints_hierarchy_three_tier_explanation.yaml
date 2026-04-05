@@ -1,6 +1,0 @@
-title: ConstraintsHierarchyThreeTierExplanation
-type: atom/string_prose
-description: >-
-  Prose explaining the three-tier enforcement hierarchy (critical
-  rules, constraints, instructions) and how each tier relates to
-  the others. Provides context for constraint authority level.

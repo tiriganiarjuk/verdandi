@@ -1,5 +1,0 @@
-title: FramingVariantHeadingCage
-type: atom/string_text
-description: >-
-  Section heading when framing_variant is "cage". Frames the
-  workspace as a confinement boundary.

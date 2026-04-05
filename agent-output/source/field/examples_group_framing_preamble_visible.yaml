@@ -1,0 +1,7 @@
+title: ExamplesGroupFramingPreambleVisible
+type: atom/boolean
+default: false
+description: >-
+  Whether to render a framing sentence between the group heading
+  and its first entry. Off by default — group headings are usually
+  self-explanatory.

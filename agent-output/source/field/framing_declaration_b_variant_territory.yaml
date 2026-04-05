@@ -1,0 +1,6 @@
+title: FramingDeclarationBVariantTerritory
+type: atom/string_template
+description: >-
+  Workspace path declaration when framing_variant is "territory".
+  Template with {{WORKSPACE_PATH}} placeholder. Frames the path
+  as the agent's domain root.

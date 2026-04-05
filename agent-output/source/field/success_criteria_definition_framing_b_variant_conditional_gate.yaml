@@ -1,0 +1,6 @@
+title: SuccessCriteriaDefinitionFramingBVariantConditionalGate
+type: atom/string_template
+description: >-
+  Definition framing as an if-and-only-if condition. Contains
+  {{DEFINITION}} placeholder. Frames success as a gate that must
+  be passed for task completion.

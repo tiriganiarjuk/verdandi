@@ -1,0 +1,6 @@
+title: FramingDeclarationBVariantEnvironmental
+type: atom/string_template
+description: >-
+  Workspace path declaration when framing_variant is "environmental".
+  Template with {{WORKSPACE_PATH}} placeholder. Frames the path
+  as the operating environment.

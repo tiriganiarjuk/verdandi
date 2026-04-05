@@ -1,0 +1,7 @@
+title: WritingOutputHeredocExplanationPostscriptVisible
+type: atom/boolean
+default: false
+description: >-
+  Whether to render the heredoc syntax explanation. Off by default.
+  Only needed when agents mangle heredoc delimiters in their tool
+  invocations.

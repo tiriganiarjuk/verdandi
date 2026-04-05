@@ -1,0 +1,7 @@
+title: ConstraintsAreNotStepsPreambleVisible
+type: atom/boolean
+default: true
+description: >-
+  Whether to render the clarification that constraints are not
+  sequential steps. Prevents models from treating a constraint list
+  as a procedure to follow in order.

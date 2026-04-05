@@ -1,7 +1,0 @@
-title: FailureCriteriaCheckBeforeAndDuringVisible
-type: atom/boolean
-default: false
-description: >-
-  Whether to render the generic temporal instruction about checking
-  failure conditions before starting and monitoring throughout. Off
-  by default.

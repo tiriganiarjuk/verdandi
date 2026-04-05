@@ -1,0 +1,5 @@
+title: FailureCriteriaAbortStanceDefinitionLabelBVariantObligation
+type: atom/string_text
+description: >-
+  Definition label for obligation-framed failure modes. Uses halt
+  condition language consistent with the obligation preamble.

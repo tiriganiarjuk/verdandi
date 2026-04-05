@@ -1,6 +1,0 @@
-title: InstructionsHalfwayPointReminder
-type: atom/string_template
-description: >-
-  Progress reminder at the midpoint. Template with {{midpoint}},
-  {{midpoint_next}}, and {{step_total}} placeholders. Visibility
-  controlled by instructions_halfway_point_reminder_visible.

@@ -1,6 +1,0 @@
-title: SuccessCriteriaVerificationGuidanceSuffix
-type: atom/string_prose
-description: >-
-  Suffix text reminding the model that some criteria are mechanically
-  verifiable while others require judgment. Appended after evidence
-  items when visibility is enabled.

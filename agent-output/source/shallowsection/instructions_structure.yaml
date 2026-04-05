@@ -5,18 +5,18 @@ description: >-
   and scaffolding tier.
 fields:
   required:
-    heading_variant: field/instructions_heading_variant
+    heading_h_variant: field/instructions_heading_h_variant
     instruction_mode_explanation_visible: field/instructions_instruction_mode_explanation_visible
     instruction_mode_marker_placement: field/instructions_instruction_mode_marker_placement
     signal_at_mode_change_visible: field/instructions_signal_at_mode_change_visible
-    instructions_preamble_step_count_visible: field/instructions_preamble_step_count_visible
-    instructions_preamble_no_add_skip_reorder_visible: field/instructions_preamble_no_add_skip_reorder_visible
-    instructions_preamble_instruction_mode_preview_visible: field/instructions_preamble_instruction_mode_preview_visible
-    instructions_preamble_no_extra_operations_visible: field/instructions_preamble_no_extra_operations_visible
+    step_count_preamble_visible: field/instructions_step_count_preamble_visible
+    no_add_skip_reorder_preamble_visible: field/instructions_no_add_skip_reorder_preamble_visible
+    instruction_mode_preview_preamble_visible: field/instructions_instruction_mode_preview_preamble_visible
+    no_extra_operations_preamble_visible: field/instructions_no_extra_operations_preamble_visible
     step_index_tracking: field/instructions_step_index_tracking
-    step_done_when_suffix_visible: field/instructions_step_done_when_suffix_visible
-    section_closer_guardrail_visible: field/instructions_section_closer_guardrail_visible
-    section_closer_instruction_mode_recap_visible: field/instructions_section_closer_instruction_mode_recap_visible
-    cross_step_dependency_phrases_visible: field/instructions_cross_step_dependency_phrases_visible
-    halfway_point_reminder_visible: field/instructions_halfway_point_reminder_visible
+    step_done_when_postscript_visible: field/instructions_step_done_when_postscript_visible
+    guardrail_closing_visible: field/instructions_guardrail_closing_visible
+    instruction_mode_recap_closing_visible: field/instructions_instruction_mode_recap_closing_visible
+    cross_step_dependency_label_visible: field/instructions_cross_step_dependency_label_visible
+    reminder_midpoint_visible: field/instructions_reminder_midpoint_visible
     scaffolding_tier_override: field/instructions_scaffolding_tier_override

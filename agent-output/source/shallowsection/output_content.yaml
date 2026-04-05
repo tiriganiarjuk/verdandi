@@ -6,10 +6,10 @@ description: >-
 fields:
   required:
     heading: field/output_heading
-    output_description: field/output_output_description
+    output_description_declaration: field/output_output_description_declaration
     format_declaration: field/output_format_declaration
     schema_embedded_preamble: field/output_schema_embedded_preamble
-    schema_reference: field/output_schema_reference
+    schema_reference_label: field/output_schema_reference_label
 containers:
   required:
-    directory_location_variant: simplegroup/output_directory_location_variant
+    directory_location_b_variant: simplegroup/output_directory_location_b_variant

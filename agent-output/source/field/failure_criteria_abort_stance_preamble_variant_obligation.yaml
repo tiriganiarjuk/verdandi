@@ -1,6 +1,0 @@
-title: FailureCriteriaAbortStancePreambleVariantObligation
-type: atom/string_prose
-description: >-
-  Abort stance preamble using obligation framing. Frames stopping
-  as a duty — the model MUST stop when failure is detected.
-  Producing output after detection is worse than no output.

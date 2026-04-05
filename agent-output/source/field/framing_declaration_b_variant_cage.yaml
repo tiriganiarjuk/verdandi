@@ -1,0 +1,6 @@
+title: FramingDeclarationBVariantCage
+type: atom/string_template
+description: >-
+  Workspace path declaration when framing_variant is "cage".
+  Template with {{WORKSPACE_PATH}} placeholder. Frames the path
+  as a hard confinement boundary.

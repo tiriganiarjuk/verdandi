@@ -1,6 +1,0 @@
-title: SuccessCriteriaEvidenceFramingVariantVerificationChecklist
-type: atom/string_prose
-description: >-
-  Evidence introduction framing evidence items as a verification
-  checklist. Action-oriented, instructs the model to verify each
-  item before declaring completion.

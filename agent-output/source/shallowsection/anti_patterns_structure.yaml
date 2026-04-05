@@ -7,4 +7,4 @@ fields:
     section_visible: field/anti_patterns_section_visible
     max_entries_rendered: field/anti_patterns_max_entries_rendered
     section_preamble_visible: field/anti_patterns_section_preamble_visible
-    constraints_vs_anti_patterns_distinction_visible: field/anti_patterns_constraints_vs_anti_patterns_distinction_visible
+    constraints_vs_anti_patterns_distinction_preamble_visible: field/anti_patterns_constraints_vs_anti_patterns_distinction_preamble_visible

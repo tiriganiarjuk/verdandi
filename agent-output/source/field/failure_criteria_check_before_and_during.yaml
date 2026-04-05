@@ -1,5 +1,0 @@
-title: FailureCriteriaCheckBeforeAndDuring
-type: atom/string_prose
-description: >-
-  Generic temporal instruction about checking failure conditions
-  before starting work and monitoring throughout execution.

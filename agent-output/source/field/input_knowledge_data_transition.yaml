@@ -1,6 +1,0 @@
-title: InputKnowledgeDataTransition
-type: atom/string_prose
-description: >-
-  Transition sentence between the knowledge-acquisition sub-block
-  (context_required) and the payload sub-block (parameters). Marks
-  the cognitive shift from learning mode to operating mode.

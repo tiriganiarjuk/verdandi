@@ -1,8 +1,0 @@
-title: ConstraintsSectionPreambleVariant
-description: >-
-  Variant alternatives for the constraints section preamble. Keys
-  match enum/section_preamble_variant_key values. Structure selects one.
-required:
-  standalone: field/constraints_section_preamble_variant_standalone
-  references_instructions: field/constraints_section_preamble_variant_references_instructions
-  references_critical_rules: field/constraints_section_preamble_variant_references_critical_rules

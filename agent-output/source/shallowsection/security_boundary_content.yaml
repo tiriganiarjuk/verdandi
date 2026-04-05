@@ -5,10 +5,12 @@ description: >-
   sub-tables.
 fields:
   required:
-    filesystem_map_intro: field/security_boundary_filesystem_map_intro
+    filesystem_map_label: field/security_boundary_filesystem_map_label
     section_closing: field/security_boundary_section_closing
     compound_entry_template: field/security_boundary_compound_entry_template
-    grouped_tool_header: field/security_boundary_grouped_tool_header
+    grouped_tool_heading: field/security_boundary_grouped_tool_heading
 containers:
   required:
-    framing_variant: group/framing_variant_content
+    framing_heading_h_variant: simplegroup/framing_heading_h_variant
+    framing_declaration_b_variant: simplegroup/framing_declaration_b_variant
+    framing_preamble_p_variant: simplegroup/framing_preamble_p_variant

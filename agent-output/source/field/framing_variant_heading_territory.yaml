@@ -1,5 +1,0 @@
-title: FramingVariantHeadingTerritory
-type: atom/string_text
-description: >-
-  Section heading when framing_variant is "territory". Frames the
-  workspace as the agent's domain.

@@ -5,7 +5,7 @@ description: >-
 fields:
   required:
     fuse_workspace_path_and_resolver: field/security_boundary_fuse_workspace_path_and_resolver
-    filesystem_map_intro_visible: field/security_boundary_filesystem_map_intro_visible
+    filesystem_map_label_visible: field/security_boundary_filesystem_map_label_visible
     section_preamble_visible: field/security_boundary_section_preamble_visible
     section_closing_visible: field/security_boundary_section_closing_visible
     tool_names_visible: field/security_boundary_tool_names_visible

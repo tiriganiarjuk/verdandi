@@ -1,6 +1,0 @@
-title: SuccessCriteriaMultiCriteriaTransition
-type: atom/title_string
-description: >-
-  Transitional text between multiple success criteria blocks.
-  Used when criteria count exceeds one to introduce subsequent
-  criteria after the first.

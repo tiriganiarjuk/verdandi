@@ -1,6 +1,0 @@
-title: FailureCriteriaAnyOneTriggersAbort
-type: atom/string_prose
-description: >-
-  Prose establishing that any single failure mode is sufficient to
-  trigger abort. Prevents the model from waiting for multiple
-  failure signals before stopping.

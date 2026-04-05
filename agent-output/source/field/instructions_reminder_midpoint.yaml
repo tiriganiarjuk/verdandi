@@ -1,0 +1,6 @@
+title: InstructionsReminderMidpoint
+type: atom/string_template
+description: >-
+  Progress reminder at the midpoint. Template with {{midpoint}},
+  {{midpoint_next}}, and {{step_total}} placeholders. Visibility
+  controlled by instructions_reminder_midpoint_visible.
