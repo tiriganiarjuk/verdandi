@@ -7,10 +7,8 @@ description: >
 fields:
   required:
     title: field/agent_title
-    description: field/agent_description
     role_identity: field/role_identity
     role_responsibility: field/role_responsibility
-    capability_tier: field/agent_capability_tier
   optional:
     role_description: field/role_description
 containers:

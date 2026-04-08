@@ -1,0 +1,6 @@
+title: SecurityBoundaryGroupedToolHeadingTemplate
+type: atom/string_template
+description: >-
+  Header line when all display entries share the same tool set.
+  Contains {{TOOLS}} placeholder. Rendered once above the entry list
+  when uniform_toolset_format is "grouped".

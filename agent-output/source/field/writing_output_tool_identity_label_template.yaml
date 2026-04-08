@@ -1,0 +1,6 @@
+title: WritingOutputToolIdentityLabelTemplate
+type: atom/string_template
+description: >-
+  Template identifying the output tool. Contains {{TOOL_NAME}}
+  placeholder replaced with the configured tool name. Rendered
+  as a label the agent uses to identify its output channel.

@@ -1,0 +1,6 @@
+title: FailureCriteriaAbortStancePreambleVariantPermission
+type: atom/string_prose
+description: >-
+  Abort stance preamble using permission framing. Frames stopping
+  as the correct action — not every task can be completed, and
+  forcing output past failure conditions violates quality standards.

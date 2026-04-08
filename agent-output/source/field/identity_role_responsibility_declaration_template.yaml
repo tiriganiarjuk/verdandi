@@ -1,0 +1,6 @@
+title: IdentityRoleResponsibilityDeclarationTemplate
+type: atom/string_template
+description: >-
+  Label introducing the agent's responsibility scope. Template with
+  {{role_responsibility}} placeholder. Position: label immediately
+  before the responsibility data.

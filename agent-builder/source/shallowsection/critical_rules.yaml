@@ -6,6 +6,7 @@ description: >
   are fully resolved and will not change again.
 fields:
   required:
+    workspace_path: field/workspace_path__x_abs
     has_output_tool: field/has_output_tool
   optional:
     tool_name: field/tool_name

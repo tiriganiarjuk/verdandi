@@ -1,0 +1,7 @@
+title: ConstraintsComplianceReminderClosingSelector
+type: enum/closing_compliance_variant_key
+default: "evaluation_warning"
+description: >-
+  Selects the tone of the closing compliance reminder.
+  'evaluation_warning' frames compliance as tied to evaluation.
+  'simultaneity' emphasizes that all constraints apply simultaneously.

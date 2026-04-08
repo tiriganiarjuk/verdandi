@@ -1,0 +1,6 @@
+title: CriticalRulesFailFastBodyVisible
+type: atom/boolean
+default: true
+description: >-
+  Whether to render the fail-fast rule. Instructs the agent to return
+  FAILURE immediately on error rather than attempting recovery.

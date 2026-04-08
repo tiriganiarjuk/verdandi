@@ -1,6 +1,0 @@
-title: InstructionsStepDoneWhenPostscript
-type: atom/string_template
-description: >-
-  Completion condition suffix appended to step body. Template with
-  {{completion_condition}} placeholder. Visibility controlled by
-  instructions_step_done_when_postscript_visible.

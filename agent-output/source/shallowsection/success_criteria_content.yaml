@@ -11,6 +11,6 @@ fields:
     criteria_separator: field/success_criteria_criteria_separator
 containers:
   required:
-    definition_framing_b_variant: simplegroup/success_criteria_definition_framing_b_variant
-    evidence_framing_b_variant: simplegroup/success_criteria_evidence_framing_b_variant
-    definition_to_evidence_transition_b_variant: simplegroup/success_criteria_definition_to_evidence_transition_b_variant
+    definition_declaration_variant_template: simplegroup/success_criteria_definition_declaration_variant_template
+    evidence_intro_variant: simplegroup/success_criteria_evidence_intro_variant
+    definition_to_evidence_transition_variant: simplegroup/success_criteria_definition_to_evidence_transition_variant

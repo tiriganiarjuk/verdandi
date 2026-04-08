@@ -1,8 +1,0 @@
-title: FramingPreamblePVariant
-description: >-
-  Variant alternatives for the section preamble introducing display
-  entries. Keys match enum/framing_variant values. Structure selects one.
-required:
-  territory: field/framing_preamble_p_variant_territory
-  environmental: field/framing_preamble_p_variant_environmental
-  cage: field/framing_preamble_p_variant_cage

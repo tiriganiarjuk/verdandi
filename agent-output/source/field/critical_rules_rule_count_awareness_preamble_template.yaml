@@ -1,0 +1,6 @@
+title: CriticalRulesRuleCountAwarenessPreambleTemplate
+type: atom/string_template
+description: >-
+  Rule count awareness prelude text. Template with {{rule_count}}
+  placeholder. Tells the agent how many inviolable rules follow.
+  Visibility controlled by the auto/threshold mechanism in structure.

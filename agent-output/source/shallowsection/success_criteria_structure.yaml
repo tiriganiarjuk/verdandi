@@ -7,9 +7,9 @@ fields:
   required:
     section_visible: field/success_criteria_section_visible
     max_entries_rendered: field/success_criteria_max_entries_rendered
-    definition_framing_b_variant: field/success_criteria_definition_framing_b_variant
-    evidence_framing_b_variant: field/success_criteria_evidence_framing_b_variant
-    definition_to_evidence_transition_b_variant: field/success_criteria_definition_to_evidence_transition_b_variant
+    definition_declaration_selector: field/success_criteria_definition_declaration_selector
+    evidence_intro_selector: field/success_criteria_evidence_intro_selector
+    definition_to_evidence_transition_selector: field/success_criteria_definition_to_evidence_transition_selector
     evidence_type_handling: field/success_criteria_evidence_type_handling
     output_vs_agent_voice: field/success_criteria_output_vs_agent_voice
     success_failure_independence_statement_postscript_visible: field/success_criteria_success_failure_independence_statement_postscript_visible

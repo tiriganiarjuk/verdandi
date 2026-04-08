@@ -1,6 +1,0 @@
-title: ExamplesGroupFramingPreamble
-type: atom/string_template
-description: >-
-  Framing sentence between group heading and entries. Template with
-  {{example_group_name}} placeholder. Visibility controlled by
-  examples_group_framing_preamble_visible.

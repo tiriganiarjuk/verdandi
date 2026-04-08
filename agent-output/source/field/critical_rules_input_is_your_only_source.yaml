@@ -1,6 +1,0 @@
-title: CriticalRulesInputIsYourOnlySource
-type: atom/string_prose
-description: >-
-  Input-only-source rule text. Prohibits supplementing input with
-  external sources, training data, or additional materials. Process
-  what you received and nothing else.

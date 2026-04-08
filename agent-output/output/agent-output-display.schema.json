@@ -80,9 +80,9 @@
           ],
           "default": "per_entry_list"
         },
-        "filesystem_map_label_visibility_threshold": {
+        "filesystem_permissions_label_visibility_threshold": {
           "$ref": "#/$defs/atom__integer",
-          "title": "SecurityBoundaryFilesystemMapLabelVisibilityThreshold",
+          "title": "SecurityBoundaryFilesystemPermissionsLabelVisibilityThreshold",
           "description": "Entry count threshold for showing the filesystem map intro line. When entry count is at or below this threshold, the intro is suppressed (too few entries to need introduction). Above the threshold, the intro renders.\nWhole number value",
           "default": 4
         },
@@ -102,7 +102,7 @@
         "path_style",
         "uniform_toolset_format",
         "heterogeneous_toolset_format",
-        "filesystem_map_label_visibility_threshold",
+        "filesystem_permissions_label_visibility_threshold",
         "entry_list_format"
       ],
       "additionalProperties": false

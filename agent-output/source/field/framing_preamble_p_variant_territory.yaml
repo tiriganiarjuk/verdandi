@@ -1,5 +1,0 @@
-title: FramingPreamblePVariantTerritory
-type: atom/string_text
-description: >-
-  Section preamble when framing_variant is "territory". Introduces
-  the display entries with domain-ownership language.

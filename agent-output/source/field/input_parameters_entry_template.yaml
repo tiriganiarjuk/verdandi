@@ -1,0 +1,7 @@
+title: InputParametersEntryTemplate
+type: atom/string_template
+description: >-
+  Template for rendering a single parameter entry. Contains
+  {{param_name}}, {{param_type}}, and {{param_description}}
+  placeholders. Code-formatted parameter name signals literal
+  identifier.

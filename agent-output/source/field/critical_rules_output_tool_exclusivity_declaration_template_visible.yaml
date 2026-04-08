@@ -1,0 +1,7 @@
+title: CriticalRulesOutputToolExclusivityDeclarationTemplateVisible
+type: atom/boolean
+default: true
+description: >-
+  Whether to render the output tool exclusivity rule. Declares that
+  the named tool is the only output mechanism. Conditional on
+  has_output_tool — data gate suppresses when no tool exists.

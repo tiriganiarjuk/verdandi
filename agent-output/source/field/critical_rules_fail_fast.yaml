@@ -1,6 +1,0 @@
-title: CriticalRulesFailFast
-type: atom/string_prose
-description: >-
-  Fail-fast rule text. Instructs the agent to return FAILURE
-  immediately on error. No recovery attempts, no partial data,
-  no working around problems.

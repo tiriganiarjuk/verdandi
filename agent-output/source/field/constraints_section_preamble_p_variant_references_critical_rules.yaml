@@ -1,6 +1,0 @@
-title: ConstraintsSectionPreamblePVariantReferencesCriticalRules
-type: atom/string_prose
-description: >-
-  Preamble variant that frames constraints relative to critical
-  rules. Establishes constraints as a secondary enforcement tier
-  below critical rules.

@@ -1,6 +1,0 @@
-title: ConstraintsNoInferredConstraintsPVariantLight
-type: atom/string_prose
-description: >-
-  Light variant of the no-inferred-constraints warning. A brief
-  reminder that only listed constraints apply, without strong
-  emphasis or repetition.

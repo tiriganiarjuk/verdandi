@@ -1,0 +1,5 @@
+title: OutputDirectoryLocationDeclarationVariantTemplateStandard
+type: atom/string_template
+description: >-
+  Directory location variant that states the output directory path
+  directly. Contains {{OUTPUT_DIRECTORY}} placeholder.

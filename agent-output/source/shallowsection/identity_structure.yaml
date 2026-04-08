@@ -6,7 +6,7 @@ fields:
   required:
     field_ordering: field/identity_field_ordering
     fuse_role_identity_declaration_and_role_description: field/identity_fuse_role_identity_declaration_and_role_description
-    role_identity_declaration_heuristic_postscript_visible: field/identity_role_identity_declaration_heuristic_postscript_visible
-    role_expertise_is_strictly_limited_postscript_visible: field/identity_role_expertise_postscript_visible
-    identity_reminder_closing_visible: field/identity_identity_reminder_closing_visible
+    role_identity_postscript_template_visible: field/identity_role_identity_postscript_template_visible
+    role_expertise_postscript_visible: field/identity_role_expertise_postscript_visible
+    identity_reminder_closing_template_visible: field/identity_identity_reminder_closing_template_visible
     bold_contrast_phrase_from_role_description_visible: field/identity_bold_contrast_visible

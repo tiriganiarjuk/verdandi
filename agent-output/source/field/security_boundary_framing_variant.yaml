@@ -1,8 +1,0 @@
-title: SecurityBoundaryFramingVariant
-type: enum/framing_variant
-default: "territory"
-description: >-
-  Posture for the security boundary section. Selects which content
-  variant renders for heading, workspace_path_declaration, and
-  section_preamble simultaneously. All three content families use
-  the same variant key.

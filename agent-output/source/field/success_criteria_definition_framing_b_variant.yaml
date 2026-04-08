@@ -1,8 +1,0 @@
-title: SuccessCriteriaDefinitionFramingBVariant
-type: enum/definition_framing_variant_key
-default: "declarative_assertion"
-description: >-
-  Selects how the success definition statement renders.
-  'declarative_assertion' states the definition directly.
-  'conditional_gate' frames it as an if-and-only-if condition.
-  'completion_identity' frames it as agent self-recognition.

@@ -1,8 +1,0 @@
-title: SecurityBoundaryFilesystemMapLabelVisible
-type: atom/boolean
-default: true
-description: >-
-  Whether to render an introductory line before the filesystem
-  display entries. Visibility may also be governed by
-  filesystem_map_label_visibility_threshold in display — the
-  threshold overrides this toggle when entry count is below it.

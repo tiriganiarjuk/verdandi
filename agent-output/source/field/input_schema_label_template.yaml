@@ -1,0 +1,5 @@
+title: InputSchemaLabelTemplate
+type: atom/string_template
+description: >-
+  Template introducing the input validation schema. Contains
+  {{input_schema}} placeholder for the schema path.

@@ -11,12 +11,7 @@ fields:
     cite_definition_and_evidence_postscript_visible: field/failure_criteria_cite_definition_and_evidence_postscript_visible
     check_before_and_during_postscript_visible: field/failure_criteria_check_before_and_during_postscript_visible
   conditional:
-    abort_stance_preamble_p_variant:
-      ref: field/failure_criteria_abort_stance_variant
-      only_when:
-        field: abort_stance_preamble_visible
-        equals: true
-    abort_stance_definition_label_b_variant:
+    abort_stance_selector:
       ref: field/failure_criteria_abort_stance_variant
       only_when:
         field: abort_stance_preamble_visible

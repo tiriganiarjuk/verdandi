@@ -1,8 +1,0 @@
-title: SuccessCriteriaDefinitionToEvidenceTransitionBVariant
-type: enum/evidence_transition_variant_key
-default: "goal_then_criteria"
-description: >-
-  Selects the transitional phrase between definition and evidence.
-  'goal_then_criteria' uses a goal-oriented bridge.
-  'proof' uses a proof-oriented bridge.
-  'dual_presentation' uses a confirmation-oriented bridge.

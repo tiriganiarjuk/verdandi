@@ -1,6 +1,0 @@
-title: ConstraintsNoInferredConstraintsPVariantExplicit
-type: atom/string_template
-description: >-
-  Explicit variant of the no-inferred-constraints warning. Contains
-  {{constraint_count}} placeholder. Strongly worded, names the exact
-  count, and forbids inventing additional constraints.

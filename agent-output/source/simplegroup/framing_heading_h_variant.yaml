@@ -1,8 +1,0 @@
-title: FramingHeadingHVariant
-description: >-
-  Variant alternatives for the security boundary section heading.
-  Keys match enum/framing_variant values. Structure selects one.
-required:
-  territory: field/framing_heading_h_variant_territory
-  environmental: field/framing_heading_h_variant_environmental
-  cage: field/framing_heading_h_variant_cage

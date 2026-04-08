@@ -1,0 +1,7 @@
+title: InstructionsHeadingSelector
+type: enum/heading_variant_key
+default: "default"
+description: >-
+  Selects which heading variant renders for the instructions section.
+  'default' uses a plain heading. 'procedure' uses formal procedural
+  language. 'steps_with_count' includes the total step count.

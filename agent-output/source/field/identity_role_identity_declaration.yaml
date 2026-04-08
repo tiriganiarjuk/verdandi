@@ -1,6 +1,0 @@
-title: IdentityRoleIdentityDeclaration
-type: atom/string_template
-description: >-
-  Core identity declaration. Template with {{role_identity}} placeholder.
-  Establishes who the agent is — the foundational sentence that frames
-  all subsequent behavior. Position: immediately after heading.

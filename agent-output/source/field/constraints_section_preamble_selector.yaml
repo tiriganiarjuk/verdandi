@@ -1,0 +1,8 @@
+title: ConstraintsSectionPreambleSelector
+type: enum/section_preamble_variant_key
+default: "standalone"
+description: >-
+  Selects which preamble variant to use for the constraints section.
+  'standalone' frames constraints independently. 'references_instructions'
+  and 'references_critical_rules' frame constraints relative to other
+  sections.

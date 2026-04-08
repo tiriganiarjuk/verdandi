@@ -1,0 +1,8 @@
+title: ConstraintsNoInferredConstraintsPreambleVariantTemplate
+description: >-
+  Variant alternatives for the no-inferred-constraints warning. Keys
+  match enum/no_inferred_constraints_variant_key values. Structure
+  selects one.
+required:
+  light: field/constraints_no_inferred_constraints_preamble_variant_template_light
+  explicit: field/constraints_no_inferred_constraints_preamble_variant_template_explicit

@@ -1,5 +1,0 @@
-title: FailureCriteriaAbortStanceDefinitionLabelBVariantPermission
-type: atom/string_text
-description: >-
-  Definition label for permission-framed failure modes. Uses
-  impossibility language consistent with the permission preamble.

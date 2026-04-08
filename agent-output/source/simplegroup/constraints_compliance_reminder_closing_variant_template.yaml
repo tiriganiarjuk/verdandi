@@ -1,0 +1,7 @@
+title: ConstraintsComplianceReminderClosingVariantTemplate
+description: >-
+  Variant alternatives for the closing compliance reminder. Keys
+  match enum/closing_compliance_variant_key values. Structure selects one.
+required:
+  evaluation_warning: field/constraints_compliance_reminder_closing_variant_template_evaluation_warning
+  simultaneity: field/constraints_compliance_reminder_closing_variant_template_simultaneity

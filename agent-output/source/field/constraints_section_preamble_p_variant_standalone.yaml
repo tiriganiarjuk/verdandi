@@ -1,6 +1,0 @@
-title: ConstraintsSectionPreamblePVariantStandalone
-type: atom/string_prose
-description: >-
-  Preamble variant that frames constraints as a standalone section.
-  No references to other sections. Used when constraints should be
-  interpreted independently.

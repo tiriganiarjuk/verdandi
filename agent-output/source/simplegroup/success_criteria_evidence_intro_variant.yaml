@@ -1,0 +1,9 @@
+title: SuccessCriteriaEvidenceIntroVariant
+description: >-
+  Variant alternatives for how the evidence list is introduced.
+  Keys match enum/evidence_framing_variant_key values. Structure
+  selects one.
+required:
+  properties: field/success_criteria_evidence_intro_variant_properties
+  verification_checklist: field/success_criteria_evidence_intro_variant_verification_checklist
+  quality_signals: field/success_criteria_evidence_intro_variant_quality_signals

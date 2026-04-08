@@ -1,0 +1,7 @@
+title: CriticalRulesBatchDisciplineDeclarationTemplateVisible
+type: atom/boolean
+default: true
+description: >-
+  Whether to render the batch discipline rule. Requires processing in
+  batches of the specified size with immediate writes. Conditional on
+  both has_output_tool and batch_size being present.

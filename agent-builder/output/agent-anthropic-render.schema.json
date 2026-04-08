@@ -704,6 +704,9 @@
       "type": "object",
       "description": "End-of-lifecycle fields duplicated for self-contained template consumption. Workspace path extracted from security_boundary. Tool summary fields duplicated from resolved writing_output. These fields are fully resolved and will not change again.\n",
       "properties": {
+        "workspace_path": {
+          "$ref": "#/$defs/field__workspace_path__x_abs"
+        },
         "has_output_tool": {
           "$ref": "#/$defs/atom__boolean",
           "title": "HasOutputTool",
@@ -720,6 +723,7 @@
         }
       },
       "required": [
+        "workspace_path",
         "has_output_tool"
       ],
       "additionalProperties": false
@@ -730,9 +734,7 @@
       "description": "Anthropic-resolved security boundary. Capabilities have been exploded to tool-path pairs and collapsed by workspace-relative path. Each display entry groups all tools and commands granted for a single path. Workspace_path has been extracted to critical_rules.\n",
       "properties": {
         "workspace_path": {
-          "$ref": "#/$defs/element__path_exists_absolute",
-          "title": "WorkspacePathXAbs",
-          "description": "Absolute filesystem path to the workspace root directory. All workspace- relative paths in the definition (context paths, schema paths, allowed_read/write paths) are resolved relative to this directory. Must be an absolute path (starting with /). Validated against the blocklist during resolution. Any path that resolves outside this workspace or into a blocked zone triggers a SecurityIncident. Example: \"/Users/username/.ai/spaces/myproject\"\nAbsolute path that must exist on the filesystem"
+          "$ref": "#/$defs/field__workspace_path__x_abs"
         },
         "display": {
           "title": "DisplayEntries",
@@ -1416,6 +1418,11 @@
       "title": "OutputToolBatchSize",
       "description": "Number of records per write tool call when write frequency is batch. The agent accumulates this many records before invoking the write tool. Balances write frequency against data loss risk from interruption.\nWhole number value",
       "default": 20
+    },
+    "field__workspace_path__x_abs": {
+      "$ref": "#/$defs/element__path_exists_absolute",
+      "title": "WorkspacePathXAbs",
+      "description": "Absolute filesystem path to the workspace root directory. All workspace- relative paths in the definition (context paths, schema paths, allowed_read/write paths) are resolved relative to this directory. Must be an absolute path (starting with /). Validated against the blocklist during resolution. Any path that resolves outside this workspace or into a blocked zone triggers a SecurityIncident. Example: \"/Users/username/.ai/spaces/myproject\"\nAbsolute path that must exist on the filesystem"
     },
     "field__return_mode": {
       "title": "ReturnMode",

@@ -1,0 +1,5 @@
+title: InstructionsInstructionModeRecapClosingTemplate
+type: atom/string_template
+description: >-
+  Mode recap in the section closer. Template with {{mode_recap_text}}
+  placeholder. Summarizes which steps were exact and which judgment.

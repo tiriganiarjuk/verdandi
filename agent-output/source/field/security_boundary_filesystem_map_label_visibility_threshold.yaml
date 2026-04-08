@@ -1,8 +1,0 @@
-title: SecurityBoundaryFilesystemMapLabelVisibilityThreshold
-type: atom/integer
-default: 4
-description: >-
-  Entry count threshold for showing the filesystem map intro line.
-  When entry count is at or below this threshold, the intro is
-  suppressed (too few entries to need introduction). Above the
-  threshold, the intro renders.

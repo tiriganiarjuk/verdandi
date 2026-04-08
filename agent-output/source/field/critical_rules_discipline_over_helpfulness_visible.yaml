@@ -1,7 +1,0 @@
-title: CriticalRulesDisciplineOverHelpfulnessVisible
-type: atom/boolean
-default: false
-description: >-
-  Whether to render the discipline-over-helpfulness rule. Reframes
-  discipline as the helpful behavior. Off by default — experimental
-  rule testing whether explicit reframing reduces helpfulness drift.

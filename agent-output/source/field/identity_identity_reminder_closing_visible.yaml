@@ -1,9 +1,0 @@
-title: IdentityIdentityReminderClosingVisible
-type: atom/boolean
-default: false
-description: >-
-  Whether to render a closing identity reminder at the end of the
-  identity section. When true, a reinforcement sentence restating
-  the agent's role identity appears as the section closer. Off by
-  default — identity is established at the top and does not need
-  restating unless experiments show drift.

@@ -1,7 +1,0 @@
-title: ConstraintsNoInferredConstraintsPVariant
-type: enum/no_inferred_constraints_variant_key
-default: "light"
-description: >-
-  Selects how strongly the no-inferred-constraints warning is worded.
-  'light' is a brief reminder. 'explicit' is a template-based
-  warning that names the constraint count.

@@ -1,7 +1,0 @@
-title: ConstraintsConstraintCountHeadingVisible
-type: atom/boolean
-default: true
-description: >-
-  Whether to render a heading that includes the constraint count.
-  Makes the model aware of how many constraints exist, which can
-  improve compliance tracking.
