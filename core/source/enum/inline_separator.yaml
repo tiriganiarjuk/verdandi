@@ -1,0 +1,8 @@
+title: InlineSeparator
+values: [dash, colon, pipe, newline, double_newline]
+description: >
+  Inline separator between adjacent text elements. Declarative intent —
+  the renderer maps each value to the actual string. 'dash' is an em
+  dash with spaces ( — ). 'colon' is a colon with trailing space (: ).
+  'pipe' is a vertical bar with spaces ( | ). 'newline' is a single
+  line break. 'double_newline' is two line breaks (visual paragraph gap).

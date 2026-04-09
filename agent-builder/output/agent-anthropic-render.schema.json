@@ -148,7 +148,15 @@
           "$ref": "#/$defs/field__agent_description"
         },
         "model": {
-          "$ref": "#/$defs/field__anthropic_model"
+          "title": "AnthropicModel",
+          "type": "string",
+          "description": "Resolved Anthropic model name for this agent. Produced by mapping the platform-agnostic capability_tier to a concrete model at the anthropic render stage. haiku for fast-cheap, sonnet for standard and analytical, opus for complex-reasoning and max-capability, inherit to match the dispatcher.\nResolved Anthropic model names. The anthropic render stage maps the platform-agnostic capability_tier to a concrete Anthropic model. haiku: fast/cheap tasks. sonnet: standard and analytical tasks. opus: complex reasoning and max capability. inherit: match the dispatcher's model.",
+          "enum": [
+            "haiku",
+            "sonnet",
+            "opus",
+            "inherit"
+          ]
         },
         "permission_mode": {
           "title": "PermissionMode",
@@ -271,9 +279,6 @@
         "title": {
           "$ref": "#/$defs/field__agent_title"
         },
-        "description": {
-          "$ref": "#/$defs/field__agent_description"
-        },
         "role_identity": {
           "$ref": "#/$defs/atom__string_text",
           "title": "RoleIdentity",
@@ -313,9 +318,6 @@
             ]
           }
         },
-        "model": {
-          "$ref": "#/$defs/field__anthropic_model"
-        },
         "role_description": {
           "$ref": "#/$defs/atom__string_prose",
           "title": "RoleDescription",
@@ -350,10 +352,8 @@
       },
       "required": [
         "title",
-        "description",
         "role_identity",
-        "role_responsibility",
-        "model"
+        "role_responsibility"
       ],
       "additionalProperties": false
     },
@@ -736,17 +736,17 @@
         "workspace_path": {
           "$ref": "#/$defs/field__workspace_path__x_abs"
         },
-        "display": {
-          "title": "DisplayEntries",
+        "filesystem_permissions": {
+          "title": "FilesystemPermissions",
           "type": "array",
-          "description": "Security boundary display entries collapsed by workspace-relative path",
+          "description": "Security boundary filesystem permission entries collapsed by workspace-relative path",
           "items": {
-            "title": "DisplayEntry",
+            "title": "FilesystemPermission",
             "type": "object",
-            "description": "A security boundary display entry grouping all tools and commands granted for a single workspace-relative path. Produced by exploding capabilities to tools and collapsing by path.\n",
+            "description": "A filesystem permission entry grouping all tools and commands granted for a single workspace-relative path. Produced by exploding capabilities to tools and collapsing by path.\n",
             "properties": {
               "path": {
-                "title": "DisplayPath",
+                "title": "FilesystemPermissionPath",
                 "oneOf": [
                   {
                     "title": "PathRelative",
@@ -778,14 +778,14 @@
                     "$ref": "#/$defs/atom__path_absolute"
                   }
                 ],
-                "description": "Path in a security boundary display entry. Workspace-relative paths are produced by stripping the workspace root prefix from absolute grant paths (e.g., \"./truth/\", \"./schemas/\"). Paths outside the workspace remain absolute (e.g., \"/tmp/bragi/\").\nFilesystem path — either relative (./) or absolute (/)"
+                "description": "Path in a filesystem permission entry. Workspace-relative paths are produced by stripping the workspace root prefix from absolute grant paths (e.g., \"./truth/\", \"./schemas/\"). Paths outside the workspace remain absolute (e.g., \"/tmp/bragi/\").\nFilesystem path — either relative (./) or absolute (/)"
               },
               "tools": {
-                "title": "DisplayToolsCommands",
+                "title": "FilesystemPermissionToolsCommands",
                 "type": "array",
                 "description": "Tool and command names granted for a specific workspace-relative path",
                 "items": {
-                  "title": "DisplayToolCommand",
+                  "title": "FilesystemPermissionToolCommand",
                   "oneOf": [
                     {
                       "$ref": "#/$defs/atom__pascal_string"
@@ -794,7 +794,7 @@
                       "$ref": "#/$defs/atom__snake_string"
                     }
                   ],
-                  "description": "Tool or command name in a security boundary display entry. Can be a Claude Code tool name (Read, Grep, Glob, Write, Edit, Bash) or an allowed shell command (find, ls, du, wc, stat, diff, tree).\nEither a Claude Code tool name (PascalCase: Read, Grep, Bash) or a shell command name (snake_case: find, ls, du, wc, stat, diff, tree)."
+                  "description": "Tool or command name in a filesystem permission entry. Can be a Claude Code tool name (Read, Grep, Glob, Write, Edit, Bash) or an allowed shell command (find, ls, du, wc, stat, diff, tree).\nEither a Claude Code tool name (PascalCase: Read, Grep, Bash) or a shell command name (snake_case: find, ls, du, wc, stat, diff, tree)."
                 },
                 "minItems": 1
               }
@@ -1538,17 +1538,6 @@
       "$ref": "#/$defs/atom__snake_string",
       "title": "ToolName",
       "description": "Resolved name of the custom output tool. Produced by matching the enforcement output tool specification against the custom tool lookup table during anthropic render. Example: \"append_validated_jsonl_batch.py\".\nLowercase snake_case string — words separated by underscores. Used for parameter names and template placeholders."
-    },
-    "field__anthropic_model": {
-      "title": "AnthropicModel",
-      "type": "string",
-      "description": "Resolved Anthropic model name for this agent. Produced by mapping the platform-agnostic capability_tier to a concrete model at the anthropic render stage. haiku for fast-cheap, sonnet for standard and analytical, opus for complex-reasoning and max-capability, inherit to match the dispatcher.\nResolved Anthropic model names. The anthropic render stage maps the platform-agnostic capability_tier to a concrete Anthropic model. haiku: fast/cheap tasks. sonnet: standard and analytical tasks. opus: complex reasoning and max capability. inherit: match the dispatcher's model.",
-      "enum": [
-        "haiku",
-        "sonnet",
-        "opus",
-        "inherit"
-      ]
     }
   }
 }

@@ -1,0 +1,11 @@
+title: StringLabel
+type: string
+min_length: 2
+max_length: 30
+excludes:
+  - pattern/absolute
+  - pattern/relative
+description: >
+  Short display-facing label text. Used for mode markers, inline
+  headings, and brief formatting text. Max 30 characters prevents
+  prose abuse — anything longer should use string_text or string_prose.

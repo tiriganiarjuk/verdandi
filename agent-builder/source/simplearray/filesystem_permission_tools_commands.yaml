@@ -1,0 +1,3 @@
+title: FilesystemPermissionToolsCommands
+items: field/filesystem_permission_tool_command
+description: Tool and command names granted for a specific workspace-relative path

@@ -63,7 +63,7 @@
     "identity": {
       "title": "IdentityStructure",
       "type": "object",
-      "description": "Structure controls for the identity section. Field ordering, declaration fusion, and visibility toggles for optional prose.",
+      "description": "Structure controls for the identity section. Field ordering and visibility toggles for optional prose.",
       "properties": {
         "field_ordering": {
           "title": "IdentityFieldOrdering",
@@ -74,12 +74,6 @@
             "responsibility_first"
           ],
           "default": "identity_first"
-        },
-        "fuse_role_identity_declaration_and_role_description": {
-          "$ref": "#/$defs/atom__boolean",
-          "title": "IdentityFuseRoleIdentityDeclarationAndRoleDescription",
-          "description": "Whether to merge the identity declaration and role description into a single paragraph. When false, declaration and role description render as separate blocks. When true, they fuse into one flowing paragraph.\nTrue or false value",
-          "default": false
         },
         "role_identity_postscript_template_visible": {
           "$ref": "#/$defs/atom__boolean",
@@ -98,44 +92,30 @@
           "title": "IdentityIdentityReminderClosingTemplateVisible",
           "description": "Whether to render a closing identity reminder at the end of the identity section. When true, a reinforcement sentence restating the agent's role identity appears as the section closer. Off by default — identity is established at the top and does not need restating unless experiments show drift.\nTrue or false value",
           "default": false
-        },
-        "bold_contrast_phrase_from_role_description_visible": {
-          "$ref": "#/$defs/atom__boolean",
-          "title": "IdentityBoldContrastVisible",
-          "description": "Whether to extract and bold a contrast phrase from the role description. When true, the renderer scans role_description for a contrastive clause (e.g., \"not a debugger, not a reviewer\") and renders it with bold emphasis. Off by default — most role descriptions do not contain contrast phrases.\nTrue or false value",
-          "default": false
         }
       },
       "required": [
         "field_ordering",
-        "fuse_role_identity_declaration_and_role_description",
         "role_identity_postscript_template_visible",
         "role_expertise_postscript_visible",
-        "identity_reminder_closing_template_visible",
-        "bold_contrast_phrase_from_role_description_visible"
+        "identity_reminder_closing_template_visible"
       ],
       "additionalProperties": false
     },
     "security_boundary": {
       "title": "SecurityBoundaryStructure",
       "type": "object",
-      "description": "Structure controls for the security boundary section. Visibility toggles, workspace path fusion, and framing variant selector.",
+      "description": "Structure controls for the security boundary section. Visibility toggles and framing variant selector.",
       "properties": {
-        "fuse_workspace_path_and_resolver": {
-          "$ref": "#/$defs/atom__boolean",
-          "title": "SecurityBoundaryFuseWorkspacePathAndResolver",
-          "description": "Whether to merge the workspace path declaration with the path resolution instruction in a single sentence. When true, renders as one flowing statement. When false, workspace path and resolution instruction render as separate lines.\nTrue or false value",
-          "default": true
-        },
         "filesystem_permissions_label_visible": {
           "$ref": "#/$defs/atom__boolean",
           "title": "SecurityBoundaryFilesystemPermissionsLabelVisible",
           "description": "Whether to render an introductory line before the filesystem display entries. Visibility may also be governed by filesystem_permissions_label_visibility_threshold in display — the threshold overrides this toggle when entry count is below it.\nTrue or false value",
           "default": true
         },
-        "section_preamble_visible": {
+        "framing_preamble_visible": {
           "$ref": "#/$defs/atom__boolean",
-          "title": "SecurityBoundarySectionPreambleVisible",
+          "title": "SecurityBoundaryFramingPreambleVisible",
           "description": "Whether to render a preamble between the section heading and the display entries. The preamble text is selected by framing_variant in content.\nTrue or false value",
           "default": true
         },
@@ -144,12 +124,6 @@
           "title": "SecurityBoundarySectionClosingVisible",
           "description": "Whether to render a closing statement after the display entries. Off by default — the entries are self-contained and hooks enforce access regardless of prose.\nTrue or false value",
           "default": false
-        },
-        "tool_names_visible": {
-          "$ref": "#/$defs/atom__boolean",
-          "title": "SecurityBoundaryToolNamesVisible",
-          "description": "Whether to show tool names alongside paths in display entries. When false, entries show paths only. Hooks enforce tool access regardless — this controls what the agent sees, not what it can do.\nTrue or false value",
-          "default": true
         },
         "framing_selector": {
           "title": "SecurityBoundaryFramingSelector",
@@ -164,11 +138,9 @@
         }
       },
       "required": [
-        "fuse_workspace_path_and_resolver",
         "filesystem_permissions_label_visible",
-        "section_preamble_visible",
+        "framing_preamble_visible",
         "section_closing_visible",
-        "tool_names_visible",
         "framing_selector"
       ],
       "additionalProperties": false
@@ -337,7 +309,7 @@
     "instructions": {
       "title": "InstructionsStructure",
       "type": "object",
-      "description": "Structure controls for the instructions section. Heading variant, mode infrastructure, preamble components, step structure, closer, and scaffolding tier.",
+      "description": "Structure controls for the instructions section. Heading variant, mode explanation visibility, preamble components, step structure, closer, and scaffolding tier.",
       "properties": {
         "heading_selector": {
           "title": "InstructionsHeadingSelector",
@@ -350,50 +322,27 @@
           ],
           "default": "default"
         },
-        "instruction_mode_explanation_visible": {
+        "instruction_mode_explanation_preamble_visible": {
           "$ref": "#/$defs/enum__visibility_mode",
-          "title": "InstructionsInstructionModeExplanationVisible",
+          "title": "InstructionsInstructionModeExplanationPreambleVisible",
           "description": "Whether to render the exact/judgment mode explanation. 'auto' renders when instruction modes are mixed (both exact and judgment steps present). 'always' forces it on. 'never' suppresses it.\nTri-state visibility control for optional prose fragments. 'auto' delegates to a threshold or data condition — the renderer decides. 'always' forces the fragment to render regardless of conditions. 'never' suppresses the fragment regardless of conditions.",
           "default": "auto"
         },
-        "instruction_mode_marker_placement": {
-          "title": "InstructionsInstructionModeMarkerPlacement",
-          "type": "string",
-          "description": "Where exact/judgment mode markers appear in instruction steps. 'header_fused' embeds in the step header. 'body_prefix' places as the first line of step body. 'visual_formatting' uses visual cues to distinguish modes without explicit text.\nWhere exact/judgment mode markers appear in instruction steps. 'header_fused' embeds the marker in the step header text. 'body_prefix' places the marker as the first line of the step body. 'visual_formatting' uses visual cues (e.g., bold vs italic) to distinguish modes without explicit text markers.",
-          "enum": [
-            "header_fused",
-            "body_prefix",
-            "visual_formatting"
-          ],
-          "default": "header_fused"
-        },
-        "signal_at_mode_change_visible": {
+        "highlight_step_count_preamble_template_visible": {
           "$ref": "#/$defs/atom__boolean",
-          "title": "InstructionsSignalAtModeChangeVisible",
-          "description": "Whether to render a transition signal when consecutive steps switch between exact and judgment modes. Off by default — mode markers in headers are usually sufficient.\nTrue or false value",
-          "default": false
-        },
-        "step_count_preamble_template_visible": {
-          "$ref": "#/$defs/atom__boolean",
-          "title": "InstructionsStepCountPreambleTemplateVisible",
+          "title": "InstructionsHighlightStepCountPreambleTemplateVisible",
           "description": "Whether to render the step count statement in the preamble. Tells the agent how many steps to expect.\nTrue or false value",
           "default": true
         },
-        "no_add_skip_reorder_preamble_visible": {
+        "sequence_integrity_preamble_visible": {
           "$ref": "#/$defs/atom__boolean",
-          "title": "InstructionsNoAddSkipReorderPreambleVisible",
+          "title": "InstructionsSequenceIntegrityPreambleVisible",
           "description": "Whether to render the prohibition against adding, skipping, or reordering steps in the preamble.\nTrue or false value",
           "default": true
         },
-        "instruction_mode_preview_preamble_visible": {
+        "follow_strictly_preamble_visible": {
           "$ref": "#/$defs/atom__boolean",
-          "title": "InstructionsInstructionModePreviewPreambleVisible",
-          "description": "Whether to render the exact/judgment mode preview in the preamble. Previews that some steps are exact (no interpretation) and some require judgment.\nTrue or false value",
-          "default": true
-        },
-        "no_extra_operations_preamble_visible": {
-          "$ref": "#/$defs/atom__boolean",
-          "title": "InstructionsNoExtraOperationsPreambleVisible",
+          "title": "InstructionsFollowStrictlyPreambleVisible",
           "description": "Whether to render the prohibition against supplementing steps with general knowledge or adding unspecified operations.\nTrue or false value",
           "default": true
         },
@@ -413,9 +362,9 @@
           "description": "Whether to render a completion condition suffix after each step body. Off by default — most steps are self-evident about completion.\nTrue or false value",
           "default": false
         },
-        "guardrail_closing_template_visible": {
+        "follow_strictly_closing_template_visible": {
           "$ref": "#/$defs/atom__boolean",
-          "title": "InstructionsGuardrailClosingTemplateVisible",
+          "title": "InstructionsFollowStrictlyClosingTemplateVisible",
           "description": "Whether to render the section closer reinforcing that the listed steps are the complete task with no additions.\nTrue or false value",
           "default": true
         },
@@ -452,16 +401,13 @@
       },
       "required": [
         "heading_selector",
-        "instruction_mode_explanation_visible",
-        "instruction_mode_marker_placement",
-        "signal_at_mode_change_visible",
-        "step_count_preamble_template_visible",
-        "no_add_skip_reorder_preamble_visible",
-        "instruction_mode_preview_preamble_visible",
-        "no_extra_operations_preamble_visible",
+        "instruction_mode_explanation_preamble_visible",
+        "highlight_step_count_preamble_template_visible",
+        "sequence_integrity_preamble_visible",
+        "follow_strictly_preamble_visible",
         "step_index_tracking",
         "step_done_when_postscript_template_visible",
-        "guardrail_closing_template_visible",
+        "follow_strictly_closing_template_visible",
         "instruction_mode_recap_closing_template_visible",
         "cross_step_dependency_label_template_visible",
         "reminder_midpoint_preamble_template_visible",
@@ -601,15 +547,15 @@
           "description": "Whether to render the clarification that constraints are not sequential steps. Prevents models from treating a constraint list as a procedure to follow in order.\nTrue or false value",
           "default": true
         },
-        "no_inferred_constraints_visible": {
+        "no_inferred_constraints_preamble_visible": {
           "$ref": "#/$defs/atom__boolean",
-          "title": "ConstraintsNoInferredConstraintsVisible",
+          "title": "ConstraintsNoInferredConstraintsPreambleVisible",
           "description": "Whether to render an explicit warning against inferring constraints not listed. Off by default — only needed when models tend to invent additional constraints from context.\nTrue or false value",
           "default": false
         },
-        "closing_compliance_reminder_visible": {
+        "compliance_reminder_closing_visible": {
           "$ref": "#/$defs/atom__boolean",
-          "title": "ConstraintsClosingComplianceReminderVisible",
+          "title": "ConstraintsComplianceReminderClosingVisible",
           "description": "Whether to render a closing reminder about constraint compliance after the constraint list. Reinforces obligation at the boundary where the model transitions to the next section.\nTrue or false value",
           "default": true
         },
@@ -668,8 +614,8 @@
         "max_entries_rendered",
         "section_preamble_visible",
         "constraints_are_not_steps_preamble_visible",
-        "no_inferred_constraints_visible",
-        "closing_compliance_reminder_visible",
+        "no_inferred_constraints_preamble_visible",
+        "compliance_reminder_closing_visible",
         "constraint_count_heading_template_visible",
         "hierarchy_tier_comparison_preamble_visible",
         "hierarchy_three_tier_explanation_preamble_visible"
@@ -701,10 +647,10 @@
         {
           "if": {
             "required": [
-              "closing_compliance_reminder_visible"
+              "compliance_reminder_closing_visible"
             ],
             "properties": {
-              "closing_compliance_reminder_visible": {
+              "compliance_reminder_closing_visible": {
                 "const": true
               }
             }
@@ -723,10 +669,10 @@
         {
           "if": {
             "required": [
-              "no_inferred_constraints_visible"
+              "no_inferred_constraints_preamble_visible"
             ],
             "properties": {
-              "no_inferred_constraints_visible": {
+              "no_inferred_constraints_preamble_visible": {
                 "const": true
               }
             }

@@ -1,7 +1,0 @@
-title: SecurityBoundaryUniformToolsetFormat
-type: enum/toolset_format
-default: "grouped"
-description: >-
-  How tool names render when all display entries share the same tool
-  set. "grouped" shows the tool list once above all entries. "per_entry"
-  repeats the tool list alongside each entry.

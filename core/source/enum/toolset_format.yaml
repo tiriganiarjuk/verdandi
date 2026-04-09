@@ -1,6 +1,8 @@
 title: ToolsetFormat
-values: [grouped, per_entry]
+values: [grouped, per_entry_list, per_entry_prose]
 description: >
-  How tool names render when all display entries share the same tool set.
-  'grouped' shows the tool list once above all entries. 'per_entry'
-  repeats the tool list alongside each entry.
+  How tool names render in security boundary display entries. 'grouped'
+  shows the tool list once above all entries (only valid when all entries
+  share the same tools — engine falls back to per_entry_list otherwise).
+  'per_entry_list' shows tools as a list alongside each entry.
+  'per_entry_prose' embeds tools in natural language alongside each entry.

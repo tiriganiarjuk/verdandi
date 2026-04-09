@@ -1,6 +1,0 @@
-title: InstructionsNoExtraOperationsPreambleVisible
-type: atom/boolean
-default: true
-description: >-
-  Whether to render the prohibition against supplementing steps with
-  general knowledge or adding unspecified operations.

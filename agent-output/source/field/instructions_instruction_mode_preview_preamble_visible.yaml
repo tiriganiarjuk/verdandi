@@ -1,7 +1,0 @@
-title: InstructionsInstructionModePreviewPreambleVisible
-type: atom/boolean
-default: true
-description: >-
-  Whether to render the exact/judgment mode preview in the preamble.
-  Previews that some steps are exact (no interpretation) and some
-  require judgment.

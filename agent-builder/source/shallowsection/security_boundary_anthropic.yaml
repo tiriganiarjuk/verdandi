@@ -9,4 +9,4 @@ fields:
     workspace_path: field/workspace_path__x_abs
 containers:
   optional:
-    display: superarray/display_entries
+    filesystem_permissions: superarray/filesystem_permissions

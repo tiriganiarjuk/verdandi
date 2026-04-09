@@ -1,6 +1,0 @@
-title: InstructionsStepCountPreambleTemplateVisible
-type: atom/boolean
-default: true
-description: >-
-  Whether to render the step count statement in the preamble.
-  Tells the agent how many steps to expect.

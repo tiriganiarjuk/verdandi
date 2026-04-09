@@ -1,0 +1,7 @@
+title: SecurityBoundaryFramingPreambleVisible
+type: atom/boolean
+default: true
+description: >-
+  Whether to render a preamble between the section heading and
+  the display entries. The preamble text is selected by
+  framing_variant in content.

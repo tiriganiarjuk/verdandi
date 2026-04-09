@@ -1,8 +1,0 @@
-title: InstructionsInstructionModeHeaderNOnly
-description: >-
-  Per-mode step header templates with n_only index tracking.
-  Keys match instruction_mode enum values. Used when
-  step_index_tracking is "n_only".
-required:
-  deterministic: field/instructions_instruction_mode_header_n_only_deterministic
-  probabilistic: field/instructions_instruction_mode_header_n_only_probabilistic

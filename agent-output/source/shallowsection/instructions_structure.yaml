@@ -1,21 +1,18 @@
 title: InstructionsStructure
 description: >-
   Structure controls for the instructions section. Heading variant,
-  mode infrastructure, preamble components, step structure, closer,
-  and scaffolding tier.
+  mode explanation visibility, preamble components, step structure,
+  closer, and scaffolding tier.
 fields:
   required:
     heading_selector: field/instructions_heading_selector
-    instruction_mode_explanation_visible: field/instructions_instruction_mode_explanation_visible
-    instruction_mode_marker_placement: field/instructions_instruction_mode_marker_placement
-    signal_at_mode_change_visible: field/instructions_signal_at_mode_change_visible
-    step_count_preamble_template_visible: field/instructions_step_count_preamble_template_visible
-    no_add_skip_reorder_preamble_visible: field/instructions_no_add_skip_reorder_preamble_visible
-    instruction_mode_preview_preamble_visible: field/instructions_instruction_mode_preview_preamble_visible
-    no_extra_operations_preamble_visible: field/instructions_no_extra_operations_preamble_visible
+    instruction_mode_explanation_preamble_visible: field/instructions_instruction_mode_explanation_preamble_visible
+    highlight_step_count_preamble_template_visible: field/instructions_highlight_step_count_preamble_template_visible
+    sequence_integrity_preamble_visible: field/instructions_sequence_integrity_preamble_visible
+    follow_strictly_preamble_visible: field/instructions_follow_strictly_preamble_visible
     step_index_tracking: field/instructions_step_index_tracking
     step_done_when_postscript_template_visible: field/instructions_step_done_when_postscript_template_visible
-    guardrail_closing_template_visible: field/instructions_guardrail_closing_template_visible
+    follow_strictly_closing_template_visible: field/instructions_follow_strictly_closing_template_visible
     instruction_mode_recap_closing_template_visible: field/instructions_instruction_mode_recap_closing_template_visible
     cross_step_dependency_label_template_visible: field/instructions_cross_step_dependency_label_template_visible
     reminder_midpoint_preamble_template_visible: field/instructions_reminder_midpoint_preamble_template_visible

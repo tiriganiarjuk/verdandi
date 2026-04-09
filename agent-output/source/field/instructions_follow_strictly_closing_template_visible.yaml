@@ -1,0 +1,6 @@
+title: InstructionsFollowStrictlyClosingTemplateVisible
+type: atom/boolean
+default: true
+description: >-
+  Whether to render the section closer reinforcing that the listed
+  steps are the complete task with no additions.

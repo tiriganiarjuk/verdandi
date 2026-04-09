@@ -1,8 +1,0 @@
-title: InstructionsInstructionModeHeader
-description: >-
-  Per-mode step header templates with n_of_m index tracking.
-  Keys match instruction_mode enum values. Structure selects
-  header vs header_n_only via step_index_tracking.
-required:
-  deterministic: field/instructions_instruction_mode_header_deterministic
-  probabilistic: field/instructions_instruction_mode_header_probabilistic

@@ -1,0 +1,11 @@
+title: FilesystemPermission
+description: >
+  A filesystem permission entry grouping all tools and commands
+  granted for a single workspace-relative path. Produced by exploding
+  capabilities to tools and collapsing by path.
+fields:
+  required:
+    path: field/filesystem_permission_path
+containers:
+  required:
+    tools: simplearray/filesystem_permission_tools_commands

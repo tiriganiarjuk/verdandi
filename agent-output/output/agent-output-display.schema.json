@@ -60,21 +60,12 @@
           ],
           "default": "relative_dotslash"
         },
-        "uniform_toolset_format": {
-          "title": "SecurityBoundaryUniformToolsetFormat",
+        "toolset_format": {
+          "title": "SecurityBoundaryToolsetFormat",
           "type": "string",
-          "description": "How tool names render when all display entries share the same tool set. \"grouped\" shows the tool list once above all entries. \"per_entry\" repeats the tool list alongside each entry.\nHow tool names render when all display entries share the same tool set. 'grouped' shows the tool list once above all entries. 'per_entry' repeats the tool list alongside each entry.",
+          "description": "How tool names render alongside paths in display entries. Engine detects whether tools are uniform or heterogeneous from the data. 'grouped' only applies when uniform — falls back to per_entry_list for heterogeneous tool sets.\nHow tool names render in security boundary display entries. 'grouped' shows the tool list once above all entries (only valid when all entries share the same tools — engine falls back to per_entry_list otherwise). 'per_entry_list' shows tools as a list alongside each entry. 'per_entry_prose' embeds tools in natural language alongside each entry.",
           "enum": [
             "grouped",
-            "per_entry"
-          ],
-          "default": "grouped"
-        },
-        "heterogeneous_toolset_format": {
-          "title": "SecurityBoundaryHeterogeneousToolsetFormat",
-          "type": "string",
-          "description": "How tool names render when display entries have different tool sets. \"per_entry_list\" shows tools as a list alongside each entry. \"per_entry_prose\" embeds tools in natural language.\nHow tool names render when display entries have different tool sets. 'per_entry_list' shows tools as a list alongside each entry. 'per_entry_prose' embeds tools in natural language alongside each entry.",
-          "enum": [
             "per_entry_list",
             "per_entry_prose"
           ],
@@ -100,8 +91,7 @@
       },
       "required": [
         "path_style",
-        "uniform_toolset_format",
-        "heterogeneous_toolset_format",
+        "toolset_format",
         "filesystem_permissions_label_visibility_threshold",
         "entry_list_format"
       ],
@@ -206,7 +196,7 @@
     "instructions": {
       "title": "InstructionsDisplay",
       "type": "object",
-      "description": "Display formatting for the instructions section. Step header format, body container, scaffolding tier thresholds, and recap format.",
+      "description": "Display formatting for the instructions section. Step header format, body container, mode separator, mode transition restriction, scaffolding tier thresholds, and recap format.",
       "properties": {
         "step_header_format": {
           "$ref": "#/$defs/enum__heading_format",
@@ -219,6 +209,25 @@
           "title": "InstructionsStepBodyContainer",
           "description": "Visual container wrapping each step body. 'none' renders directly. 'blockquote' indents in a blockquote. 'bare_with_endmarker' appends an end marker for visual boundary closure.\nVisual container wrapping a content body. 'none' renders content directly with no wrapping. 'blockquote' indents content in a markdown blockquote. 'bare_with_endmarker' renders content directly but appends an end marker for visual boundary closure.",
           "default": "none"
+        },
+        "step_mode_separator": {
+          "title": "InstructionsStepModeSeparator",
+          "type": "string",
+          "description": "Separator between mode label and step header. Only rendered when both mode label and step header are present. The renderer maps the enum value to the actual separator string.\nInline separator between adjacent text elements. Declarative intent — the renderer maps each value to the actual string. 'dash' is an em dash with spaces ( — ). 'colon' is a colon with trailing space (: ). 'pipe' is a vertical bar with spaces ( | ). 'newline' is a single line break. 'double_newline' is two line breaks (visual paragraph gap).",
+          "enum": [
+            "dash",
+            "colon",
+            "pipe",
+            "newline",
+            "double_newline"
+          ],
+          "default": "dash"
+        },
+        "instruction_mode_restrict_to_transition": {
+          "title": "InstructionsInstructionModeRestrictToTransition",
+          "type": "boolean",
+          "description": "When true, consecutive steps with the same instruction mode suppress their mode labels. Only steps where the mode changes from the previous step display the label. When false, every step shows its mode label.\nTrue or false value",
+          "default": false
         },
         "scaffolding_tier_lightweight_activation_threshold": {
           "$ref": "#/$defs/atom__integer",
@@ -246,6 +255,8 @@
       "required": [
         "step_header_format",
         "step_body_container",
+        "step_mode_separator",
+        "instruction_mode_restrict_to_transition",
         "scaffolding_tier_lightweight_activation_threshold",
         "scaffolding_tier_standard_activation_threshold",
         "instruction_mode_recap_format"
@@ -310,9 +321,9 @@
           "description": "Constraint count threshold for format switching when enumeration_format is a pair. Below this count the first format applies; at or above, the second format applies.\nWhole number value",
           "default": 6
         },
-        "closing_compliance_reminder_visibility_threshold": {
+        "compliance_reminder_closing_visibility_threshold": {
           "$ref": "#/$defs/atom__integer",
-          "title": "ConstraintsClosingComplianceReminderVisibilityThreshold",
+          "title": "ConstraintsComplianceReminderClosingVisibilityThreshold",
           "description": "Constraint count threshold for showing the closing compliance reminder. When constraint count is at or above this value and visibility is enabled, the reminder renders.\nWhole number value",
           "default": 6
         },
@@ -343,7 +354,7 @@
       "required": [
         "rules_format",
         "rules_format_threshold",
-        "closing_compliance_reminder_visibility_threshold",
+        "compliance_reminder_closing_visibility_threshold",
         "constraint_count_heading_visibility_threshold",
         "must_vs_must_not_normalization",
         "polarity_grouping_activation_threshold"

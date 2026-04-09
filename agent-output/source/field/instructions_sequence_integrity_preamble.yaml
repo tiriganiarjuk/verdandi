@@ -1,0 +1,5 @@
+title: InstructionsSequenceIntegrityPreamble
+type: atom/string_prose
+description: >-
+  Prohibition against adding, skipping, or reordering steps.
+  Position: preamble component.

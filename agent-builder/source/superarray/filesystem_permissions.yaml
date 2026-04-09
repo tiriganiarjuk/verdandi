@@ -1,0 +1,3 @@
+title: FilesystemPermissions
+items: group/filesystem_permission
+description: Security boundary filesystem permission entries collapsed by workspace-relative path

@@ -27,7 +27,23 @@
           "minLength": 5
         },
         "agent_description": {
-          "$ref": "#/$defs/field__agent_description"
+          "$ref": "#/$defs/atom__string_prose",
+          "title": "AgentDescription",
+          "description": "One-line purpose statement for the agent. Becomes the frontmatter `description` field in the generated agent prompt. Should complete the sentence \"This agent...\" without starting with \"This agent\". Be specific about what the agent does, not what it is. \"Assesses truth entries against quality dimensions\" not \"A quality control agent\".\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths.",
+          "minLength": 40,
+          "x-semantic": {
+            "intent": "Communicates the agent's purpose to humans and systems that select agents for tasks. Vague descriptions make agents undiscoverable.",
+            "severity": "warning",
+            "checks": [
+              "Completes the sentence 'This agent...' naturally",
+              "Describes what the agent does, not what it is",
+              "Specific enough to distinguish from other agents"
+            ],
+            "anti_patterns": [
+              "Starting with 'This agent' or 'An agent that'",
+              "Describing identity instead of action: 'A quality control agent'"
+            ]
+          }
         },
         "dispatch_mode": {
           "title": "DispatchMode",
@@ -145,9 +161,6 @@
           "title": "AgentTitle",
           "description": "Human-readable agent title derived mechanically from agent_name. Split on hyphens, capitalize each word. Becomes the frontmatter title field in the generated agent prompt.\nTitle Case string — each word starts uppercase, separated by spaces. Used for display titles, section headings, and short labels. Not prose (no sentences), not an identifier (has spaces)."
         },
-        "description": {
-          "$ref": "#/$defs/field__agent_description"
-        },
         "role_identity": {
           "$ref": "#/$defs/atom__string_text",
           "title": "RoleIdentity",
@@ -234,7 +247,6 @@
       },
       "required": [
         "title",
-        "description",
         "role_identity",
         "role_responsibility",
         "capability_tier"
@@ -1412,25 +1424,6 @@
         "text"
       ],
       "default": "text"
-    },
-    "field__agent_description": {
-      "$ref": "#/$defs/atom__string_prose",
-      "title": "AgentDescription",
-      "description": "One-line purpose statement for the agent. Becomes the frontmatter `description` field in the generated agent prompt. Should complete the sentence \"This agent...\" without starting with \"This agent\". Be specific about what the agent does, not what it is. \"Assesses truth entries against quality dimensions\" not \"A quality control agent\".\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths.",
-      "minLength": 40,
-      "x-semantic": {
-        "intent": "Communicates the agent's purpose to humans and systems that select agents for tasks. Vague descriptions make agents undiscoverable.",
-        "severity": "warning",
-        "checks": [
-          "Completes the sentence 'This agent...' naturally",
-          "Describes what the agent does, not what it is",
-          "Specific enough to distinguish from other agents"
-        ],
-        "anti_patterns": [
-          "Starting with 'This agent' or 'An agent that'",
-          "Describing identity instead of action: 'A quality control agent'"
-        ]
-      }
     },
     "field__output_format_kind": {
       "$ref": "#/$defs/enum__output_format_kind",

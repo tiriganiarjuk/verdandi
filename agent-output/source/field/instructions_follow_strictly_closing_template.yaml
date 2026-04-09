@@ -1,0 +1,5 @@
+title: InstructionsFollowStrictlyClosingTemplate
+type: atom/string_template
+description: >-
+  Section closer reinforcing completeness. Template with {{step_count}}
+  placeholder. States that the listed steps are the complete task.

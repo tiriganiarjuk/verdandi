@@ -1,7 +1,0 @@
-title: DisplayPath
-type: union/path_any
-description: >-
-  Path in a security boundary display entry. Workspace-relative paths
-  are produced by stripping the workspace root prefix from absolute grant
-  paths (e.g., "./truth/", "./schemas/"). Paths outside the workspace
-  remain absolute (e.g., "/tmp/bragi/").

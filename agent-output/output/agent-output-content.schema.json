@@ -348,26 +348,21 @@
     "instructions": {
       "title": "InstructionsContent",
       "type": "object",
-      "description": "Content prose for the instructions section. Preamble components, per-step mode templates (via instruction_mode sub-table), mode explanation variant, dependency phrases, closer text, and heading variant sub-table.",
+      "description": "Content prose for the instructions section. Preamble components, per-step mode label variant, step header templates, mode explanation variant, dependency phrases, closer text, and heading variant sub-table.",
       "properties": {
-        "step_count_preamble_template": {
+        "highlight_step_count_preamble_template": {
           "$ref": "#/$defs/atom__string_template",
-          "title": "InstructionsStepCountPreambleTemplate",
+          "title": "InstructionsHighlightStepCountPreambleTemplate",
           "description": "Step count statement in the preamble. Template with {{step_count}} placeholder. Tells the agent how many steps to expect.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
         },
-        "no_add_skip_reorder_preamble": {
+        "sequence_integrity_preamble": {
           "$ref": "#/$defs/atom__string_prose",
-          "title": "InstructionsNoAddSkipReorderPreamble",
+          "title": "InstructionsSequenceIntegrityPreamble",
           "description": "Prohibition against adding, skipping, or reordering steps. Position: preamble component.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
         },
-        "instruction_mode_preview_preamble": {
+        "follow_strictly_preamble": {
           "$ref": "#/$defs/atom__string_prose",
-          "title": "InstructionsInstructionModePreviewPreamble",
-          "description": "Preview of exact/judgment mode distinction in the preamble. Explains that some steps are mechanical and some require reasoning.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
-        },
-        "no_extra_operations_preamble": {
-          "$ref": "#/$defs/atom__string_prose",
-          "title": "InstructionsNoExtraOperationsPreamble",
+          "title": "InstructionsFollowStrictlyPreamble",
           "description": "Prohibition against supplementing steps with general knowledge or adding unspecified operations. Each step is a complete specification.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
         },
         "step_done_when_postscript_template": {
@@ -385,15 +380,25 @@
           "title": "InstructionsReminderMidpointPreambleTemplate",
           "description": "Progress reminder at the midpoint. Template with {{midpoint}}, {{midpoint_next}}, and {{step_total}} placeholders. Visibility controlled by instructions_reminder_midpoint_visible.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
         },
-        "guardrail_closing_template": {
+        "follow_strictly_closing_template": {
           "$ref": "#/$defs/atom__string_template",
-          "title": "InstructionsGuardrailClosingTemplate",
+          "title": "InstructionsFollowStrictlyClosingTemplate",
           "description": "Section closer reinforcing completeness. Template with {{step_count}} placeholder. States that the listed steps are the complete task.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
         },
         "instruction_mode_recap_closing_template": {
           "$ref": "#/$defs/atom__string_template",
           "title": "InstructionsInstructionModeRecapClosingTemplate",
           "description": "Mode recap in the section closer. Template with {{mode_recap_text}} placeholder. Summarizes which steps were exact and which judgment.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
+        },
+        "step_header_template": {
+          "$ref": "#/$defs/atom__string_template",
+          "title": "InstructionsStepHeaderTemplate",
+          "description": "Step header template with n_of_m index tracking. Contains {{step_n}} and {{step_total}} placeholders. Used when step_index_tracking is \"n_of_m\".\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
+        },
+        "step_header_n_only_template": {
+          "$ref": "#/$defs/atom__string_template",
+          "title": "InstructionsStepHeaderNOnlyTemplate",
+          "description": "Step header template with n_only index tracking. Contains {{step_n}} placeholder only. Used when step_index_tracking is \"n_only\".\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
         },
         "heading_variant_template": {
           "title": "InstructionsHeadingVariantTemplate",
@@ -423,105 +428,25 @@
           ],
           "additionalProperties": false
         },
-        "instruction_mode": {
-          "title": "InstructionsInstructionModeContent",
+        "step_mode_label_variant": {
+          "title": "InstructionsStepModeLabelVariant",
           "type": "object",
-          "description": "Shared variant content for instruction mode per-step templates. Contains four role families (header, header_n_only, body_prefix, signal_at_mode_change) that are all keyed by instruction_mode enum values. The engine finds the enum field in step data, looks up the mode value in each role sub-table, and renders in declaration order. Structure selector step_index_tracking chooses between header and header_n_only.",
+          "description": "Mode label text for instruction steps. Keys match instruction_mode enum values (deterministic/probabilistic). The label renders before the step header, separated by the step_mode_separator display field.",
           "properties": {
-            "header": {
-              "title": "InstructionsInstructionModeHeader",
-              "type": "object",
-              "description": "Per-mode step header templates with n_of_m index tracking. Keys match instruction_mode enum values. Structure selects header vs header_n_only via step_index_tracking.",
-              "properties": {
-                "deterministic": {
-                  "$ref": "#/$defs/atom__string_template",
-                  "title": "InstructionsInstructionModeHeaderDeterministic",
-                  "description": "Step header for exact-mode steps with n_of_m tracking. Template with {{step_n}} and {{step_total}} placeholders.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
-                },
-                "probabilistic": {
-                  "$ref": "#/$defs/atom__string_template",
-                  "title": "InstructionsInstructionModeHeaderProbabilistic",
-                  "description": "Step header for judgment-mode steps with n_of_m tracking. Template with {{step_n}} and {{step_total}} placeholders.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
-                }
-              },
-              "required": [
-                "deterministic",
-                "probabilistic"
-              ],
-              "additionalProperties": false
+            "deterministic": {
+              "$ref": "#/$defs/atom__string_label",
+              "title": "InstructionsStepModeLabelVariantDeterministic",
+              "description": "Mode label for deterministic (exact) steps. Rendered before the step header to signal the execution mode.\nShort display-facing label text. Used for mode markers, inline headings, and brief formatting text. Max 30 characters prevents prose abuse — anything longer should use string_text or string_prose."
             },
-            "header_n_only": {
-              "title": "InstructionsInstructionModeHeaderNOnly",
-              "type": "object",
-              "description": "Per-mode step header templates with n_only index tracking. Keys match instruction_mode enum values. Used when step_index_tracking is \"n_only\".",
-              "properties": {
-                "deterministic": {
-                  "$ref": "#/$defs/atom__string_template",
-                  "title": "InstructionsInstructionModeHeaderNOnlyDeterministic",
-                  "description": "Step header for exact-mode steps with n_only tracking. Template with {{step_n}} placeholder. No total shown.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
-                },
-                "probabilistic": {
-                  "$ref": "#/$defs/atom__string_template",
-                  "title": "InstructionsInstructionModeHeaderNOnlyProbabilistic",
-                  "description": "Step header for judgment-mode steps with n_only tracking. Template with {{step_n}} placeholder. No total shown.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
-                }
-              },
-              "required": [
-                "deterministic",
-                "probabilistic"
-              ],
-              "additionalProperties": false
-            },
-            "body_prefix": {
-              "title": "InstructionsInstructionModeBodyPrefix",
-              "type": "object",
-              "description": "Per-mode body prefix directives. Keys match instruction_mode enum values. Short text preceding the step body when marker_placement is 'body_prefix'.",
-              "properties": {
-                "deterministic": {
-                  "$ref": "#/$defs/atom__string_text",
-                  "title": "InstructionsInstructionModeBodyPrefixDeterministic",
-                  "description": "Body prefix for exact-mode steps when marker_placement is 'body_prefix'. Short directive text preceding the step body.\nNatural language prose — must contain at least one whitespace character. Mutually exclusive with all identifier types. Used for descriptions, instructions, error messages, and display labels. Not a path."
-                },
-                "probabilistic": {
-                  "$ref": "#/$defs/atom__string_text",
-                  "title": "InstructionsInstructionModeBodyPrefixProbabilistic",
-                  "description": "Body prefix for judgment-mode steps when marker_placement is 'body_prefix'. Short directive text preceding the step body.\nNatural language prose — must contain at least one whitespace character. Mutually exclusive with all identifier types. Used for descriptions, instructions, error messages, and display labels. Not a path."
-                }
-              },
-              "required": [
-                "deterministic",
-                "probabilistic"
-              ],
-              "additionalProperties": false
-            },
-            "signal_at_mode_change": {
-              "title": "InstructionsInstructionModeSignalAtModeChange",
-              "type": "object",
-              "description": "Per-mode transition signals rendered between consecutive steps when instruction mode changes. Keys match the TARGET mode (the mode of the step that follows).",
-              "properties": {
-                "deterministic": {
-                  "$ref": "#/$defs/atom__string_prose",
-                  "title": "InstructionsInstructionModeSignalAtModeChangeDeterministic",
-                  "description": "Transition signal when switching from judgment to exact mode. Rendered between consecutive steps when modes change.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
-                },
-                "probabilistic": {
-                  "$ref": "#/$defs/atom__string_prose",
-                  "title": "InstructionsInstructionModeSignalAtModeChangeProbabilistic",
-                  "description": "Transition signal when switching from exact to judgment mode. Rendered between consecutive steps when modes change.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
-                }
-              },
-              "required": [
-                "deterministic",
-                "probabilistic"
-              ],
-              "additionalProperties": false
+            "probabilistic": {
+              "$ref": "#/$defs/atom__string_label",
+              "title": "InstructionsStepModeLabelVariantProbabilistic",
+              "description": "Mode label for probabilistic (judgment) steps. Rendered before the step header to signal the execution mode.\nShort display-facing label text. Used for mode markers, inline headings, and brief formatting text. Max 30 characters prevents prose abuse — anything longer should use string_text or string_prose."
             }
           },
           "required": [
-            "header",
-            "header_n_only",
-            "body_prefix",
-            "signal_at_mode_change"
+            "deterministic",
+            "probabilistic"
           ],
           "additionalProperties": false
         },
@@ -555,17 +480,18 @@
         }
       },
       "required": [
-        "step_count_preamble_template",
-        "no_add_skip_reorder_preamble",
-        "instruction_mode_preview_preamble",
-        "no_extra_operations_preamble",
+        "highlight_step_count_preamble_template",
+        "sequence_integrity_preamble",
+        "follow_strictly_preamble",
         "step_done_when_postscript_template",
         "cross_step_dependency_label_template",
         "reminder_midpoint_preamble_template",
-        "guardrail_closing_template",
+        "follow_strictly_closing_template",
         "instruction_mode_recap_closing_template",
+        "step_header_template",
+        "step_header_n_only_template",
         "heading_variant_template",
-        "instruction_mode",
+        "step_mode_label_variant",
         "instruction_mode_explanation_preamble_variant"
       ],
       "additionalProperties": false
@@ -1154,12 +1080,24 @@
   },
   "additionalProperties": false,
   "$defs": {
-    "atom__string_prose": {
-      "title": "StringProse",
+    "pattern__absolute": {
+      "title": "Absolute",
       "type": "string",
-      "description": "Substantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths.\n",
-      "pattern": "^[A-Z](?:.*?\\s){3,}.*[.!?;:]$",
-      "minLength": 20
+      "description": "Starts with forward slash — absolute path prefix",
+      "pattern": "^/"
+    },
+    "pattern__relative": {
+      "title": "Relative",
+      "type": "string",
+      "description": "Starts with dot — relative path prefix (e.g., ./src/file.py)",
+      "pattern": "^\\."
+    },
+    "atom__string_template": {
+      "title": "StringTemplate",
+      "type": "string",
+      "description": "Prose string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose.\n",
+      "pattern": "\\{\\{[a-zA-Z_]+\\}\\}",
+      "minLength": 5
     },
     "atom__string_text": {
       "title": "StringText",
@@ -1184,12 +1122,29 @@
         ]
       }
     },
-    "atom__string_template": {
-      "title": "StringTemplate",
+    "atom__string_prose": {
+      "title": "StringProse",
       "type": "string",
-      "description": "Prose string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose.\n",
-      "pattern": "\\{\\{[a-zA-Z_]+\\}\\}",
-      "minLength": 5
+      "description": "Substantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths.\n",
+      "pattern": "^[A-Z](?:.*?\\s){3,}.*[.!?;:]$",
+      "minLength": 20
+    },
+    "atom__string_label": {
+      "title": "StringLabel",
+      "type": "string",
+      "description": "Short display-facing label text. Used for mode markers, inline headings, and brief formatting text. Max 30 characters prevents prose abuse — anything longer should use string_text or string_prose.\n",
+      "minLength": 2,
+      "maxLength": 30,
+      "not": {
+        "anyOf": [
+          {
+            "pattern": "^/"
+          },
+          {
+            "pattern": "^\\."
+          }
+        ]
+      }
     },
     "atom__title_string": {
       "title": "TitleString",

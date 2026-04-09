@@ -1,6 +1,0 @@
-title: DisplayTool
-type: atom/pascal_string
-description: >-
-  Tool or command name in a security boundary display entry. Can be a
-  Claude Code tool name (Read, Grep, Glob, Write, Edit) or an allowed
-  shell command (find, ls, du, wc, stat, diff, tree).

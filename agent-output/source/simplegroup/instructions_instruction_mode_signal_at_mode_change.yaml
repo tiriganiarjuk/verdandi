@@ -1,8 +1,0 @@
-title: InstructionsInstructionModeSignalAtModeChange
-description: >-
-  Per-mode transition signals rendered between consecutive steps
-  when instruction mode changes. Keys match the TARGET mode
-  (the mode of the step that follows).
-required:
-  deterministic: field/instructions_instruction_mode_signal_at_mode_change_deterministic
-  probabilistic: field/instructions_instruction_mode_signal_at_mode_change_probabilistic

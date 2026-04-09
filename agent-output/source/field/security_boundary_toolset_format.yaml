@@ -1,0 +1,8 @@
+title: SecurityBoundaryToolsetFormat
+type: enum/toolset_format
+default: "per_entry_list"
+description: >-
+  How tool names render alongside paths in display entries. Engine
+  detects whether tools are uniform or heterogeneous from the data.
+  'grouped' only applies when uniform — falls back to per_entry_list
+  for heterogeneous tool sets.

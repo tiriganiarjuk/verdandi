@@ -1,7 +1,0 @@
-title: InstructionsSignalAtModeChangeVisible
-type: atom/boolean
-default: false
-description: >-
-  Whether to render a transition signal when consecutive steps switch
-  between exact and judgment modes. Off by default — mode markers in
-  headers are usually sufficient.
