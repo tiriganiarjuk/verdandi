@@ -5,11 +5,11 @@ description: >-
   intro, and completeness postscript.
 fields:
   required:
-    section_heading: field/input_section_heading
-    description_format_declaration_template: field/input_description_format_declaration_template
+    section_start: field/input_section_start
+    description_format_template: field/input_description_format_template
     section_preamble: field/input_section_preamble
     context_required_heading: field/input_context_required_heading
-    context_required_preamble: field/input_context_required_preamble
+    context_required_intro: field/input_context_required_intro
     context_required_entry_template: field/input_context_required_entry_template
     context_available_heading: field/input_context_available_heading
     parameters_transition: field/input_parameters_transition

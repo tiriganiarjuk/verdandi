@@ -5,6 +5,6 @@ description: >-
 fields:
   required:
     filesystem_permissions_label_visible: field/security_boundary_filesystem_permissions_label_visible
-    framing_preamble_visible: field/security_boundary_framing_preamble_visible
+    framing_section_preamble_visible: field/security_boundary_framing_section_preamble_visible
     section_closing_visible: field/security_boundary_section_closing_visible
     framing_selector: field/security_boundary_framing_selector

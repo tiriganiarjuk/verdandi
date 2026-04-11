@@ -1,0 +1,6 @@
+title: InputContextRequiredIntroVisible
+type: atom/boolean
+default: true
+description: >-
+  Whether to render the context required intro that establishes
+  prerequisite vs reference reading mode.

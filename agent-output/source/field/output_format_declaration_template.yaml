@@ -1,5 +1,0 @@
-title: OutputFormatDeclarationTemplate
-type: atom/string_template
-description: >-
-  Template declaring the output format. Contains {{FORMAT}}
-  placeholder replaced with the configured output format value.

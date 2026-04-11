@@ -1,6 +1,0 @@
-title: CriticalRulesOutputToolExclusivityDeclarationTemplate
-type: atom/string_template
-description: >-
-  Output tool exclusivity rule text. Template with {{tool_name}}
-  placeholder. Declares that the named tool is the only output
-  mechanism.

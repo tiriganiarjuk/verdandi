@@ -4,11 +4,11 @@ description: >-
   preamble, and one prose template per rule.
 fields:
   required:
-    section_heading: field/critical_rules_section_heading
+    section_start: field/critical_rules_section_start
     authority_preamble: field/critical_rules_authority_preamble
-    workspace_confinement_declaration_template: field/critical_rules_workspace_confinement_declaration_template
-    output_tool_exclusivity_declaration_template: field/critical_rules_output_tool_exclusivity_declaration_template
-    batch_discipline_declaration_template: field/critical_rules_batch_discipline_declaration_template
+    workspace_confinement_template: field/critical_rules_workspace_confinement_template
+    output_tool_exclusivity_template: field/critical_rules_output_tool_exclusivity_template
+    batch_discipline_template: field/critical_rules_batch_discipline_template
     fail_fast_body: field/critical_rules_fail_fast_body
     input_is_your_only_source_body: field/critical_rules_input_is_your_only_source_body
     no_invention_body: field/critical_rules_no_invention_body

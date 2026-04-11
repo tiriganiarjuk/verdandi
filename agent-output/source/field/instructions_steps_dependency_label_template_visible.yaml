@@ -1,7 +1,0 @@
-title: InstructionsStepsDependencyLabelTemplateVisible
-type: atom/boolean
-default: false
-description: >-
-  Whether to render dependency phrases indicating which earlier steps
-  a step's output depends on. Off by default — adds noise for
-  simple linear workflows.

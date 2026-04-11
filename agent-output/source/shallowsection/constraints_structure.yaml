@@ -11,7 +11,7 @@ fields:
     constraints_are_not_steps_preamble_visible: field/constraints_are_not_steps_preamble_visible
     no_inferred_constraints_preamble_visible: field/constraints_no_inferred_constraints_preamble_visible
     compliance_reminder_closing_visible: field/constraints_compliance_reminder_closing_visible
-    constraint_count_heading_template_visible: field/constraints_constraint_count_heading_template_visible
+    constraint_count_heading_visible: field/constraints_constraint_count_heading_visible
     hierarchy_tier_comparison_preamble_visible: field/constraints_hierarchy_tier_comparison_preamble_visible
     hierarchy_three_tier_explanation_preamble_visible: field/constraints_hierarchy_three_tier_explanation_preamble_visible
   conditional:

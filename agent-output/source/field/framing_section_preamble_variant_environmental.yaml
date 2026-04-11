@@ -1,0 +1,5 @@
+title: FramingSectionPreambleVariantEnvironmental
+type: atom/string_text
+description: >-
+  Section preamble when framing_variant is "environmental". Introduces
+  the display entries with availability language.

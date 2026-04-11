@@ -5,11 +5,11 @@ description: >-
   sub-table.
 fields:
   required:
-    section_heading: field/output_section_heading
-    output_description_declaration_template: field/output_output_description_declaration_template
-    format_declaration_template: field/output_format_declaration_template
-    schema_embedded_preamble: field/output_schema_embedded_preamble
+    section_start: field/output_section_start
+    output_description_template: field/output_output_description_template
+    format_template: field/output_format_template
+    schema_embed_intro: field/output_schema_embed_intro
     schema_reference_label_template: field/output_schema_reference_label_template
 containers:
   required:
-    directory_location_declaration_variant_template: simplegroup/output_directory_location_declaration_variant_template
+    directory_location_variant_template: simplegroup/output_directory_location_variant_template

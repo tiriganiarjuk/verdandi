@@ -4,7 +4,7 @@ description: >-
   group framing sentence, and entry heading template.
 fields:
   required:
-    section_heading: field/examples_section_heading
+    section_start: field/examples_section_start
     section_preamble: field/examples_section_preamble
     group_framing_preamble_template: field/examples_group_framing_preamble_template
     example_heading_template: field/examples_example_heading_template

@@ -252,12 +252,12 @@
     "instructions": {
       "title": "InstructionsDisplay",
       "type": "object",
-      "description": "Display formatting for the instructions section. Step header format, body container, mode separator, mode transition restriction, scaffolding tier thresholds, and recap format.",
+      "description": "Display formatting for the instructions section. Step heading format, body container, mode separator, mode transition restriction, scaffolding tier thresholds, and recap format.",
       "properties": {
-        "steps_header_format": {
+        "steps_heading_format": {
           "$ref": "#/$defs/enum__heading_format",
-          "title": "InstructionsStepsHeaderFormat",
-          "description": "How step headers render. 'bold' uses markdown bold text inline. 'h3' uses a level-3 heading. 'h4' uses a level-4 heading.\nHow a sub-block heading renders. 'bold' uses markdown bold text inline. 'h3' uses a level-3 heading. 'h4' uses a level-4 heading. Section-level headings (H2) are invariant and not configurable.",
+          "title": "InstructionsStepsHeadingFormat",
+          "description": "How step headings render. 'bold' uses markdown bold text inline. 'h3' uses a level-3 heading. 'h4' uses a level-4 heading.\nHow a sub-block heading renders. 'bold' uses markdown bold text inline. 'h3' uses a level-3 heading. 'h4' uses a level-4 heading. Section-level headings (H2) are invariant and not configurable.",
           "default": "bold"
         },
         "steps_body_container": {
@@ -319,7 +319,7 @@
         }
       },
       "required": [
-        "steps_header_format",
+        "steps_heading_format",
         "steps_body_container",
         "steps_mode_separator",
         "steps_mode_restrict_to_transition",

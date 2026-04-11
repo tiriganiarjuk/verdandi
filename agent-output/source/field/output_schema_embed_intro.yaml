@@ -1,0 +1,6 @@
+title: OutputSchemaEmbedIntro
+type: atom/string_prose
+description: >-
+  Intro text rendered immediately before the embedded schema when
+  schema_embed is true. Introduces the inline schema and instructs
+  the model that every record must validate against it.

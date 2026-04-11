@@ -1,0 +1,6 @@
+title: InstructionsStepsHeadingTemplate
+type: atom/string_template
+description: >-
+  Step heading template with n_of_m index tracking. Contains
+  {{step_n}} and {{step_total}} placeholders. Used when
+  step_index_tracking is "n_of_m".

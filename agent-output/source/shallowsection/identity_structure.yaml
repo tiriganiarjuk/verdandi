@@ -5,6 +5,6 @@ description: >-
 fields:
   required:
     pre_field_ordering: field/identity_pre_field_ordering
-    role_identity_postscript_template_visible: field/identity_role_identity_postscript_template_visible
+    role_identity_postscript_visible: field/identity_role_identity_postscript_visible
     role_expertise_postscript_visible: field/identity_role_expertise_postscript_visible
-    identity_reminder_closing_template_visible: field/identity_identity_reminder_closing_template_visible
+    identity_reminder_closing_visible: field/identity_identity_reminder_closing_visible

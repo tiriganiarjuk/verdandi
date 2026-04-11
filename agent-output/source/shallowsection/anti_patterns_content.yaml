@@ -4,6 +4,6 @@ description: >-
   and distinction prose.
 fields:
   required:
-    section_heading: field/anti_patterns_section_heading
+    section_start: field/anti_patterns_section_start
     section_preamble: field/anti_patterns_section_preamble
     constraints_vs_anti_patterns_distinction_preamble: field/anti_patterns_constraints_vs_anti_patterns_distinction_preamble

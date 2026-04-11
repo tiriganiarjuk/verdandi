@@ -1,6 +1,0 @@
-title: InputDescriptionFormatDeclarationTemplate
-type: atom/string_template
-description: >-
-  Integrated description and format declaration. Template with
-  {{format}} and {{description}} placeholders. Presents what the
-  agent receives and in what shape as a single sentence.

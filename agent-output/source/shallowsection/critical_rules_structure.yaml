@@ -5,12 +5,12 @@ description: >-
 fields:
   required:
     authority_preamble_visible: field/critical_rules_authority_preamble_visible
-    rule_count_awareness_preamble_template_visible: field/critical_rules_rule_count_awareness_preamble_template_visible
+    rule_count_awareness_preamble_visible: field/critical_rules_rule_count_awareness_preamble_visible
     rule_count_awareness_preamble_template_auto_threshold: field/critical_rules_rule_count_awareness_preamble_template_auto_threshold
-    workspace_confinement_declaration_template_visible: field/critical_rules_workspace_confinement_declaration_template_visible
+    workspace_confinement_visible: field/critical_rules_workspace_confinement_visible
     fail_fast_body_visible: field/critical_rules_fail_fast_body_visible
     input_is_your_only_source_body_visible: field/critical_rules_input_is_your_only_source_body_visible
     no_invention_body_visible: field/critical_rules_no_invention_body_visible
-    output_tool_exclusivity_declaration_template_visible: field/critical_rules_output_tool_exclusivity_declaration_template_visible
-    batch_discipline_declaration_template_visible: field/critical_rules_batch_discipline_declaration_template_visible
+    output_tool_exclusivity_visible: field/critical_rules_output_tool_exclusivity_visible
+    batch_discipline_visible: field/critical_rules_batch_discipline_visible
     discipline_over_helpfulness_body_visible: field/critical_rules_discipline_over_helpfulness_body_visible

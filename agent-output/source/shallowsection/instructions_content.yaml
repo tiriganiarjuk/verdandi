@@ -1,7 +1,7 @@
 title: InstructionsContent
 description: >-
   Content prose for the instructions section. Preamble components,
-  per-step mode label variant, step header templates, mode explanation
+  per-step mode label variant, step heading templates, mode explanation
   variant, dependency phrases, closer text, and heading variant sub-table.
 fields:
   required:
@@ -13,10 +13,10 @@ fields:
     reminder_midpoint_preamble_template: field/instructions_reminder_midpoint_preamble_template
     follow_strictly_closing_template: field/instructions_follow_strictly_closing_template
     instruction_mode_recap_closing_template: field/instructions_instruction_mode_recap_closing_template
-    steps_header_template: field/instructions_steps_header_template
-    steps_header_n_only_template: field/instructions_steps_header_n_only_template
+    steps_heading_template: field/instructions_steps_heading_template
+    steps_heading_n_only_template: field/instructions_steps_heading_n_only_template
 containers:
   required:
-    section_heading_variant_template: simplegroup/instructions_section_heading_variant_template
+    section_start_variant_template: simplegroup/instructions_section_start_variant_template
     steps_mode_label_variant: simplegroup/instructions_steps_mode_label_variant
     instruction_mode_explanation_preamble_variant: simplegroup/instructions_instruction_mode_explanation_preamble_variant

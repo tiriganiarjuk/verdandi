@@ -1,0 +1,7 @@
+title: IdentityRoleIdentityPostscriptVisible
+type: atom/boolean
+default: true
+description: >-
+  Whether to render the identity declaration heuristic postscript.
+  When true, a decision-heuristic sentence follows the declaration.
+  When false, the declaration stands alone.

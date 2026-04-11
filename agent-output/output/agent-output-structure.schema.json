@@ -75,9 +75,9 @@
           ],
           "default": "identity_first"
         },
-        "role_identity_postscript_template_visible": {
+        "role_identity_postscript_visible": {
           "$ref": "#/$defs/atom__boolean",
-          "title": "IdentityRoleIdentityPostscriptTemplateVisible",
+          "title": "IdentityRoleIdentityPostscriptVisible",
           "description": "Whether to render the identity declaration heuristic postscript. When true, a decision-heuristic sentence follows the declaration. When false, the declaration stands alone.\nTrue or false value",
           "default": true
         },
@@ -87,18 +87,18 @@
           "description": "Whether to render the expertise limitation postscript after the expertise list. When true, a reinforcement statement constraining expertise to the listed areas appears after the list. When false, the expertise list renders without a closing constraint.\nTrue or false value",
           "default": true
         },
-        "identity_reminder_closing_template_visible": {
+        "identity_reminder_closing_visible": {
           "$ref": "#/$defs/atom__boolean",
-          "title": "IdentityIdentityReminderClosingTemplateVisible",
+          "title": "IdentityIdentityReminderClosingVisible",
           "description": "Whether to render a closing identity reminder at the end of the identity section. When true, a reinforcement sentence restating the agent's role identity appears as the section closer. Off by default — identity is established at the top and does not need restating unless experiments show drift.\nTrue or false value",
           "default": false
         }
       },
       "required": [
         "pre_field_ordering",
-        "role_identity_postscript_template_visible",
+        "role_identity_postscript_visible",
         "role_expertise_postscript_visible",
-        "identity_reminder_closing_template_visible"
+        "identity_reminder_closing_visible"
       ],
       "additionalProperties": false
     },
@@ -113,9 +113,9 @@
           "description": "Whether to render an introductory line before the filesystem display entries. Visibility may also be governed by filesystem_permissions_label_visibility_threshold in display — the threshold overrides this toggle when entry count is below it.\nTrue or false value",
           "default": true
         },
-        "framing_preamble_visible": {
+        "framing_section_preamble_visible": {
           "$ref": "#/$defs/atom__boolean",
-          "title": "SecurityBoundaryFramingPreambleVisible",
+          "title": "SecurityBoundaryFramingSectionPreambleVisible",
           "description": "Whether to render a preamble between the section heading and the display entries. The preamble text is selected by framing_variant in content.\nTrue or false value",
           "default": true
         },
@@ -139,7 +139,7 @@
       },
       "required": [
         "filesystem_permissions_label_visible",
-        "framing_preamble_visible",
+        "framing_section_preamble_visible",
         "section_closing_visible",
         "framing_selector"
       ],
@@ -156,10 +156,10 @@
           "description": "Whether to render the input section preamble. Conditional on context_required presence — renders when context documents exist.\nTrue or false value",
           "default": true
         },
-        "context_required_preamble_visible": {
+        "context_required_intro_visible": {
           "$ref": "#/$defs/atom__boolean",
-          "title": "InputContextRequiredPreambleVisible",
-          "description": "Whether to render the context required preamble that establishes prerequisite vs reference reading mode.\nTrue or false value",
+          "title": "InputContextRequiredIntroVisible",
+          "description": "Whether to render the context required intro that establishes prerequisite vs reference reading mode.\nTrue or false value",
           "default": true
         },
         "parameters_transition_visible": {
@@ -174,9 +174,9 @@
           "description": "Whether to render the input completeness assertion. Off by default — experimental fragment testing whether explicit completeness reduces caveat-hedging.\nTrue or false value",
           "default": false
         },
-        "schema_label_template_visible": {
+        "schema_label_visible": {
           "$ref": "#/$defs/atom__boolean",
-          "title": "InputSchemaLabelTemplateVisible",
+          "title": "InputSchemaLabelVisible",
           "description": "Whether to render the input schema introduction. Only relevant when input_schema is present in the data.\nTrue or false value",
           "default": true
         },
@@ -195,10 +195,10 @@
       },
       "required": [
         "section_preamble_visible",
-        "context_required_preamble_visible",
+        "context_required_intro_visible",
         "parameters_transition_visible",
         "input_completeness_postscript_visible",
-        "schema_label_template_visible",
+        "schema_label_visible",
         "parameters_heading_visible",
         "parameters_heading_auto_threshold"
       ],
@@ -215,9 +215,9 @@
           "description": "Whether to render the authority preamble establishing that critical rules override all other instructions. Sets the stakes before individual rules are listed.\nTrue or false value",
           "default": true
         },
-        "rule_count_awareness_preamble_template_visible": {
+        "rule_count_awareness_preamble_visible": {
           "$ref": "#/$defs/enum__visibility_mode",
-          "title": "CriticalRulesRuleCountAwarenessPreambleTemplateVisible",
+          "title": "CriticalRulesRuleCountAwarenessPreambleVisible",
           "description": "Whether to render the rule count awareness prelude. 'auto' renders when rule count exceeds the auto_threshold. 'always' forces it on. 'never' suppresses it. The prelude tells the agent how many rules to expect.\nTri-state visibility control for optional prose fragments. 'auto' delegates to a threshold or data condition — the renderer decides. 'always' forces the fragment to render regardless of conditions. 'never' suppresses the fragment regardless of conditions.",
           "default": "auto"
         },
@@ -227,9 +227,9 @@
           "description": "Rule count threshold for the auto mode of rule_count_awareness_preamble_visible. When rule count exceeds this threshold and visibility is 'auto', the preamble renders.\nWhole number value",
           "default": 5
         },
-        "workspace_confinement_declaration_template_visible": {
+        "workspace_confinement_visible": {
           "$ref": "#/$defs/atom__boolean",
-          "title": "CriticalRulesWorkspaceConfinementDeclarationTemplateVisible",
+          "title": "CriticalRulesWorkspaceConfinementVisible",
           "description": "Whether to render the workspace confinement rule. Declares that nothing outside the workspace path exists. Hooks enforce this regardless — the toggle tests whether the prose helps.\nTrue or false value",
           "default": true
         },
@@ -251,15 +251,15 @@
           "description": "Whether to render the no-invention rule. Requires every claim in output to trace to input. Silence is correct when data is absent.\nTrue or false value",
           "default": true
         },
-        "output_tool_exclusivity_declaration_template_visible": {
+        "output_tool_exclusivity_visible": {
           "$ref": "#/$defs/atom__boolean",
-          "title": "CriticalRulesOutputToolExclusivityDeclarationTemplateVisible",
+          "title": "CriticalRulesOutputToolExclusivityVisible",
           "description": "Whether to render the output tool exclusivity rule. Declares that the named tool is the only output mechanism. Conditional on has_output_tool — data gate suppresses when no tool exists.\nTrue or false value",
           "default": true
         },
-        "batch_discipline_declaration_template_visible": {
+        "batch_discipline_visible": {
           "$ref": "#/$defs/atom__boolean",
-          "title": "CriticalRulesBatchDisciplineDeclarationTemplateVisible",
+          "title": "CriticalRulesBatchDisciplineVisible",
           "description": "Whether to render the batch discipline rule. Requires processing in batches of the specified size with immediate writes. Conditional on both has_output_tool and batch_size being present.\nTrue or false value",
           "default": true
         },
@@ -272,14 +272,14 @@
       },
       "required": [
         "authority_preamble_visible",
-        "rule_count_awareness_preamble_template_visible",
+        "rule_count_awareness_preamble_visible",
         "rule_count_awareness_preamble_template_auto_threshold",
-        "workspace_confinement_declaration_template_visible",
+        "workspace_confinement_visible",
         "fail_fast_body_visible",
         "input_is_your_only_source_body_visible",
         "no_invention_body_visible",
-        "output_tool_exclusivity_declaration_template_visible",
-        "batch_discipline_declaration_template_visible",
+        "output_tool_exclusivity_visible",
+        "batch_discipline_visible",
         "discipline_over_helpfulness_body_visible"
       ],
       "additionalProperties": false
@@ -289,8 +289,8 @@
       "type": "object",
       "description": "Structure controls for the instructions section. Heading variant, mode explanation visibility, preamble components, step structure, closer, and scaffolding tier.",
       "properties": {
-        "section_heading_selector": {
-          "title": "InstructionsSectionHeadingSelector",
+        "section_start_selector": {
+          "title": "InstructionsSectionStartSelector",
           "type": "string",
           "description": "Selects which heading variant renders for the instructions section. 'default' uses a plain heading. 'procedure' uses formal procedural language. 'steps_with_count' includes the total step count.\nInstructions section heading style. 'default' uses a plain heading. 'procedure' uses formal procedural language. 'steps_with_count' includes the total step count in the heading.",
           "enum": [
@@ -306,9 +306,9 @@
           "description": "Whether to render the exact/judgment mode explanation. 'auto' renders when instruction modes are mixed (both exact and judgment steps present). 'always' forces it on. 'never' suppresses it.\nTri-state visibility control for optional prose fragments. 'auto' delegates to a threshold or data condition — the renderer decides. 'always' forces the fragment to render regardless of conditions. 'never' suppresses the fragment regardless of conditions.",
           "default": "auto"
         },
-        "highlight_step_count_preamble_template_visible": {
+        "highlight_step_count_preamble_visible": {
           "$ref": "#/$defs/atom__boolean",
-          "title": "InstructionsHighlightStepCountPreambleTemplateVisible",
+          "title": "InstructionsHighlightStepCountPreambleVisible",
           "description": "Whether to render the step count statement in the preamble. Tells the agent how many steps to expect.\nTrue or false value",
           "default": true
         },
@@ -334,33 +334,33 @@
           ],
           "default": "n_of_m"
         },
-        "steps_done_when_postscript_template_visible": {
+        "steps_done_when_postscript_visible": {
           "$ref": "#/$defs/atom__boolean",
-          "title": "InstructionsStepsDoneWhenPostscriptTemplateVisible",
+          "title": "InstructionsStepsDoneWhenPostscriptVisible",
           "description": "Whether to render a completion condition suffix after each step body. Off by default — most steps are self-evident about completion.\nTrue or false value",
           "default": false
         },
-        "follow_strictly_closing_template_visible": {
+        "follow_strictly_closing_visible": {
           "$ref": "#/$defs/atom__boolean",
-          "title": "InstructionsFollowStrictlyClosingTemplateVisible",
+          "title": "InstructionsFollowStrictlyClosingVisible",
           "description": "Whether to render the section closer reinforcing that the listed steps are the complete task with no additions.\nTrue or false value",
           "default": true
         },
-        "instruction_mode_recap_closing_template_visible": {
+        "instruction_mode_recap_closing_visible": {
           "$ref": "#/$defs/atom__boolean",
-          "title": "InstructionsInstructionModeRecapClosingTemplateVisible",
+          "title": "InstructionsInstructionModeRecapClosingVisible",
           "description": "Whether to render a mode recap in the section closer summarizing which steps were exact and which required judgment.\nTrue or false value",
           "default": false
         },
-        "steps_dependency_label_template_visible": {
+        "steps_dependency_label_visible": {
           "$ref": "#/$defs/atom__boolean",
-          "title": "InstructionsStepsDependencyLabelTemplateVisible",
+          "title": "InstructionsStepsDependencyLabelVisible",
           "description": "Whether to render dependency phrases indicating which earlier steps a step's output depends on. Off by default — adds noise for simple linear workflows.\nTrue or false value",
           "default": false
         },
-        "reminder_midpoint_preamble_template_visible": {
+        "reminder_midpoint_preamble_visible": {
           "$ref": "#/$defs/atom__boolean",
-          "title": "InstructionsReminderMidpointPreambleTemplateVisible",
+          "title": "InstructionsReminderMidpointPreambleVisible",
           "description": "Whether to render a progress reminder at the midpoint of the step list. Off by default — only useful for long instruction sets where the agent may lose orientation.\nTrue or false value",
           "default": false
         },
@@ -378,17 +378,17 @@
         }
       },
       "required": [
-        "section_heading_selector",
+        "section_start_selector",
         "instruction_mode_explanation_preamble_visible",
-        "highlight_step_count_preamble_template_visible",
+        "highlight_step_count_preamble_visible",
         "sequence_integrity_preamble_visible",
         "follow_strictly_preamble_visible",
         "steps_index_tracking",
-        "steps_done_when_postscript_template_visible",
-        "follow_strictly_closing_template_visible",
-        "instruction_mode_recap_closing_template_visible",
-        "steps_dependency_label_template_visible",
-        "reminder_midpoint_preamble_template_visible",
+        "steps_done_when_postscript_visible",
+        "follow_strictly_closing_visible",
+        "instruction_mode_recap_closing_visible",
+        "steps_dependency_label_visible",
+        "reminder_midpoint_preamble_visible",
         "pre_scaffolding_tier_override"
       ],
       "additionalProperties": false
@@ -422,9 +422,9 @@
           "description": "Whether to override the per-group examples_max_number from data. When false, data passes through unchanged. When true, the sibling examples_max_number value is used instead.\nTrue or false value",
           "default": false
         },
-        "group_framing_preamble_template_visible": {
+        "group_framing_preamble_visible": {
           "$ref": "#/$defs/atom__boolean",
-          "title": "ExamplesGroupFramingPreambleTemplateVisible",
+          "title": "ExamplesGroupFramingPreambleVisible",
           "description": "Whether to render a framing sentence between the group heading and its first entry. Off by default — group headings are usually self-explanatory.\nTrue or false value",
           "default": false
         },
@@ -446,7 +446,7 @@
         "groups_suppress_lone_heading",
         "groups_display_headings_override",
         "groups_max_number_override",
-        "group_framing_preamble_template_visible"
+        "group_framing_preamble_visible"
       ],
       "additionalProperties": false,
       "allOf": [
@@ -537,9 +537,9 @@
           "description": "Whether to render a closing reminder about constraint compliance after the constraint list. Reinforces obligation at the boundary where the model transitions to the next section.\nTrue or false value",
           "default": true
         },
-        "constraint_count_heading_template_visible": {
+        "constraint_count_heading_visible": {
           "$ref": "#/$defs/atom__boolean",
-          "title": "ConstraintsConstraintCountHeadingTemplateVisible",
+          "title": "ConstraintsConstraintCountHeadingVisible",
           "description": "Whether to render a heading that includes the constraint count. Makes the model aware of how many constraints exist, which can improve compliance tracking.\nTrue or false value",
           "default": true
         },
@@ -594,7 +594,7 @@
         "constraints_are_not_steps_preamble_visible",
         "no_inferred_constraints_preamble_visible",
         "compliance_reminder_closing_visible",
-        "constraint_count_heading_template_visible",
+        "constraint_count_heading_visible",
         "hierarchy_tier_comparison_preamble_visible",
         "hierarchy_three_tier_explanation_preamble_visible"
       ],

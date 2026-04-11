@@ -1,8 +1,0 @@
-title: OutputDirectoryLocationDeclarationVariantTemplate
-description: >-
-  Variant alternatives for the output directory location declaration.
-  Keys match enum/directory_location_variant_key values. Structure
-  selects one.
-required:
-  standard: field/output_directory_location_declaration_variant_template_standard
-  with_boundary: field/output_directory_location_declaration_variant_template_with_boundary

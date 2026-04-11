@@ -11,6 +11,6 @@ fields:
     grouped_tool_heading_template: field/security_boundary_grouped_tool_heading_template
 containers:
   required:
-    framing_section_heading_variant: simplegroup/framing_section_heading_variant
+    framing_section_start_variant: simplegroup/framing_section_start_variant
     framing_declaration_variant_template: simplegroup/framing_declaration_variant_template
-    framing_preamble_variant: simplegroup/framing_preamble_variant
+    framing_section_preamble_variant: simplegroup/framing_section_preamble_variant

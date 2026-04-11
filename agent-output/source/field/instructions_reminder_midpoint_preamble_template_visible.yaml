@@ -1,7 +1,0 @@
-title: InstructionsReminderMidpointPreambleTemplateVisible
-type: atom/boolean
-default: false
-description: >-
-  Whether to render a progress reminder at the midpoint of the step
-  list. Off by default — only useful for long instruction sets where
-  the agent may lose orientation.

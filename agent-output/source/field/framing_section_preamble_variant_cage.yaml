@@ -1,0 +1,5 @@
+title: FramingSectionPreambleVariantCage
+type: atom/string_text
+description: >-
+  Section preamble when framing_variant is "cage". Introduces the
+  display entries with confinement language.

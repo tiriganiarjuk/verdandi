@@ -1,6 +1,0 @@
-title: InstructionsStepsHeaderNOnlyTemplate
-type: atom/string_template
-description: >-
-  Step header template with n_only index tracking. Contains
-  {{step_n}} placeholder only. Used when step_index_tracking
-  is "n_only".

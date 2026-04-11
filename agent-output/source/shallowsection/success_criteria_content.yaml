@@ -5,7 +5,7 @@ description: >-
   framing, and definition-to-evidence transition.
 fields:
   required:
-    section_heading: field/success_criteria_section_heading
+    section_start: field/success_criteria_section_start
     verification_guidance_postscript: field/success_criteria_verification_guidance_postscript
     success_failure_independence_statement_postscript: field/success_criteria_success_failure_independence_statement_postscript
     criteria_separator: field/success_criteria_criteria_separator
