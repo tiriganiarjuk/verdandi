@@ -4,5 +4,8 @@ description: >-
   format with threshold-based switching.
 fields:
   required:
-    evidence_format: field/success_criteria_evidence_format
-    evidence_format_threshold: field/success_criteria_evidence_format_threshold
+    criteria_evidence_format: field/success_criteria_criteria_evidence_format
+    criteria_evidence_format_threshold: field/success_criteria_criteria_evidence_format_threshold
+  optional:
+    pre_section_divider_override: field/success_criteria_pre_section_divider_override
+    pre_body_entry_separator_override: field/success_criteria_pre_body_entry_separator_override

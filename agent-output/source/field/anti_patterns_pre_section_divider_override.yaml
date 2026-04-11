@@ -1,0 +1,6 @@
+title: AntiPatternsPreSectionDividerOverride
+type: enum/separator_content
+description: >-
+  Section-level override for the global inter_section_separator.
+  When set, replaces the global default for the divider that
+  renders above this section.

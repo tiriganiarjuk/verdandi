@@ -5,3 +5,6 @@ description: >-
 fields:
   required:
     patterns_format: field/anti_patterns_patterns_format
+  optional:
+    pre_section_divider_override: field/anti_patterns_pre_section_divider_override
+    pre_body_entry_separator_override: field/anti_patterns_pre_body_entry_separator_override

@@ -1,0 +1,6 @@
+title: ConstraintsPreSectionVisible
+type: atom/boolean
+default: true
+description: >-
+  Whether to render the constraints section at all. When false, the
+  entire section is suppressed regardless of other constraint settings.

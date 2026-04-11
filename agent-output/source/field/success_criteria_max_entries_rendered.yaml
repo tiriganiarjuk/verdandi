@@ -1,6 +1,0 @@
-title: SuccessCriteriaMaxEntriesRendered
-type: atom/integer
-default: 0
-description: >-
-  Maximum number of success criteria entries to render. Zero means
-  render all entries without limit.

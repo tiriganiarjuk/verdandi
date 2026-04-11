@@ -1,7 +1,0 @@
-title: InstructionsScaffoldingTierLightweightActivationThreshold
-type: atom/integer
-default: 3
-description: >-
-  Step count threshold for lightweight scaffolding tier activation.
-  When structural_complexity_override is 'auto' and step count is
-  at or below this value, lightweight tier is used.

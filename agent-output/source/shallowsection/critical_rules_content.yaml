@@ -4,7 +4,7 @@ description: >-
   preamble, and one prose template per rule.
 fields:
   required:
-    heading: field/critical_rules_heading
+    section_heading: field/critical_rules_section_heading
     authority_preamble: field/critical_rules_authority_preamble
     workspace_confinement_declaration_template: field/critical_rules_workspace_confinement_declaration_template
     output_tool_exclusivity_declaration_template: field/critical_rules_output_tool_exclusivity_declaration_template

@@ -1,0 +1,7 @@
+title: ExamplesGroupsEntryBodyContainer
+type: enum/body_container
+default: "bare_with_endmarker"
+description: >-
+  Visual container for example entry content. 'bare_with_endmarker'
+  renders directly with an end marker for boundary closure.
+  'blockquote' indents. 'none' renders directly.

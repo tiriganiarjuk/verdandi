@@ -1,8 +1,0 @@
-title: SuccessCriteriaMultiCriteriaRelationship
-type: enum/multi_criteria_relationship
-default: "independent_blocks"
-description: >-
-  How multiple success criteria relate to each other.
-  'independent_blocks' renders each criterion as a standalone block.
-  'numbered_dimensions' renders criteria as numbered evaluation
-  dimensions. Only applies when criteria count exceeds one.

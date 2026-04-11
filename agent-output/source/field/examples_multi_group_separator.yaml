@@ -1,7 +1,0 @@
-title: ExamplesMultiGroupSeparator
-type: enum/separator_style
-default: "horizontal_rule"
-description: >-
-  Visual separator between example groups when multiple groups exist.
-  'horizontal_rule' inserts a markdown rule. 'none' uses whitespace
-  only.

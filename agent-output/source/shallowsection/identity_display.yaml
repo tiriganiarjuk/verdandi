@@ -6,3 +6,6 @@ fields:
   required:
     role_expertise_format: field/identity_role_expertise_format
     role_expertise_format_threshold: field/identity_role_expertise_format_threshold
+  optional:
+    pre_section_divider_override: field/identity_pre_section_divider_override
+    pre_body_entry_separator_override: field/identity_pre_body_entry_separator_override

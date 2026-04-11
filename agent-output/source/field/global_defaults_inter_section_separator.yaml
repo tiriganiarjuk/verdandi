@@ -1,0 +1,7 @@
+title: GlobalDefaultsInterSectionSeparator
+type: enum/separator_content
+default: "horizontal_rule"
+description: >-
+  Default separator rendered between adjacent sections in the agent
+  prompt. Applies unless a specific section overrides it with
+  pre_section_divider_override.

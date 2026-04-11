@@ -1,7 +1,0 @@
-title: SuccessCriteriaEvidenceTypeHandling
-type: enum/evidence_type_handling
-default: "undifferentiated"
-description: >-
-  How evidence items render relative to their type markers.
-  'undifferentiated' renders all evidence items uniformly.
-  'graduated_language' varies language based on evidence type.

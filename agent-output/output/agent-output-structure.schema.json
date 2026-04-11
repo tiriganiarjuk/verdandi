@@ -65,8 +65,8 @@
       "type": "object",
       "description": "Structure controls for the identity section. Field ordering and visibility toggles for optional prose.",
       "properties": {
-        "field_ordering": {
-          "title": "IdentityFieldOrdering",
+        "pre_field_ordering": {
+          "title": "IdentityPreFieldOrdering",
           "type": "string",
           "description": "Structural variant for identity section field sequence. Controls whether the section leads with role identity and declaration (identity_first) or with scope and responsibility (responsibility_first).\nStructural variant for identity section field sequence. 'identity_first' leads with role identity and declaration. 'responsibility_first' leads with scope and responsibility.",
           "enum": [
@@ -95,7 +95,7 @@
         }
       },
       "required": [
-        "field_ordering",
+        "pre_field_ordering",
         "role_identity_postscript_template_visible",
         "role_expertise_postscript_visible",
         "identity_reminder_closing_template_visible"
@@ -207,7 +207,7 @@
     "critical_rules": {
       "title": "CriticalRulesStructure",
       "type": "object",
-      "description": "Structure controls for the critical rules section. Visibility toggles for each rule, presentation format, and hierarchy mode.",
+      "description": "Structure controls for the critical rules section. Visibility toggles for each rule.",
       "properties": {
         "authority_preamble_visible": {
           "$ref": "#/$defs/atom__boolean",
@@ -268,26 +268,6 @@
           "title": "CriticalRulesDisciplineOverHelpfulnessBodyVisible",
           "description": "Whether to render the discipline-over-helpfulness rule. Reframes discipline as the helpful behavior. Off by default — experimental rule testing whether explicit reframing reduces helpfulness drift.\nTrue or false value",
           "default": false
-        },
-        "rule_presentation": {
-          "title": "CriticalRulesRulePresentation",
-          "type": "string",
-          "description": "How individual rules render. 'single_sentence' presents each rule as a dense single sentence. 'heading_plus_body' gives each rule a bold heading with an explanatory body beneath.\nHow critical rules render. 'single_sentence' presents each rule as a single dense sentence. 'heading_plus_body' gives each rule a bold heading with an explanatory body beneath.",
-          "enum": [
-            "single_sentence",
-            "heading_plus_body"
-          ],
-          "default": "single_sentence"
-        },
-        "internal_hierarchy": {
-          "title": "CriticalRulesInternalHierarchy",
-          "type": "string",
-          "description": "Internal organization of critical rules. 'flat' renders all rules in a single list. 'universal_then_output_tool' groups into universal rules (always apply) followed by output-tool-specific rules.\nInternal organization of critical rules. 'flat' renders all rules in a single list with no grouping. 'universal_then_output_tool' groups rules into universal rules (always apply) followed by output-tool-specific rules (conditional on has_output_tool).",
-          "enum": [
-            "flat",
-            "universal_then_output_tool"
-          ],
-          "default": "flat"
         }
       },
       "required": [
@@ -300,9 +280,7 @@
         "no_invention_body_visible",
         "output_tool_exclusivity_declaration_template_visible",
         "batch_discipline_declaration_template_visible",
-        "discipline_over_helpfulness_body_visible",
-        "rule_presentation",
-        "internal_hierarchy"
+        "discipline_over_helpfulness_body_visible"
       ],
       "additionalProperties": false
     },
@@ -311,8 +289,8 @@
       "type": "object",
       "description": "Structure controls for the instructions section. Heading variant, mode explanation visibility, preamble components, step structure, closer, and scaffolding tier.",
       "properties": {
-        "heading_selector": {
-          "title": "InstructionsHeadingSelector",
+        "section_heading_selector": {
+          "title": "InstructionsSectionHeadingSelector",
           "type": "string",
           "description": "Selects which heading variant renders for the instructions section. 'default' uses a plain heading. 'procedure' uses formal procedural language. 'steps_with_count' includes the total step count.\nInstructions section heading style. 'default' uses a plain heading. 'procedure' uses formal procedural language. 'steps_with_count' includes the total step count in the heading.",
           "enum": [
@@ -346,8 +324,8 @@
           "description": "Whether to render the prohibition against supplementing steps with general knowledge or adding unspecified operations.\nTrue or false value",
           "default": true
         },
-        "step_index_tracking": {
-          "title": "InstructionsStepIndexTracking",
+        "steps_index_tracking": {
+          "title": "InstructionsStepsIndexTracking",
           "type": "string",
           "description": "How step numbers render in headers. 'n_only' shows just the step number. 'n_of_m' shows step number and total.\nHow step numbers render in instruction headers. 'n_only' shows just the step number (Step 3). 'n_of_m' shows step number and total (Step 3 of 7).",
           "enum": [
@@ -356,9 +334,9 @@
           ],
           "default": "n_of_m"
         },
-        "step_done_when_postscript_template_visible": {
+        "steps_done_when_postscript_template_visible": {
           "$ref": "#/$defs/atom__boolean",
-          "title": "InstructionsStepDoneWhenPostscriptTemplateVisible",
+          "title": "InstructionsStepsDoneWhenPostscriptTemplateVisible",
           "description": "Whether to render a completion condition suffix after each step body. Off by default — most steps are self-evident about completion.\nTrue or false value",
           "default": false
         },
@@ -374,9 +352,9 @@
           "description": "Whether to render a mode recap in the section closer summarizing which steps were exact and which required judgment.\nTrue or false value",
           "default": false
         },
-        "cross_step_dependency_label_template_visible": {
+        "steps_dependency_label_template_visible": {
           "$ref": "#/$defs/atom__boolean",
-          "title": "InstructionsCrossStepDependencyLabelTemplateVisible",
+          "title": "InstructionsStepsDependencyLabelTemplateVisible",
           "description": "Whether to render dependency phrases indicating which earlier steps a step's output depends on. Off by default — adds noise for simple linear workflows.\nTrue or false value",
           "default": false
         },
@@ -386,8 +364,8 @@
           "description": "Whether to render a progress reminder at the midpoint of the step list. Off by default — only useful for long instruction sets where the agent may lose orientation.\nTrue or false value",
           "default": false
         },
-        "scaffolding_tier_override": {
-          "title": "InstructionsScaffoldingTierOverride",
+        "pre_scaffolding_tier_override": {
+          "title": "InstructionsPreScaffoldingTierOverride",
           "type": "string",
           "description": "Scaffolding tier for instruction rendering. 'auto' selects from step count using activation thresholds. 'lightweight' uses minimal scaffolding. 'standard' adds preamble, markers, and closers. 'heavy' adds progress reminders, dependencies, and recaps.\nStructural complexity tier for instruction rendering. 'auto' selects tier from step count using activation thresholds. 'lightweight' uses minimal scaffolding (few steps, little overhead). 'standard' adds preamble, mode markers, and closers. 'heavy' adds progress reminders, dependency phrases, and detailed recaps.",
           "enum": [
@@ -400,18 +378,18 @@
         }
       },
       "required": [
-        "heading_selector",
+        "section_heading_selector",
         "instruction_mode_explanation_preamble_visible",
         "highlight_step_count_preamble_template_visible",
         "sequence_integrity_preamble_visible",
         "follow_strictly_preamble_visible",
-        "step_index_tracking",
-        "step_done_when_postscript_template_visible",
+        "steps_index_tracking",
+        "steps_done_when_postscript_template_visible",
         "follow_strictly_closing_template_visible",
         "instruction_mode_recap_closing_template_visible",
-        "cross_step_dependency_label_template_visible",
+        "steps_dependency_label_template_visible",
         "reminder_midpoint_preamble_template_visible",
-        "scaffolding_tier_override"
+        "pre_scaffolding_tier_override"
       ],
       "additionalProperties": false
     },
@@ -426,21 +404,21 @@
           "description": "Whether to render the section preamble explaining how to read examples (GOOD/BAD/WHY pattern).\nTrue or false value",
           "default": true
         },
-        "suppress_lone_group_heading": {
+        "groups_suppress_lone_heading": {
           "$ref": "#/$defs/atom__boolean",
-          "title": "ExamplesSuppressLoneGroupHeading",
+          "title": "ExamplesGroupsSuppressLoneHeading",
           "description": "Whether to suppress the group heading when only one example group exists. When true, a single-group agent skips the group heading and promotes entries directly under the section heading.\nTrue or false value",
           "default": true
         },
-        "example_display_headings_override": {
+        "groups_display_headings_override": {
           "$ref": "#/$defs/atom__boolean",
-          "title": "ExamplesExampleDisplayHeadingsOverride",
+          "title": "ExamplesGroupsDisplayHeadingsOverride",
           "description": "Whether to override the per-group example_display_headings from data. When false, data passes through unchanged. When true, the sibling examples_example_display_headings value is used instead.\nTrue or false value",
           "default": false
         },
-        "examples_max_number_override": {
+        "groups_max_number_override": {
           "$ref": "#/$defs/atom__boolean",
-          "title": "ExamplesMaxNumberOverride",
+          "title": "ExamplesGroupsMaxNumberOverride",
           "description": "Whether to override the per-group examples_max_number from data. When false, data passes through unchanged. When true, the sibling examples_max_number value is used instead.\nTrue or false value",
           "default": false
         },
@@ -450,24 +428,24 @@
           "description": "Whether to render a framing sentence between the group heading and its first entry. Off by default — group headings are usually self-explanatory.\nTrue or false value",
           "default": false
         },
-        "example_display_headings": {
+        "groups_display_headings": {
           "$ref": "#/$defs/atom__boolean",
-          "title": "ExamplesExampleDisplayHeadings",
+          "title": "ExamplesGroupsDisplayHeadings",
           "description": "Override value for example entry headings. Only applies when examples_example_display_headings_override is true. Controls whether individual example entries show their headings.\nTrue or false value",
           "default": true
         },
-        "examples_max_number": {
+        "groups_max_number": {
           "$ref": "#/$defs/atom__integer",
-          "title": "ExamplesMaxNumber",
+          "title": "ExamplesGroupsMaxNumber",
           "description": "Override value for maximum examples to render per group. Only applies when examples_max_number_override is true. 0 means no truncation. N > 0 caps at N entries, preserving author priority order.\nWhole number value",
           "default": 0
         }
       },
       "required": [
         "section_preamble_visible",
-        "suppress_lone_group_heading",
-        "example_display_headings_override",
-        "examples_max_number_override",
+        "groups_suppress_lone_heading",
+        "groups_display_headings_override",
+        "groups_max_number_override",
         "group_framing_preamble_template_visible"
       ],
       "additionalProperties": false,
@@ -475,44 +453,44 @@
         {
           "if": {
             "required": [
-              "example_display_headings_override"
+              "groups_display_headings_override"
             ],
             "properties": {
-              "example_display_headings_override": {
+              "groups_display_headings_override": {
                 "const": true
               }
             }
           },
           "then": {
             "required": [
-              "example_display_headings"
+              "groups_display_headings"
             ]
           },
           "else": {
             "properties": {
-              "example_display_headings": false
+              "groups_display_headings": false
             }
           }
         },
         {
           "if": {
             "required": [
-              "examples_max_number_override"
+              "groups_max_number_override"
             ],
             "properties": {
-              "examples_max_number_override": {
+              "groups_max_number_override": {
                 "const": true
               }
             }
           },
           "then": {
             "required": [
-              "examples_max_number"
+              "groups_max_number"
             ]
           },
           "else": {
             "properties": {
-              "examples_max_number": false
+              "groups_max_number": false
             }
           }
         }
@@ -523,15 +501,15 @@
       "type": "object",
       "description": "Structure controls for the constraints section. Master visibility, entry limit, visibility toggles, and variant selectors conditional on their paired visibility toggle.",
       "properties": {
-        "section_visible": {
+        "pre_section_visible": {
           "$ref": "#/$defs/atom__boolean",
-          "title": "ConstraintsSectionVisible",
+          "title": "ConstraintsPreSectionVisible",
           "description": "Whether to render the constraints section at all. When false, the entire section is suppressed regardless of other constraint settings.\nTrue or false value",
           "default": true
         },
-        "max_entries_rendered": {
+        "pre_max_entries_rendered": {
           "$ref": "#/$defs/atom__integer",
-          "title": "ConstraintsMaxEntriesRendered",
+          "title": "ConstraintsPreMaxEntriesRendered",
           "description": "Maximum number of constraint entries to render. Zero means render all entries without limit. Positive values cap the list, useful for token budget control when constraint counts are high.\nWhole number value",
           "default": 0
         },
@@ -610,8 +588,8 @@
         }
       },
       "required": [
-        "section_visible",
-        "max_entries_rendered",
+        "pre_section_visible",
+        "pre_max_entries_rendered",
         "section_preamble_visible",
         "constraints_are_not_steps_preamble_visible",
         "no_inferred_constraints_preamble_visible",
@@ -695,15 +673,15 @@
       "type": "object",
       "description": "Structure controls for the anti-patterns section. Master visibility, entry limit, preamble and distinction toggles.",
       "properties": {
-        "section_visible": {
+        "pre_section_visible": {
           "$ref": "#/$defs/atom__boolean",
-          "title": "AntiPatternsSectionVisible",
+          "title": "AntiPatternsPreSectionVisible",
           "description": "Whether to render the anti-patterns section at all. When false, the entire section is suppressed regardless of other anti-pattern settings.\nTrue or false value",
           "default": true
         },
-        "max_entries_rendered": {
+        "pre_max_entries_rendered": {
           "$ref": "#/$defs/atom__integer",
-          "title": "AntiPatternsMaxEntriesRendered",
+          "title": "AntiPatternsPreMaxEntriesRendered",
           "description": "Maximum number of anti-pattern entries to render. Zero means render all entries without limit.\nWhole number value",
           "default": 0
         },
@@ -721,8 +699,8 @@
         }
       },
       "required": [
-        "section_visible",
-        "max_entries_rendered",
+        "pre_section_visible",
+        "pre_max_entries_rendered",
         "section_preamble_visible",
         "constraints_vs_anti_patterns_distinction_preamble_visible"
       ],
@@ -731,17 +709,17 @@
     "success_criteria": {
       "title": "SuccessCriteriaStructure",
       "type": "object",
-      "description": "Structure controls for the success criteria section. Variant selectors for definition framing, evidence framing, and transition style. Voice, evidence handling, and multi-criteria relationship.",
+      "description": "Structure controls for the success criteria section. Variant selectors for definition framing, evidence framing, and transition style. Evidence handling and multi-criteria relationship.",
       "properties": {
-        "section_visible": {
+        "pre_section_visible": {
           "$ref": "#/$defs/atom__boolean",
-          "title": "SuccessCriteriaSectionVisible",
+          "title": "SuccessCriteriaPreSectionVisible",
           "description": "Whether to render the success criteria section at all. When false, the entire section is suppressed regardless of other settings.\nTrue or false value",
           "default": true
         },
-        "max_entries_rendered": {
+        "pre_max_entries_rendered": {
           "$ref": "#/$defs/atom__integer",
-          "title": "SuccessCriteriaMaxEntriesRendered",
+          "title": "SuccessCriteriaPreMaxEntriesRendered",
           "description": "Maximum number of success criteria entries to render. Zero means render all entries without limit.\nWhole number value",
           "default": 0
         },
@@ -778,8 +756,8 @@
           ],
           "default": "goal_then_criteria"
         },
-        "evidence_type_handling": {
-          "title": "SuccessCriteriaEvidenceTypeHandling",
+        "criteria_evidence_type_handling": {
+          "title": "SuccessCriteriaCriteriaEvidenceTypeHandling",
           "type": "string",
           "description": "How evidence items render relative to their type markers. 'undifferentiated' renders all evidence items uniformly. 'graduated_language' varies language based on evidence type.\nHow evidence items are rendered relative to their type markers. 'graduated_language' adds per-item type markers distinguishing mechanical from judgment evidence. 'undifferentiated' renders all evidence items equally with no type distinction.",
           "enum": [
@@ -787,16 +765,6 @@
             "undifferentiated"
           ],
           "default": "undifferentiated"
-        },
-        "output_vs_agent_voice": {
-          "title": "SuccessCriteriaOutputVsAgentVoice",
-          "type": "string",
-          "description": "Voice paradigm for success criteria prose. 'output_centric' describes success in terms of what the output looks like. 'agent_centric' describes success in terms of what the agent did.\nVoice paradigm for success criteria prose. 'output_centric' frames criteria in terms of what the output must be. 'agent_centric' frames criteria in terms of what the agent must achieve.",
-          "enum": [
-            "output_centric",
-            "agent_centric"
-          ],
-          "default": "output_centric"
         },
         "success_failure_independence_statement_postscript_visible": {
           "$ref": "#/$defs/atom__boolean",
@@ -810,8 +778,8 @@
           "description": "Whether to render the verification guidance suffix after evidence. Off by default. When enabled, reminds the model that some criteria are mechanically verifiable while others require judgment.\nTrue or false value",
           "default": false
         },
-        "multi_criteria_relationship": {
-          "title": "SuccessCriteriaMultiCriteriaRelationship",
+        "criteria_relationship": {
+          "title": "SuccessCriteriaCriteriaRelationship",
           "type": "string",
           "description": "How multiple success criteria relate to each other. 'independent_blocks' renders each criterion as a standalone block. 'numbered_dimensions' renders criteria as numbered evaluation dimensions. Only applies when criteria count exceeds one.\nHow multiple success criteria relate to each other. 'independent_blocks' renders each criterion as a standalone block. 'numbered_dimensions' numbers criteria as dimensions of a single quality assessment.",
           "enum": [
@@ -822,16 +790,15 @@
         }
       },
       "required": [
-        "section_visible",
-        "max_entries_rendered",
+        "pre_section_visible",
+        "pre_max_entries_rendered",
         "definition_declaration_selector",
         "evidence_intro_selector",
         "definition_to_evidence_transition_selector",
-        "evidence_type_handling",
-        "output_vs_agent_voice",
+        "criteria_evidence_type_handling",
         "success_failure_independence_statement_postscript_visible",
         "verification_guidance_postscript_visible",
-        "multi_criteria_relationship"
+        "criteria_relationship"
       ],
       "additionalProperties": false
     },
@@ -840,15 +807,15 @@
       "type": "object",
       "description": "Structure controls for the failure criteria section. Master visibility, entry limit, visibility toggles, and abort stance variant conditional on preamble visibility.",
       "properties": {
-        "section_visible": {
+        "pre_section_visible": {
           "$ref": "#/$defs/atom__boolean",
-          "title": "FailureCriteriaSectionVisible",
+          "title": "FailureCriteriaPreSectionVisible",
           "description": "Whether to render the failure criteria section at all. When false, the entire section is suppressed regardless of other settings.\nTrue or false value",
           "default": true
         },
-        "max_entries_rendered": {
+        "pre_max_entries_rendered": {
           "$ref": "#/$defs/atom__integer",
-          "title": "FailureCriteriaMaxEntriesRendered",
+          "title": "FailureCriteriaPreMaxEntriesRendered",
           "description": "Maximum number of failure criteria entries to render. Zero means render all entries without limit.\nWhole number value",
           "default": 0
         },
@@ -882,8 +849,8 @@
         }
       },
       "required": [
-        "section_visible",
-        "max_entries_rendered",
+        "pre_section_visible",
+        "pre_max_entries_rendered",
         "abort_stance_preamble_visible",
         "cite_definition_and_evidence_postscript_visible",
         "check_before_and_during_postscript_visible"

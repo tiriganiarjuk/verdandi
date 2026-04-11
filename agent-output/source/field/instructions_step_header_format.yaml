@@ -1,6 +1,0 @@
-title: InstructionsStepHeaderFormat
-type: enum/heading_format
-default: "bold"
-description: >-
-  How step headers render. 'bold' uses markdown bold text inline.
-  'h3' uses a level-3 heading. 'h4' uses a level-4 heading.

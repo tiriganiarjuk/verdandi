@@ -3,11 +3,11 @@ version: 1
 description: >-
   Display surface schema for agent output rendering. Controls visual
   formatting: list styles, thresholds, separators, containers, and
-  inline formats. Independent of both structure and content. Three
-  sections (output, writing_output, return_format) have no display
-  knobs.
+  inline formats. Independent of both structure and content. Global
+  defaults apply across all sections unless overridden.
 shallowsections:
   required:
+    global_defaults: shallowsection/global_defaults_display
     identity: shallowsection/identity_display
     security_boundary: shallowsection/security_boundary_display
     input: shallowsection/input_display
@@ -18,3 +18,6 @@ shallowsections:
     anti_patterns: shallowsection/anti_patterns_display
     success_criteria: shallowsection/success_criteria_display
     failure_criteria: shallowsection/failure_criteria_display
+    output: shallowsection/output_display
+    writing_output: shallowsection/writing_output_display
+    return_format: shallowsection/return_format_display

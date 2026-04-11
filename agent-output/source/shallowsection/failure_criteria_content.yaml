@@ -5,7 +5,7 @@ description: >-
   definition label.
 fields:
   required:
-    heading: field/failure_criteria_heading
+    section_heading: field/failure_criteria_section_heading
     any_one_triggers_abort_preamble: field/failure_criteria_any_one_triggers_abort_preamble
     evidence_intro: field/failure_criteria_evidence_intro
     cite_definition_and_evidence_postscript: field/failure_criteria_cite_definition_and_evidence_postscript

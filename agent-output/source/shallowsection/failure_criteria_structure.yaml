@@ -5,8 +5,8 @@ description: >-
   variant conditional on preamble visibility.
 fields:
   required:
-    section_visible: field/failure_criteria_section_visible
-    max_entries_rendered: field/failure_criteria_max_entries_rendered
+    pre_section_visible: field/failure_criteria_pre_section_visible
+    pre_max_entries_rendered: field/failure_criteria_pre_max_entries_rendered
     abort_stance_preamble_visible: field/failure_criteria_abort_stance_preamble_visible
     cite_definition_and_evidence_postscript_visible: field/failure_criteria_cite_definition_and_evidence_postscript_visible
     check_before_and_during_postscript_visible: field/failure_criteria_check_before_and_during_postscript_visible

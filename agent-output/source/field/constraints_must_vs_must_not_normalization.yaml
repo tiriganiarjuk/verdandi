@@ -1,7 +1,0 @@
-title: ConstraintsMustVsMustNotNormalization
-type: enum/must_normalization
-default: "preserve_voice"
-description: >-
-  How must/must-not phrasing is normalized across constraints.
-  'preserve_voice' keeps authored phrasing. Other values rewrite
-  constraints to a consistent polarity style.

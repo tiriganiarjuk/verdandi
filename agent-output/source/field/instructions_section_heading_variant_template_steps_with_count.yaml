@@ -1,0 +1,6 @@
+title: InstructionsSectionHeadingVariantTemplateStepsWithCount
+type: atom/string_template
+description: >-
+  Heading text when heading_variant is "steps_with_count". Template
+  with {{step_count}} placeholder. Includes total step count in
+  the heading.

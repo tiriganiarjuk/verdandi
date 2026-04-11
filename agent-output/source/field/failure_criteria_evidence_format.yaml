@@ -1,7 +1,0 @@
-title: FailureCriteriaEvidenceFormat
-type: enum/list_format
-default: "bare"
-description: >-
-  Format for rendering failure evidence lists. Unlike success
-  criteria which uses threshold-based switching, failure evidence
-  uses a single fixed format.

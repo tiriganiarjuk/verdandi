@@ -1,0 +1,8 @@
+title: ExamplesGroupsMaxNumber
+type: atom/integer
+default: 0
+description: >-
+  Override value for maximum examples to render per group. Only
+  applies when examples_max_number_override is true. 0 means no
+  truncation. N > 0 caps at N entries, preserving author priority
+  order.

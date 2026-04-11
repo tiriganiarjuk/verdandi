@@ -6,18 +6,18 @@ description: >-
 fields:
   required:
     section_preamble_visible: field/examples_section_preamble_visible
-    suppress_lone_group_heading: field/examples_suppress_lone_group_heading
-    example_display_headings_override: field/examples_example_display_headings_override
-    examples_max_number_override: field/examples_max_number_override
+    groups_suppress_lone_heading: field/examples_groups_suppress_lone_heading
+    groups_display_headings_override: field/examples_groups_display_headings_override
+    groups_max_number_override: field/examples_groups_max_number_override
     group_framing_preamble_template_visible: field/examples_group_framing_preamble_template_visible
   conditional:
-    example_display_headings:
-      ref: field/examples_example_display_headings
+    groups_display_headings:
+      ref: field/examples_groups_display_headings
       only_when:
-        field: example_display_headings_override
+        field: groups_display_headings_override
         equals: true
-    examples_max_number:
-      ref: field/examples_max_number
+    groups_max_number:
+      ref: field/examples_groups_max_number
       only_when:
-        field: examples_max_number_override
+        field: groups_max_number_override
         equals: true

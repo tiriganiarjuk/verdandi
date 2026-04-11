@@ -1,8 +1,0 @@
-title: InstructionsStepModeLabelVariant
-description: >-
-  Mode label text for instruction steps. Keys match instruction_mode
-  enum values (deterministic/probabilistic). The label renders before
-  the step header, separated by the step_mode_separator display field.
-required:
-  deterministic: field/instructions_step_mode_label_variant_deterministic
-  probabilistic: field/instructions_step_mode_label_variant_probabilistic

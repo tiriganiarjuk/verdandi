@@ -4,7 +4,10 @@ description: >-
   body container, and separators for entries and groups.
 fields:
   required:
-    example_heading_format: field/examples_example_heading_format
-    example_body_container: field/examples_example_body_container
-    example_separator: field/examples_example_separator
-    multi_group_separator: field/examples_multi_group_separator
+    groups_entry_heading_format: field/examples_groups_entry_heading_format
+    groups_entry_body_container: field/examples_groups_entry_body_container
+    groups_entry_separator: field/examples_groups_entry_separator
+    groups_separator: field/examples_groups_separator
+  optional:
+    pre_section_divider_override: field/examples_pre_section_divider_override
+    pre_body_entry_separator_override: field/examples_pre_body_entry_separator_override

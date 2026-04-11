@@ -1,6 +1,0 @@
-title: SecurityBoundaryPathStyle
-type: enum/path_display_style
-default: "relative_dotslash"
-description: >-
-  How filesystem paths render in display entries. Controls whether
-  paths show as relative with ./ prefix, relative bare, or absolute.

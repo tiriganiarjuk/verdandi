@@ -5,10 +5,13 @@ description: >-
   scaffolding tier thresholds, and recap format.
 fields:
   required:
-    step_header_format: field/instructions_step_header_format
-    step_body_container: field/instructions_step_body_container
-    step_mode_separator: field/instructions_step_mode_separator
-    instruction_mode_restrict_to_transition: field/instructions_instruction_mode_restrict_to_transition
-    scaffolding_tier_lightweight_activation_threshold: field/instructions_scaffolding_tier_lightweight_activation_threshold
-    scaffolding_tier_standard_activation_threshold: field/instructions_scaffolding_tier_standard_activation_threshold
-    instruction_mode_recap_format: field/instructions_instruction_mode_recap_format
+    steps_header_format: field/instructions_steps_header_format
+    steps_body_container: field/instructions_steps_body_container
+    steps_mode_separator: field/instructions_steps_mode_separator
+    steps_mode_restrict_to_transition: field/instructions_steps_mode_restrict_to_transition
+    steps_scaffolding_lightweight_threshold: field/instructions_steps_scaffolding_lightweight_threshold
+    steps_scaffolding_standard_threshold: field/instructions_steps_scaffolding_standard_threshold
+    steps_mode_recap_format: field/instructions_steps_mode_recap_format
+  optional:
+    pre_section_divider_override: field/instructions_pre_section_divider_override
+    pre_body_entry_separator_override: field/instructions_pre_body_entry_separator_override

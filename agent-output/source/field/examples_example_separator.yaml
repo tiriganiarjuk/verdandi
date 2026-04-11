@@ -1,6 +1,0 @@
-title: ExamplesExampleSeparator
-type: enum/separator_style
-default: "horizontal_rule"
-description: >-
-  Visual separator between example entries within a group. Used when
-  entry headings are off (per-group data controls this).

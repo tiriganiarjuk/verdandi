@@ -1,7 +1,0 @@
-title: ConstraintsMaxEntriesRendered
-type: atom/integer
-default: 0
-description: >-
-  Maximum number of constraint entries to render. Zero means render all
-  entries without limit. Positive values cap the list, useful for token
-  budget control when constraint counts are high.

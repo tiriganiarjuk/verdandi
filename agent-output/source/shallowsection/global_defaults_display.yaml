@@ -1,0 +1,8 @@
+title: GlobalDefaults
+description: >-
+  Global default display controls that apply across all sections
+  unless overridden at the section level.
+fields:
+  required:
+    inter_section_separator: field/global_defaults_inter_section_separator
+    intra_section_separator: field/global_defaults_intra_section_separator

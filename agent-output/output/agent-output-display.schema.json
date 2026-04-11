@@ -2,9 +2,10 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "agent-output-display.schema.json",
   "title": "Agent Output Display",
-  "description": "Display surface schema for agent output rendering. Controls visual formatting: list styles, thresholds, separators, containers, and inline formats. Independent of both structure and content. Three sections (output, writing_output, return_format) have no display knobs.",
+  "description": "Display surface schema for agent output rendering. Controls visual formatting: list styles, thresholds, separators, containers, and inline formats. Independent of both structure and content. Global defaults apply across all sections unless overridden.",
   "type": "object",
   "required": [
+    "global_defaults",
     "identity",
     "security_boundary",
     "input",
@@ -14,9 +15,36 @@
     "constraints",
     "anti_patterns",
     "success_criteria",
-    "failure_criteria"
+    "failure_criteria",
+    "output",
+    "writing_output",
+    "return_format"
   ],
   "properties": {
+    "global_defaults": {
+      "title": "GlobalDefaults",
+      "type": "object",
+      "description": "Global default display controls that apply across all sections unless overridden at the section level.",
+      "properties": {
+        "inter_section_separator": {
+          "$ref": "#/$defs/enum__separator_content",
+          "title": "GlobalDefaultsInterSectionSeparator",
+          "description": "Default separator rendered between adjacent sections in the agent prompt. Applies unless a specific section overrides it with pre_section_divider_override.\nContent separator between repeated blocks. Declarative intent — the renderer maps each value to the actual string. 'newline' is a single line break. 'double_newline' is two line breaks (visual paragraph gap). 'horizontal_rule' is a markdown --- rule. 'blank_line' is an empty line. Extensible via union with fence types when more complex separators are needed.",
+          "default": "horizontal_rule"
+        },
+        "intra_section_separator": {
+          "$ref": "#/$defs/enum__separator_content",
+          "title": "GlobalDefaultsIntraSectionSeparator",
+          "description": "Default separator rendered between output points within a section (between heading/preamble/body/closing and between entries inside each slot). Applies unless a section overrides it with pre_body_entry_separator_override for the body slot.\nContent separator between repeated blocks. Declarative intent — the renderer maps each value to the actual string. 'newline' is a single line break. 'double_newline' is two line breaks (visual paragraph gap). 'horizontal_rule' is a markdown --- rule. 'blank_line' is an empty line. Extensible via union with fence types when more complex separators are needed.",
+          "default": "double_newline"
+        }
+      },
+      "required": [
+        "inter_section_separator",
+        "intra_section_separator"
+      ],
+      "additionalProperties": false
+    },
     "identity": {
       "title": "IdentityDisplay",
       "type": "object",
@@ -36,6 +64,16 @@
           "title": "IdentityRoleExpertiseFormatThreshold",
           "description": "Item count threshold for expertise format switching. When identity_expertise_format is a pair, items above this count use the first format, items at or below use the second.\nWhole number value",
           "default": 3
+        },
+        "pre_section_divider_override": {
+          "$ref": "#/$defs/enum__separator_content",
+          "title": "IdentityPreSectionDividerOverride",
+          "description": "Section-level override for the global inter_section_separator. When set, replaces the global default for the divider that renders above this section.\nContent separator between repeated blocks. Declarative intent — the renderer maps each value to the actual string. 'newline' is a single line break. 'double_newline' is two line breaks (visual paragraph gap). 'horizontal_rule' is a markdown --- rule. 'blank_line' is an empty line. Extensible via union with fence types when more complex separators are needed."
+        },
+        "pre_body_entry_separator_override": {
+          "$ref": "#/$defs/enum__separator_content",
+          "title": "IdentityPreBodyEntrySeparatorOverride",
+          "description": "Section-level override for the global intra_section_separator applied to body-entry joins. When set, replaces the global default between body output points in this section.\nContent separator between repeated blocks. Declarative intent — the renderer maps each value to the actual string. 'newline' is a single line break. 'double_newline' is two line breaks (visual paragraph gap). 'horizontal_rule' is a markdown --- rule. 'blank_line' is an empty line. Extensible via union with fence types when more complex separators are needed."
         }
       },
       "required": [
@@ -47,10 +85,10 @@
     "security_boundary": {
       "title": "SecurityBoundaryDisplay",
       "type": "object",
-      "description": "Display formatting for the security boundary section. Path style, toolset formats, intro threshold, and entry list format.",
+      "description": "Display formatting for the security boundary section. Path style, toolset format, label visibility threshold, and entry list format.",
       "properties": {
-        "path_style": {
-          "title": "SecurityBoundaryPathStyle",
+        "filesystem_permissions_path_style": {
+          "title": "SecurityBoundaryFilesystemPermissionsPathStyle",
           "type": "string",
           "description": "How filesystem paths render in display entries. Controls whether paths show as relative with ./ prefix, relative bare, or absolute.\nHow filesystem paths render in agent-facing output. 'relative_dotslash' strips the workspace prefix and prepends ./ (e.g., ./src/main.py). 'relative_bare' strips the prefix with no ./ (e.g., src/main.py). 'absolute' renders the full absolute path as-is.",
           "enum": [
@@ -60,8 +98,8 @@
           ],
           "default": "relative_dotslash"
         },
-        "toolset_format": {
-          "title": "SecurityBoundaryToolsetFormat",
+        "filesystem_permissions_toolset_format": {
+          "title": "SecurityBoundaryFilesystemPermissionsToolsetFormat",
           "type": "string",
           "description": "How tool names render alongside paths in display entries. Engine detects whether tools are uniform or heterogeneous from the data. 'grouped' only applies when uniform — falls back to per_entry_list for heterogeneous tool sets.\nHow tool names render in security boundary display entries. 'grouped' shows the tool list once above all entries (only valid when all entries share the same tools — engine falls back to per_entry_list otherwise). 'per_entry_list' shows tools as a list alongside each entry. 'per_entry_prose' embeds tools in natural language alongside each entry.",
           "enum": [
@@ -77,8 +115,8 @@
           "description": "Entry count threshold for showing the filesystem map intro line. When entry count is at or below this threshold, the intro is suppressed (too few entries to need introduction). Above the threshold, the intro renders.\nWhole number value",
           "default": 4
         },
-        "entry_list_format": {
-          "title": "SecurityBoundaryEntryListFormat",
+        "filesystem_permissions_list_format": {
+          "title": "SecurityBoundaryFilesystemPermissionsListFormat",
           "type": "string",
           "description": "Marker style for the display entry list. Controls whether entries render with bullets, numbers, or dashes.\nMarker style for list entries. 'bullet' uses bullet point markers. 'numbered' uses sequential integers. 'dash' uses dash markers.",
           "enum": [
@@ -87,13 +125,23 @@
             "dash"
           ],
           "default": "bullet"
+        },
+        "pre_section_divider_override": {
+          "$ref": "#/$defs/enum__separator_content",
+          "title": "SecurityBoundaryPreSectionDividerOverride",
+          "description": "Section-level override for the global inter_section_separator. When set, replaces the global default for the divider that renders above this section.\nContent separator between repeated blocks. Declarative intent — the renderer maps each value to the actual string. 'newline' is a single line break. 'double_newline' is two line breaks (visual paragraph gap). 'horizontal_rule' is a markdown --- rule. 'blank_line' is an empty line. Extensible via union with fence types when more complex separators are needed."
+        },
+        "pre_body_entry_separator_override": {
+          "$ref": "#/$defs/enum__separator_content",
+          "title": "SecurityBoundaryPreBodyEntrySeparatorOverride",
+          "description": "Section-level override for the global intra_section_separator applied to body-entry joins. When set, replaces the global default between body output points in this section.\nContent separator between repeated blocks. Declarative intent — the renderer maps each value to the actual string. 'newline' is a single line break. 'double_newline' is two line breaks (visual paragraph gap). 'horizontal_rule' is a markdown --- rule. 'blank_line' is an empty line. Extensible via union with fence types when more complex separators are needed."
         }
       },
       "required": [
-        "path_style",
-        "toolset_format",
+        "filesystem_permissions_path_style",
+        "filesystem_permissions_toolset_format",
         "filesystem_permissions_label_visibility_threshold",
-        "entry_list_format"
+        "filesystem_permissions_list_format"
       ],
       "additionalProperties": false
     },
@@ -128,6 +176,16 @@
           "title": "InputParametersFormatThreshold",
           "description": "Parameter count threshold for format switching when parameters_format is a pair. At or below this count the second format applies; above it the first format applies.\nWhole number value",
           "default": 2
+        },
+        "pre_section_divider_override": {
+          "$ref": "#/$defs/enum__separator_content",
+          "title": "InputPreSectionDividerOverride",
+          "description": "Section-level override for the global inter_section_separator. When set, replaces the global default for the divider that renders above this section.\nContent separator between repeated blocks. Declarative intent — the renderer maps each value to the actual string. 'newline' is a single line break. 'double_newline' is two line breaks (visual paragraph gap). 'horizontal_rule' is a markdown --- rule. 'blank_line' is an empty line. Extensible via union with fence types when more complex separators are needed."
+        },
+        "pre_body_entry_separator_override": {
+          "$ref": "#/$defs/enum__separator_content",
+          "title": "InputPreBodyEntrySeparatorOverride",
+          "description": "Section-level override for the global intra_section_separator applied to body-entry joins. When set, replaces the global default between body output points in this section.\nContent separator between repeated blocks. Declarative intent — the renderer maps each value to the actual string. 'newline' is a single line break. 'double_newline' is two line breaks (visual paragraph gap). 'horizontal_rule' is a markdown --- rule. 'blank_line' is an empty line. Extensible via union with fence types when more complex separators are needed."
         }
       },
       "required": [
@@ -141,7 +199,7 @@
     "critical_rules": {
       "title": "CriticalRulesDisplay",
       "type": "object",
-      "description": "Display formatting for the critical rules section. Inline format for workspace path, tool name, and batch size. Tool name repetition strategy and rule separator.",
+      "description": "Display formatting for the critical rules section. Inline format for workspace path, tool name, and batch size. Tool name repetition strategy and rule separator override.",
       "properties": {
         "workspace_path_format": {
           "$ref": "#/$defs/enum__inline_format",
@@ -171,16 +229,15 @@
           "description": "How the batch size value renders inline. 'plain' renders the number directly. 'bold' wraps in markdown bold. 'metadata' renders as a key-value label.\nHow a single value renders inline. 'backtick' wraps in code backticks. 'plain' renders as-is. 'bold' wraps in markdown bold. 'metadata' renders as a key-value label (e.g., \"Batch size = N\").",
           "default": "plain"
         },
-        "rule_separator": {
-          "title": "CriticalRulesRuleSeparator",
-          "type": "string",
+        "pre_section_divider_override": {
+          "$ref": "#/$defs/enum__separator_content",
+          "title": "CriticalRulesPreSectionDividerOverride",
+          "description": "Section-level override for the global inter_section_separator. When set, replaces the global default for the divider that renders above this section.\nContent separator between repeated blocks. Declarative intent — the renderer maps each value to the actual string. 'newline' is a single line break. 'double_newline' is two line breaks (visual paragraph gap). 'horizontal_rule' is a markdown --- rule. 'blank_line' is an empty line. Extensible via union with fence types when more complex separators are needed."
+        },
+        "pre_body_entry_separator_override": {
+          "$ref": "#/$defs/enum__separator_content",
+          "title": "CriticalRulesPreBodyEntrySeparatorOverride",
           "description": "Content separator between individual critical rules. Controls visual density of the rule list. 'newline' for dense packing, 'double_newline' for visual separation between rules.\nContent separator between repeated blocks. Declarative intent — the renderer maps each value to the actual string. 'newline' is a single line break. 'double_newline' is two line breaks (visual paragraph gap). 'horizontal_rule' is a markdown --- rule. 'blank_line' is an empty line. Extensible via union with fence types when more complex separators are needed.",
-          "enum": [
-            "newline",
-            "double_newline",
-            "horizontal_rule",
-            "blank_line"
-          ],
           "default": "double_newline"
         }
       },
@@ -188,8 +245,7 @@
         "workspace_path_format",
         "tool_name_format",
         "tool_name_repetition",
-        "batch_size_format",
-        "rule_separator"
+        "batch_size_format"
       ],
       "additionalProperties": false
     },
@@ -198,20 +254,20 @@
       "type": "object",
       "description": "Display formatting for the instructions section. Step header format, body container, mode separator, mode transition restriction, scaffolding tier thresholds, and recap format.",
       "properties": {
-        "step_header_format": {
+        "steps_header_format": {
           "$ref": "#/$defs/enum__heading_format",
-          "title": "InstructionsStepHeaderFormat",
+          "title": "InstructionsStepsHeaderFormat",
           "description": "How step headers render. 'bold' uses markdown bold text inline. 'h3' uses a level-3 heading. 'h4' uses a level-4 heading.\nHow a sub-block heading renders. 'bold' uses markdown bold text inline. 'h3' uses a level-3 heading. 'h4' uses a level-4 heading. Section-level headings (H2) are invariant and not configurable.",
           "default": "bold"
         },
-        "step_body_container": {
+        "steps_body_container": {
           "$ref": "#/$defs/enum__body_container",
-          "title": "InstructionsStepBodyContainer",
+          "title": "InstructionsStepsBodyContainer",
           "description": "Visual container wrapping each step body. 'none' renders directly. 'blockquote' indents in a blockquote. 'bare_with_endmarker' appends an end marker for visual boundary closure.\nVisual container wrapping a content body. 'none' renders content directly with no wrapping. 'blockquote' indents content in a markdown blockquote. 'bare_with_endmarker' renders content directly but appends an end marker for visual boundary closure.",
           "default": "none"
         },
-        "step_mode_separator": {
-          "title": "InstructionsStepModeSeparator",
+        "steps_mode_separator": {
+          "title": "InstructionsStepsModeSeparator",
           "type": "string",
           "description": "Separator between mode label and step header. Only rendered when both mode label and step header are present. The renderer maps the enum value to the actual separator string.\nInline separator between adjacent text elements. Declarative intent — the renderer maps each value to the actual string. 'dash' is an em dash with spaces ( — ). 'colon' is a colon with trailing space (: ). 'pipe' is a vertical bar with spaces ( | ). 'newline' is a single line break. 'double_newline' is two line breaks (visual paragraph gap).",
           "enum": [
@@ -223,26 +279,26 @@
           ],
           "default": "dash"
         },
-        "instruction_mode_restrict_to_transition": {
-          "title": "InstructionsInstructionModeRestrictToTransition",
+        "steps_mode_restrict_to_transition": {
+          "title": "InstructionsStepsModeRestrictToTransition",
           "type": "boolean",
           "description": "When true, consecutive steps with the same instruction mode suppress their mode labels. Only steps where the mode changes from the previous step display the label. When false, every step shows its mode label.\nTrue or false value",
           "default": false
         },
-        "scaffolding_tier_lightweight_activation_threshold": {
+        "steps_scaffolding_lightweight_threshold": {
           "$ref": "#/$defs/atom__integer",
-          "title": "InstructionsScaffoldingTierLightweightActivationThreshold",
+          "title": "InstructionsStepsScaffoldingLightweightThreshold",
           "description": "Step count threshold for lightweight scaffolding tier activation. When structural_complexity_override is 'auto' and step count is at or below this value, lightweight tier is used.\nWhole number value",
           "default": 3
         },
-        "scaffolding_tier_standard_activation_threshold": {
+        "steps_scaffolding_standard_threshold": {
           "$ref": "#/$defs/atom__integer",
-          "title": "InstructionsScaffoldingTierStandardActivationThreshold",
+          "title": "InstructionsStepsScaffoldingStandardThreshold",
           "description": "Step count threshold for standard scaffolding tier activation. When structural_complexity_override is 'auto' and step count is above lightweight but at or below this value, standard tier is used. Above this threshold, heavy tier activates.\nWhole number value",
           "default": 7
         },
-        "instruction_mode_recap_format": {
-          "title": "InstructionsInstructionModeRecapFormat",
+        "steps_mode_recap_format": {
+          "title": "InstructionsStepsModeRecapFormat",
           "type": "string",
           "description": "How the mode recap renders in the section closer. 'prose' summarizes as flowing text. 'tabular' presents as a structured mapping of step numbers to modes.\nHow a mode recap renders in section closers. 'prose' summarizes modes as flowing text. 'tabular' presents modes in a structured table or list mapping step numbers to their modes.",
           "enum": [
@@ -250,16 +306,26 @@
             "tabular"
           ],
           "default": "prose"
+        },
+        "pre_section_divider_override": {
+          "$ref": "#/$defs/enum__separator_content",
+          "title": "InstructionsPreSectionDividerOverride",
+          "description": "Section-level override for the global inter_section_separator. When set, replaces the global default for the divider that renders above this section.\nContent separator between repeated blocks. Declarative intent — the renderer maps each value to the actual string. 'newline' is a single line break. 'double_newline' is two line breaks (visual paragraph gap). 'horizontal_rule' is a markdown --- rule. 'blank_line' is an empty line. Extensible via union with fence types when more complex separators are needed."
+        },
+        "pre_body_entry_separator_override": {
+          "$ref": "#/$defs/enum__separator_content",
+          "title": "InstructionsPreBodyEntrySeparatorOverride",
+          "description": "Section-level override for the global intra_section_separator applied to body-entry joins. When set, replaces the global default between body output points in this section.\nContent separator between repeated blocks. Declarative intent — the renderer maps each value to the actual string. 'newline' is a single line break. 'double_newline' is two line breaks (visual paragraph gap). 'horizontal_rule' is a markdown --- rule. 'blank_line' is an empty line. Extensible via union with fence types when more complex separators are needed."
         }
       },
       "required": [
-        "step_header_format",
-        "step_body_container",
-        "step_mode_separator",
-        "instruction_mode_restrict_to_transition",
-        "scaffolding_tier_lightweight_activation_threshold",
-        "scaffolding_tier_standard_activation_threshold",
-        "instruction_mode_recap_format"
+        "steps_header_format",
+        "steps_body_container",
+        "steps_mode_separator",
+        "steps_mode_restrict_to_transition",
+        "steps_scaffolding_lightweight_threshold",
+        "steps_scaffolding_standard_threshold",
+        "steps_mode_recap_format"
       ],
       "additionalProperties": false
     },
@@ -268,36 +334,46 @@
       "type": "object",
       "description": "Display formatting for the examples section. Entry heading format, body container, and separators for entries and groups.",
       "properties": {
-        "example_heading_format": {
+        "groups_entry_heading_format": {
           "$ref": "#/$defs/enum__heading_format",
-          "title": "ExamplesExampleHeadingFormat",
+          "title": "ExamplesGroupsEntryHeadingFormat",
           "description": "How example entry headings render. 'bold' uses markdown bold (preserves boundaries without visual density for many entries). 'h3' or 'h4' uses heading levels.\nHow a sub-block heading renders. 'bold' uses markdown bold text inline. 'h3' uses a level-3 heading. 'h4' uses a level-4 heading. Section-level headings (H2) are invariant and not configurable.",
           "default": "bold"
         },
-        "example_body_container": {
+        "groups_entry_body_container": {
           "$ref": "#/$defs/enum__body_container",
-          "title": "ExamplesExampleBodyContainer",
+          "title": "ExamplesGroupsEntryBodyContainer",
           "description": "Visual container for example entry content. 'bare_with_endmarker' renders directly with an end marker for boundary closure. 'blockquote' indents. 'none' renders directly.\nVisual container wrapping a content body. 'none' renders content directly with no wrapping. 'blockquote' indents content in a markdown blockquote. 'bare_with_endmarker' renders content directly but appends an end marker for visual boundary closure.",
           "default": "bare_with_endmarker"
         },
-        "example_separator": {
+        "groups_entry_separator": {
           "$ref": "#/$defs/enum__separator_style",
-          "title": "ExamplesExampleSeparator",
+          "title": "ExamplesGroupsEntrySeparator",
           "description": "Visual separator between example entries within a group. Used when entry headings are off (per-group data controls this).\nVisual separator between repeated blocks. 'horizontal_rule' inserts a markdown horizontal rule (---) between items. 'none' uses only whitespace separation.",
           "default": "horizontal_rule"
         },
-        "multi_group_separator": {
+        "groups_separator": {
           "$ref": "#/$defs/enum__separator_style",
-          "title": "ExamplesMultiGroupSeparator",
+          "title": "ExamplesGroupsSeparator",
           "description": "Visual separator between example groups when multiple groups exist. 'horizontal_rule' inserts a markdown rule. 'none' uses whitespace only.\nVisual separator between repeated blocks. 'horizontal_rule' inserts a markdown horizontal rule (---) between items. 'none' uses only whitespace separation.",
           "default": "horizontal_rule"
+        },
+        "pre_section_divider_override": {
+          "$ref": "#/$defs/enum__separator_content",
+          "title": "ExamplesPreSectionDividerOverride",
+          "description": "Section-level override for the global inter_section_separator. When set, replaces the global default for the divider that renders above this section.\nContent separator between repeated blocks. Declarative intent — the renderer maps each value to the actual string. 'newline' is a single line break. 'double_newline' is two line breaks (visual paragraph gap). 'horizontal_rule' is a markdown --- rule. 'blank_line' is an empty line. Extensible via union with fence types when more complex separators are needed."
+        },
+        "pre_body_entry_separator_override": {
+          "$ref": "#/$defs/enum__separator_content",
+          "title": "ExamplesPreBodyEntrySeparatorOverride",
+          "description": "Section-level override for the global intra_section_separator applied to body-entry joins. When set, replaces the global default between body output points in this section.\nContent separator between repeated blocks. Declarative intent — the renderer maps each value to the actual string. 'newline' is a single line break. 'double_newline' is two line breaks (visual paragraph gap). 'horizontal_rule' is a markdown --- rule. 'blank_line' is an empty line. Extensible via union with fence types when more complex separators are needed."
         }
       },
       "required": [
-        "example_heading_format",
-        "example_body_container",
-        "example_separator",
-        "multi_group_separator"
+        "groups_entry_heading_format",
+        "groups_entry_body_container",
+        "groups_entry_separator",
+        "groups_separator"
       ],
       "additionalProperties": false
     },
@@ -333,8 +409,8 @@
           "description": "Constraint count threshold for showing the count heading. When constraint count is at or above this value and visibility is enabled, the count heading renders.\nWhole number value",
           "default": 6
         },
-        "must_vs_must_not_normalization": {
-          "title": "ConstraintsMustVsMustNotNormalization",
+        "rules_polarity_normalization": {
+          "title": "ConstraintsRulesPolarityNormalization",
           "type": "string",
           "description": "How must/must-not phrasing is normalized across constraints. 'preserve_voice' keeps authored phrasing. Other values rewrite constraints to a consistent polarity style.\nHow MUST/MUST-NOT polarity is handled in constraint lists. 'preserve_voice' renders constraints as authored with no normalization. 'normalize_outliers' rewrites minority-polarity items to match the dominant voice. 'prefix_tags' prepends [MUST] or [MUST NOT] tags to each constraint regardless of authored voice.",
           "enum": [
@@ -344,11 +420,21 @@
           ],
           "default": "preserve_voice"
         },
-        "polarity_grouping_activation_threshold": {
+        "rules_polarity_grouping_threshold": {
           "$ref": "#/$defs/atom__integer",
-          "title": "ConstraintsPolarityGroupingActivationThreshold",
+          "title": "ConstraintsRulesPolarityGroupingThreshold",
           "description": "Constraint count threshold for activating polarity grouping. When constraint count reaches this value, constraints are split into must and must-not groups for clarity.\nWhole number value",
           "default": 11
+        },
+        "pre_section_divider_override": {
+          "$ref": "#/$defs/enum__separator_content",
+          "title": "ConstraintsPreSectionDividerOverride",
+          "description": "Section-level override for the global inter_section_separator. When set, replaces the global default for the divider that renders above this section.\nContent separator between repeated blocks. Declarative intent — the renderer maps each value to the actual string. 'newline' is a single line break. 'double_newline' is two line breaks (visual paragraph gap). 'horizontal_rule' is a markdown --- rule. 'blank_line' is an empty line. Extensible via union with fence types when more complex separators are needed."
+        },
+        "pre_body_entry_separator_override": {
+          "$ref": "#/$defs/enum__separator_content",
+          "title": "ConstraintsPreBodyEntrySeparatorOverride",
+          "description": "Section-level override for the global intra_section_separator applied to body-entry joins. When set, replaces the global default between body output points in this section.\nContent separator between repeated blocks. Declarative intent — the renderer maps each value to the actual string. 'newline' is a single line break. 'double_newline' is two line breaks (visual paragraph gap). 'horizontal_rule' is a markdown --- rule. 'blank_line' is an empty line. Extensible via union with fence types when more complex separators are needed."
         }
       },
       "required": [
@@ -356,8 +442,8 @@
         "rules_format_threshold",
         "compliance_reminder_closing_visibility_threshold",
         "constraint_count_heading_visibility_threshold",
-        "must_vs_must_not_normalization",
-        "polarity_grouping_activation_threshold"
+        "rules_polarity_normalization",
+        "rules_polarity_grouping_threshold"
       ],
       "additionalProperties": false
     },
@@ -375,6 +461,16 @@
             "bold_prohibition"
           ],
           "default": "bare_bullets"
+        },
+        "pre_section_divider_override": {
+          "$ref": "#/$defs/enum__separator_content",
+          "title": "AntiPatternsPreSectionDividerOverride",
+          "description": "Section-level override for the global inter_section_separator. When set, replaces the global default for the divider that renders above this section.\nContent separator between repeated blocks. Declarative intent — the renderer maps each value to the actual string. 'newline' is a single line break. 'double_newline' is two line breaks (visual paragraph gap). 'horizontal_rule' is a markdown --- rule. 'blank_line' is an empty line. Extensible via union with fence types when more complex separators are needed."
+        },
+        "pre_body_entry_separator_override": {
+          "$ref": "#/$defs/enum__separator_content",
+          "title": "AntiPatternsPreBodyEntrySeparatorOverride",
+          "description": "Section-level override for the global intra_section_separator applied to body-entry joins. When set, replaces the global default between body output points in this section.\nContent separator between repeated blocks. Declarative intent — the renderer maps each value to the actual string. 'newline' is a single line break. 'double_newline' is two line breaks (visual paragraph gap). 'horizontal_rule' is a markdown --- rule. 'blank_line' is an empty line. Extensible via union with fence types when more complex separators are needed."
         }
       },
       "required": [
@@ -387,25 +483,35 @@
       "type": "object",
       "description": "Display formatting for the success criteria section. Evidence format with threshold-based switching.",
       "properties": {
-        "evidence_format": {
+        "criteria_evidence_format": {
           "$ref": "#/$defs/union__format_or_pair",
-          "title": "SuccessCriteriaEvidenceFormat",
+          "title": "SuccessCriteriaCriteriaEvidenceFormat",
           "description": "Format for rendering the evidence list. A single enum value uses that format always. A pair switches at the threshold — first format below, second format at or above the threshold.\nPolymorphic format field. A plain string enum value means always use that format. A two-element array means threshold-based switching — first element above threshold, second at or below. Type tells behavior: string = unconditional, array = conditional.",
           "default": [
             "bulleted",
             "numbered"
           ]
         },
-        "evidence_format_threshold": {
+        "criteria_evidence_format_threshold": {
           "$ref": "#/$defs/atom__integer",
-          "title": "SuccessCriteriaEvidenceFormatThreshold",
+          "title": "SuccessCriteriaCriteriaEvidenceFormatThreshold",
           "description": "Evidence count threshold for format switching when evidence_format is a pair. Below this count the first format applies; at or above, the second format applies.\nWhole number value",
           "default": 5
+        },
+        "pre_section_divider_override": {
+          "$ref": "#/$defs/enum__separator_content",
+          "title": "SuccessCriteriaPreSectionDividerOverride",
+          "description": "Section-level override for the global inter_section_separator. When set, replaces the global default for the divider that renders above this section.\nContent separator between repeated blocks. Declarative intent — the renderer maps each value to the actual string. 'newline' is a single line break. 'double_newline' is two line breaks (visual paragraph gap). 'horizontal_rule' is a markdown --- rule. 'blank_line' is an empty line. Extensible via union with fence types when more complex separators are needed."
+        },
+        "pre_body_entry_separator_override": {
+          "$ref": "#/$defs/enum__separator_content",
+          "title": "SuccessCriteriaPreBodyEntrySeparatorOverride",
+          "description": "Section-level override for the global intra_section_separator applied to body-entry joins. When set, replaces the global default between body output points in this section.\nContent separator between repeated blocks. Declarative intent — the renderer maps each value to the actual string. 'newline' is a single line break. 'double_newline' is two line breaks (visual paragraph gap). 'horizontal_rule' is a markdown --- rule. 'blank_line' is an empty line. Extensible via union with fence types when more complex separators are needed."
         }
       },
       "required": [
-        "evidence_format",
-        "evidence_format_threshold"
+        "criteria_evidence_format",
+        "criteria_evidence_format_threshold"
       ],
       "additionalProperties": false
     },
@@ -414,16 +520,80 @@
       "type": "object",
       "description": "Display formatting for the failure criteria section. Evidence format.",
       "properties": {
-        "evidence_format": {
+        "criteria_evidence_format": {
           "$ref": "#/$defs/enum__list_format",
-          "title": "FailureCriteriaEvidenceFormat",
+          "title": "FailureCriteriaCriteriaEvidenceFormat",
           "description": "Format for rendering failure evidence lists. Unlike success criteria which uses threshold-based switching, failure evidence uses a single fixed format.\nHow a list of items renders visually. 'bulleted' uses dash or bullet markers. 'numbered' uses sequential integers. 'inline' joins items on one line with a separator. 'prose' flows items as natural language. 'bare' renders items with no markers or joining.",
           "default": "bare"
+        },
+        "pre_section_divider_override": {
+          "$ref": "#/$defs/enum__separator_content",
+          "title": "FailureCriteriaPreSectionDividerOverride",
+          "description": "Section-level override for the global inter_section_separator. When set, replaces the global default for the divider that renders above this section.\nContent separator between repeated blocks. Declarative intent — the renderer maps each value to the actual string. 'newline' is a single line break. 'double_newline' is two line breaks (visual paragraph gap). 'horizontal_rule' is a markdown --- rule. 'blank_line' is an empty line. Extensible via union with fence types when more complex separators are needed."
+        },
+        "pre_body_entry_separator_override": {
+          "$ref": "#/$defs/enum__separator_content",
+          "title": "FailureCriteriaPreBodyEntrySeparatorOverride",
+          "description": "Section-level override for the global intra_section_separator applied to body-entry joins. When set, replaces the global default between body output points in this section.\nContent separator between repeated blocks. Declarative intent — the renderer maps each value to the actual string. 'newline' is a single line break. 'double_newline' is two line breaks (visual paragraph gap). 'horizontal_rule' is a markdown --- rule. 'blank_line' is an empty line. Extensible via union with fence types when more complex separators are needed."
         }
       },
       "required": [
-        "evidence_format"
+        "criteria_evidence_format"
       ],
+      "additionalProperties": false
+    },
+    "output": {
+      "title": "UoutputDisplay",
+      "type": "object",
+      "description": "Display formatting for the output section. Only section-level separator overrides; this section has no per-field display knobs.",
+      "properties": {
+        "pre_section_divider_override": {
+          "$ref": "#/$defs/enum__separator_content",
+          "title": "OutputPreSectionDividerOverride",
+          "description": "Section-level override for the global inter_section_separator. When set, replaces the global default for the divider that renders above this section.\nContent separator between repeated blocks. Declarative intent — the renderer maps each value to the actual string. 'newline' is a single line break. 'double_newline' is two line breaks (visual paragraph gap). 'horizontal_rule' is a markdown --- rule. 'blank_line' is an empty line. Extensible via union with fence types when more complex separators are needed."
+        },
+        "pre_body_entry_separator_override": {
+          "$ref": "#/$defs/enum__separator_content",
+          "title": "OutputPreBodyEntrySeparatorOverride",
+          "description": "Section-level override for the global intra_section_separator applied to body-entry joins. When set, replaces the global default between body output points in this section.\nContent separator between repeated blocks. Declarative intent — the renderer maps each value to the actual string. 'newline' is a single line break. 'double_newline' is two line breaks (visual paragraph gap). 'horizontal_rule' is a markdown --- rule. 'blank_line' is an empty line. Extensible via union with fence types when more complex separators are needed."
+        }
+      },
+      "additionalProperties": false
+    },
+    "writing_output": {
+      "title": "UwritingUoutputDisplay",
+      "type": "object",
+      "description": "Display formatting for the writing_output section. Only section-level separator overrides; this section has no per-field display knobs.",
+      "properties": {
+        "pre_section_divider_override": {
+          "$ref": "#/$defs/enum__separator_content",
+          "title": "WritingOutputPreSectionDividerOverride",
+          "description": "Section-level override for the global inter_section_separator. When set, replaces the global default for the divider that renders above this section.\nContent separator between repeated blocks. Declarative intent — the renderer maps each value to the actual string. 'newline' is a single line break. 'double_newline' is two line breaks (visual paragraph gap). 'horizontal_rule' is a markdown --- rule. 'blank_line' is an empty line. Extensible via union with fence types when more complex separators are needed."
+        },
+        "pre_body_entry_separator_override": {
+          "$ref": "#/$defs/enum__separator_content",
+          "title": "WritingOutputPreBodyEntrySeparatorOverride",
+          "description": "Section-level override for the global intra_section_separator applied to body-entry joins. When set, replaces the global default between body output points in this section.\nContent separator between repeated blocks. Declarative intent — the renderer maps each value to the actual string. 'newline' is a single line break. 'double_newline' is two line breaks (visual paragraph gap). 'horizontal_rule' is a markdown --- rule. 'blank_line' is an empty line. Extensible via union with fence types when more complex separators are needed."
+        }
+      },
+      "additionalProperties": false
+    },
+    "return_format": {
+      "title": "UreturnUformatDisplay",
+      "type": "object",
+      "description": "Display formatting for the return_format section. Only section-level separator overrides; this section has no per-field display knobs.",
+      "properties": {
+        "pre_section_divider_override": {
+          "$ref": "#/$defs/enum__separator_content",
+          "title": "ReturnFormatPreSectionDividerOverride",
+          "description": "Section-level override for the global inter_section_separator. When set, replaces the global default for the divider that renders above this section.\nContent separator between repeated blocks. Declarative intent — the renderer maps each value to the actual string. 'newline' is a single line break. 'double_newline' is two line breaks (visual paragraph gap). 'horizontal_rule' is a markdown --- rule. 'blank_line' is an empty line. Extensible via union with fence types when more complex separators are needed."
+        },
+        "pre_body_entry_separator_override": {
+          "$ref": "#/$defs/enum__separator_content",
+          "title": "ReturnFormatPreBodyEntrySeparatorOverride",
+          "description": "Section-level override for the global intra_section_separator applied to body-entry joins. When set, replaces the global default between body output points in this section.\nContent separator between repeated blocks. Declarative intent — the renderer maps each value to the actual string. 'newline' is a single line break. 'double_newline' is two line breaks (visual paragraph gap). 'horizontal_rule' is a markdown --- rule. 'blank_line' is an empty line. Extensible via union with fence types when more complex separators are needed."
+        }
+      },
       "additionalProperties": false
     }
   },
@@ -445,6 +615,17 @@
       "title": "Integer",
       "type": "integer",
       "description": "Whole number value"
+    },
+    "enum__separator_content": {
+      "title": "SeparatorContent",
+      "type": "string",
+      "description": "Content separator between repeated blocks. Declarative intent — the renderer maps each value to the actual string. 'newline' is a single line break. 'double_newline' is two line breaks (visual paragraph gap). 'horizontal_rule' is a markdown --- rule. 'blank_line' is an empty line. Extensible via union with fence types when more complex separators are needed.\n",
+      "enum": [
+        "newline",
+        "double_newline",
+        "horizontal_rule",
+        "blank_line"
+      ]
     },
     "union__format_or_pair": {
       "title": "FormatOrPair",

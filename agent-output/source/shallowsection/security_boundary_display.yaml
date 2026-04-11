@@ -1,10 +1,13 @@
 title: SecurityBoundaryDisplay
 description: >-
   Display formatting for the security boundary section. Path style,
-  toolset formats, intro threshold, and entry list format.
+  toolset format, label visibility threshold, and entry list format.
 fields:
   required:
-    path_style: field/security_boundary_path_style
-    toolset_format: field/security_boundary_toolset_format
+    filesystem_permissions_path_style: field/security_boundary_filesystem_permissions_path_style
+    filesystem_permissions_toolset_format: field/security_boundary_filesystem_permissions_toolset_format
     filesystem_permissions_label_visibility_threshold: field/security_boundary_filesystem_permissions_label_visibility_threshold
-    entry_list_format: field/security_boundary_entry_list_format
+    filesystem_permissions_list_format: field/security_boundary_filesystem_permissions_list_format
+  optional:
+    pre_section_divider_override: field/security_boundary_pre_section_divider_override
+    pre_body_entry_separator_override: field/security_boundary_pre_body_entry_separator_override

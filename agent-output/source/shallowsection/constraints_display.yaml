@@ -9,5 +9,8 @@ fields:
     rules_format_threshold: field/constraints_rules_format_threshold
     compliance_reminder_closing_visibility_threshold: field/constraints_compliance_reminder_closing_visibility_threshold
     constraint_count_heading_visibility_threshold: field/constraints_constraint_count_heading_visibility_threshold
-    must_vs_must_not_normalization: field/constraints_must_vs_must_not_normalization
-    polarity_grouping_activation_threshold: field/constraints_polarity_grouping_activation_threshold
+    rules_polarity_normalization: field/constraints_rules_polarity_normalization
+    rules_polarity_grouping_threshold: field/constraints_rules_polarity_grouping_threshold
+  optional:
+    pre_section_divider_override: field/constraints_pre_section_divider_override
+    pre_body_entry_separator_override: field/constraints_pre_body_entry_separator_override

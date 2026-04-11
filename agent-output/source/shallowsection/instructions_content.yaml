@@ -8,15 +8,15 @@ fields:
     highlight_step_count_preamble_template: field/instructions_highlight_step_count_preamble_template
     sequence_integrity_preamble: field/instructions_sequence_integrity_preamble
     follow_strictly_preamble: field/instructions_follow_strictly_preamble
-    step_done_when_postscript_template: field/instructions_step_done_when_postscript_template
-    cross_step_dependency_label_template: field/instructions_cross_step_dependency_label_template
+    steps_done_when_postscript_template: field/instructions_steps_done_when_postscript_template
+    steps_dependency_label_template: field/instructions_steps_dependency_label_template
     reminder_midpoint_preamble_template: field/instructions_reminder_midpoint_preamble_template
     follow_strictly_closing_template: field/instructions_follow_strictly_closing_template
     instruction_mode_recap_closing_template: field/instructions_instruction_mode_recap_closing_template
-    step_header_template: field/instructions_step_header_template
-    step_header_n_only_template: field/instructions_step_header_n_only_template
+    steps_header_template: field/instructions_steps_header_template
+    steps_header_n_only_template: field/instructions_steps_header_n_only_template
 containers:
   required:
-    heading_variant_template: simplegroup/instructions_heading_variant_template
-    step_mode_label_variant: simplegroup/instructions_step_mode_label_variant
+    section_heading_variant_template: simplegroup/instructions_section_heading_variant_template
+    steps_mode_label_variant: simplegroup/instructions_steps_mode_label_variant
     instruction_mode_explanation_preamble_variant: simplegroup/instructions_instruction_mode_explanation_preamble_variant

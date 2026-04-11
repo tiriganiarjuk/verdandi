@@ -5,7 +5,7 @@ description: >-
   and no-inferred-constraints warning.
 fields:
   required:
-    heading: field/constraints_heading
+    section_heading: field/constraints_section_heading
     constraints_are_not_steps_preamble: field/constraints_are_not_steps_preamble
     constraint_count_heading_template: field/constraints_constraint_count_heading_template
     hierarchy_tier_comparison_preamble: field/constraints_hierarchy_tier_comparison_preamble

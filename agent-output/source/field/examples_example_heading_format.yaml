@@ -1,7 +1,0 @@
-title: ExamplesExampleHeadingFormat
-type: enum/heading_format
-default: "bold"
-description: >-
-  How example entry headings render. 'bold' uses markdown bold
-  (preserves boundaries without visual density for many entries).
-  'h3' or 'h4' uses heading levels.

@@ -1,5 +1,0 @@
-title: InstructionsStepModeLabelVariantDeterministic
-type: atom/string_label
-description: >-
-  Mode label for deterministic (exact) steps. Rendered before the
-  step header to signal the execution mode.

@@ -1,0 +1,8 @@
+title: GlobalDefaultsIntraSectionSeparator
+type: enum/separator_content
+default: "double_newline"
+description: >-
+  Default separator rendered between output points within a section
+  (between heading/preamble/body/closing and between entries inside
+  each slot). Applies unless a section overrides it with
+  pre_body_entry_separator_override for the body slot.

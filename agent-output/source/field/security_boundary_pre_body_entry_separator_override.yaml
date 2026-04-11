@@ -1,0 +1,6 @@
+title: SecurityBoundaryPreBodyEntrySeparatorOverride
+type: enum/separator_content
+description: >-
+  Section-level override for the global intra_section_separator
+  applied to body-entry joins. When set, replaces the global
+  default between body output points in this section.

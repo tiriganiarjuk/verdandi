@@ -5,7 +5,7 @@ description: >-
   heredoc explanation.
 fields:
   required:
-    heading: field/writing_output_heading
+    section_heading: field/writing_output_section_heading
     transition_preamble: field/writing_output_transition_preamble
     tool_mandate_preamble: field/writing_output_tool_mandate_preamble
     tool_identity_label_template: field/writing_output_tool_identity_label_template

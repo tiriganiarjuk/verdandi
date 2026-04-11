@@ -1,0 +1,8 @@
+title: InstructionsStepsModeRestrictToTransition
+type: atom/boolean
+default: false
+description: >-
+  When true, consecutive steps with the same instruction mode suppress
+  their mode labels. Only steps where the mode changes from the
+  previous step display the label. When false, every step shows
+  its mode label.

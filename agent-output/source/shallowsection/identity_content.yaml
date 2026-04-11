@@ -4,7 +4,7 @@ description: >-
   templates, role labels, expertise label, and closing reminder.
 fields:
   required:
-    heading_template: field/identity_heading_template
+    section_heading_template: field/identity_section_heading_template
     role_identity_declaration_template: field/identity_role_identity_declaration_template
     role_identity_postscript_template: field/identity_role_identity_postscript_template
     role_responsibility_declaration_template: field/identity_role_responsibility_declaration_template

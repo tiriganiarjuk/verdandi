@@ -5,8 +5,8 @@ description: >-
   on their paired visibility toggle.
 fields:
   required:
-    section_visible: field/constraints_section_visible
-    max_entries_rendered: field/constraints_max_entries_rendered
+    pre_section_visible: field/constraints_pre_section_visible
+    pre_max_entries_rendered: field/constraints_pre_max_entries_rendered
     section_preamble_visible: field/constraints_section_preamble_visible
     constraints_are_not_steps_preamble_visible: field/constraints_are_not_steps_preamble_visible
     no_inferred_constraints_preamble_visible: field/constraints_no_inferred_constraints_preamble_visible

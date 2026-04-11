@@ -5,7 +5,7 @@ description: >-
   tracking requirements.
 fields:
   required:
-    heading: field/return_format_heading
+    section_heading: field/return_format_section_heading
     files_vs_status_explanation_preamble: field/return_format_files_vs_status_explanation_preamble
     token_must_be_first_word_preamble: field/return_format_token_must_be_first_word_preamble
     token_must_be_first_word_tokens_three_preamble: field/return_format_token_must_be_first_word_tokens_three_preamble

@@ -1,6 +1,0 @@
-title: IdentityHeadingTemplate
-type: atom/string_template
-description: >-
-  Section heading for identity. Template with {{title}} placeholder
-  for the agent's display title. Rendered as H2 (or H3 inside a
-  group). Position: first element of the section.

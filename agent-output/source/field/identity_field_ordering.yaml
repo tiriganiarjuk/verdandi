@@ -1,8 +1,0 @@
-title: IdentityFieldOrdering
-type: enum/field_ordering
-default: "identity_first"
-description: >-
-  Structural variant for identity section field sequence. Controls
-  whether the section leads with role identity and declaration
-  (identity_first) or with scope and responsibility
-  (responsibility_first).

@@ -1,0 +1,7 @@
+title: InstructionsStepsModeSeparator
+type: enum/inline_separator
+default: "dash"
+description: >-
+  Separator between mode label and step header. Only rendered when
+  both mode label and step header are present. The renderer maps the
+  enum value to the actual separator string.

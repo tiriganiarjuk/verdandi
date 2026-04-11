@@ -1,0 +1,7 @@
+title: ConstraintsRulesPolarityGroupingThreshold
+type: atom/integer
+default: 11
+description: >-
+  Constraint count threshold for activating polarity grouping.
+  When constraint count reaches this value, constraints are split
+  into must and must-not groups for clarity.

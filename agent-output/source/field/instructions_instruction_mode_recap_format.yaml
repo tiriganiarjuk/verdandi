@@ -1,7 +1,0 @@
-title: InstructionsInstructionModeRecapFormat
-type: enum/recap_format
-default: "prose"
-description: >-
-  How the mode recap renders in the section closer. 'prose'
-  summarizes as flowing text. 'tabular' presents as a structured
-  mapping of step numbers to modes.

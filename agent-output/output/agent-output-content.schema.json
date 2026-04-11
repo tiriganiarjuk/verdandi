@@ -25,9 +25,9 @@
       "type": "object",
       "description": "Content prose for the identity section. Heading, declaration templates, role labels, expertise label, and closing reminder.",
       "properties": {
-        "heading_template": {
+        "section_heading_template": {
           "$ref": "#/$defs/atom__string_template",
-          "title": "IdentityHeadingTemplate",
+          "title": "IdentitySectionHeadingTemplate",
           "description": "Section heading for identity. Template with {{title}} placeholder for the agent's display title. Rendered as H2 (or H3 inside a group). Position: first element of the section.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
         },
         "role_identity_declaration_template": {
@@ -62,7 +62,7 @@
         }
       },
       "required": [
-        "heading_template",
+        "section_heading_template",
         "role_identity_declaration_template",
         "role_identity_postscript_template",
         "role_responsibility_declaration_template",
@@ -97,24 +97,24 @@
           "title": "SecurityBoundaryGroupedToolHeadingTemplate",
           "description": "Header line when all display entries share the same tool set. Contains {{TOOLS}} placeholder. Rendered once above the entry list when uniform_toolset_format is \"grouped\".\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
         },
-        "framing_heading_variant": {
-          "title": "FramingHeadingVariant",
+        "framing_section_heading_variant": {
+          "title": "FramingSectionHeadingVariant",
           "type": "object",
           "description": "Variant alternatives for the security boundary section heading. Keys match enum/framing_variant values. Structure selects one.",
           "properties": {
             "territory": {
               "$ref": "#/$defs/atom__string_text",
-              "title": "FramingHeadingVariantTerritory",
+              "title": "FramingSectionHeadingVariantTerritory",
               "description": "Section heading when framing_variant is \"territory\". Frames the workspace as the agent's domain.\nNatural language prose — must contain at least one whitespace character. Mutually exclusive with all identifier types. Used for descriptions, instructions, error messages, and display labels. Not a path."
             },
             "environmental": {
               "$ref": "#/$defs/atom__string_text",
-              "title": "FramingHeadingVariantEnvironmental",
+              "title": "FramingSectionHeadingVariantEnvironmental",
               "description": "Section heading when framing_variant is \"environmental\". Frames the workspace as the operating context.\nNatural language prose — must contain at least one whitespace character. Mutually exclusive with all identifier types. Used for descriptions, instructions, error messages, and display labels. Not a path."
             },
             "cage": {
               "$ref": "#/$defs/atom__string_text",
-              "title": "FramingHeadingVariantCage",
+              "title": "FramingSectionHeadingVariantCage",
               "description": "Section heading when framing_variant is \"cage\". Frames the workspace as a confinement boundary.\nNatural language prose — must contain at least one whitespace character. Mutually exclusive with all identifier types. Used for descriptions, instructions, error messages, and display labels. Not a path."
             }
           },
@@ -187,7 +187,7 @@
         "section_closing",
         "compound_entry_template",
         "grouped_tool_heading_template",
-        "framing_heading_variant",
+        "framing_section_heading_variant",
         "framing_declaration_variant_template",
         "framing_preamble_variant"
       ],
@@ -198,7 +198,7 @@
       "type": "object",
       "description": "Content prose for the input section. Description template, context headings and preambles, parameter templates, schema intro, and completeness postscript.",
       "properties": {
-        "heading": {
+        "section_heading": {
           "$ref": "#/$defs/atom__title_string",
           "title": "InputHeading",
           "description": "Section heading for input. Plain text, no placeholders.\nTitle Case string — each word starts uppercase, separated by spaces. Used for display titles, section headings, and short labels. Not prose (no sentences), not an identifier (has spaces)."
@@ -260,7 +260,7 @@
         }
       },
       "required": [
-        "heading",
+        "section_heading",
         "description_format_declaration_template",
         "section_preamble",
         "context_required_heading",
@@ -280,7 +280,7 @@
       "type": "object",
       "description": "Content prose for the critical rules section. Heading, authority preamble, and one prose template per rule.",
       "properties": {
-        "heading": {
+        "section_heading": {
           "$ref": "#/$defs/atom__string_text",
           "title": "CriticalRulesHeading",
           "description": "Section heading for critical rules. Plain text, no placeholders. Rendered as H2. Typically emphatic — all caps or strong language to signal inviolability.\nNatural language prose — must contain at least one whitespace character. Mutually exclusive with all identifier types. Used for descriptions, instructions, error messages, and display labels. Not a path."
@@ -332,7 +332,7 @@
         }
       },
       "required": [
-        "heading",
+        "section_heading",
         "authority_preamble",
         "workspace_confinement_declaration_template",
         "output_tool_exclusivity_declaration_template",
@@ -365,14 +365,14 @@
           "title": "InstructionsFollowStrictlyPreamble",
           "description": "Prohibition against supplementing steps with general knowledge or adding unspecified operations. Each step is a complete specification.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
         },
-        "step_done_when_postscript_template": {
+        "steps_done_when_postscript_template": {
           "$ref": "#/$defs/atom__string_template",
-          "title": "InstructionsStepDoneWhenPostscriptTemplate",
+          "title": "InstructionsStepsDoneWhenPostscriptTemplate",
           "description": "Completion condition suffix appended to step body. Template with {{completion_condition}} placeholder. Visibility controlled by instructions_step_done_when_postscript_visible.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
         },
-        "cross_step_dependency_label_template": {
+        "steps_dependency_label_template": {
           "$ref": "#/$defs/atom__string_template",
-          "title": "InstructionsCrossStepDependencyLabelTemplate",
+          "title": "InstructionsStepsDependencyLabelTemplate",
           "description": "Dependency phrase indicating which earlier steps a step builds on. Template with {{dependency_steps}} placeholder. Visibility controlled by instructions_cross_step_dependency_label_visible.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
         },
         "reminder_midpoint_preamble_template": {
@@ -390,34 +390,34 @@
           "title": "InstructionsInstructionModeRecapClosingTemplate",
           "description": "Mode recap in the section closer. Template with {{mode_recap_text}} placeholder. Summarizes which steps were exact and which judgment.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
         },
-        "step_header_template": {
+        "steps_header_template": {
           "$ref": "#/$defs/atom__string_template",
-          "title": "InstructionsStepHeaderTemplate",
+          "title": "InstructionsStepsHeaderTemplate",
           "description": "Step header template with n_of_m index tracking. Contains {{step_n}} and {{step_total}} placeholders. Used when step_index_tracking is \"n_of_m\".\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
         },
-        "step_header_n_only_template": {
+        "steps_header_n_only_template": {
           "$ref": "#/$defs/atom__string_template",
-          "title": "InstructionsStepHeaderNOnlyTemplate",
+          "title": "InstructionsStepsHeaderNOnlyTemplate",
           "description": "Step header template with n_only index tracking. Contains {{step_n}} placeholder only. Used when step_index_tracking is \"n_only\".\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
         },
-        "heading_variant_template": {
-          "title": "InstructionsHeadingVariantTemplate",
+        "section_heading_variant_template": {
+          "title": "InstructionsSectionHeadingVariantTemplate",
           "type": "object",
           "description": "Variant alternatives for the instructions section heading. Keys match enum/heading_variant_key values. Structure selects one.",
           "properties": {
             "default": {
               "$ref": "#/$defs/atom__title_string",
-              "title": "InstructionsHeadingVariantTemplateDefault",
+              "title": "InstructionsSectionHeadingVariantTemplateDefault",
               "description": "Heading text when heading_variant is \"default\". Plain section heading.\nTitle Case string — each word starts uppercase, separated by spaces. Used for display titles, section headings, and short labels. Not prose (no sentences), not an identifier (has spaces)."
             },
             "procedure": {
               "$ref": "#/$defs/atom__title_string",
-              "title": "InstructionsHeadingVariantTemplateProcedure",
+              "title": "InstructionsSectionHeadingVariantTemplateProcedure",
               "description": "Heading text when heading_variant is \"procedure\". Uses formal procedural language.\nTitle Case string — each word starts uppercase, separated by spaces. Used for display titles, section headings, and short labels. Not prose (no sentences), not an identifier (has spaces)."
             },
             "steps_with_count": {
               "$ref": "#/$defs/atom__string_template",
-              "title": "InstructionsHeadingVariantTemplateStepsWithCount",
+              "title": "InstructionsSectionHeadingVariantTemplateStepsWithCount",
               "description": "Heading text when heading_variant is \"steps_with_count\". Template with {{step_count}} placeholder. Includes total step count in the heading.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
             }
           },
@@ -428,19 +428,19 @@
           ],
           "additionalProperties": false
         },
-        "step_mode_label_variant": {
-          "title": "InstructionsStepModeLabelVariant",
+        "steps_mode_label_variant": {
+          "title": "InstructionsStepsModeLabelVariant",
           "type": "object",
           "description": "Mode label text for instruction steps. Keys match instruction_mode enum values (deterministic/probabilistic). The label renders before the step header, separated by the step_mode_separator display field.",
           "properties": {
             "deterministic": {
               "$ref": "#/$defs/atom__string_label",
-              "title": "InstructionsStepModeLabelVariantDeterministic",
+              "title": "InstructionsStepsModeLabelVariantDeterministic",
               "description": "Mode label for deterministic (exact) steps. Rendered before the step header to signal the execution mode.\nShort display-facing label text. Used for mode markers, inline headings, and brief formatting text. Max 30 characters prevents prose abuse — anything longer should use string_text or string_prose."
             },
             "probabilistic": {
               "$ref": "#/$defs/atom__string_label",
-              "title": "InstructionsStepModeLabelVariantProbabilistic",
+              "title": "InstructionsStepsModeLabelVariantProbabilistic",
               "description": "Mode label for probabilistic (judgment) steps. Rendered before the step header to signal the execution mode.\nShort display-facing label text. Used for mode markers, inline headings, and brief formatting text. Max 30 characters prevents prose abuse — anything longer should use string_text or string_prose."
             }
           },
@@ -483,15 +483,15 @@
         "highlight_step_count_preamble_template",
         "sequence_integrity_preamble",
         "follow_strictly_preamble",
-        "step_done_when_postscript_template",
-        "cross_step_dependency_label_template",
+        "steps_done_when_postscript_template",
+        "steps_dependency_label_template",
         "reminder_midpoint_preamble_template",
         "follow_strictly_closing_template",
         "instruction_mode_recap_closing_template",
-        "step_header_template",
-        "step_header_n_only_template",
-        "heading_variant_template",
-        "step_mode_label_variant",
+        "steps_header_template",
+        "steps_header_n_only_template",
+        "section_heading_variant_template",
+        "steps_mode_label_variant",
         "instruction_mode_explanation_preamble_variant"
       ],
       "additionalProperties": false
@@ -501,7 +501,7 @@
       "type": "object",
       "description": "Content prose for the examples section. Heading, preamble, group framing sentence, and entry heading template.",
       "properties": {
-        "heading": {
+        "section_heading": {
           "$ref": "#/$defs/atom__string_text",
           "title": "ExamplesHeading",
           "description": "Section heading for examples. Plain text, no placeholders.\nNatural language prose — must contain at least one whitespace character. Mutually exclusive with all identifier types. Used for descriptions, instructions, error messages, and display labels. Not a path."
@@ -523,7 +523,7 @@
         }
       },
       "required": [
-        "heading",
+        "section_heading",
         "section_preamble",
         "group_framing_preamble_template",
         "example_heading_template"
@@ -535,7 +535,7 @@
       "type": "object",
       "description": "Content prose for the constraints section. Heading, plain prose fields, and variant sub-tables for preamble, closing reminder, and no-inferred-constraints warning.",
       "properties": {
-        "heading": {
+        "section_heading": {
           "$ref": "#/$defs/atom__title_string",
           "title": "ConstraintsHeading",
           "description": "Section heading for constraints. Plain text, no placeholders. Rendered at the configured heading level.\nTitle Case string — each word starts uppercase, separated by spaces. Used for display titles, section headings, and short labels. Not prose (no sentences), not an identifier (has spaces)."
@@ -634,7 +634,7 @@
         }
       },
       "required": [
-        "heading",
+        "section_heading",
         "constraints_are_not_steps_preamble",
         "constraint_count_heading_template",
         "hierarchy_tier_comparison_preamble",
@@ -650,7 +650,7 @@
       "type": "object",
       "description": "Content prose for the anti-patterns section. Heading, preamble, and distinction prose.",
       "properties": {
-        "heading": {
+        "section_heading": {
           "$ref": "#/$defs/atom__string_text",
           "title": "AntiPatternsHeading",
           "description": "Section heading for anti-patterns. Plain text, no placeholders. Rendered at the configured heading level.\nNatural language prose — must contain at least one whitespace character. Mutually exclusive with all identifier types. Used for descriptions, instructions, error messages, and display labels. Not a path."
@@ -667,7 +667,7 @@
         }
       },
       "required": [
-        "heading",
+        "section_heading",
         "section_preamble",
         "constraints_vs_anti_patterns_distinction_preamble"
       ],
@@ -678,7 +678,7 @@
       "type": "object",
       "description": "Content prose for the success criteria section. Heading, plain prose, and variant sub-tables for definition framing, evidence framing, and definition-to-evidence transition.",
       "properties": {
-        "heading": {
+        "section_heading": {
           "$ref": "#/$defs/atom__string_text",
           "title": "SuccessCriteriaHeading",
           "description": "Section heading for success criteria. Plain text, no placeholders. Rendered at the configured heading level.\nNatural language prose — must contain at least one whitespace character. Mutually exclusive with all identifier types. Used for descriptions, instructions, error messages, and display labels. Not a path."
@@ -784,7 +784,7 @@
         }
       },
       "required": [
-        "heading",
+        "section_heading",
         "verification_guidance_postscript",
         "success_failure_independence_statement_postscript",
         "criteria_separator",
@@ -799,7 +799,7 @@
       "type": "object",
       "description": "Content prose for the failure criteria section. Heading, plain prose, and abort stance variant sub-tables for preamble and definition label.",
       "properties": {
-        "heading": {
+        "section_heading": {
           "$ref": "#/$defs/atom__string_text",
           "title": "FailureCriteriaHeading",
           "description": "Section heading for failure criteria. Plain text, no placeholders. Rendered at the configured heading level. Typically uses \"Abort Conditions\" rather than \"Failure Criteria.\"\nNatural language prose — must contain at least one whitespace character. Mutually exclusive with all identifier types. Used for descriptions, instructions, error messages, and display labels. Not a path."
@@ -870,7 +870,7 @@
         }
       },
       "required": [
-        "heading",
+        "section_heading",
         "any_one_triggers_abort_preamble",
         "evidence_intro",
         "cite_definition_and_evidence_postscript",
@@ -885,7 +885,7 @@
       "type": "object",
       "description": "Content prose for the output section. Heading, description and format templates, schema prose, and directory location variant sub-table.",
       "properties": {
-        "heading": {
+        "section_heading": {
           "$ref": "#/$defs/atom__string_text",
           "title": "OutputHeading",
           "description": "Section heading for the output section. Plain text, no placeholders. Rendered at the configured heading level.\nNatural language prose — must contain at least one whitespace character. Mutually exclusive with all identifier types. Used for descriptions, instructions, error messages, and display labels. Not a path."
@@ -934,7 +934,7 @@
         }
       },
       "required": [
-        "heading",
+        "section_heading",
         "output_description_declaration_template",
         "format_declaration_template",
         "schema_embedded_preamble",
@@ -948,7 +948,7 @@
       "type": "object",
       "description": "Content prose for the writing output section. Heading, transition preamble, tool mandate, identity label, invocation preamble, and heredoc explanation.",
       "properties": {
-        "heading": {
+        "section_heading": {
           "$ref": "#/$defs/atom__string_text",
           "title": "WritingOutputHeading",
           "description": "Section heading for the output mechanics section. Plain text, no placeholders. Rendered at the configured heading level.\nNatural language prose — must contain at least one whitespace character. Mutually exclusive with all identifier types. Used for descriptions, instructions, error messages, and display labels. Not a path."
@@ -980,7 +980,7 @@
         }
       },
       "required": [
-        "heading",
+        "section_heading",
         "transition_preamble",
         "tool_mandate_preamble",
         "tool_identity_label_template",
@@ -994,7 +994,7 @@
       "type": "object",
       "description": "Content prose for the return format section. Heading, protocol components, metrics obligations, abort/failure distinction, and tracking requirements.",
       "properties": {
-        "heading": {
+        "section_heading": {
           "$ref": "#/$defs/atom__string_text",
           "title": "ReturnFormatHeading",
           "description": "Section heading for the return protocol section. Plain text, no placeholders. Rendered at the configured heading level.\nNatural language prose — must contain at least one whitespace character. Mutually exclusive with all identifier types. Used for descriptions, instructions, error messages, and display labels. Not a path."
@@ -1061,7 +1061,7 @@
         }
       },
       "required": [
-        "heading",
+        "section_heading",
         "files_vs_status_explanation_preamble",
         "token_must_be_first_word_preamble",
         "token_must_be_first_word_tokens_three_preamble",

@@ -1,0 +1,8 @@
+title: UoutputDisplay
+description: >-
+  Display formatting for the output section. Only section-level
+  separator overrides; this section has no per-field display knobs.
+fields:
+  optional:
+    pre_section_divider_override: field/output_pre_section_divider_override
+    pre_body_entry_separator_override: field/output_pre_body_entry_separator_override

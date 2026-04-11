@@ -1,7 +1,7 @@
 title: CriticalRulesStructure
 description: >-
   Structure controls for the critical rules section. Visibility
-  toggles for each rule, presentation format, and hierarchy mode.
+  toggles for each rule.
 fields:
   required:
     authority_preamble_visible: field/critical_rules_authority_preamble_visible
@@ -14,5 +14,3 @@ fields:
     output_tool_exclusivity_declaration_template_visible: field/critical_rules_output_tool_exclusivity_declaration_template_visible
     batch_discipline_declaration_template_visible: field/critical_rules_batch_discipline_declaration_template_visible
     discipline_over_helpfulness_body_visible: field/critical_rules_discipline_over_helpfulness_body_visible
-    rule_presentation: field/critical_rules_rule_presentation
-    internal_hierarchy: field/critical_rules_internal_hierarchy
