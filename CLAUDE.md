@@ -63,6 +63,23 @@ None of them felt uncertain while doing it.
 
 _This section grows from experience. If you are corrected on an error that could recur, append it here immediately._
 
+## You Will Get These Things Wrong (salvaged)
+
+### Union Fields Without List Defaults (agent-output)
+**Detection:** If you author a `field/` whose type is a union like `union/format_or_pair` and you give it a scalar default (or no default) where the consumer expects a list...
+**Why it's wrong:** Union fields such as `format_or_pair` need `list[str]` defaults. Supplying the list default is a required Draupnir extension — without it the generated schema/model defaults are wrong for these union-typed fields.
+**Recovery:** Give union fields their `list[str]` default explicitly.
+
+### Shortening Property Names So They No Longer Match TOML Keys
+**Detection:** If you rename a schema property to a shorter/cleaner form (e.g. dropping a suffix like `_postscript_visible`)...
+**Why it's wrong:** Identity (and other) property names must match the authored TOML keys **exactly** — e.g. `expertise_is_strictly_limited_postscript_visible`, not a shortened variant. A mismatch produces silent key mismatches between the TOML definition and the generated schema.
+**Recovery:** Keep property names byte-for-byte identical to the TOML keys; verify by comparing TOML keys against schema property names per section.
+
+### Choosing simplegroup vs group for Variant Sub-Tables (agent-output)
+**Detection:** If you are modelling a content-surface variant sub-table and reach for the wrong container level...
+**Why it's wrong:** In agent-output, variant sub-tables are **simplegroups when flat** (one level of TOML sub-table) and **groups when nested** (2+ levels). E.g. `security_boundary.framing_variant` and `failure_criteria.abort_stance_variant` use groups (nested TOML sub-tables); `constraints` and `success_criteria` variant sub-tables are direct simplegroups in the shallowsection (flat TOML sub-tables).
+**Recovery:** Count the TOML sub-table nesting depth — 1 level → simplegroup, 2+ levels → group.
+
 ---
 <!-- ═══════════════════════════════════════════════════════════════════════ -->
 <!-- EVERYTHING ABOVE THIS LINE IS BEHAVIORAL (human-maintained, empirical) -->
