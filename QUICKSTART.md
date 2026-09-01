@@ -14,7 +14,7 @@ Verdandi is static data. You edit YAML files, then run Draupnir to compile them 
 
 ```bash
 # Regenerate all schemas from Verdandi YAML
-cd /Users/johnny/.ai/smidja/draupnir && uv run draupnir --all
+cd /Users/johnny/.ai/smidja/draupnir && uv run draupnir
 
 # Check for drift without writing (dry run)
 cd /Users/johnny/.ai/smidja/draupnir && uv run draupnir --check
@@ -36,7 +36,7 @@ JSON Schema files written to `{project}/output/*.schema.json`. agent-builder pro
 The full cascade is:
 
 1. Edit YAML in `{project}/source/`
-2. Run Draupnir to regenerate schemas: `cd /Users/johnny/.ai/smidja/draupnir && uv run draupnir --all`
+2. Run Draupnir to regenerate schemas: `cd /Users/johnny/.ai/smidja/draupnir && uv run draupnir`
 3. Rebuild Nornir gates to embed updated schemas: `nornir_deploy --build gates`
 4. Downstream consumers automatically pick up the new schemas
 

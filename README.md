@@ -36,7 +36,7 @@ The separation between `core/` (universal primitives like path types, string con
 Verdandi is edited by hand. After editing YAML, regenerate schemas through the downstream pipeline:
 
 ```bash
-cd ../draupnir && uv run draupnir --all       # Regenerate JSON Schemas
+cd ../draupnir && uv run draupnir       # Regenerate JSON Schemas
 cd ../nornir && nornir_deploy --build gates    # Recompile gate modules
 ```
 

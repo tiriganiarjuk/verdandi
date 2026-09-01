@@ -49,7 +49,7 @@ None of them felt uncertain while doing it.
 ### Forgetting to Run Draupnir After Changes
 **Detection:** If you edit Verdandi YAML but don't regenerate schemas...
 **Why it's wrong:** Verdandi is consumed by Draupnir. Changes to YAML only take effect when Draupnir regenerates the JSON Schemas. And after schema regeneration, Nornir must be rebuilt to embed the updated schemas. The cascade is: YAML → Draupnir → schemas → Nornir rebuild → pipeline uses new schemas.
-**Recovery:** After any YAML edit: `cd /Users/johnny/.ai/smidja/draupnir && uv run draupnir --all`, then `nornir_deploy --build gates` if validation gates are affected.
+**Recovery:** After any YAML edit: `cd /Users/johnny/.ai/smidja/draupnir && uv run draupnir`, then `nornir_deploy --build gates` if validation gates are affected.
 
 ### Using the Old Schema Format (flat map + nullable)
 **Detection:** If you write a schema YAML with top-level `required:` list, `nullable:` list, or a flat `sections:`/`shallowsections:` map without zones...
