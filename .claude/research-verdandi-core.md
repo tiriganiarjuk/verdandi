@@ -1608,7 +1608,7 @@ Stale documentation actively causes LLMs to revert features to match old docs. W
 - Reads all 348 Verdandi YAML files in load order
 - Validates with Pydantic models
 - Generates 13 JSON Schema files
-- Location: `/Users/johnny/.ai/spaces/bragi/tools/draupnir/`
+- Location: `/Users/johnny/ai/spaces/bragi/tools/draupnir/`
 
 ### Regin (Transform Engine)
 - Consumes Draupnir's JSON Schema output
@@ -1681,12 +1681,12 @@ Stale documentation actively causes LLMs to revert features to match old docs. W
 
 | File | Purpose | Path |
 |------|---------|------|
-| CLAUDE.md | Context refresh protocol, common mistakes, recovery | `/Users/johnny/.ai/smidja/verdandi/` |
-| CONTEXT_MAP.md | Resource inventory, documentation references | `/Users/johnny/.ai/smidja/verdandi/` |
-| COMPOSITION_RULES.md | Formal specification, level-by-level reference | `/Users/johnny/.ai/smidja/verdandi/` |
-| QUICKSTART.md | Operational guide, examples, what not to do | `/Users/johnny/.ai/smidja/verdandi/` |
-| PLAN_SCHEMA_ZONE_UNIFICATION.md | Recent enhancements: zones, exists predicate, leading-dot | `/Users/johnny/.ai/smidja/verdandi/` |
-| VERDANDI_REDESIGN.md | Field membrane design rationale | `/Users/johnny/.ai/smidja/verdandi/` |
+| CLAUDE.md | Context refresh protocol, common mistakes, recovery | `/Users/johnny/ai/smidja/verdandi/` |
+| CONTEXT_MAP.md | Resource inventory, documentation references | `/Users/johnny/ai/smidja/verdandi/` |
+| COMPOSITION_RULES.md | Formal specification, level-by-level reference | `/Users/johnny/ai/smidja/verdandi/` |
+| QUICKSTART.md | Operational guide, examples, what not to do | `/Users/johnny/ai/smidja/verdandi/` |
+| PLAN_SCHEMA_ZONE_UNIFICATION.md | Recent enhancements: zones, exists predicate, leading-dot | `/Users/johnny/ai/smidja/verdandi/` |
+| VERDANDI_REDESIGN.md | Field membrane design rationale | `/Users/johnny/ai/smidja/verdandi/` |
 
 ### Generated Schemas
 

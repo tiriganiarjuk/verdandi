@@ -14,13 +14,13 @@ Verdandi is static data. You edit YAML files, then run Draupnir to compile them 
 
 ```bash
 # Regenerate all schemas from Verdandi YAML
-cd /Users/johnny/.ai/smidja/draupnir && uv run draupnir
+cd /Users/johnny/ai/smidja/draupnir && uv run draupnir
 
 # Check for drift without writing (dry run)
-cd /Users/johnny/.ai/smidja/draupnir && uv run draupnir --check
+cd /Users/johnny/ai/smidja/draupnir && uv run draupnir --check
 
 # List available schemas
-cd /Users/johnny/.ai/smidja/draupnir && uv run draupnir --list
+cd /Users/johnny/ai/smidja/draupnir && uv run draupnir --list
 ```
 
 ### Input
@@ -36,7 +36,7 @@ JSON Schema files written to `{project}/output/*.schema.json`. agent-builder pro
 The full cascade is:
 
 1. Edit YAML in `{project}/source/`
-2. Run Draupnir to regenerate schemas: `cd /Users/johnny/.ai/smidja/draupnir && uv run draupnir`
+2. Run Draupnir to regenerate schemas: `cd /Users/johnny/ai/smidja/draupnir && uv run draupnir`
 3. Rebuild Nornir gates to embed updated schemas: `nornir_deploy --build gates`
 4. Downstream consumers automatically pick up the new schemas
 
@@ -44,7 +44,7 @@ The full cascade is:
 
 Each project contains YAML files organized into 15 subdirectories (one per composition level). Each file defines a single reusable type. Higher-level types reference lower-level types by file path (e.g., `field/dispatch_mode` means `field/dispatch_mode.yaml`).
 
-**Draupnir** (`/Users/johnny/.ai/smidja/draupnir/`) is the compiler. It reads all Verdandi YAML files in dependency order, validates them into frozen Pydantic models, and generates JSON Schema files to `{project}/output/`.
+**Draupnir** (`/Users/johnny/ai/smidja/draupnir/`) is the compiler. It reads all Verdandi YAML files in dependency order, validates them into frozen Pydantic models, and generates JSON Schema files to `{project}/output/`.
 
 The generated JSON Schemas are then consumed by:
 - **Nornir** for runtime validation of agent TOML definitions at pipeline boundaries
@@ -221,7 +221,7 @@ Read these files first, in this order, when working with Verdandi:
 | 2 | `COMPOSITION_RULES.md` | Formal specification of all 15 levels, their fields, and the composition rule. The authoritative reference. |
 | 3 | `CONTEXT_MAP.md` | Multi-project architecture, schema references, consuming tools, directory inventory |
 | 4 | `VERDANDI_REDESIGN.md` | Field membrane design rationale |
-| 5 | `/Users/johnny/.ai/smidja/draupnir/CLAUDE.md` | Architectural constraints for the Draupnir compiler that consumes Verdandi |
+| 5 | `/Users/johnny/ai/smidja/draupnir/CLAUDE.md` | Architectural constraints for the Draupnir compiler that consumes Verdandi |
 
 ### Quick orientation files
 

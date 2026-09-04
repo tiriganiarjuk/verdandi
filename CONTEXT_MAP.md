@@ -1,6 +1,6 @@
 <!-- ═══════════════════════════════════════════════════════════════════════ -->
 <!-- DO NOT EDIT THIS BLOCK. Before editing ANY part of this file, you MUST  -->
-<!-- first read /Users/johnny/.ai/CONTEXT_MANAGEMENT_SYSTEM.md — it defines  -->
+<!-- first read /Users/johnny/ai/CONTEXT_MANAGEMENT_SYSTEM.md — it defines  -->
 <!-- what this file is for and what may NOT go in it.                        -->
 <!--                                                                          -->
 <!-- This file is a MAP (a router), not a source. Its only job is to tell    -->
@@ -33,8 +33,8 @@ A hand-authored YAML type hierarchy — the source of every shape in the agent p
 > Your default frame will send you looking for one; there isn't one, and the twenty minutes
 > spent are a known tax. It is data. Draupnir is the only thing that reads it.
 
-1. `~/.ai/smidja/galdr/context/AGENT_BUILD_SYSTEM.md` — why the pipeline exists at all: determinism as the goal, the double gate, and what is being built toward. This is the part that cannot be recovered by reading a tree, and inferring it from the structure has gone wrong every time it has been tried.
-2. `~/.ai/smidja/galdr/context/VERDANDI_ELEMENT.md` — Verdandi's own reason for being: why an LLM cannot be trusted to write a schema, why the field membrane is mandatory, why the constraint-bearing type tier is immutable at the filesystem level, and why the levels accreted rather than being designed.
+1. `~/ai/smidja/galdr/context/AGENT_BUILD_SYSTEM.md` — why the pipeline exists at all: determinism as the goal, the double gate, and what is being built toward. This is the part that cannot be recovered by reading a tree, and inferring it from the structure has gone wrong every time it has been tried.
+2. `~/ai/smidja/galdr/context/VERDANDI_ELEMENT.md` — Verdandi's own reason for being: why an LLM cannot be trusted to write a schema, why the field membrane is mandatory, why the constraint-bearing type tier is immutable at the filesystem level, and why the levels accreted rather than being designed.
 3. `COMPOSITION_RULES.md` — the formal specification: what keys each level accepts and what it may reference. The authority for authoring.
 
 > Read the next one for its *prohibitions*, not its overview. The "What NOT to Do" list is
