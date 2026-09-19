@@ -33,7 +33,7 @@ fields:
     output_tool_schema_path:
       ref: field/output_tool_schema__x_abs
       always_when:
-        field: enforcement_output_tool_format
+        field: output_tool_format
         in: [jsonl, json]
     output_tool_file_path:
       ref: field/output_tool_file_path__abs

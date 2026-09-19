@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "agent-raw-definition.schema.json",
   "title": "Agent Raw Definition",
-  "description": "Authored agent definition as written by humans. Entry point to the pipeline DAG. Paths are workspace-relative, includes are file references, no computed sections.\n",
+  "description": "Authored agent definition as it arrives. Entry point to the pipeline DAG. Mostly written by an agent rather than by hand, which is why incorrect input is blocked and returned here rather than repaired downstream. Paths are workspace-relative, includes are file references, no computed sections.\n",
   "type": "object",
   "required": [
     "indirect",

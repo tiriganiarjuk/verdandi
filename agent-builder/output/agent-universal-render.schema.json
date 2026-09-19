@@ -1141,10 +1141,10 @@
             {
               "if": {
                 "required": [
-                  "enforcement_output_tool_format"
+                  "output_tool_format"
                 ],
                 "properties": {
-                  "enforcement_output_tool_format": {
+                  "output_tool_format": {
                     "enum": [
                       "jsonl",
                       "json"
