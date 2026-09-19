@@ -334,29 +334,11 @@
           ],
           "default": "n_of_m"
         },
-        "steps_done_when_postscript_visible": {
-          "$ref": "#/$defs/atom__boolean",
-          "title": "InstructionsStepsDoneWhenPostscriptVisible",
-          "description": "Whether to render a completion condition suffix after each step body. Off by default — most steps are self-evident about completion.\nTrue or false value",
-          "default": false
-        },
         "follow_strictly_closing_visible": {
           "$ref": "#/$defs/atom__boolean",
           "title": "InstructionsFollowStrictlyClosingVisible",
           "description": "Whether to render the section closer reinforcing that the listed steps are the complete task with no additions.\nTrue or false value",
           "default": true
-        },
-        "instruction_mode_recap_closing_visible": {
-          "$ref": "#/$defs/atom__boolean",
-          "title": "InstructionsInstructionModeRecapClosingVisible",
-          "description": "Whether to render a mode recap in the section closer summarizing which steps were exact and which required judgment.\nTrue or false value",
-          "default": false
-        },
-        "steps_dependency_label_visible": {
-          "$ref": "#/$defs/atom__boolean",
-          "title": "InstructionsStepsDependencyLabelVisible",
-          "description": "Whether to render dependency phrases indicating which earlier steps a step's output depends on. Off by default — adds noise for simple linear workflows.\nTrue or false value",
-          "default": false
         },
         "reminder_midpoint_preamble_visible": {
           "$ref": "#/$defs/atom__boolean",
@@ -384,10 +366,7 @@
         "sequence_integrity_preamble_visible",
         "follow_strictly_preamble_visible",
         "steps_index_tracking",
-        "steps_done_when_postscript_visible",
         "follow_strictly_closing_visible",
-        "instruction_mode_recap_closing_visible",
-        "steps_dependency_label_visible",
         "reminder_midpoint_preamble_visible",
         "pre_scaffolding_tier_override"
       ],

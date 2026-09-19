@@ -1,6 +1,0 @@
-title: InstructionsStepsDependencyLabelTemplate
-type: atom/string_template
-description: >-
-  Dependency phrase indicating which earlier steps a step builds on.
-  Template with {{dependency_steps}} placeholder. Visibility controlled
-  by instructions_cross_step_dependency_label_visible.

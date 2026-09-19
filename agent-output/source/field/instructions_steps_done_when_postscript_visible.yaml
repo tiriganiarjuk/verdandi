@@ -1,6 +1,0 @@
-title: InstructionsStepsDoneWhenPostscriptVisible
-type: atom/boolean
-default: false
-description: >-
-  Whether to render a completion condition suffix after each step body.
-  Off by default — most steps are self-evident about completion.

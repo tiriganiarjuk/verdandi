@@ -2,5 +2,5 @@ title: SuccessCriteriaDefinitionDeclarationVariantTemplateCompletionIdentity
 type: atom/string_template
 description: >-
   Definition framing as agent self-recognition of success. Contains
-  {{DEFINITION}} placeholder. Frames success in terms of what the
+  {{success_definition}} placeholder. Frames success in terms of what the
   agent will recognize when it has succeeded.

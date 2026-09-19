@@ -348,7 +348,7 @@
     "instructions": {
       "title": "InstructionsContent",
       "type": "object",
-      "description": "Content prose for the instructions section. Preamble components, per-step mode label variant, step heading templates, mode explanation variant, dependency phrases, closer text, and heading variant sub-table.",
+      "description": "Content prose for the instructions section. Preamble components, per-step mode label variant, step heading templates, mode explanation variant, closer text, and heading variant sub-table.",
       "properties": {
         "highlight_step_count_preamble_template": {
           "$ref": "#/$defs/atom__string_template",
@@ -365,16 +365,6 @@
           "title": "InstructionsFollowStrictlyPreamble",
           "description": "Prohibition against supplementing steps with general knowledge or adding unspecified operations. Each step is a complete specification.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
         },
-        "steps_done_when_postscript_template": {
-          "$ref": "#/$defs/atom__string_template",
-          "title": "InstructionsStepsDoneWhenPostscriptTemplate",
-          "description": "Completion condition suffix appended to step body. Template with {{completion_condition}} placeholder. Visibility controlled by instructions_step_done_when_postscript_visible.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
-        },
-        "steps_dependency_label_template": {
-          "$ref": "#/$defs/atom__string_template",
-          "title": "InstructionsStepsDependencyLabelTemplate",
-          "description": "Dependency phrase indicating which earlier steps a step builds on. Template with {{dependency_steps}} placeholder. Visibility controlled by instructions_cross_step_dependency_label_visible.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
-        },
         "reminder_midpoint_preamble_template": {
           "$ref": "#/$defs/atom__string_template",
           "title": "InstructionsReminderMidpointPreambleTemplate",
@@ -384,11 +374,6 @@
           "$ref": "#/$defs/atom__string_template",
           "title": "InstructionsFollowStrictlyClosingTemplate",
           "description": "Section closer reinforcing completeness. Template with {{step_count}} placeholder. States that the listed steps are the complete task.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
-        },
-        "instruction_mode_recap_closing_template": {
-          "$ref": "#/$defs/atom__string_template",
-          "title": "InstructionsInstructionModeRecapClosingTemplate",
-          "description": "Mode recap in the section closer. Template with {{mode_recap_text}} placeholder. Summarizes which steps were exact and which judgment.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
         },
         "steps_heading_template": {
           "$ref": "#/$defs/atom__string_template",
@@ -483,11 +468,8 @@
         "highlight_step_count_preamble_template",
         "sequence_integrity_preamble",
         "follow_strictly_preamble",
-        "steps_done_when_postscript_template",
-        "steps_dependency_label_template",
         "reminder_midpoint_preamble_template",
         "follow_strictly_closing_template",
-        "instruction_mode_recap_closing_template",
         "steps_heading_template",
         "steps_heading_n_only_template",
         "section_start_variant_template",
@@ -706,17 +688,17 @@
             "declarative_assertion": {
               "$ref": "#/$defs/atom__string_template",
               "title": "SuccessCriteriaDefinitionDeclarationVariantTemplateDeclarativeAssertion",
-              "description": "Definition framing that states the success definition directly. Contains {{DEFINITION}} placeholder replaced with the authored definition text.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
+              "description": "Definition framing that states the success definition directly. Contains {{success_definition}} placeholder replaced with the authored definition text.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
             },
             "conditional_gate": {
               "$ref": "#/$defs/atom__string_template",
               "title": "SuccessCriteriaDefinitionDeclarationVariantTemplateConditionalGate",
-              "description": "Definition framing as an if-and-only-if condition. Contains {{DEFINITION}} placeholder. Frames success as a gate that must be passed for task completion.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
+              "description": "Definition framing as an if-and-only-if condition. Contains {{success_definition}} placeholder. Frames success as a gate that must be passed for task completion.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
             },
             "completion_identity": {
               "$ref": "#/$defs/atom__string_template",
               "title": "SuccessCriteriaDefinitionDeclarationVariantTemplateCompletionIdentity",
-              "description": "Definition framing as agent self-recognition of success. Contains {{DEFINITION}} placeholder. Frames success in terms of what the agent will recognize when it has succeeded.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
+              "description": "Definition framing as agent self-recognition of success. Contains {{success_definition}} placeholder. Frames success in terms of what the agent will recognize when it has succeeded.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
             }
           },
           "required": [

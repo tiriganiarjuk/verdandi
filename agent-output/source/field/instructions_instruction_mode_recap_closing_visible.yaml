@@ -1,6 +1,0 @@
-title: InstructionsInstructionModeRecapClosingVisible
-type: atom/boolean
-default: false
-description: >-
-  Whether to render a mode recap in the section closer summarizing
-  which steps were exact and which required judgment.

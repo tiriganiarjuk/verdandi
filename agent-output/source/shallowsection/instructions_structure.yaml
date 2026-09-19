@@ -11,9 +11,6 @@ fields:
     sequence_integrity_preamble_visible: field/instructions_sequence_integrity_preamble_visible
     follow_strictly_preamble_visible: field/instructions_follow_strictly_preamble_visible
     steps_index_tracking: field/instructions_steps_index_tracking
-    steps_done_when_postscript_visible: field/instructions_steps_done_when_postscript_visible
     follow_strictly_closing_visible: field/instructions_follow_strictly_closing_visible
-    instruction_mode_recap_closing_visible: field/instructions_instruction_mode_recap_closing_visible
-    steps_dependency_label_visible: field/instructions_steps_dependency_label_visible
     reminder_midpoint_preamble_visible: field/instructions_reminder_midpoint_preamble_visible
     pre_scaffolding_tier_override: field/instructions_pre_scaffolding_tier_override
