@@ -252,7 +252,7 @@
     "instructions": {
       "title": "InstructionsDisplay",
       "type": "object",
-      "description": "Display formatting for the instructions section. Step heading format, body container, mode separator, mode transition restriction, scaffolding tier thresholds, and recap format.",
+      "description": "Display formatting for the instructions section. Step heading format, body container, mode separator, mode transition restriction, and scaffolding tier thresholds.",
       "properties": {
         "steps_heading_format": {
           "$ref": "#/$defs/enum__heading_format",
@@ -297,16 +297,6 @@
           "description": "Step count threshold for standard scaffolding tier activation. When structural_complexity_override is 'auto' and step count is above lightweight but at or below this value, standard tier is used. Above this threshold, heavy tier activates.\nWhole number value",
           "default": 7
         },
-        "steps_mode_recap_format": {
-          "title": "InstructionsStepsModeRecapFormat",
-          "type": "string",
-          "description": "How the mode recap renders in the section closer. 'prose' summarizes as flowing text. 'tabular' presents as a structured mapping of step numbers to modes.\nHow a mode recap renders in section closers. 'prose' summarizes modes as flowing text. 'tabular' presents modes in a structured table or list mapping step numbers to their modes.",
-          "enum": [
-            "prose",
-            "tabular"
-          ],
-          "default": "prose"
-        },
         "pre_section_divider_override": {
           "$ref": "#/$defs/enum__separator_content",
           "title": "InstructionsPreSectionDividerOverride",
@@ -324,8 +314,7 @@
         "steps_mode_separator",
         "steps_mode_restrict_to_transition",
         "steps_scaffolding_lightweight_threshold",
-        "steps_scaffolding_standard_threshold",
-        "steps_mode_recap_format"
+        "steps_scaffolding_standard_threshold"
       ],
       "additionalProperties": false
     },

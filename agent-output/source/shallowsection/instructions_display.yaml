@@ -2,7 +2,7 @@ title: InstructionsDisplay
 description: >-
   Display formatting for the instructions section. Step heading
   format, body container, mode separator, mode transition restriction,
-  scaffolding tier thresholds, and recap format.
+  and scaffolding tier thresholds.
 fields:
   required:
     steps_heading_format: field/instructions_steps_heading_format
@@ -11,7 +11,6 @@ fields:
     steps_mode_restrict_to_transition: field/instructions_steps_mode_restrict_to_transition
     steps_scaffolding_lightweight_threshold: field/instructions_steps_scaffolding_lightweight_threshold
     steps_scaffolding_standard_threshold: field/instructions_steps_scaffolding_standard_threshold
-    steps_mode_recap_format: field/instructions_steps_mode_recap_format
   optional:
     pre_section_divider_override: field/instructions_pre_section_divider_override
     pre_body_entry_separator_override: field/instructions_pre_body_entry_separator_override
