@@ -382,31 +382,23 @@
         "parameters": {
           "$ref": "#/$defs/array__dispatch_parameters"
         },
-        "context": {
-          "title": "ContextResources",
-          "type": "object",
-          "description": "Context resources available to the agent — required items that must be provided and optional items available on request.\n",
-          "properties": {
-            "context_required": {
-              "title": "ContextRequired",
-              "type": "array",
-              "description": "Required context resources — paths absolutized after resolution",
-              "items": {
-                "$ref": "#/$defs/simplegroup__context_item"
-              },
-              "minItems": 1
-            },
-            "context_available": {
-              "title": "ContextAvailable",
-              "type": "array",
-              "description": "Available context resources — paths absolutized after resolution",
-              "items": {
-                "$ref": "#/$defs/simplegroup__context_item"
-              },
-              "minItems": 1
-            }
+        "context_required": {
+          "title": "ContextRequired",
+          "type": "array",
+          "description": "Required context resources — paths absolutized after resolution",
+          "items": {
+            "$ref": "#/$defs/simplegroup__context_item"
           },
-          "additionalProperties": false
+          "minItems": 1
+        },
+        "context_available": {
+          "title": "ContextAvailable",
+          "type": "array",
+          "description": "Available context resources — paths absolutized after resolution",
+          "items": {
+            "$ref": "#/$defs/simplegroup__context_item"
+          },
+          "minItems": 1
         }
       },
       "required": [

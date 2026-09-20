@@ -13,4 +13,5 @@ fields:
 containers:
   optional:
     parameters: array/dispatch_parameters
-    context: group/context_resources
+    context_required: array/context_required
+    context_available: array/context_available
