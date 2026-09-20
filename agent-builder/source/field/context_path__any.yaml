@@ -1,10 +1,8 @@
 title: ContextPathAny
 type: union/path_any
 description: >-
-  Workspace-relative path to a context resource file. The transformer embeds
-  this file's content into the agent prompt as a labeled section (using
-  context_label as the heading) AND adds the path to read hooks (granting file
-  access). This dual-purpose mechanism ensures prompt awareness and permission
-  always stay in sync. Because content is embedded, consider file size — large
-  files consume context window. For context_required, the file must exist at
-  resolution time. For context_available, missing files are silently skipped.
+  Path to a context resource file, workspace-relative or absolute. Absolutized
+  during the build and added to the agent's Read hook, so prompt awareness and
+  permission stay in sync by construction. Whether the resource is mandatory
+  or merely offered is carried by the array this item sits in —
+  context_required or context_available — never by the path itself.

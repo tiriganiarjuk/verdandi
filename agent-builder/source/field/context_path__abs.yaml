@@ -1,7 +1,9 @@
 title: ContextPathAbs
 type: atom/path_absolute
 description: >-
-  Workspace-relative path to a context resource. The transformer uses this to
-  both generate prompt sections (telling the agent about the resource) AND add
-  the path to read hooks (granting access). This dual-purpose mechanism
-  ensures prompt awareness and permission always stay in sync.
+  Absolute path to a context resource, resolved during the build. Used twice:
+  the rendered prompt directs the agent to it, and the path is added to the
+  agent's Read hook. That dual use is what keeps prompt awareness and
+  permission in sync. Whether the resource is mandatory or merely offered is
+  carried by the array this item sits in — context_required or
+  context_available — never by the path itself.

@@ -1,11 +1,15 @@
 title: OutputSchemaEmbed
 type: atom/boolean
 description: >-
-  Whether to embed the output schema directly into the agent prompt. When
-  true, the format transformer reads the schema file and inlines its content —
-  uses context window but ensures the agent sees the schema without a tool
-  call. When false (or omitted), the schema path is granted read access and
-  the agent reads it via Read tool — saves context but adds a tool-call round
-  trip. Prefer true for small schemas (under ~100 lines) or when schema
-  adherence is critical. Prefer false for large schemas where context window
-  conservation matters. Either way the agent knows the desired shape.
+  Whether to embed the output schema directly into the agent prompt. Authored
+  here, in the data — the decision is made before rendering, not by a control
+  surface. When true, the schema's content is inlined and the read grant is
+  suppressed: the agent sees the schema with no tool call. When false (or
+  omitted), the schema path is granted read access and the agent reads it via
+  the Read tool — one round trip, and the content arrives as a recent turn.
+  Prefer true for small schemas (under ~100 lines) or when adherence is
+  critical. Prefer false for large ones — the cost is not only context window:
+  a large inlined block lands mid-prompt where attention is weakest, and
+  pushes every later section further into that same trough. There is no free
+  position for it. Which way is better for a given schema is worth building
+  both ways and testing. Either way the agent knows the desired shape.

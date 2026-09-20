@@ -1,3 +1,9 @@
 title: ContextAvailable
 items: simplegroup/context_item
-description: Available context resources — paths absolutized after resolution
+description: >-
+  Context the agent MAY use, paths absolutized — information that further
+  material exists and is reachable. The agent is not required to consult it.
+  Contrast context_required, which is a mandatory instruction the agent must
+  satisfy or abort. The two must stay distinct all the way to the rendered
+  prompt — they exist so the prompt can carry should-language and must-language
+  as visibly different prose.

@@ -806,7 +806,7 @@
             "output_schema_embed": {
               "$ref": "#/$defs/atom__boolean",
               "title": "OutputSchemaEmbed",
-              "description": "Whether to embed the output schema directly into the agent prompt. When true, the format transformer reads the schema file and inlines its content — uses context window but ensures the agent sees the schema without a tool call. When false (or omitted), the schema path is granted read access and the agent reads it via Read tool — saves context but adds a tool-call round trip. Prefer true for small schemas (under ~100 lines) or when schema adherence is critical. Prefer false for large schemas where context window conservation matters. Either way the agent knows the desired shape.\nTrue or false value"
+              "description": "Whether to embed the output schema directly into the agent prompt. Authored here, in the data — the decision is made before rendering, not by a control surface. When true, the schema's content is inlined and the read grant is suppressed: the agent sees the schema with no tool call. When false (or omitted), the schema path is granted read access and the agent reads it via the Read tool — one round trip, and the content arrives as a recent turn. Prefer true for small schemas (under ~100 lines) or when adherence is critical. Prefer false for large ones — the cost is not only context window: a large inlined block lands mid-prompt where attention is weakest, and pushes every later section further into that same trough. There is no free position for it. Which way is better for a given schema is worth building both ways and testing. Either way the agent knows the desired shape.\nTrue or false value"
             }
           },
           "additionalProperties": false,
@@ -876,7 +876,7 @@
             "context_required": {
               "title": "ContextRequired",
               "type": "array",
-              "description": "Context resources the agent requires — resolution fails if missing",
+              "description": "Context the agent MUST use. An instruction, not a listing: the agent is required to utilize these resources and to abort rather than proceed without them. Contrast context_available, which only informs the agent that further material exists. The two must stay distinct all the way to the rendered prompt — they exist so the prompt can carry must-language and should-language as visibly different prose. Paths are absolutized during the build.",
               "items": {
                 "$ref": "#/$defs/simplegroup__context_item_raw"
               },
@@ -885,7 +885,7 @@
             "context_available": {
               "title": "ContextAvailable",
               "type": "array",
-              "description": "Context resources available to the agent — silently skipped if missing",
+              "description": "Context the agent MAY use — information that further material exists and is reachable. The agent is not required to consult it. Contrast context_required, which is a mandatory instruction the agent must satisfy or abort. The two must stay distinct all the way to the rendered prompt — they exist so the prompt can carry should-language and must-language as visibly different prose. Paths are absolutized during the build.",
               "items": {
                 "$ref": "#/$defs/simplegroup__context_item_raw"
               },
@@ -1628,7 +1628,7 @@
         "context_path": {
           "$ref": "#/$defs/union__path_any",
           "title": "ContextPathAny",
-          "description": "Workspace-relative path to a context resource file. The transformer embeds this file's content into the agent prompt as a labeled section (using context_label as the heading) AND adds the path to read hooks (granting file access). This dual-purpose mechanism ensures prompt awareness and permission always stay in sync. Because content is embedded, consider file size — large files consume context window. For context_required, the file must exist at resolution time. For context_available, missing files are silently skipped.\nFilesystem path — either relative (./) or absolute (/)"
+          "description": "Path to a context resource file, workspace-relative or absolute. Absolutized during the build and added to the agent's Read hook, so prompt awareness and permission stay in sync by construction. Whether the resource is mandatory or merely offered is carried by the array this item sits in — context_required or context_available — never by the path itself.\nFilesystem path — either relative (./) or absolute (/)"
         }
       },
       "required": [
