@@ -5,12 +5,12 @@ description: >-
   framing, and definition-to-evidence transition.
 fields:
   required:
-    section_start: field/success_criteria_section_start
-    verification_guidance_postscript: field/success_criteria_verification_guidance_postscript
-    success_failure_independence_statement_postscript: field/success_criteria_success_failure_independence_statement_postscript
-    criteria_separator: field/success_criteria_criteria_separator
+    success_criteria_section_start: field/success_criteria_section_start
+    success_criteria_verification_guidance_postscript: field/success_criteria_verification_guidance_postscript
+    success_criteria_success_failure_independence_statement_postscript: field/success_criteria_success_failure_independence_statement_postscript
+    success_criteria_criteria_separator: field/success_criteria_criteria_separator
 containers:
   required:
-    definition_declaration_variant_template: simplegroup/success_criteria_definition_declaration_variant_template
-    evidence_intro_variant: simplegroup/success_criteria_evidence_intro_variant
-    definition_to_evidence_transition_variant: simplegroup/success_criteria_definition_to_evidence_transition_variant
+    success_criteria_definition_declaration_variant_template: simplegroup/success_criteria_definition_declaration_variant_template
+    success_criteria_evidence_intro_variant: simplegroup/success_criteria_evidence_intro_variant
+    success_criteria_definition_to_evidence_transition_variant: simplegroup/success_criteria_definition_to_evidence_transition_variant

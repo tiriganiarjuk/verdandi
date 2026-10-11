@@ -4,10 +4,10 @@ description: >-
   and parameter list format with threshold switching.
 fields:
   required:
-    context_required_format: field/input_context_required_format
-    context_available_format: field/input_context_available_format
-    parameters_format: field/input_parameters_format
-    parameters_format_threshold: field/input_parameters_format_threshold
+    input_context_required_format: field/input_context_required_format
+    input_context_available_format: field/input_context_available_format
+    input_parameters_format: field/input_parameters_format
+    input_parameters_format_threshold: field/input_parameters_format_threshold
   optional:
-    pre_section_divider_override: field/input_pre_section_divider_override
-    pre_body_entry_separator_override: field/input_pre_body_entry_separator_override
+    input_pre_section_divider_override: field/input_pre_section_divider_override
+    input_pre_body_entry_separator_override: field/input_pre_body_entry_separator_override

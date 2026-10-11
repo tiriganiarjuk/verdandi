@@ -5,12 +5,12 @@ description: >-
   definition label.
 fields:
   required:
-    section_start: field/failure_criteria_section_start
-    any_one_triggers_abort_preamble: field/failure_criteria_any_one_triggers_abort_preamble
-    evidence_intro: field/failure_criteria_evidence_intro
-    cite_definition_and_evidence_postscript: field/failure_criteria_cite_definition_and_evidence_postscript
-    check_before_and_during_postscript: field/failure_criteria_check_before_and_during_postscript
+    failure_criteria_section_start: field/failure_criteria_section_start
+    failure_criteria_any_one_triggers_abort_preamble: field/failure_criteria_any_one_triggers_abort_preamble
+    failure_criteria_evidence_intro: field/failure_criteria_evidence_intro
+    failure_criteria_cite_definition_and_evidence_postscript: field/failure_criteria_cite_definition_and_evidence_postscript
+    failure_criteria_check_before_and_during_postscript: field/failure_criteria_check_before_and_during_postscript
 containers:
   required:
-    abort_stance_preamble_variant: simplegroup/failure_criteria_abort_stance_preamble_variant
-    abort_stance_definition_label_variant: simplegroup/failure_criteria_abort_stance_definition_label_variant
+    failure_criteria_abort_stance_preamble_variant: simplegroup/failure_criteria_abort_stance_preamble_variant
+    failure_criteria_abort_stance_definition_label_variant: simplegroup/failure_criteria_abort_stance_definition_label_variant

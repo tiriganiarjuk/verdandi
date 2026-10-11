@@ -4,7 +4,7 @@ description: >-
   entry limit, preamble and distinction toggles.
 fields:
   required:
-    pre_section_visible: field/anti_patterns_pre_section_visible
-    pre_max_entries_rendered: field/anti_patterns_pre_max_entries_rendered
-    section_preamble_visible: field/anti_patterns_section_preamble_visible
-    constraints_vs_anti_patterns_distinction_preamble_visible: field/anti_patterns_constraints_vs_anti_patterns_distinction_preamble_visible
+    anti_patterns_pre_section_visible: field/anti_patterns_pre_section_visible
+    anti_patterns_pre_max_entries_rendered: field/anti_patterns_pre_max_entries_rendered
+    anti_patterns_section_preamble_visible: field/anti_patterns_section_preamble_visible
+    anti_patterns_constraints_vs_anti_patterns_distinction_preamble_visible: field/anti_patterns_constraints_vs_anti_patterns_distinction_preamble_visible

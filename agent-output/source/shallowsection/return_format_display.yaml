@@ -4,5 +4,5 @@ description: >-
   separator overrides; this section has no per-field display knobs.
 fields:
   optional:
-    pre_section_divider_override: field/return_format_pre_section_divider_override
-    pre_body_entry_separator_override: field/return_format_pre_body_entry_separator_override
+    return_format_pre_section_divider_override: field/return_format_pre_section_divider_override
+    return_format_pre_body_entry_separator_override: field/return_format_pre_body_entry_separator_override

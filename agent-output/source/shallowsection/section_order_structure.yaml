@@ -3,4 +3,4 @@ description: >-
   Controls the render order of body sections in the agent prompt.
 containers:
   required:
-    order: simplearray/section_order
+    section_order_order: simplearray/section_order

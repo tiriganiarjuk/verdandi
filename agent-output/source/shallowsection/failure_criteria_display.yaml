@@ -4,7 +4,7 @@ description: >-
   format.
 fields:
   required:
-    criteria_evidence_format: field/failure_criteria_criteria_evidence_format
+    failure_criteria_criteria_evidence_format: field/failure_criteria_criteria_evidence_format
   optional:
-    pre_section_divider_override: field/failure_criteria_pre_section_divider_override
-    pre_body_entry_separator_override: field/failure_criteria_pre_body_entry_separator_override
+    failure_criteria_pre_section_divider_override: field/failure_criteria_pre_section_divider_override
+    failure_criteria_pre_body_entry_separator_override: field/failure_criteria_pre_body_entry_separator_override

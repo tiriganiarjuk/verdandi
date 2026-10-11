@@ -5,12 +5,12 @@ description: >-
   style. Evidence handling and multi-criteria relationship.
 fields:
   required:
-    pre_section_visible: field/success_criteria_pre_section_visible
-    pre_max_entries_rendered: field/success_criteria_pre_max_entries_rendered
-    definition_declaration_selector: field/success_criteria_definition_declaration_selector
-    evidence_intro_selector: field/success_criteria_evidence_intro_selector
-    definition_to_evidence_transition_selector: field/success_criteria_definition_to_evidence_transition_selector
-    criteria_evidence_type_handling: field/success_criteria_criteria_evidence_type_handling
-    success_failure_independence_statement_postscript_visible: field/success_criteria_success_failure_independence_statement_postscript_visible
-    verification_guidance_postscript_visible: field/success_criteria_verification_guidance_postscript_visible
-    criteria_relationship: field/success_criteria_criteria_relationship
+    success_criteria_pre_section_visible: field/success_criteria_pre_section_visible
+    success_criteria_pre_max_entries_rendered: field/success_criteria_pre_max_entries_rendered
+    success_criteria_definition_declaration_selector: field/success_criteria_definition_declaration_selector
+    success_criteria_evidence_intro_selector: field/success_criteria_evidence_intro_selector
+    success_criteria_definition_to_evidence_transition_selector: field/success_criteria_definition_to_evidence_transition_selector
+    success_criteria_criteria_evidence_type_handling: field/success_criteria_criteria_evidence_type_handling
+    success_criteria_success_failure_independence_statement_postscript_visible: field/success_criteria_success_failure_independence_statement_postscript_visible
+    success_criteria_verification_guidance_postscript_visible: field/success_criteria_verification_guidance_postscript_visible
+    success_criteria_criteria_relationship: field/success_criteria_criteria_relationship

@@ -5,9 +5,9 @@ description: >-
   heredoc explanation.
 fields:
   required:
-    section_start: field/writing_output_section_start
-    transition_preamble: field/writing_output_transition_preamble
-    tool_mandate_preamble: field/writing_output_tool_mandate_preamble
-    tool_identity_label_template: field/writing_output_tool_identity_label_template
-    invocation_preamble: field/writing_output_invocation_preamble
-    heredoc_explanation_postscript: field/writing_output_heredoc_explanation_postscript
+    writing_output_section_start: field/writing_output_section_start
+    writing_output_transition_preamble: field/writing_output_transition_preamble
+    writing_output_tool_mandate_preamble: field/writing_output_tool_mandate_preamble
+    writing_output_tool_identity_label_template: field/writing_output_tool_identity_label_template
+    writing_output_invocation_preamble: field/writing_output_invocation_preamble
+    writing_output_heredoc_explanation_postscript: field/writing_output_heredoc_explanation_postscript

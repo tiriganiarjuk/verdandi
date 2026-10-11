@@ -5,12 +5,12 @@ description: >-
   and scaffolding tier thresholds.
 fields:
   required:
-    steps_heading_format: field/instructions_steps_heading_format
-    steps_body_container: field/instructions_steps_body_container
-    steps_mode_separator: field/instructions_steps_mode_separator
-    steps_mode_restrict_to_transition: field/instructions_steps_mode_restrict_to_transition
-    steps_scaffolding_lightweight_threshold: field/instructions_steps_scaffolding_lightweight_threshold
-    steps_scaffolding_standard_threshold: field/instructions_steps_scaffolding_standard_threshold
+    instructions_steps_heading_format: field/instructions_steps_heading_format
+    instructions_steps_body_container: field/instructions_steps_body_container
+    instructions_steps_mode_separator: field/instructions_steps_mode_separator
+    instructions_steps_mode_restrict_to_transition: field/instructions_steps_mode_restrict_to_transition
+    instructions_steps_scaffolding_lightweight_threshold: field/instructions_steps_scaffolding_lightweight_threshold
+    instructions_steps_scaffolding_standard_threshold: field/instructions_steps_scaffolding_standard_threshold
   optional:
-    pre_section_divider_override: field/instructions_pre_section_divider_override
-    pre_body_entry_separator_override: field/instructions_pre_body_entry_separator_override
+    instructions_pre_section_divider_override: field/instructions_pre_section_divider_override
+    instructions_pre_body_entry_separator_override: field/instructions_pre_body_entry_separator_override

@@ -5,12 +5,12 @@ description: >-
   closer, and scaffolding tier.
 fields:
   required:
-    section_start_selector: field/instructions_section_start_selector
-    instruction_mode_explanation_preamble_visible: field/instructions_instruction_mode_explanation_preamble_visible
-    highlight_step_count_preamble_visible: field/instructions_highlight_step_count_preamble_visible
-    sequence_integrity_preamble_visible: field/instructions_sequence_integrity_preamble_visible
-    follow_strictly_preamble_visible: field/instructions_follow_strictly_preamble_visible
-    steps_index_tracking: field/instructions_steps_index_tracking
-    follow_strictly_closing_visible: field/instructions_follow_strictly_closing_visible
-    reminder_midpoint_preamble_visible: field/instructions_reminder_midpoint_preamble_visible
-    pre_scaffolding_tier_override: field/instructions_pre_scaffolding_tier_override
+    instructions_section_start_selector: field/instructions_section_start_selector
+    instructions_instruction_mode_explanation_preamble_visible: field/instructions_instruction_mode_explanation_preamble_visible
+    instructions_highlight_step_count_preamble_visible: field/instructions_highlight_step_count_preamble_visible
+    instructions_sequence_integrity_preamble_visible: field/instructions_sequence_integrity_preamble_visible
+    instructions_follow_strictly_preamble_visible: field/instructions_follow_strictly_preamble_visible
+    instructions_steps_index_tracking: field/instructions_steps_index_tracking
+    instructions_follow_strictly_closing_visible: field/instructions_follow_strictly_closing_visible
+    instructions_reminder_midpoint_preamble_visible: field/instructions_reminder_midpoint_preamble_visible
+    instructions_pre_scaffolding_tier_override: field/instructions_pre_scaffolding_tier_override

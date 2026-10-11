@@ -5,10 +5,10 @@ description: >-
   repetition strategy and rule separator override.
 fields:
   required:
-    workspace_path_format: field/critical_rules_workspace_path_format
-    tool_name_format: field/critical_rules_tool_name_format
-    tool_name_repetition: field/critical_rules_tool_name_repetition
-    batch_size_format: field/critical_rules_batch_size_format
+    critical_rules_workspace_path_format: field/critical_rules_workspace_path_format
+    critical_rules_tool_name_format: field/critical_rules_tool_name_format
+    critical_rules_tool_name_repetition: field/critical_rules_tool_name_repetition
+    critical_rules_batch_size_format: field/critical_rules_batch_size_format
   optional:
-    pre_section_divider_override: field/critical_rules_pre_section_divider_override
-    pre_body_entry_separator_override: field/critical_rules_pre_body_entry_separator_override
+    critical_rules_pre_section_divider_override: field/critical_rules_pre_section_divider_override
+    critical_rules_pre_body_entry_separator_override: field/critical_rules_pre_body_entry_separator_override

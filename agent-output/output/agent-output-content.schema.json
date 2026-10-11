@@ -25,50 +25,50 @@
       "type": "object",
       "description": "Content prose for the identity section. Heading, declaration templates, role labels, expertise label, and closing reminder.",
       "properties": {
-        "section_start_template": {
+        "identity_section_start_template": {
           "$ref": "#/$defs/atom__string_template",
           "title": "IdentitySectionStartTemplate",
           "description": "Section heading for identity. Template with {{title}} placeholder for the agent's display title. Rendered as H2 (or H3 inside a group). Position: first element of the section.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
         },
-        "role_identity_template": {
+        "identity_role_identity_template": {
           "$ref": "#/$defs/atom__string_template",
           "title": "IdentityRoleIdentityTemplate",
           "description": "Core identity declaration. Template with {{role_identity}} placeholder. Establishes who the agent is — the foundational sentence that frames all subsequent behavior. Position: immediately after heading.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
         },
-        "role_identity_postscript_template": {
+        "identity_role_identity_postscript_template": {
           "$ref": "#/$defs/atom__string_template",
           "title": "IdentityRoleIdentityPostscriptTemplate",
           "description": "Reinforcement postscript after the identity declaration. Template with {{role_identity}} placeholder. Anchors decision-making to the declared identity. Position: after declaration, before responsibility.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
         },
-        "role_responsibility_template": {
+        "identity_role_responsibility_template": {
           "$ref": "#/$defs/atom__string_template",
           "title": "IdentityRoleResponsibilityTemplate",
           "description": "Label introducing the agent's responsibility scope. Template with {{role_responsibility}} placeholder. Position: label immediately before the responsibility data.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
         },
-        "role_expertise_label": {
+        "identity_role_expertise_label": {
           "$ref": "#/$defs/atom__string_text",
           "title": "IdentityRoleExpertiseLabel",
           "description": "Label introducing the expertise list. Plain text (no placeholders). Position: label immediately before the expertise data list.\nNatural language prose — must contain at least one whitespace character. Mutually exclusive with all identifier types. Used for descriptions, instructions, error messages, and display labels. Not a path."
         },
-        "role_expertise_postscript": {
+        "identity_role_expertise_postscript": {
           "$ref": "#/$defs/atom__string_prose",
           "title": "IdentityRoleExpertisePostscript",
           "description": "Reinforcement postscript after the expertise list. Constrains the agent's authoritative judgment to the listed areas only. Visibility controlled by identity_expertise_postscript_visible in structure. Position: postscript after expertise data.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
         },
-        "identity_reminder_closing_template": {
+        "identity_identity_reminder_closing_template": {
           "$ref": "#/$defs/atom__string_template",
           "title": "IdentityIdentityReminderClosingTemplate",
           "description": "Optional closing sentence restating the agent's role identity. Template with {{role_identity}} placeholder. Visibility controlled by identity_closing_reminder_visible in structure. Position: last element of the section.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
         }
       },
       "required": [
-        "section_start_template",
-        "role_identity_template",
-        "role_identity_postscript_template",
-        "role_responsibility_template",
-        "role_expertise_label",
-        "role_expertise_postscript",
-        "identity_reminder_closing_template"
+        "identity_section_start_template",
+        "identity_role_identity_template",
+        "identity_role_identity_postscript_template",
+        "identity_role_responsibility_template",
+        "identity_role_expertise_label",
+        "identity_role_expertise_postscript",
+        "identity_identity_reminder_closing_template"
       ],
       "additionalProperties": false
     },
@@ -77,27 +77,27 @@
       "type": "object",
       "description": "Content prose for the security boundary section. Filesystem map intro, section closing, entry templates, and framing variant sub-tables.",
       "properties": {
-        "filesystem_permissions_label": {
+        "security_boundary_filesystem_permissions_label": {
           "$ref": "#/$defs/atom__string_text",
           "title": "SecurityBoundaryFilesystemPermissionsLabel",
           "description": "Introductory line before the filesystem display entries. Plain text with no placeholders. Position: label before the entry list. Visibility controlled by security_boundary_filesystem_permissions_label_visible.\nNatural language prose — must contain at least one whitespace character. Mutually exclusive with all identifier types. Used for descriptions, instructions, error messages, and display labels. Not a path."
         },
-        "section_closing": {
+        "security_boundary_section_closing": {
           "$ref": "#/$defs/atom__string_prose",
           "title": "SecurityBoundarySectionClosing",
           "description": "Closing statement after the display entries. Instructs the agent on what to do when a needed path is not listed. Position: postscript after the entry list. Visibility controlled by security_boundary_section_closing_visible.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
         },
-        "compound_entry_template": {
+        "security_boundary_compound_entry_template": {
           "$ref": "#/$defs/atom__string_template",
           "title": "SecurityBoundaryCompoundEntryTemplate",
           "description": "Template for rendering a single display entry when tools are shown per-entry. Contains {{PATH}} and {{TOOLS}} placeholders. Used when tool sets differ across entries (heterogeneous format).\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
         },
-        "grouped_tool_heading_template": {
+        "security_boundary_grouped_tool_heading_template": {
           "$ref": "#/$defs/atom__string_template",
           "title": "SecurityBoundaryGroupedToolHeadingTemplate",
           "description": "Header line when all display entries share the same tool set. Contains {{TOOLS}} placeholder. Rendered once above the entry list when uniform_toolset_format is \"grouped\".\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
         },
-        "framing_section_start_variant": {
+        "security_boundary_framing_section_start_variant": {
           "title": "FramingSectionStartVariant",
           "type": "object",
           "description": "Variant alternatives for the security boundary section heading. Keys match enum/framing_variant values. Structure selects one.",
@@ -125,7 +125,7 @@
           ],
           "additionalProperties": false
         },
-        "framing_declaration_variant_template": {
+        "security_boundary_framing_declaration_variant_template": {
           "title": "FramingDeclarationVariantTemplate",
           "type": "object",
           "description": "Variant alternatives for the workspace path declaration. Keys match enum/framing_variant values. Structure selects one. Templates contain {{WORKSPACE_PATH}} placeholder.",
@@ -153,7 +153,7 @@
           ],
           "additionalProperties": false
         },
-        "framing_section_preamble_variant": {
+        "security_boundary_framing_section_preamble_variant": {
           "title": "FramingSectionPreambleVariant",
           "type": "object",
           "description": "Variant alternatives for the section preamble introducing display entries. Keys match enum/framing_variant values. Structure selects one.",
@@ -183,13 +183,13 @@
         }
       },
       "required": [
-        "filesystem_permissions_label",
-        "section_closing",
-        "compound_entry_template",
-        "grouped_tool_heading_template",
-        "framing_section_start_variant",
-        "framing_declaration_variant_template",
-        "framing_section_preamble_variant"
+        "security_boundary_filesystem_permissions_label",
+        "security_boundary_section_closing",
+        "security_boundary_compound_entry_template",
+        "security_boundary_grouped_tool_heading_template",
+        "security_boundary_framing_section_start_variant",
+        "security_boundary_framing_declaration_variant_template",
+        "security_boundary_framing_section_preamble_variant"
       ],
       "additionalProperties": false
     },
@@ -198,80 +198,80 @@
       "type": "object",
       "description": "Content prose for the input section. Description template, context headings and preambles, parameter templates, schema intro, and completeness postscript.",
       "properties": {
-        "section_start": {
+        "input_section_start": {
           "$ref": "#/$defs/atom__title_string",
           "title": "InputHeading",
           "description": "Section heading for input. Plain text, no placeholders.\nTitle Case string — each word starts uppercase, separated by spaces. Used for display titles, section headings, and short labels. Not prose (no sentences), not an identifier (has spaces)."
         },
-        "description_format_template": {
+        "input_description_format_template": {
           "$ref": "#/$defs/atom__string_template",
           "title": "InputDescriptionFormatTemplate",
           "description": "Integrated description and format declaration. Template with {{format}} and {{description}} placeholders. Presents what the agent receives and in what shape as a single sentence.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
         },
-        "section_preamble": {
+        "input_section_preamble": {
           "$ref": "#/$defs/atom__string_prose",
           "title": "InputSectionPreamble",
           "description": "Preamble for the input section. Sets context before any data. Conditional on context_required presence — complex agents need a framing sentence, simple agents need none.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
         },
-        "context_required_heading": {
+        "input_context_required_heading": {
           "$ref": "#/$defs/atom__string_text",
           "title": "InputContextRequiredHeading",
           "description": "Sub-block heading for required context resources. Introduces the reading list the agent must absorb before processing input.\nNatural language prose — must contain at least one whitespace character. Mutually exclusive with all identifier types. Used for descriptions, instructions, error messages, and display labels. Not a path."
         },
-        "context_required_intro": {
+        "input_context_required_intro": {
           "$ref": "#/$defs/atom__string_prose",
           "title": "InputContextRequiredIntro",
           "description": "Intro for the required context sub-block. Establishes that context documents are prerequisite knowledge to absorb, not reference material to consult during work.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
         },
-        "context_required_entry_template": {
+        "input_context_required_entry_template": {
           "$ref": "#/$defs/atom__string_template",
           "title": "InputContextRequiredEntryTemplate",
           "description": "Template for rendering a single context entry. Contains {{context_label}} and {{context_path}} placeholders. Label-first presentation with path as the action target.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
         },
-        "context_available_heading": {
+        "input_context_available_heading": {
           "$ref": "#/$defs/atom__string_text",
           "title": "InputContextAvailableHeading",
           "description": "Sub-block heading for available (optional) context resources.\nNatural language prose — must contain at least one whitespace character. Mutually exclusive with all identifier types. Used for descriptions, instructions, error messages, and display labels. Not a path."
         },
-        "parameters_transition": {
+        "input_parameters_transition": {
           "$ref": "#/$defs/atom__string_prose",
           "title": "InputParametersTransition",
           "description": "Transition sentence between the knowledge-acquisition sub-block (context_required) and the payload sub-block (parameters). Marks the cognitive shift from learning mode to operating mode.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
         },
-        "parameters_heading": {
+        "input_parameters_heading": {
           "$ref": "#/$defs/atom__title_string",
           "title": "InputParametersHeading",
           "description": "Sub-block heading for dispatch parameters. Introduces the concrete handles the agent uses to locate its input data.\nTitle Case string — each word starts uppercase, separated by spaces. Used for display titles, section headings, and short labels. Not prose (no sentences), not an identifier (has spaces)."
         },
-        "parameters_entry_template": {
+        "input_parameters_entry_template": {
           "$ref": "#/$defs/atom__string_template",
           "title": "InputParametersEntryTemplate",
           "description": "Template for rendering a single parameter entry. Contains {{param_name}}, {{param_type}}, and {{param_description}} placeholders. Code-formatted parameter name signals literal identifier.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
         },
-        "input_completeness_postscript": {
+        "input_input_completeness_postscript": {
           "$ref": "#/$defs/atom__string_prose",
           "title": "InputInputCompletenessPostscript",
           "description": "Postscript asserting that the agent's input is complete. Reduces caveat-hedging in autonomous agents that cannot ask follow-up questions. Position: after all input sub-blocks.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
         },
-        "schema_label_template": {
+        "input_schema_label_template": {
           "$ref": "#/$defs/atom__string_template",
           "title": "InputSchemaLabelTemplate",
           "description": "Template introducing the input validation schema. Contains {{input_schema}} placeholder for the schema path.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
         }
       },
       "required": [
-        "section_start",
-        "description_format_template",
-        "section_preamble",
-        "context_required_heading",
-        "context_required_intro",
-        "context_required_entry_template",
-        "context_available_heading",
-        "parameters_transition",
-        "parameters_heading",
-        "parameters_entry_template",
-        "input_completeness_postscript",
-        "schema_label_template"
+        "input_section_start",
+        "input_description_format_template",
+        "input_section_preamble",
+        "input_context_required_heading",
+        "input_context_required_intro",
+        "input_context_required_entry_template",
+        "input_context_available_heading",
+        "input_parameters_transition",
+        "input_parameters_heading",
+        "input_parameters_entry_template",
+        "input_input_completeness_postscript",
+        "input_schema_label_template"
       ],
       "additionalProperties": false
     },
@@ -280,68 +280,68 @@
       "type": "object",
       "description": "Content prose for the critical rules section. Heading, authority preamble, and one prose template per rule.",
       "properties": {
-        "section_start": {
+        "critical_rules_section_start": {
           "$ref": "#/$defs/atom__string_text",
           "title": "CriticalRulesHeading",
           "description": "Section heading for critical rules. Plain text, no placeholders. Rendered as H2. Typically emphatic — all caps or strong language to signal inviolability.\nNatural language prose — must contain at least one whitespace character. Mutually exclusive with all identifier types. Used for descriptions, instructions, error messages, and display labels. Not a path."
         },
-        "authority_preamble": {
+        "critical_rules_authority_preamble": {
           "$ref": "#/$defs/atom__string_prose",
           "title": "CriticalRulesAuthorityPreamble",
           "description": "Authority establishment before rules are listed. Declares that critical rules override all other instructions and that violation equals task failure. Position: preamble after heading.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
         },
-        "workspace_confinement_template": {
+        "critical_rules_workspace_confinement_template": {
           "$ref": "#/$defs/atom__string_template",
           "title": "CriticalRulesWorkspaceConfinementTemplate",
           "description": "Workspace confinement rule text. Template with {{workspace_path}} placeholder. Declares that nothing outside the workspace exists.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
         },
-        "output_tool_exclusivity_template": {
+        "critical_rules_output_tool_exclusivity_template": {
           "$ref": "#/$defs/atom__string_template",
           "title": "CriticalRulesOutputToolExclusivityTemplate",
           "description": "Output tool exclusivity rule text. Template with {{tool_name}} placeholder. Declares that the named tool is the only output mechanism.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
         },
-        "batch_discipline_template": {
+        "critical_rules_batch_discipline_template": {
           "$ref": "#/$defs/atom__string_template",
           "title": "CriticalRulesBatchDisciplineTemplate",
           "description": "Batch discipline rule text. Template with {{batch_size}} and {{tool_name}} placeholders. Requires processing in batches with immediate writes after each batch.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
         },
-        "fail_fast_body": {
+        "critical_rules_fail_fast_body": {
           "$ref": "#/$defs/atom__string_prose",
           "title": "CriticalRulesFailFastBody",
           "description": "Fail-fast rule text. Instructs the agent to return FAILURE immediately on error. No recovery attempts, no partial data, no working around problems.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
         },
-        "input_is_your_only_source_body": {
+        "critical_rules_input_is_your_only_source_body": {
           "$ref": "#/$defs/atom__string_prose",
           "title": "CriticalRulesInputIsYourOnlySourceBody",
           "description": "Input-only-source rule text. Prohibits supplementing input with external sources, training data, or additional materials. Process what you received and nothing else.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
         },
-        "no_invention_body": {
+        "critical_rules_no_invention_body": {
           "$ref": "#/$defs/atom__string_prose",
           "title": "CriticalRulesNoInventionBody",
           "description": "No-invention rule text. Requires every claim in output to trace to input. If you cannot point to the source, do not include it. Silence is correct when data is absent.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
         },
-        "discipline_over_helpfulness_body": {
+        "critical_rules_discipline_over_helpfulness_body": {
           "$ref": "#/$defs/atom__string_prose",
           "title": "CriticalRulesDisciplineOverHelpfulnessBody",
           "description": "Discipline-over-helpfulness rule text. Reframes discipline as the helpful behavior — clean FAILURE is more helpful than contaminated success. Experimental rule.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
         },
-        "rule_count_awareness_preamble_template": {
+        "critical_rules_rule_count_awareness_preamble_template": {
           "$ref": "#/$defs/atom__string_template",
           "title": "CriticalRulesRuleCountAwarenessPreambleTemplate",
           "description": "Rule count awareness prelude text. Template with {{rule_count}} placeholder. Tells the agent how many inviolable rules follow. Visibility controlled by the auto/threshold mechanism in structure.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
         }
       },
       "required": [
-        "section_start",
-        "authority_preamble",
-        "workspace_confinement_template",
-        "output_tool_exclusivity_template",
-        "batch_discipline_template",
-        "fail_fast_body",
-        "input_is_your_only_source_body",
-        "no_invention_body",
-        "discipline_over_helpfulness_body",
-        "rule_count_awareness_preamble_template"
+        "critical_rules_section_start",
+        "critical_rules_authority_preamble",
+        "critical_rules_workspace_confinement_template",
+        "critical_rules_output_tool_exclusivity_template",
+        "critical_rules_batch_discipline_template",
+        "critical_rules_fail_fast_body",
+        "critical_rules_input_is_your_only_source_body",
+        "critical_rules_no_invention_body",
+        "critical_rules_discipline_over_helpfulness_body",
+        "critical_rules_rule_count_awareness_preamble_template"
       ],
       "additionalProperties": false
     },
@@ -350,42 +350,42 @@
       "type": "object",
       "description": "Content prose for the instructions section. Preamble components, per-step mode label variant, step heading templates, mode explanation variant, closer text, and heading variant sub-table.",
       "properties": {
-        "highlight_step_count_preamble_template": {
+        "instructions_highlight_step_count_preamble_template": {
           "$ref": "#/$defs/atom__string_template",
           "title": "InstructionsHighlightStepCountPreambleTemplate",
           "description": "Step count statement in the preamble. Template with {{step_count}} placeholder. Tells the agent how many steps to expect.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
         },
-        "sequence_integrity_preamble": {
+        "instructions_sequence_integrity_preamble": {
           "$ref": "#/$defs/atom__string_prose",
           "title": "InstructionsSequenceIntegrityPreamble",
           "description": "Prohibition against adding, skipping, or reordering steps. Position: preamble component.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
         },
-        "follow_strictly_preamble": {
+        "instructions_follow_strictly_preamble": {
           "$ref": "#/$defs/atom__string_prose",
           "title": "InstructionsFollowStrictlyPreamble",
           "description": "Prohibition against supplementing steps with general knowledge or adding unspecified operations. Each step is a complete specification.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
         },
-        "reminder_midpoint_preamble_template": {
+        "instructions_reminder_midpoint_preamble_template": {
           "$ref": "#/$defs/atom__string_template",
           "title": "InstructionsReminderMidpointPreambleTemplate",
           "description": "Progress reminder at the midpoint. Template with {{midpoint}}, {{midpoint_next}}, and {{step_total}} placeholders. Visibility controlled by instructions_reminder_midpoint_visible.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
         },
-        "follow_strictly_closing_template": {
+        "instructions_follow_strictly_closing_template": {
           "$ref": "#/$defs/atom__string_template",
           "title": "InstructionsFollowStrictlyClosingTemplate",
           "description": "Section closer reinforcing completeness. Template with {{step_count}} placeholder. States that the listed steps are the complete task.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
         },
-        "steps_heading_template": {
+        "instructions_steps_heading_template": {
           "$ref": "#/$defs/atom__string_template",
           "title": "InstructionsStepsHeadingTemplate",
           "description": "Step heading template with n_of_m index tracking. Contains {{step_n}} and {{step_total}} placeholders. Used when step_index_tracking is \"n_of_m\".\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
         },
-        "steps_heading_n_only_template": {
+        "instructions_steps_heading_n_only_template": {
           "$ref": "#/$defs/atom__string_template",
           "title": "InstructionsStepsHeadingNOnlyTemplate",
           "description": "Step heading template with n_only index tracking. Contains {{step_n}} placeholder only. Used when step_index_tracking is \"n_only\".\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
         },
-        "section_start_variant_template": {
+        "instructions_section_start_variant_template": {
           "title": "InstructionsSectionStartVariantTemplate",
           "type": "object",
           "description": "Variant alternatives for the instructions section heading. Keys match enum/heading_variant_key values. Structure selects one.",
@@ -413,7 +413,7 @@
           ],
           "additionalProperties": false
         },
-        "steps_mode_label_variant": {
+        "instructions_steps_mode_label_variant": {
           "title": "InstructionsStepsModeLabelVariant",
           "type": "object",
           "description": "Mode label text for instruction steps. Keys match instruction_mode enum values (deterministic/probabilistic). The label renders before the step header, separated by the step_mode_separator display field.",
@@ -435,7 +435,7 @@
           ],
           "additionalProperties": false
         },
-        "instruction_mode_explanation_preamble_variant": {
+        "instructions_instruction_mode_explanation_preamble_variant": {
           "title": "InstructionsInstructionModeExplanationPreambleVariant",
           "type": "object",
           "description": "Variant alternatives for the instruction mode explanation. Keys represent the mode composition of the step list. The selector is computed from data (mixed vs uniform modes), not from a structure toggle.",
@@ -465,16 +465,16 @@
         }
       },
       "required": [
-        "highlight_step_count_preamble_template",
-        "sequence_integrity_preamble",
-        "follow_strictly_preamble",
-        "reminder_midpoint_preamble_template",
-        "follow_strictly_closing_template",
-        "steps_heading_template",
-        "steps_heading_n_only_template",
-        "section_start_variant_template",
-        "steps_mode_label_variant",
-        "instruction_mode_explanation_preamble_variant"
+        "instructions_highlight_step_count_preamble_template",
+        "instructions_sequence_integrity_preamble",
+        "instructions_follow_strictly_preamble",
+        "instructions_reminder_midpoint_preamble_template",
+        "instructions_follow_strictly_closing_template",
+        "instructions_steps_heading_template",
+        "instructions_steps_heading_n_only_template",
+        "instructions_section_start_variant_template",
+        "instructions_steps_mode_label_variant",
+        "instructions_instruction_mode_explanation_preamble_variant"
       ],
       "additionalProperties": false
     },
@@ -483,32 +483,32 @@
       "type": "object",
       "description": "Content prose for the examples section. Heading, preamble, group framing sentence, and entry heading template.",
       "properties": {
-        "section_start": {
+        "examples_section_start": {
           "$ref": "#/$defs/atom__string_text",
           "title": "ExamplesHeading",
           "description": "Section heading for examples. Plain text, no placeholders.\nNatural language prose — must contain at least one whitespace character. Mutually exclusive with all identifier types. Used for descriptions, instructions, error messages, and display labels. Not a path."
         },
-        "section_preamble": {
+        "examples_section_preamble": {
           "$ref": "#/$defs/atom__string_prose",
           "title": "ExamplesSectionPreamble",
           "description": "Preamble explaining the example format. Describes the GOOD/BAD/WHY pattern and how to learn principles from examples. Position: after heading, before first group.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
         },
-        "group_framing_preamble_template": {
+        "examples_group_framing_preamble_template": {
           "$ref": "#/$defs/atom__string_template",
           "title": "ExamplesGroupFramingPreambleTemplate",
           "description": "Framing sentence between group heading and entries. Template with {{example_group_name}} placeholder. Visibility controlled by examples_group_framing_preamble_visible.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
         },
-        "example_heading_template": {
+        "examples_example_heading_template": {
           "$ref": "#/$defs/atom__string_template",
           "title": "ExamplesExampleHeadingTemplate",
           "description": "Template for rendering individual example entry headings. Contains {{example_heading}} placeholder. Display format controlled by examples_entry_heading_format in display.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
         }
       },
       "required": [
-        "section_start",
-        "section_preamble",
-        "group_framing_preamble_template",
-        "example_heading_template"
+        "examples_section_start",
+        "examples_section_preamble",
+        "examples_group_framing_preamble_template",
+        "examples_example_heading_template"
       ],
       "additionalProperties": false
     },
@@ -517,32 +517,32 @@
       "type": "object",
       "description": "Content prose for the constraints section. Heading, plain prose fields, and variant sub-tables for preamble, closing reminder, and no-inferred-constraints warning.",
       "properties": {
-        "section_start": {
+        "constraints_section_start": {
           "$ref": "#/$defs/atom__title_string",
           "title": "ConstraintsHeading",
           "description": "Section heading for constraints. Plain text, no placeholders. Rendered at the configured heading level.\nTitle Case string — each word starts uppercase, separated by spaces. Used for display titles, section headings, and short labels. Not prose (no sentences), not an identifier (has spaces)."
         },
-        "constraints_are_not_steps_preamble": {
+        "constraints_constraints_are_not_steps_preamble": {
           "$ref": "#/$defs/atom__string_prose",
           "title": "ConstraintsAreNotStepsPreamble",
           "description": "Prose clarifying that constraints are not sequential steps. Prevents the model from treating a numbered or bulleted constraint list as a procedure to execute in order.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
         },
-        "constraint_count_heading_template": {
+        "constraints_constraint_count_heading_template": {
           "$ref": "#/$defs/atom__string_template",
           "title": "ConstraintsConstraintCountHeadingTemplate",
           "description": "Template for the constraint count heading. Contains {{constraint_count}} placeholder replaced at render time with the actual number of constraints.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
         },
-        "hierarchy_tier_comparison_preamble": {
+        "constraints_hierarchy_tier_comparison_preamble": {
           "$ref": "#/$defs/atom__string_prose",
           "title": "ConstraintsHierarchyTierComparisonPreamble",
           "description": "Prose explaining how constraints relate to critical rules and instructions in the enforcement hierarchy. Establishes relative authority of constraints vs other tiers.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
         },
-        "hierarchy_three_tier_explanation_preamble": {
+        "constraints_hierarchy_three_tier_explanation_preamble": {
           "$ref": "#/$defs/atom__string_prose",
           "title": "ConstraintsHierarchyThreeTierExplanationPreamble",
           "description": "Prose explaining the three-tier enforcement hierarchy (critical rules, constraints, instructions) and how each tier relates to the others. Provides context for constraint authority level.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
         },
-        "section_preamble_variant": {
+        "constraints_section_preamble_variant": {
           "title": "ConstraintsSectionPreambleVariant",
           "type": "object",
           "description": "Variant alternatives for the constraints section preamble. Keys match enum/section_preamble_variant_key values. Structure selects one.",
@@ -570,7 +570,7 @@
           ],
           "additionalProperties": false
         },
-        "compliance_reminder_closing_variant_template": {
+        "constraints_compliance_reminder_closing_variant_template": {
           "title": "ConstraintsComplianceReminderClosingVariantTemplate",
           "type": "object",
           "description": "Variant alternatives for the closing compliance reminder. Keys match enum/closing_compliance_variant_key values. Structure selects one.",
@@ -592,7 +592,7 @@
           ],
           "additionalProperties": false
         },
-        "no_inferred_constraints_preamble_variant_template": {
+        "constraints_no_inferred_constraints_preamble_variant_template": {
           "title": "ConstraintsNoInferredConstraintsPreambleVariantTemplate",
           "type": "object",
           "description": "Variant alternatives for the no-inferred-constraints warning. Keys match enum/no_inferred_constraints_variant_key values. Structure selects one.",
@@ -616,14 +616,14 @@
         }
       },
       "required": [
-        "section_start",
-        "constraints_are_not_steps_preamble",
-        "constraint_count_heading_template",
-        "hierarchy_tier_comparison_preamble",
-        "hierarchy_three_tier_explanation_preamble",
-        "section_preamble_variant",
-        "compliance_reminder_closing_variant_template",
-        "no_inferred_constraints_preamble_variant_template"
+        "constraints_section_start",
+        "constraints_constraints_are_not_steps_preamble",
+        "constraints_constraint_count_heading_template",
+        "constraints_hierarchy_tier_comparison_preamble",
+        "constraints_hierarchy_three_tier_explanation_preamble",
+        "constraints_section_preamble_variant",
+        "constraints_compliance_reminder_closing_variant_template",
+        "constraints_no_inferred_constraints_preamble_variant_template"
       ],
       "additionalProperties": false
     },
@@ -632,26 +632,26 @@
       "type": "object",
       "description": "Content prose for the anti-patterns section. Heading, preamble, and distinction prose.",
       "properties": {
-        "section_start": {
+        "anti_patterns_section_start": {
           "$ref": "#/$defs/atom__string_text",
           "title": "AntiPatternsHeading",
           "description": "Section heading for anti-patterns. Plain text, no placeholders. Rendered at the configured heading level.\nNatural language prose — must contain at least one whitespace character. Mutually exclusive with all identifier types. Used for descriptions, instructions, error messages, and display labels. Not a path."
         },
-        "section_preamble": {
+        "anti_patterns_section_preamble": {
           "$ref": "#/$defs/atom__string_prose",
           "title": "AntiPatternsSectionPreamble",
           "description": "Preamble prose for the anti-patterns section. Establishes what anti-patterns represent and how the model should interpret and avoid them during task execution.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
         },
-        "constraints_vs_anti_patterns_distinction_preamble": {
+        "anti_patterns_constraints_vs_anti_patterns_distinction_preamble": {
           "$ref": "#/$defs/atom__string_prose",
           "title": "AntiPatternsConstraintsVsAntiPatternsDistinctionPreamble",
           "description": "Prose explaining the distinction between constraints and anti-patterns. Constraints are mandatory rules; anti-patterns are behavioral pitfalls to recognize and avoid.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
         }
       },
       "required": [
-        "section_start",
-        "section_preamble",
-        "constraints_vs_anti_patterns_distinction_preamble"
+        "anti_patterns_section_start",
+        "anti_patterns_section_preamble",
+        "anti_patterns_constraints_vs_anti_patterns_distinction_preamble"
       ],
       "additionalProperties": false
     },
@@ -660,27 +660,27 @@
       "type": "object",
       "description": "Content prose for the success criteria section. Heading, plain prose, and variant sub-tables for definition framing, evidence framing, and definition-to-evidence transition.",
       "properties": {
-        "section_start": {
+        "success_criteria_section_start": {
           "$ref": "#/$defs/atom__string_text",
           "title": "SuccessCriteriaHeading",
           "description": "Section heading for success criteria. Plain text, no placeholders. Rendered at the configured heading level.\nNatural language prose — must contain at least one whitespace character. Mutually exclusive with all identifier types. Used for descriptions, instructions, error messages, and display labels. Not a path."
         },
-        "verification_guidance_postscript": {
+        "success_criteria_verification_guidance_postscript": {
           "$ref": "#/$defs/atom__string_prose",
           "title": "SuccessCriteriaVerificationGuidancePostscript",
           "description": "Suffix text reminding the model that some criteria are mechanically verifiable while others require judgment. Appended after evidence items when visibility is enabled.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
         },
-        "success_failure_independence_statement_postscript": {
+        "success_criteria_success_failure_independence_statement_postscript": {
           "$ref": "#/$defs/atom__string_prose",
           "title": "SuccessCriteriaSuccessFailureIndependenceStatementPostscript",
           "description": "Statement clarifying that success criteria define quality while failure criteria define breakage, and that these are independent evaluations not inverses of each other.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
         },
-        "criteria_separator": {
+        "success_criteria_criteria_separator": {
           "$ref": "#/$defs/atom__title_string",
           "title": "SuccessCriteriaCriteriaSeparator",
           "description": "Transitional text between multiple success criteria blocks. Used when criteria count exceeds one to introduce subsequent criteria after the first.\nTitle Case string — each word starts uppercase, separated by spaces. Used for display titles, section headings, and short labels. Not prose (no sentences), not an identifier (has spaces)."
         },
-        "definition_declaration_variant_template": {
+        "success_criteria_definition_declaration_variant_template": {
           "title": "SuccessCriteriaDefinitionDeclarationVariantTemplate",
           "type": "object",
           "description": "Variant alternatives for how success definitions render. Keys match enum/definition_framing_variant_key values. Structure selects one.",
@@ -708,7 +708,7 @@
           ],
           "additionalProperties": false
         },
-        "evidence_intro_variant": {
+        "success_criteria_evidence_intro_variant": {
           "title": "SuccessCriteriaEvidenceIntroVariant",
           "type": "object",
           "description": "Variant alternatives for how the evidence list is introduced. Keys match enum/evidence_framing_variant_key values. Structure selects one.",
@@ -736,7 +736,7 @@
           ],
           "additionalProperties": false
         },
-        "definition_to_evidence_transition_variant": {
+        "success_criteria_definition_to_evidence_transition_variant": {
           "title": "SuccessCriteriaDefinitionToEvidenceTransitionVariant",
           "type": "object",
           "description": "Variant alternatives for the transition between definition and evidence. Keys match enum/evidence_transition_variant_key values. Structure selects one.",
@@ -766,13 +766,13 @@
         }
       },
       "required": [
-        "section_start",
-        "verification_guidance_postscript",
-        "success_failure_independence_statement_postscript",
-        "criteria_separator",
-        "definition_declaration_variant_template",
-        "evidence_intro_variant",
-        "definition_to_evidence_transition_variant"
+        "success_criteria_section_start",
+        "success_criteria_verification_guidance_postscript",
+        "success_criteria_success_failure_independence_statement_postscript",
+        "success_criteria_criteria_separator",
+        "success_criteria_definition_declaration_variant_template",
+        "success_criteria_evidence_intro_variant",
+        "success_criteria_definition_to_evidence_transition_variant"
       ],
       "additionalProperties": false
     },
@@ -781,32 +781,32 @@
       "type": "object",
       "description": "Content prose for the failure criteria section. Heading, plain prose, and abort stance variant sub-tables for preamble and definition label.",
       "properties": {
-        "section_start": {
+        "failure_criteria_section_start": {
           "$ref": "#/$defs/atom__string_text",
           "title": "FailureCriteriaHeading",
           "description": "Section heading for failure criteria. Plain text, no placeholders. Rendered at the configured heading level. Typically uses \"Abort Conditions\" rather than \"Failure Criteria.\"\nNatural language prose — must contain at least one whitespace character. Mutually exclusive with all identifier types. Used for descriptions, instructions, error messages, and display labels. Not a path."
         },
-        "any_one_triggers_abort_preamble": {
+        "failure_criteria_any_one_triggers_abort_preamble": {
           "$ref": "#/$defs/atom__string_prose",
           "title": "FailureCriteriaAnyOneTriggersAbortPreamble",
           "description": "Prose establishing that any single failure mode is sufficient to trigger abort. Prevents the model from waiting for multiple failure signals before stopping.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
         },
-        "evidence_intro": {
+        "failure_criteria_evidence_intro": {
           "$ref": "#/$defs/atom__string_prose",
           "title": "FailureCriteriaEvidenceIntro",
           "description": "Prose introducing the evidence list for each failure mode. Establishes that any single signal is sufficient to indicate the failure mode is active.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
         },
-        "cite_definition_and_evidence_postscript": {
+        "failure_criteria_cite_definition_and_evidence_postscript": {
           "$ref": "#/$defs/atom__string_prose",
           "title": "FailureCriteriaCiteDefinitionAndEvidencePostscript",
           "description": "Postscript instructing the model to cite both the failure definition and evidence when reporting failure. Connects the definition/evidence hierarchy to the return_format reporting structure.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
         },
-        "check_before_and_during_postscript": {
+        "failure_criteria_check_before_and_during_postscript": {
           "$ref": "#/$defs/atom__string_prose",
           "title": "FailureCriteriaCheckBeforeAndDuringPostscript",
           "description": "Generic temporal instruction about checking failure conditions before starting work and monitoring throughout execution.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
         },
-        "abort_stance_preamble_variant": {
+        "failure_criteria_abort_stance_preamble_variant": {
           "title": "FailureCriteriaAbortStancePreambleVariant",
           "type": "object",
           "description": "Variant alternatives for the abort stance preamble. Keys match enum/abort_stance_variant_key values. Structure selects one.",
@@ -828,7 +828,7 @@
           ],
           "additionalProperties": false
         },
-        "abort_stance_definition_label_variant": {
+        "failure_criteria_abort_stance_definition_label_variant": {
           "title": "FailureCriteriaAbortStanceDefinitionLabelVariant",
           "type": "object",
           "description": "Variant alternatives for the failure mode definition label. Keys match enum/abort_stance_variant_key values. Structure selects one.",
@@ -852,13 +852,13 @@
         }
       },
       "required": [
-        "section_start",
-        "any_one_triggers_abort_preamble",
-        "evidence_intro",
-        "cite_definition_and_evidence_postscript",
-        "check_before_and_during_postscript",
-        "abort_stance_preamble_variant",
-        "abort_stance_definition_label_variant"
+        "failure_criteria_section_start",
+        "failure_criteria_any_one_triggers_abort_preamble",
+        "failure_criteria_evidence_intro",
+        "failure_criteria_cite_definition_and_evidence_postscript",
+        "failure_criteria_check_before_and_during_postscript",
+        "failure_criteria_abort_stance_preamble_variant",
+        "failure_criteria_abort_stance_definition_label_variant"
       ],
       "additionalProperties": false
     },
@@ -867,32 +867,32 @@
       "type": "object",
       "description": "Content prose for the output section. Heading, description and format templates, schema prose, and directory location variant sub-table.",
       "properties": {
-        "section_start": {
+        "output_section_start": {
           "$ref": "#/$defs/atom__string_text",
           "title": "OutputHeading",
           "description": "Section heading for the output section. Plain text, no placeholders. Rendered at the configured heading level.\nNatural language prose — must contain at least one whitespace character. Mutually exclusive with all identifier types. Used for descriptions, instructions, error messages, and display labels. Not a path."
         },
-        "output_description_template": {
+        "output_output_description_template": {
           "$ref": "#/$defs/atom__string_template",
           "title": "OutputOutputDescriptionTemplate",
           "description": "Template describing what the agent produces. Contains {{DESCRIPTION}} placeholder replaced with the authored output description from the agent definition.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
         },
-        "format_template": {
+        "output_format_template": {
           "$ref": "#/$defs/atom__string_template",
           "title": "OutputFormatTemplate",
           "description": "Template declaring the output format. Contains {{FORMAT}} placeholder replaced with the configured output format value.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
         },
-        "schema_embed_intro": {
+        "output_schema_embed_intro": {
           "$ref": "#/$defs/atom__string_prose",
           "title": "OutputSchemaEmbedIntro",
           "description": "Intro text rendered immediately before the embedded schema when schema_embed is true. Introduces the inline schema and instructs the model that every record must validate against it.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
         },
-        "schema_reference_label_template": {
+        "output_schema_reference_label_template": {
           "$ref": "#/$defs/atom__string_template",
           "title": "OutputSchemaReferenceLabelTemplate",
           "description": "Template for the schema path reference when schema_embed is false. Contains {{SCHEMA_PATH}} placeholder. Instructs the model to read the schema at the given path and conform output to it.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
         },
-        "directory_location_variant_template": {
+        "output_directory_location_variant_template": {
           "title": "OutputDirectoryLocationVariantTemplate",
           "type": "object",
           "description": "Variant alternatives for the output directory location declaration. Keys match enum/directory_location_variant_key values. Structure selects one.",
@@ -916,12 +916,12 @@
         }
       },
       "required": [
-        "section_start",
-        "output_description_template",
-        "format_template",
-        "schema_embed_intro",
-        "schema_reference_label_template",
-        "directory_location_variant_template"
+        "output_section_start",
+        "output_output_description_template",
+        "output_format_template",
+        "output_schema_embed_intro",
+        "output_schema_reference_label_template",
+        "output_directory_location_variant_template"
       ],
       "additionalProperties": false
     },
@@ -930,44 +930,44 @@
       "type": "object",
       "description": "Content prose for the writing output section. Heading, transition preamble, tool mandate, identity label, invocation preamble, and heredoc explanation.",
       "properties": {
-        "section_start": {
+        "writing_output_section_start": {
           "$ref": "#/$defs/atom__string_text",
           "title": "WritingOutputHeading",
           "description": "Section heading for the output mechanics section. Plain text, no placeholders. Rendered at the configured heading level.\nNatural language prose — must contain at least one whitespace character. Mutually exclusive with all identifier types. Used for descriptions, instructions, error messages, and display labels. Not a path."
         },
-        "transition_preamble": {
+        "writing_output_transition_preamble": {
           "$ref": "#/$defs/atom__string_prose",
           "title": "WritingOutputTransitionPreamble",
           "description": "Transition sentence connecting from instructions to the output mechanics section. Bridges the what-to-do with the how-to-deliver.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
         },
-        "tool_mandate_preamble": {
+        "writing_output_tool_mandate_preamble": {
           "$ref": "#/$defs/atom__string_prose",
           "title": "WritingOutputToolMandatePreamble",
           "description": "Prose establishing that output flows through one channel only. The agent does not write files directly or choose alternative tools. Enforces single-tool exclusivity.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
         },
-        "tool_identity_label_template": {
+        "writing_output_tool_identity_label_template": {
           "$ref": "#/$defs/atom__string_template",
           "title": "WritingOutputToolIdentityLabelTemplate",
           "description": "Template identifying the output tool. Contains {{TOOL_NAME}} placeholder replaced with the configured tool name. Rendered as a label the agent uses to identify its output channel.\nProse string containing at least one {{placeholder}} interpolation marker. The renderer substitutes marker contents with data field values at composition time. Used for content.toml template blobs like headings, declarations, and labels that embed agent-specific data in prose."
         },
-        "invocation_preamble": {
+        "writing_output_invocation_preamble": {
           "$ref": "#/$defs/atom__string_prose",
           "title": "WritingOutputInvocationPreamble",
           "description": "Preamble introducing the invocation template. Instructs the agent to copy the template exactly, substituting only the marked placeholders.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
         },
-        "heredoc_explanation_postscript": {
+        "writing_output_heredoc_explanation_postscript": {
           "$ref": "#/$defs/atom__string_prose",
           "title": "WritingOutputHeredocExplanationPostscript",
           "description": "Explanation of heredoc syntax for passing multi-line JSON to the output tool. Clarifies that EOF markers delimit the content block.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
         }
       },
       "required": [
-        "section_start",
-        "transition_preamble",
-        "tool_mandate_preamble",
-        "tool_identity_label_template",
-        "invocation_preamble",
-        "heredoc_explanation_postscript"
+        "writing_output_section_start",
+        "writing_output_transition_preamble",
+        "writing_output_tool_mandate_preamble",
+        "writing_output_tool_identity_label_template",
+        "writing_output_invocation_preamble",
+        "writing_output_heredoc_explanation_postscript"
       ],
       "additionalProperties": false
     },
@@ -976,86 +976,86 @@
       "type": "object",
       "description": "Content prose for the return format section. Heading, protocol components, metrics obligations, abort/failure distinction, and tracking requirements.",
       "properties": {
-        "section_start": {
+        "return_format_section_start": {
           "$ref": "#/$defs/atom__string_text",
           "title": "ReturnFormatHeading",
           "description": "Section heading for the return protocol section. Plain text, no placeholders. Rendered at the configured heading level.\nNatural language prose — must contain at least one whitespace character. Mutually exclusive with all identifier types. Used for descriptions, instructions, error messages, and display labels. Not a path."
         },
-        "files_vs_status_explanation_preamble": {
+        "return_format_files_vs_status_explanation_preamble": {
           "$ref": "#/$defs/atom__string_prose",
           "title": "ReturnFormatFilesVsStatusExplanationPreamble",
           "description": "Prose explaining the two-channel model. Work products go to files, the return goes to the dispatcher as a brief status signal — not the deliverable.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
         },
-        "token_must_be_first_word_preamble": {
+        "return_format_token_must_be_first_word_preamble": {
           "$ref": "#/$defs/atom__string_prose",
           "title": "ReturnFormatTokenMustBeFirstWordPreamble",
           "description": "Prose establishing that the return must begin with a protocol token. The dispatch layer parses this token programmatically. It must not be paraphrased or embedded in prose.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
         },
-        "token_must_be_first_word_tokens_three_preamble": {
+        "return_format_token_must_be_first_word_tokens_three_preamble": {
           "$ref": "#/$defs/atom__string_prose",
           "title": "ReturnFormatTokenMustBeFirstWordTokensThreePreamble",
           "description": "Prose listing the three terminal states: SUCCESS, FAILURE, or ABORT. Used when the agent definition includes ABORT as a valid return token.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
         },
-        "token_must_be_first_word_tokens_two_preamble": {
+        "return_format_token_must_be_first_word_tokens_two_preamble": {
           "$ref": "#/$defs/atom__string_prose",
           "title": "ReturnFormatTokenMustBeFirstWordTokensTwoPreamble",
           "description": "Prose listing the two terminal states: SUCCESS or FAILURE. Used when the agent definition does not include ABORT as a valid return token.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
         },
-        "report_completion_label": {
+        "return_format_report_completion_label": {
           "$ref": "#/$defs/atom__string_text",
           "title": "ReturnFormatReportCompletionLabel",
           "description": "Label text introducing the completion report format. Plain text, no placeholders. Precedes the structured return template.\nNatural language prose — must contain at least one whitespace character. Mutually exclusive with all identifier types. Used for descriptions, instructions, error messages, and display labels. Not a path."
         },
-        "report_all_metrics_postscript": {
+        "return_format_report_all_metrics_postscript": {
           "$ref": "#/$defs/atom__string_prose",
           "title": "ReturnFormatReportAllMetricsPostscript",
           "description": "Postscript reminding the agent to report all metrics specified for its return state. The dispatcher and downstream processes depend on these values being present.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
         },
-        "abort_vs_failure_distinction_preamble": {
+        "return_format_abort_vs_failure_distinction_preamble": {
           "$ref": "#/$defs/atom__string_prose",
           "title": "ReturnFormatAbortVsFailureDistinctionPreamble",
           "description": "Prose distinguishing ABORT from FAILURE. ABORT means the work should not be attempted. It is not failure — it is a responsible decision to stop before producing bad output.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
         },
-        "honest_failure_over_dubious_success_preamble": {
+        "return_format_honest_failure_over_dubious_success_preamble": {
           "$ref": "#/$defs/atom__string_prose",
           "title": "ReturnFormatHonestFailureOverDubiousSuccessPreamble",
           "description": "Prose granting explicit permission to return clean FAILURE. An honest FAILURE is better than a dubious SUCCESS. A clean FAILURE with a clear reason is more valuable than compromised output.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
         },
-        "track_metrics_as_you_work_postscript": {
+        "return_format_track_metrics_as_you_work_postscript": {
           "$ref": "#/$defs/atom__string_prose",
           "title": "ReturnFormatTrackMetricsAsYouWorkPostscript",
           "description": "Postscript establishing retroactive orientation. Return requirements imply tracking requirements — if you must report a count, maintain it as you work; if you must report a path, know it before you write.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
         },
-        "track_metrics_as_you_work_antidrift_postscript": {
+        "return_format_track_metrics_as_you_work_antidrift_postscript": {
           "$ref": "#/$defs/atom__string_prose",
           "title": "ReturnFormatTrackMetricsAsYouWorkAntidriftPostscript",
           "description": "Anti-drift prose establishing that the dispatcher is waiting for the return signal. When a terminal state is reached, report it immediately. Do not continue work after reaching a terminal state.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
         },
-        "do_not_fabricate_metrics_postscript": {
+        "return_format_do_not_fabricate_metrics_postscript": {
           "$ref": "#/$defs/atom__string_prose",
           "title": "ReturnFormatDoNotFabricateMetricsPostscript",
           "description": "Postscript requiring the agent to report actual metrics from execution. Do not fabricate values to match the expected format.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
         },
-        "failure_cross_reference_preamble": {
+        "return_format_failure_cross_reference_preamble": {
           "$ref": "#/$defs/atom__string_prose",
           "title": "ReturnFormatFailureCrossReferencePreamble",
           "description": "Cross-reference prose connecting the return protocol to the failure criteria section. Clarifies that failure conditions are defined elsewhere and this section covers how to report failure.\nSubstantive prose text that forms complete sentences. Starts with a capital letter, contains at least three whitespace characters, ends with sentence punctuation. Structural constraints prevent non-prose abuse, so path exclusions are not needed. Used for descriptions, instructions, and multi-sentence text that may reference file paths."
         }
       },
       "required": [
-        "section_start",
-        "files_vs_status_explanation_preamble",
-        "token_must_be_first_word_preamble",
-        "token_must_be_first_word_tokens_three_preamble",
-        "token_must_be_first_word_tokens_two_preamble",
-        "report_completion_label",
-        "report_all_metrics_postscript",
-        "abort_vs_failure_distinction_preamble",
-        "honest_failure_over_dubious_success_preamble",
-        "track_metrics_as_you_work_postscript",
-        "track_metrics_as_you_work_antidrift_postscript",
-        "do_not_fabricate_metrics_postscript",
-        "failure_cross_reference_preamble"
+        "return_format_section_start",
+        "return_format_files_vs_status_explanation_preamble",
+        "return_format_token_must_be_first_word_preamble",
+        "return_format_token_must_be_first_word_tokens_three_preamble",
+        "return_format_token_must_be_first_word_tokens_two_preamble",
+        "return_format_report_completion_label",
+        "return_format_report_all_metrics_postscript",
+        "return_format_abort_vs_failure_distinction_preamble",
+        "return_format_honest_failure_over_dubious_success_preamble",
+        "return_format_track_metrics_as_you_work_postscript",
+        "return_format_track_metrics_as_you_work_antidrift_postscript",
+        "return_format_do_not_fabricate_metrics_postscript",
+        "return_format_failure_cross_reference_preamble"
       ],
       "additionalProperties": false
     }

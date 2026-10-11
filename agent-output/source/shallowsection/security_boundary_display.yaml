@@ -4,10 +4,10 @@ description: >-
   toolset format, label visibility threshold, and entry list format.
 fields:
   required:
-    filesystem_permissions_path_style: field/security_boundary_filesystem_permissions_path_style
-    filesystem_permissions_toolset_format: field/security_boundary_filesystem_permissions_toolset_format
-    filesystem_permissions_label_visibility_threshold: field/security_boundary_filesystem_permissions_label_visibility_threshold
-    filesystem_permissions_list_format: field/security_boundary_filesystem_permissions_list_format
+    security_boundary_filesystem_permissions_path_style: field/security_boundary_filesystem_permissions_path_style
+    security_boundary_filesystem_permissions_toolset_format: field/security_boundary_filesystem_permissions_toolset_format
+    security_boundary_filesystem_permissions_label_visibility_threshold: field/security_boundary_filesystem_permissions_label_visibility_threshold
+    security_boundary_filesystem_permissions_list_format: field/security_boundary_filesystem_permissions_list_format
   optional:
-    pre_section_divider_override: field/security_boundary_pre_section_divider_override
-    pre_body_entry_separator_override: field/security_boundary_pre_body_entry_separator_override
+    security_boundary_pre_section_divider_override: field/security_boundary_pre_section_divider_override
+    security_boundary_pre_body_entry_separator_override: field/security_boundary_pre_body_entry_separator_override

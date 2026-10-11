@@ -4,10 +4,10 @@ description: >-
   templates, role labels, expertise label, and closing reminder.
 fields:
   required:
-    section_start_template: field/identity_section_start_template
-    role_identity_template: field/identity_role_identity_template
-    role_identity_postscript_template: field/identity_role_identity_postscript_template
-    role_responsibility_template: field/identity_role_responsibility_template
-    role_expertise_label: field/identity_role_expertise_label
-    role_expertise_postscript: field/identity_role_expertise_postscript
-    identity_reminder_closing_template: field/identity_identity_reminder_closing_template
+    identity_section_start_template: field/identity_section_start_template
+    identity_role_identity_template: field/identity_role_identity_template
+    identity_role_identity_postscript_template: field/identity_role_identity_postscript_template
+    identity_role_responsibility_template: field/identity_role_responsibility_template
+    identity_role_expertise_label: field/identity_role_expertise_label
+    identity_role_expertise_postscript: field/identity_role_expertise_postscript
+    identity_identity_reminder_closing_template: field/identity_identity_reminder_closing_template

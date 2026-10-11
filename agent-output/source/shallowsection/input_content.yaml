@@ -5,15 +5,15 @@ description: >-
   intro, and completeness postscript.
 fields:
   required:
-    section_start: field/input_section_start
-    description_format_template: field/input_description_format_template
-    section_preamble: field/input_section_preamble
-    context_required_heading: field/input_context_required_heading
-    context_required_intro: field/input_context_required_intro
-    context_required_entry_template: field/input_context_required_entry_template
-    context_available_heading: field/input_context_available_heading
-    parameters_transition: field/input_parameters_transition
-    parameters_heading: field/input_parameters_heading
-    parameters_entry_template: field/input_parameters_entry_template
-    input_completeness_postscript: field/input_input_completeness_postscript
-    schema_label_template: field/input_schema_label_template
+    input_section_start: field/input_section_start
+    input_description_format_template: field/input_description_format_template
+    input_section_preamble: field/input_section_preamble
+    input_context_required_heading: field/input_context_required_heading
+    input_context_required_intro: field/input_context_required_intro
+    input_context_required_entry_template: field/input_context_required_entry_template
+    input_context_available_heading: field/input_context_available_heading
+    input_parameters_transition: field/input_parameters_transition
+    input_parameters_heading: field/input_parameters_heading
+    input_parameters_entry_template: field/input_parameters_entry_template
+    input_input_completeness_postscript: field/input_input_completeness_postscript
+    input_schema_label_template: field/input_schema_label_template

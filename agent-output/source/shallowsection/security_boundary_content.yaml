@@ -5,12 +5,12 @@ description: >-
   sub-tables.
 fields:
   required:
-    filesystem_permissions_label: field/security_boundary_filesystem_permissions_label
-    section_closing: field/security_boundary_section_closing
-    compound_entry_template: field/security_boundary_compound_entry_template
-    grouped_tool_heading_template: field/security_boundary_grouped_tool_heading_template
+    security_boundary_filesystem_permissions_label: field/security_boundary_filesystem_permissions_label
+    security_boundary_section_closing: field/security_boundary_section_closing
+    security_boundary_compound_entry_template: field/security_boundary_compound_entry_template
+    security_boundary_grouped_tool_heading_template: field/security_boundary_grouped_tool_heading_template
 containers:
   required:
-    framing_section_start_variant: simplegroup/framing_section_start_variant
-    framing_declaration_variant_template: simplegroup/framing_declaration_variant_template
-    framing_section_preamble_variant: simplegroup/framing_section_preamble_variant
+    security_boundary_framing_section_start_variant: simplegroup/security_boundary_framing_section_start_variant
+    security_boundary_framing_declaration_variant_template: simplegroup/security_boundary_framing_declaration_variant_template
+    security_boundary_framing_section_preamble_variant: simplegroup/security_boundary_framing_section_preamble_variant

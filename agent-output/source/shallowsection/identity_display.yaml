@@ -4,8 +4,8 @@ description: >-
   pair for the expertise list.
 fields:
   required:
-    role_expertise_format: field/identity_role_expertise_format
-    role_expertise_format_threshold: field/identity_role_expertise_format_threshold
+    identity_role_expertise_format: field/identity_role_expertise_format
+    identity_role_expertise_format_threshold: field/identity_role_expertise_format_threshold
   optional:
-    pre_section_divider_override: field/identity_pre_section_divider_override
-    pre_body_entry_separator_override: field/identity_pre_body_entry_separator_override
+    identity_pre_section_divider_override: field/identity_pre_section_divider_override
+    identity_pre_body_entry_separator_override: field/identity_pre_body_entry_separator_override

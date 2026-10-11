@@ -5,15 +5,15 @@ description: >-
   variant, closer text, and heading variant sub-table.
 fields:
   required:
-    highlight_step_count_preamble_template: field/instructions_highlight_step_count_preamble_template
-    sequence_integrity_preamble: field/instructions_sequence_integrity_preamble
-    follow_strictly_preamble: field/instructions_follow_strictly_preamble
-    reminder_midpoint_preamble_template: field/instructions_reminder_midpoint_preamble_template
-    follow_strictly_closing_template: field/instructions_follow_strictly_closing_template
-    steps_heading_template: field/instructions_steps_heading_template
-    steps_heading_n_only_template: field/instructions_steps_heading_n_only_template
+    instructions_highlight_step_count_preamble_template: field/instructions_highlight_step_count_preamble_template
+    instructions_sequence_integrity_preamble: field/instructions_sequence_integrity_preamble
+    instructions_follow_strictly_preamble: field/instructions_follow_strictly_preamble
+    instructions_reminder_midpoint_preamble_template: field/instructions_reminder_midpoint_preamble_template
+    instructions_follow_strictly_closing_template: field/instructions_follow_strictly_closing_template
+    instructions_steps_heading_template: field/instructions_steps_heading_template
+    instructions_steps_heading_n_only_template: field/instructions_steps_heading_n_only_template
 containers:
   required:
-    section_start_variant_template: simplegroup/instructions_section_start_variant_template
-    steps_mode_label_variant: simplegroup/instructions_steps_mode_label_variant
-    instruction_mode_explanation_preamble_variant: simplegroup/instructions_instruction_mode_explanation_preamble_variant
+    instructions_section_start_variant_template: simplegroup/instructions_section_start_variant_template
+    instructions_steps_mode_label_variant: simplegroup/instructions_steps_mode_label_variant
+    instructions_instruction_mode_explanation_preamble_variant: simplegroup/instructions_instruction_mode_explanation_preamble_variant
