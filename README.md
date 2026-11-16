@@ -2,7 +2,7 @@
 
 A universal schema composition system. Defines complex validated data structures through a 15-level type hierarchy — from regex patterns up through conditional, zone-aware containers to complete schema documents.
 
-**Currently used by the agent definition pipeline:** Verdandi → [Draupnir](https://github.com/johnny111272/draupnir) → [Nornir](https://github.com/johnny111272/nornir) Gates → [Regin](https://github.com/johnny111272/regin) → Galdr
+**Currently used by the agent definition pipeline:** Verdandi → [Draupnir](https://github.com/tiriganiarjuk/draupnir) → [Nornir](https://github.com/tiriganiarjuk/nornir) Gates → [Regin](https://github.com/tiriganiarjuk/regin) → Galdr
 
 ## What This Is
 
