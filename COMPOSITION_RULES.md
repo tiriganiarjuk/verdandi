@@ -41,7 +41,7 @@ pattern          raw regex patterns — the lowest building block
 atom             constrained base types (string/integer/boolean + pattern + exclusions)
 enum             enumerated allowed values
 element          atom + runtime format contract
-union            oneOf composition of atoms, enums, or elements
+union            oneOf composition of atoms, enums, elements, or tuples
 tuple            fixed-length typed sequence (type composition, not a container)
 ```
 
@@ -112,7 +112,7 @@ description: Starts with dot (relative path prefix)
 | regex | yes | Regular expression pattern |
 | description | yes | Human-readable explanation (used in scaffolding templates) |
 
-Referenced by: atoms (via `pattern:` and `excludes:`)
+Referenced by: atoms (via `pattern:` and `excludes:`), tuples (via `items:`)
 
 ---
 
@@ -223,11 +223,11 @@ description: Path that must exist — either relative or absolute
 | Field | Required | Description |
 |-------|----------|-------------|
 | title | yes | PascalCase name (used for Python class generation) |
-| union | yes | List of `atom/`, `enum/`, or `element/` references |
+| union | yes | List of `atom/`, `enum/`, `element/`, or `tuple/` references |
 | description | yes | Human-readable explanation (used in scaffolding templates) |
 
 Pure composition — no constraints added. Members must all be
-type-tier models (atom, enum, or element).
+type-tier models (atom, enum, element, or tuple).
 
 Referenced by: field/ (via `type:`), tuple/ (via `items:`)
 
@@ -249,14 +249,14 @@ description: >-
 | Field | Required | Description |
 |-------|----------|-------------|
 | title | yes | PascalCase name (used for Python class generation) |
-| items | yes | Ordered list of type-tier references (atom/enum/element/union) |
+| items | yes | Ordered list of type-tier references (pattern/atom/enum/element/tuple/union) |
 | constraint | no | Validation rule (e.g., `ascending_strict`) |
 | description | yes | Human-readable explanation (used in scaffolding templates) |
 
 Length is implicit from `items` count. Positions can reference
 different type-tier models.
 
-Referenced by: field/ (via `type:`)
+Referenced by: field/ (via `type:`), union/ (via `union:`), tuple/ (via `items:`)
 
 ---
 
@@ -588,7 +588,8 @@ conditional:
 | simplegroup | top-level zones | `field/`, `simplearray/` |
 | group | `fields:` section | `field/` |
 | group | `containers:` section | `simplearray/`, `simplegroup/`, `array/` |
-| shallowsection | top-level zones | `field/` |
+| shallowsection | `fields:` section | `field/` |
+| shallowsection | `containers:` section | `simplegroup/`, `simplearray/`, `array/`, `superarray/`, `group/` |
 | schema | `sections:` / `shallowsections:` zones | `section/` or `shallowsection/` |
 
 ---
@@ -750,21 +751,24 @@ containers:
 
 ### shallowsection/
 
-Composes fields alongside containers. Field refs live at the top
-level (not nested under a `fields:` key like group/).
+Composes fields alongside containers. Like group/, it keeps them in
+two sections: field refs under `fields:`, container refs under
+`containers:`, each with its own `required`/`optional`/`conditional`
+zones.
 
 ```yaml
 # shallowsection/identity.yaml
 title: Identity
 description: Agent identity — who it is, what tier it runs at
-required:
-  title: field/agent_title
-  description: field/agent_description
-  role_identity: field/role_identity
-  role_responsibility: field/role_responsibility
-  capability_tier: field/agent_capability_tier
-optional:
-  role_description: field/role_description
+fields:
+  required:
+    title: field/agent_title
+    description: field/agent_description
+    role_identity: field/role_identity
+    role_responsibility: field/role_responsibility
+    capability_tier: field/agent_capability_tier
+  optional:
+    role_description: field/role_description
 containers:
   optional:
     role_expertise: simplearray/role_expertise
@@ -774,18 +778,19 @@ containers:
 # shallowsection/dispatcher.yaml — with conditional field
 title: Dispatcher
 description: Everything the dispatcher skill needs to launch and feed the agent
-required:
-  agent_name: field/agent_name
-  dispatch_mode: field/dispatch_mode
-  # ... more required fields
-optional:
-  max_agents: field/dispatch_max_agents
-conditional:
-  batch_size:
-    ref: field/dispatch_batch_size
-    only_when:
-      field: dispatch_mode
-      equals: batch
+fields:
+  required:
+    agent_name: field/agent_name
+    dispatch_mode: field/dispatch_mode
+    # ... more required fields
+  optional:
+    max_agents: field/dispatch_max_agents
+  conditional:
+    batch_size:
+      ref: field/dispatch_batch_size
+      only_when:
+        field: dispatch_mode
+        equals: batch
 containers:
   optional:
     parameters: array/dispatch_parameters
@@ -795,13 +800,10 @@ containers:
 |---------|----------|-------------|
 | title | yes | PascalCase name (used for Python class generation) |
 | description | yes | Human-readable explanation (used in scaffolding templates) |
-| required | no | Named `field/` references |
-| optional | no | Named `field/` references |
-| conditional | no | Named conditional entries referencing `field/` |
-| containers | no | `required`/`optional` zones — values reference `simplegroup/`, `simplearray/`, `array/`, `superarray/`, `group/` |
+| fields | no | `required`/`optional`/`conditional` zones — values reference `field/` |
+| containers | no | `required`/`optional`/`conditional` zones — values reference `simplegroup/`, `simplearray/`, `array/`, `superarray/`, `group/` |
 
-At least one of `required`, `optional`, `conditional`, or `containers`
-must exist.
+At least one of `fields` or `containers` must exist.
 
 **Container limit:** Maximum 3 containers per shallowsection. This
 prevents abuse — shallowsections are for mostly-flat structures with
