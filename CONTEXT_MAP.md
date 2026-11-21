@@ -42,8 +42,6 @@ A hand-authored YAML type hierarchy — the source of every shape in the agent p
 
 4. `QUICKSTART.md` — the operational rules, stage variants, and the things that look reasonable and are forbidden.
 
-**Proof:** before authoring or changing any level file, state (a) what the field membrane buys that a direct type reference does not, (b) why references may only flow downward and what that makes impossible, and (c) one thing you would have done that the level system forbids. Generic acknowledgment means you are not oriented — go back and read.
-
 ---
 
 ## Refresh guide — want X → read Y
